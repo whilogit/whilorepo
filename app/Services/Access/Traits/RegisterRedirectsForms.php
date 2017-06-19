@@ -125,6 +125,13 @@ trait RegisterRedirectsForms
 		}
 		
 	}
+	  public function showCompanyPlans()
+		{  
+		  return view('frontend.companyauth.companyplans');
+			
+			
+		}
+	
 	
 	
 }

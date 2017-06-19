@@ -57,6 +57,7 @@ Route::group(['namespace' => 'Auth'], function () {
 		
 		
 		Route::get('company/signup', 'AuthController@showCompanyRegisterForm')->name('company.signup');
+		Route::get('company/choose_plans', 'AuthController@showCompanyPlans');
 		Route::post('company/signup', 'AuthController@cregister');
 		Route::post('company/logo', 'AuthController@logoupload');
 		Route::post('company/complete', 'AuthController@compcomplete');
