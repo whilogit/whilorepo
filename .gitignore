@@ -25,3 +25,9 @@ composer.phar
 error.log
 Todo.rtf
 .vagrant
+test.txt
+test (copy).txt
+nbproject/project.xml
+nbproject/project.properties
+nbproject/private/private.properties
+nbproject/private/config.properties

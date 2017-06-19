@@ -28,7 +28,7 @@ class JobController extends Controller
     public function index($limit = 10, $offset = 1)
     {
 			$count = ceil(DB::table('companyjobs')->where('status',1)->count() / 10);  
-			return view('frontend.jobdetails');
+			return view('frontend.joblist')->with(array("joblist"=>Joblist::get(), "count"=>$count));
     }
 	
 	public function searchjobjoblist($keyword,$locations)

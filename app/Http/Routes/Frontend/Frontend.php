@@ -7,7 +7,7 @@ Route::get('/', 'FrontendController@index')->name('frontend.index');
 Route::get('/feedback/{id}', 'FeedbackController@getfeedback')->name('frontend.submitfeedback');
 Route::post('/feedback/submit', 'FeedbackController@submitfeedback');
 Route::get('/feedback/status/success', 'FeedbackController@success');
-
+Route::get('/termsandconditions', 'TermsController@index');
 
 Route::get('/payroll', 'FrontendController@payroll')->name('frontend.submitfeedback');
 Route::get('/trainhire', 'FrontendController@trainhire')->name('frontend.submitfeedback');
