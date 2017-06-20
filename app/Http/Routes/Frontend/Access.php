@@ -61,7 +61,11 @@ Route::group(['namespace' => 'Auth'], function () {
 		Route::post('company/signup', 'AuthController@cregister');
 		Route::post('company/logo', 'AuthController@logoupload');
 		Route::post('company/complete', 'AuthController@compcomplete');
-		Route::post('company/companyimages', 'AuthController@imageupload');	
+		Route::post('company/companyimages', 'AuthController@imageupload');	  
+		Route::post('company/dopayment', 'AuthController@dopayment');
+		Route::post('company/planselect', 'AuthController@companyplan');
+        Route::get('company/payment', 'AuthController@showPaymentpage');
+        Route::get('company/reg_complete', 'AuthController@regCompletepage');
 		
 		Route::post('company/removelogo', 'AuthController@removelogo');
 		Route::post('company/removeimages', 'AuthController@removeimages');

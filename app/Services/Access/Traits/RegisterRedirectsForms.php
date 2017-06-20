@@ -125,12 +125,31 @@ trait RegisterRedirectsForms
 		}
 		
 	}
-	  public function showCompanyPlans()
-		{  
-		  return view('frontend.companyauth.companyplans');
-			
-			
-		}
+	    public function showCompanyPlans()
+        {  
+              return view('frontend.companyauth.companyplans');
+
+
+        }
+     public function showPaymentpage()
+        {  
+              return view('frontend.companyauth.companyplanpayment');
+
+
+        }
+      public function regCompletepage()
+        {  
+           $commaster = DB::table('commaster as c')
+                                        ->join('comprofile as p', 'c.companyId', '=', 'p.companyId')
+                                        ->join('_locations as l', 'l.locationId', '=', 'p.locationId')
+                                        ->join('userlogin as log', 'log.userId', '=', 'c.userId')
+                                        ->select('c.*','p.*','l.locationName','log.userName','log.emailAddress')
+                                        ->where('c.userId', '=', $_SESSION['WHILLO']['USERID'])
+                                        ->first(); //die(json_encode($commaster));
+       $commaimages = DB::table('companyimages')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->get(); 
+       $companylogo = DB::table('companylogo')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->get();
+       return view('frontend.companyauth.completed')->with(array("commaster"=>$commaster,"companyimages"=>$commaimages,"companylogo"=>$companylogo));
+        }
 	
 	
 	

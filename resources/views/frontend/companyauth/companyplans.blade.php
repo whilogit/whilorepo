@@ -128,7 +128,7 @@
     </div>
     
    
-    <section class="slice slice-lg bg-image" style="background-image:url(../images/mainbg.png)">
+    <section class="slice slice-lg bg-image"  name="choose_plan" style="background-image:url(../images/mainbg.png)">
         <div class="wp-section">
                 <div class="container">
     <div class="row">
@@ -178,7 +178,7 @@
                     </table>
                 </div>
                 <div class="panel-footer">
-                    <a href="http://www.jquery2dotnet.com" class="btn btn-success" role="button">Sign Up</a>
+                    <a href="#" class="btn btn-success" role="button">Sign Up</a>
                     1 month FREE trial</div>
             </div>
         </div>
@@ -235,7 +235,7 @@
                     </table>
                 </div>
                 <div class="panel-footer">
-                    <a href="http://www.jquery2dotnet.com" class="btn btn-success" role="button">Sign Up</a>
+                    <a href="#" class="btn btn-success" role="button">Sign Up</a>
                     1 month FREE trial</div>
             </div>
         </div>
@@ -285,7 +285,11 @@
                     </table>
                 </div>
                 <div class="panel-footer">
-                    <a href="http://www.jquery2dotnet.com" class="btn btn-success" role="button">Sign Up</a> 1 month FREE trial</div>
+                   
+                 <button class="btn btn-success btnsubmit" type="button">
+                                                        Sign Up   </button>1 month FREE trial
+                                                 
+                </div>
             </div>
         </div>
     </div>
@@ -295,5 +299,5 @@
     </section>
 @endsection
 @section('after-scripts-end')
-    <script src="/assets/app/register.companyimages.js"></script>
+    <script src="/assets/app/register.companyplan.js"></script>
 @stop

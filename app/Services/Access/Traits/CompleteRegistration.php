@@ -17,6 +17,30 @@ use Hash;
 trait completeRegistration
 {
     use RedirectsUsers;
+		public function companyplan(Request $request,Response $response)
+            { 
+                DB::table('csteps')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->increment('steps');
+                return response()->json(array(
+                                                    'success' => true,
+                                                    'errors' => "Plan selected completed"
+                                                    ));
+
+                 
+                         
+
+             }
+        public function dopayment(Request $request,Response $response)
+            { 
+             DB::table('csteps')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->increment('steps');
+                return response()->json(array(
+                                                    'success' => true,
+                                                    'errors' => "Payment completed"
+                                                    ));
+
+                 
+                         
+
+             }
 
     public function compcomplete(Request $request,Response $response)
     { 
