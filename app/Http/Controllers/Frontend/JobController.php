@@ -22,7 +22,7 @@ class JobController extends Controller
 	public function companylogo($category,$year,$month,$name,$time,$size,$ext)
     {
 		header('Content-type: image/jpeg'); 
-		 die(file_get_contents(app_path() . "/Storage/Images/$category/$year/$month/$year" . "_" . $month . "_" . $time ."_" . $name . "_" . $size ."." . $ext));
+		 die(file_get_contents(app_path(). "/Storage/Images/$category/$year/$month/$year" . "_" . $month . "_" . $time ."_" . $name . "_" . $size ."." . $ext));
 	}
 	
     public function index($limit = 10, $offset = 1)
@@ -44,10 +44,12 @@ class JobController extends Controller
 						$resume->where('l.locationId','=',$locations);
 						
 						if($keyword!="")
-						$resume->where('j.jobTitle','LIKE','%' . $keyword . '%'); 
+						$resume->where('j.jobTitle','LIKE','%' . $keyword . '%')
+                                                ->orWhere('j.keyskills','LIKE','%' . $keyword . '%');
 								
 					  })
 					  ->where('j.status',1)->count() / 10);  
+                                         
 			return view('frontend.joblist')->with(array("joblist"=>Joblist::get(10,1,$keyword,$locations), "count"=>$count));
     }
 	

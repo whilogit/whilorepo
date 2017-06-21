@@ -6,7 +6,7 @@
             <div class="container">
 
        
-            <form class="form-light ">
+            <form class="form-light " action="post">
 			
                 <div class="col-md-8 col-md-offset-2 pb-20 pt-20">  <!-- style="background: hsla(0, 100%, 100%, 0.34);box-shadow: 0px 0px 12px 1px hsla(0, 100%, 100%, 0.34);" -->
 				 <div class="section-title-wr">
@@ -18,19 +18,19 @@
                      <div class="col-md-6">
                                 <div class="form-group form-group-lg">
                                     <label  class="c-white">Keywords</label>
-                                    <input type="text" class="form-control input-lg" placeholder="Eg.Webdesign,Java,C#,etc ...">
+                                    <input type="text" class="form-control input-lg" required="required" placeholder="Eg.Webdesign,Java,C#,etc ...">
                                 </div>
                             </div>
                     <div class="col-md-6">
                                 <div class="form-group form-group-lg">
                                     <label  class="c-white">Location</label>
-                                    <input type="text" class="form-control input-lg" placeholder="Eg.Bangalore,Mysore,etc ...">
+                                    <input type="text" class="form-control input-lg" required="required" placeholder="Eg.Bangalore,Mysore,etc ...">
                                 </div>
                             </div>
               <div class="row">
                     <div class="col-md-12 text-center">
                         <a href="#" class="btn btn-lg btn-dark form-control1" title="">
-                            <span>SEARCH</span>
+                            <span> <button type="submit" id="submit">SEARCH</button></span>
                         </a>
                     </div>
 					

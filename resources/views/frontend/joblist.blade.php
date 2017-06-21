@@ -3,14 +3,14 @@
 @section('content')
  <div class="pg-opt" style="margin-top:5%;">
         <div class="container">
-            <div class="row">
+           <!-- <div class="row">
                 <div class="col-md-6">
                     <h2>Job list</h2>
                 </div>
                 <div class="col-md-6">
                     <ol class="breadcrumb"><li><a href="/">Home</a></li><li class="active">Job list</li></ol>
                 </div>
-            </div>
+            </div>-->
         </div>
     </div>
     <br />
@@ -21,6 +21,7 @@
                     <div class="col-md-8">
                         
                         <ul class="list-listings-2" name="joblist">
+                      
                         
                          @foreach ($joblist as $list)
                             <li class="featured" id="{{ $list->jobId }}" style="box-shadow: 0 10px 6px -6px #777">
@@ -29,7 +30,7 @@
                                      <img src="/<?php echo $list->logoCategory == "" ? "" : "companylogo.get/" ?>{{ $list->logoCategory }}/{{ $list->dirYear }}/{{ $list->dirMonth }}/{{ $list->logoName }}/{{ $list->crTime }}/s.{{ $list->logExt }}" class="img-responsive" style="width:100%"  alt="{{ $list->companyName }}">
                                                                             
                                    
-                                    <a href="/jobdetails/{{ $list->jobId }}/<?php echo str_replace(" ", "-",$list->jobTitle) ?>" class="btn btn-lg btn-square btn-light btn-block-bm btn-icon">See more</a>
+                                    <a href="/jobdetails/{{ $list->jobId }}/<?php echo str_replace(" ", "-",$list->jobTitle) ?>" target="_blank" class="btn btn-lg btn-square btn-light btn-block-bm btn-icon">See more</a>
                                 </div>
                                 <div class="cell">
                                     <div class="listing-body clearfix">

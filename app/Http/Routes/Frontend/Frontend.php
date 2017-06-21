@@ -4,6 +4,7 @@
  * Frontend Controllers
  */
 Route::get('/', 'FrontendController@index')->name('frontend.index');
+Route::get('jobs', 'FrontendController@index')->name('frontend.joblist');
 Route::get('/feedback/{id}', 'FeedbackController@getfeedback')->name('frontend.submitfeedback');
 Route::post('/feedback/submit', 'FeedbackController@submitfeedback');
 Route::get('/feedback/status/success', 'FeedbackController@success');
@@ -23,7 +24,7 @@ Route::get('/Corporate-Leadership-Program', 'FrontendController@corporateleaders
 
 
 Route::group(['middleware' => 'AuthJoblist'], function () {
-	Route::get('jobs', 'JobController@index')->name('frontend.joblist');
+	//Route::get('jobs', 'JobController@index')->name('frontend.joblist');
 	Route::get('search/joblist/{offset}', 'JobController@joblistpagination')->name('frontend.joblistpagination');
 	Route::get('jobdetails/{id}/{title}', 'JobController@jobdetails')->name('frontend.jobdetails');
 Route::get('jobs/keyword={keyword}/location={locations}', 'JobController@searchjobjoblist')->name('frontend.jobjoblist');
