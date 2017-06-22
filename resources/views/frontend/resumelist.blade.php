@@ -6,7 +6,7 @@
             <div class="container">
 
        
-            <form class="form-light " action="post">
+            <form class="form-light " method="post" action="/talents">
 			
                 <div class="col-md-8 col-md-offset-2 pb-20 pt-20">  <!-- style="background: hsla(0, 100%, 100%, 0.34);box-shadow: 0px 0px 12px 1px hsla(0, 100%, 100%, 0.34);" -->
 				 <div class="section-title-wr">
@@ -85,7 +85,5 @@
 @endsection
 
 @section('after-scripts-end')
-  
-   <script src="/assets/app/conpany.joblist.js"></script>
-  
+   <script src="/assets/app/talent.js"></script> 
 @stop
