@@ -30,7 +30,7 @@ class Authenticate
 		   if($_SESSION['WHILLO']['TYPE'] == "E")$GLOBALS['redirect'] = "employee";
 		   return $next($request);
 	   }  
-	   return redirect()->guest('/');
+	   return redirect()->guest('auth/signin');
 	   
 	   /* if (Auth::guard($guard)->guest()) {
             if ($request->ajax() || $request->wantsJson()) {

@@ -30,6 +30,11 @@ class ResumeController extends Controller
     {
 			return view('frontend.resumelist')->with(array("data"=>ResumesList::getlist()));
     }
+     public function searchedresults($limit = 10, $offset = 1)
+    {
+			return view('frontend.resumelist')->with(array("data"=>ResumesList::getlist()));
+    }
+    
 	public function talentdetails($id, $name)
     {
 			ResumesDetails::getdetails($id);return view('frontend.resumedetails')->with(array("data"=>ResumesDetails::getdetails($id)));
