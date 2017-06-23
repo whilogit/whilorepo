@@ -6,7 +6,7 @@
             <div class="container">
 
        
-            <form class="form-light " method="post" action="/talentss">
+            <form class="form-light " method="get" action="/talents">
 			
                 <div class="col-md-8 col-md-offset-2 pb-20 pt-20">  <!-- style="background: hsla(0, 100%, 100%, 0.34);box-shadow: 0px 0px 12px 1px hsla(0, 100%, 100%, 0.34);" -->
 				 <div class="section-title-wr">
@@ -18,13 +18,13 @@
                      <div class="col-md-6">
                                 <div class="form-group form-group-lg">
                                     <label  class="c-white">Keywords</label>
-                                    <input type="text" class="form-control input-lg" required="required" placeholder="Eg.Webdesign,Java,C#,etc ...">
+                                    <input type="text" id="keyword" class="form-control input-lg" required="required" placeholder="Eg.Webdesign,Java,C#,etc ...">
                                 </div>
                             </div>
                     <div class="col-md-6">
                                 <div class="form-group form-group-lg">
                                     <label  class="c-white">Location</label>
-                                    <input type="text" class="form-control input-lg" required="required" placeholder="Eg.Bangalore,Mysore,etc ...">
+                                    <input type="text" id="location" class="form-control input-lg" required="required" placeholder="Eg.Bangalore,Mysore,etc ...">
                                 </div>
                             </div>
               <div class="row">
