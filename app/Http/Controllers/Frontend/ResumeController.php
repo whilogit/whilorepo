@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Repositories\Frontend\Resumes\ResumesList;
 use App\Repositories\Frontend\Resumes\ResumesDetails;
 use App\Repositories\Frontend\Resumes\ResumesPermession;
-
+use App\Repositories\Frontend\Jobs\Joblist;
 
 
 use DB;
@@ -14,6 +14,7 @@ use DB;
  * Class FrontendController
  * @package App\Http\Controllers
  */
+
 class ResumeController extends Controller
 {
     /**
@@ -28,7 +29,8 @@ class ResumeController extends Controller
 	
     public function index($limit = 10, $offset = 1)
     {
-			return view('frontend.resumelist')->with(array("data"=>ResumesList::getlist()));
+        $count = DB::table('jmaster')->where('accountStatus',1)->count(); 
+			return view('frontend.resumelist')->with(array("data"=>ResumesList::getlist(), "count"=>$count,"keyword"=>""))->with("locations",DB::table('_locations')->get() );
     }
 	public function talentdetails($id, $name)
     {
@@ -53,7 +55,29 @@ class ResumeController extends Controller
 			return ResumesPermession::downloade($id);
     }
 	
-	
+		public function searchtalentlist($keyword,$locations)
+                {
+			$count = ceil(DB::table('jmaster as m')
+					
+					->join('jprofile as p', 'p.seekerId', '=', 'm.seekerId')
+					->leftjoin('jprofileimage as i', 'i.seekerId', '=', 'm.seekerId')
+                                ->leftjoin('jkeyskill as js', 'js.seekerId', '=', 'm.seekerId')
+					->join('jproffessional as jp', 'jp.seekerId', '=', 'm.seekerId')
+					
+					->leftjoin('_locations as l', 'p.locationId', '=', 'l.locationId')
+                                ->where(function($resume) use ($keyword,$locations)
+					  {
+						if($locations!="")
+						$resume->where('p.locationId','=',$locations);
+						
+						if($keyword!="")
+						$resume->where('js.keyskills','LIKE','%' . $keyword . '%');
+                                         })
+					 ->where('m.accountStatus',1)->count() / 10);  
+                                           
+			//return view('frontend.joblist')->with(array("joblist"=>Joblist::get(10,1,$keyword,$locations), "count"=>$count,"keyword"=>$keyword))->with("locations",DB::table('_locations')->get());
+                                          return view('frontend.resumelist')->with(array("data"=>ResumesList::getlist(10,1,$keyword,$locations)))->with("locations",DB::table('_locations')->get());
+    }
 	
 
 	public function jobdetails($jobid)

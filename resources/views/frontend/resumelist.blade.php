@@ -6,7 +6,7 @@
             <div class="container">
 
        
-            <form class="form-light " method="get" action="/talents">
+            <form class="form-light " name="search">
 			
                 <div class="col-md-8 col-md-offset-2 pb-20 pt-20">  <!-- style="background: hsla(0, 100%, 100%, 0.34);box-shadow: 0px 0px 12px 1px hsla(0, 100%, 100%, 0.34);" -->
 				 <div class="section-title-wr">
@@ -17,20 +17,25 @@
             </div>
                      <div class="col-md-6">
                                 <div class="form-group form-group-lg">
-                                    <label  class="c-white">Keywords</label>
-                                    <input type="text" id="keyword" class="form-control input-lg" required="required" placeholder="Eg.Webdesign,Java,C#,etc ...">
+                                   <label class="c-white">KEYWORDS</label>
+                                    <input type="text" class="form-control input-lg" required="required" name="keyword" placeholder="Eg.Webdesign,Java,C#,etc ...">
                                 </div>
                             </div>
                     <div class="col-md-6">
                                 <div class="form-group form-group-lg">
                                     <label  class="c-white">Location</label>
-                                    <input type="text" id="location" class="form-control input-lg" required="required" placeholder="Eg.Bangalore,Mysore,etc ...">
+                                   				<select type="text" class="form-control input-lg" required="required" name="locations"><option value="">-Locations-</option>
+                                     @foreach ($locations as $location)
+                                                  <option  value="{{ $location->locationId }}">{{ $location->locationName }}</option>
+                                     @endforeach
+                                    </select>
                                 </div>
                             </div>
               <div class="row">
                     <div class="col-md-12 text-center">
-                        <a href="#" class="btn btn-lg btn-dark form-control1" title="">
-                            <span> <button type="submit" id="submit">SEARCH</button></span>
+                        
+                       <a name="btnsearch" href="javascript:void(0)" class="btn btn-lg" title="">
+                            <span class="c-white">SEARCH</span>
                         </a>
                     </div>
 					

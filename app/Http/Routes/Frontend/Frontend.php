@@ -4,7 +4,7 @@
  * Frontend Controllers
  */
 Route::get('/', 'FrontendController@index')->name('frontend.index');
-Route::get('jobs', 'FrontendController@index')->name('frontend.joblist');
+//Route::get('jobs', 'FrontendController@index')->name('frontend.joblist');
 Route::get('/feedback/{id}', 'FeedbackController@getfeedback')->name('frontend.submitfeedback');
 Route::post('/feedback/submit', 'FeedbackController@submitfeedback');
 Route::get('/feedback/status/success', 'FeedbackController@success');
@@ -24,7 +24,7 @@ Route::get('/Corporate-Leadership-Program', 'FrontendController@corporateleaders
 
 
 Route::group(['middleware' => 'AuthJoblist'], function () {
-	//Route::get('jobs', 'JobController@index')->name('frontend.joblist');
+	Route::get('jobs', 'JobController@index')->name('frontend.joblist');
 	Route::get('search/joblist/{offset}', 'JobController@joblistpagination')->name('frontend.joblistpagination');
 	
 Route::get('jobs/keyword={keyword}/location={locations}', 'JobController@searchjobjoblist')->name('frontend.jobjoblist');
@@ -33,6 +33,7 @@ Route::get('jobs/keyword={keyword}/location={locations}', 'JobController@searchj
 
 Route::group(['middleware' => 'AuthResumelist'], function () {
 	Route::get('talents', 'ResumeController@index')->name('frontend.resumelist');
+        Route::get('talents/keyword={keyword}/location={locations}', 'ResumeController@searchtalentlist')->name('frontend.jobjoblist');
         Route::get('companies', 'CompanyController@index')->name('frontend.company');
 	Route::get('consultants', 'ConsultantController@index')->name('frontend.consultant');
 	Route::get('talentdetails/{id}/{name}', 'ResumeController@talentdetails')->name('frontend.talentdetails');
