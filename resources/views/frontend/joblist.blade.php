@@ -135,4 +135,18 @@
 
 @section('after-scripts-end')
    <script src="/assets/app/froentend.js"></script> 
+   <script type="text/javascript" src="/js/jquery.twbsPagination.js"></script>
+   <script src="/assets/app/conpany.joblist.js"></script>
+   @if ($count > 1)
+     <script>
+	 $(function(){ 
+	 $('[name=jobslisttotalpage]').twbsPagination({
+        totalPages: "{{ $count }}",
+        visiblePages: 7,
+        onPageClick: function (event, page) { 
+		   $('[name=myjobstotalpage] li a b').html(page); 
+            $.joblist.paginationjoblist(page);
+        }
+    });
+   })(jQuery); </script>@endif
 @stop

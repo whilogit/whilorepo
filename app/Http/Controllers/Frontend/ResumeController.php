@@ -27,10 +27,10 @@ class ResumeController extends Controller
 		 die(file_get_contents(app_path() . "/Storage/Images/$category/$year/$month/$year" . "_" . $month . "_" . $time ."_" . $name . "_" . $size ."." . $ext));
 	}
 	
-    public function index($limit = 10, $offset = 1)
+    public function index($limit = 12, $offset = 1)
     {
-        $count = DB::table('jmaster')->where('accountStatus',1)->count(); 
-			return view('frontend.resumelist')->with(array("data"=>ResumesList::getlist(), "count"=>$count,"keyword"=>""))->with("locations",DB::table('_locations')->get() );
+        $count = ceil(DB::table('jmaster')->where('accountStatus',1)->count()/10); 
+			return view('frontend.resumelist')->with(array("data"=>ResumesList::get(), "count"=>$count,"keyword"=>""))->with("locations",DB::table('_locations')->get() );
     }
 	public function talentdetails($id, $name)
     {
@@ -73,10 +73,10 @@ class ResumeController extends Controller
 						if($keyword!="")
 						$resume->where('js.keyskills','LIKE','%' . $keyword . '%');
                                          })
-					 ->where('m.accountStatus',1)->count() / 10);  
+					 ->where('m.accountStatus',1)->count() / 12);  
                                            
 			//return view('frontend.joblist')->with(array("joblist"=>Joblist::get(10,1,$keyword,$locations), "count"=>$count,"keyword"=>$keyword))->with("locations",DB::table('_locations')->get());
-                                          return view('frontend.resumelist')->with(array("data"=>ResumesList::getlist(10,1,$keyword,$locations)))->with("locations",DB::table('_locations')->get());
+                                          return view('frontend.resumelist1')->with(array("data"=>ResumesList::getlist(12,1,$keyword,$locations),"count"=>$count,"keyword"=>$keyword))->with("locations",DB::table('_locations')->get());
     }
 	
 
@@ -104,11 +104,11 @@ class ResumeController extends Controller
 					
 		return view('frontend.jobdetails')->with("jobdetails",$jobs);
     }
-	public function joblistpagination($offset = 1, $limit = 10)
+	public function joblistpagination($offset = 1, $limit = 12)
     {
 		return response()->json(array(
 					'success' => true,
-					'data' => Joblist::get($limit,$offset),
+					'data' => ResumesList::getlist($limit,$offset),
 					));
 	}
 	

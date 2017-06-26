@@ -4,6 +4,8 @@
  * Frontend Controllers
  */
 Route::get('/', 'FrontendController@index')->name('frontend.index');
+Route::get('verifytalent', 'FrontendController@verifytalent');
+Route::get('privacypolicy', 'FrontendController@privacypolicy');
 //Route::get('jobs', 'FrontendController@index')->name('frontend.joblist');
 Route::get('/feedback/{id}', 'FeedbackController@getfeedback')->name('frontend.submitfeedback');
 Route::post('/feedback/submit', 'FeedbackController@submitfeedback');

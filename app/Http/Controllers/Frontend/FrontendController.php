@@ -22,7 +22,9 @@ class FrontendController extends Controller
 
         return view('frontend.index')->with("locations",DB::table('_locations')->get() );
     }
-
+     public function verifytalent(){ return view('frontend.verifytalent');   }
+    
+     public function privacypolicy(){ return view('frontend.privacypolicy');   }
    
     public function payroll(){ return view('frontend.static.payroll');   }
     public function trainhire(){ return view('frontend.static.trainhire');   }
