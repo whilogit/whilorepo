@@ -94,13 +94,39 @@ trait RegisterRedirectsForms
 					 ->get();
 					 
 		foreach ($steps as $step){
+                 
 			    if($step->accountStatus == 0){ 
 				switch($step->steps){
 					case 1: { 
-					        $companylogo = DB::table('companylogo')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->get();
-							$companyimages = DB::table('companyimages')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->get();// die(json_encode($companyimages));
-							return view('frontend.companyauth.companyimages')->with(array("companylogo"=>$companylogo,"companyimages"=>$companyimages)); break;}
-					case 2: {  
+					        //$companylogo = DB::table('companylogo')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->get();
+                                                $complans = DB::table('_plantypes as c')
+                                        ->leftjoin('_plandetails as p', 'c.id', '=', 'p.plan_id')
+                                        ->select('c.*','p.*')
+                                        ->get();
+                                                dd($complans);
+							//$companyimages = DB::table('companyimages')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->get();// die(json_encode($companyimages));
+							//return view('frontend.companyauth.companyimages')->with(array("companylogo"=>$companylogo,"companyimages"=>$companyimages));
+                                            
+                                               return view('frontend.companyauth.companyplans')->with(array("complans"=>$complans));
+                                            break;
+                                            }
+                                         case 2: { 
+					        //$companylogo = DB::table('companylogo')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->get();
+							//$companyimages = DB::table('companyimages')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->get();// die(json_encode($companyimages));
+							//return view('frontend.companyauth.companyimages')->with(array("companylogo"=>$companylogo,"companyimages"=>$companyimages)); 
+                                             return view('frontend.companyauth.companyplanpayment');
+                                             break;
+                                            }
+                                        case 3: { 
+					        //$companylogo = DB::table('companylogo')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->get();
+							//$companyimages = DB::table('companyimages')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->get();// die(json_encode($companyimages));
+                                             return view('frontend.companyauth.companyimages');		//return view('frontend.companyauth.companyimages')->with(array("companylogo"=>$companylogo,"companyimages"=>$companyimages)); 
+                                            break;
+                                            }
+                                            
+                                            
+                            
+					case 4: {  
 						
 						$commaster = DB::table('commaster as c')
 										 ->join('comprofile as p', 'c.companyId', '=', 'p.companyId')
@@ -127,16 +153,39 @@ trait RegisterRedirectsForms
 	}
 	    public function showCompanyPlans()
         {  
-              return view('frontend.companyauth.companyplans');
+               if(isset($_SESSION['WHILLO']['STATUS'])){ if($_SESSION['WHILLO']['TYPE']=="C")
+                     $plantypes = DB::table('_plantypes as c')
+                                        ->select('c.*')
+                                        ->get();
+                          $complans = DB::table('_plantypes as c')
+                          
+                                        ->leftjoin('_plandetails as p', 'c.id', '=', 'p.plan_id')
+                                        ->select('c.*','p.*')
+                                        ->get();
+                    return view('frontend.companyauth.companyplans')->with(array("complans"=>$complans,"plantypes"=> $plantypes));
+               }
 
 
         }
      public function showPaymentpage()
         {  
+               if(isset($_SESSION['WHILLO']['STATUS'])){ if($_SESSION['WHILLO']['TYPE']=="C")
               return view('frontend.companyauth.companyplanpayment');
+               }
 
 
         }
+public function CompanyImagesPage()
+        {  
+                
+               
+               if(isset($_SESSION['WHILLO']['STATUS'])){ if($_SESSION['WHILLO']['TYPE']=="C")
+              return view('frontend.companyauth.companyimages');
+               }
+
+
+        }
+        
       public function regCompletepage()
         {  
            $commaster = DB::table('commaster as c')

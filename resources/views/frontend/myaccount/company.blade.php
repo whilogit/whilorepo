@@ -30,7 +30,7 @@
                         </div>
                        
                         <ul class="categories">
-                         <li ><a href="#CompanyProfile" data-toggle="tab">Company Profile</a></li>
+                         <li ><a href="#CompanyProfile"     data-toggle="tab">Company Profile</a></li>
 <li ><a href="#Postnewjobs" data-toggle="tab">Post New Jobs</a></li>
 <li ><a href="#postedjobs" data-toggle="tab">Posted Jobs</a></li>
 <li ><a href="#ShortlistedCandidates" data-toggle="tab">Shortlisted Candidates</a></li>

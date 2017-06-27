@@ -75,7 +75,37 @@ $(function(){
 					}
 			  });
 		},
+                
+                
 	}
+        $('a[href="#CompanyProfile"]').click(function(){
+                    var postdata = {};
+		   postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
+			$('body').removeClass('loaded');
+			$.post('/company/getdetails',postdata,function(response){   
+			$('body').addClass('loaded');
+				if(response.success)
+                                {
+        
+                                    alert('sucess');
+                                 
+                                }
+					
+				else 
+					{
+					if ((typeof  response.errors) == 'object') { 
+						var errorsHtml = ""; 
+						$.each( response.errors, function( key, value ) {
+							errorsHtml += '<li><i class="fa fa-times" style="color:#F00;"></i>' + value[0] + '</li>';
+						});
+						$('[name=company]  .responsereport li').html('' + errorsHtml);
+					}else{
+						$('[name=company]  .responsereport li').html('' + response.errors);
+					}
+					
+					}
+			},'json');
+                }); 
 	$.companyacount.init();
 	$.companyacount.globalinit();
 })(jQuery);

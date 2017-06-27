@@ -58,7 +58,7 @@
 					<div class="col-md-8">
                                         <div class="panel panel-default panel-sidebar-1">
                                             <div class="panel-heading">
-                                                <h2>@foreach ($companylogo as $logo) <img src="/display/image/{{ $logo->logoCategory }}/{{ $logo->dirYear }}/{{ $logo->dirMonth }}/{{ $logo->logoName }}/{{ $logo->crTime }}/s.{{ $logo->logExt }}" style="border:1px solid #ccc"> @endforeach <b>{{ $commaster->companyName }}</b></h2>
+                                                <h2><!--@foreach ($companylogo as $logo) <img src="/display/image/{{ $logo->logoCategory }}/{{ $logo->dirYear }}/{{ $logo->dirMonth }}/{{ $logo->logoName }}/{{ $logo->crTime }}/s.{{ $logo->logExt }}" style="border:1px solid #ccc"> @endforeach <b>{{ $commaster->companyName }}</b></h2>
                                             </div>
                                             <div class="panel-body">
                                                 <div class="row">
@@ -66,10 +66,9 @@
                                                         <strong>Address</strong>
                                                         <p class="p1">{{ $commaster->address }}, <br>{{ $commaster->locationName }}<br>Pin: {{ $commaster->pincode }}</p>
                                                           <p class="p1"><span>Website</span>:{{ $commaster->website }}</p>
-														</div>
                                                     <div class="col-md-6">
                                                          <strong>Contact Details</strong>
-                                                        <p class="p1"><span>Mobile</span>:{{ $commaster->mobileNumber }}</p>
+                                                        <p class="p1"><span>Mobile</span>:{{ $commaster->mobileNumber }}</p>--> 
 														 <p class="p1"><span>Phone</span>:{{ $commaster->phone }}</p>
 														  <p class="p1"><span>Email</span>:{{ $commaster->emailAddress }}</p>
 														 
