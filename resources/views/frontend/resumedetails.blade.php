@@ -16,6 +16,7 @@
             </div>
         </div>
     </div>
+<button type=button">shortlist</button>
  @foreach($data['profile'] as $profile)
  <script>var seekerid = "{{ $profile->seekerId }}";</script>   
 <section class="slice bg-white">
