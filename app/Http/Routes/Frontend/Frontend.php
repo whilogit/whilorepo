@@ -56,6 +56,14 @@ Route::get('companylogo.get/{category}/{year}/{month}/{name}/{time}/{size}.{ext}
 	 Route::get('company/myjobs/{page}', 'JobController@myjobsbypage')->name('myjobs.pagination');
           
  });
+
+         Route::group(['middleware' => 'talent'], function () {
+    
+               Route::get('jobdetails/{id}/{title}', 'JobController@jobdetails')->name('frontend.jobdetails');
+	});
+	
+
+
  
 Route::group(['middleware' => 'auth'], function () {
     Route::group(['namespace' => 'User'], function() {
@@ -64,7 +72,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::patch('profile/update', 'ProfileController@update')->name('frontend.user.profile.update');
 		Route::get('myaccount', 'DashboardController@index')->name('myaccount.index');
 		Route::post('job/changestatus/{id}', 'JobController@changestatus');
-               Route::get('jobdetails/{id}/{title}', 'JobController@jobdetails')->name('frontend.jobdetails');
+              // Route::get('jobdetails/{id}/{title}', 'JobController@jobdetails')->name('frontend.jobdetails');
 	});
 	
 });

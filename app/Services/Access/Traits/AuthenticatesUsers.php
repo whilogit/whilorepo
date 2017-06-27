@@ -38,6 +38,9 @@ trait AuthenticatesUsers
      */
     public function login(Request $request)
     {
+        
+        dd($request);
+        //exit;
        $rules = array('username' => 'required|Min:6','password' => 'required|Min:6');
 	   $validator = Validator::make($request->all(), $rules); 
 		
