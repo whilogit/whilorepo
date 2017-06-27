@@ -4,7 +4,9 @@
  * Frontend Controllers
  */
 Route::get('/', 'FrontendController@index')->name('frontend.index');
-Route::get('jobs', 'FrontendController@index')->name('frontend.joblist');
+Route::get('verifytalent', 'FrontendController@verifytalent');
+Route::get('privacypolicy', 'FrontendController@privacypolicy');
+//Route::get('jobs', 'FrontendController@index')->name('frontend.joblist');
 Route::get('/feedback/{id}', 'FeedbackController@getfeedback')->name('frontend.submitfeedback');
 Route::post('/feedback/submit', 'FeedbackController@submitfeedback');
 Route::get('/feedback/status/success', 'FeedbackController@success');
@@ -24,16 +26,17 @@ Route::get('/Corporate-Leadership-Program', 'FrontendController@corporateleaders
 
 
 Route::group(['middleware' => 'AuthJoblist'], function () {
-	//Route::get('jobs', 'JobController@index')->name('frontend.joblist');
+	Route::get('jobs', 'JobController@index')->name('frontend.joblist');
 	Route::get('search/joblist/{offset}', 'JobController@joblistpagination')->name('frontend.joblistpagination');
-	Route::get('jobdetails/{id}/{title}', 'JobController@jobdetails')->name('frontend.jobdetails');
+	
 Route::get('jobs/keyword={keyword}/location={locations}', 'JobController@searchjobjoblist')->name('frontend.jobjoblist');
 });
 
 
 Route::group(['middleware' => 'AuthResumelist'], function () {
 	Route::get('talents', 'ResumeController@index')->name('frontend.resumelist');
-Route::get('companies', 'CompanyController@index')->name('frontend.company');
+        Route::get('talents/keyword={keyword}/location={locations}', 'ResumeController@searchtalentlist')->name('frontend.jobjoblist');
+        Route::get('companies', 'CompanyController@index')->name('frontend.company');
 	Route::get('consultants', 'ConsultantController@index')->name('frontend.consultant');
 	Route::get('talentdetails/{id}/{name}', 'ResumeController@talentdetails')->name('frontend.talentdetails');
 	Route::post('resume/permission/{id}', 'ResumeController@permission')->name('frontend.permission');
@@ -60,6 +63,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::patch('profile/update', 'ProfileController@update')->name('frontend.user.profile.update');
 		Route::get('myaccount', 'DashboardController@index')->name('myaccount.index');
 		Route::post('job/changestatus/{id}', 'JobController@changestatus');
+                Route::get('jobdetails/{id}/{title}', 'JobController@jobdetails')->name('frontend.jobdetails');
 	});
 	
 });

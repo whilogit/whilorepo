@@ -46,47 +46,54 @@
 </div>
 </section>
 
-@foreach($data['industry'] as $industry)
-	@if(count($data[$industry->industryId]) > 0)
-        <section id="{{ $industry->industryId }}" class="slice relative bg-white bb animate-hover-slide has-pattern" style="background-color: #7a3fa8 !important;">
+<section id="" class="slice relative bg-white bb animate-hover-slide has-pattern" style="background-color: #7a3fa8 !important;">
         <div class="wp-section">
             <div class="container">
-                <div class="section-title-wr">
-                    <h3 class="section-title left"><span>{{ $industry->industryName }}</span></h3>
-                </div>
                 
-                <div id="carouselWork{{ $industry->industryId }}" class="carousel carousel-3 slide animate-hover-slide">
-                    <div class="carousel-nav">
-                        <a data-slide="prev" class="left" href="#carouselWork{{$industry->industryId }}"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
-                        <a data-slide="next" class="right" href="#carouselWork{{ $industry->industryId }}"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
-                    </div>
-                    <!-- Wrapper for slides -->
-                    <div class="carousel-inner"><?php $incr = 0; $class = "active"; ?>
-                   @foreach($data[$industry->industryId] as $resume)
+                
+                
+                 
+                   <?php $incr = 0; $class = "active"; ?>
+                   @foreach($data as $resume)
                     <?php $incr++;  ?>
                        <?php if($incr == 1){  echo '<div class="item ' . $class . '"><div class="row">';  }?>
                             
-                                <div class="col-md-2">
-                                    <div class="wp-block inverse bordergrey">
-                                       <a target="_blank" href="/talentdetails/{{ $resume->seekerId }}/{{ $resume->firstName }}"> <div class="figure"><img  style="width:100%;height:150px" alt="" src=@if($resume->imageCategory != "") "/display/image/{{ $resume->imageCategory }}/{{ $resume->dirYear }}/{{ $resume->dirMonth }}/{{ $resume->imageName }}/{{ $resume->crTime }}/s.{{ $resume->imgExt }}" @else "http://www.oldpotterybarn.co.uk/wp-content/uploads/2015/06/default-medium.png" @endif class="img-responsive"></div>
-                                      <h2>{{ $resume->firstName }} {{ $resume->lastName }}<small>Location: {{ $resume->locationName }}</small></h2><p>{{ $resume->experienceName }}</span></p></a></div>
+                               
+    <div class="col-md-2">
+                                    
+<div class="wp-block inverse bordergrey">
+                                       <a target="_blank" href="/talentdetails/{{ $resume->seekerId }}/{{ $resume->firstName }}">
+ <div class="figure">
+<img  style="width:100%;height:150px" alt="" src=@if($resume->imageCategory != "") "/display/image/{{ $resume->imageCategory }}/{{ $resume->dirYear }}/{{ $resume->dirMonth }}/{{ $resume->imageName }}/{{ $resume->crTime }}/s.{{ $resume->imgExt }}" @else "http://www.oldpotterybarn.co.uk/wp-content/uploads/2015/06/default-medium.png" @endif class="img-responsive"></div>
+
+                                      <h2>{{ $resume->firstName }} {{ $resume->lastName }}<small>Location: {{ $resume->locationName }}</small></h2><p>{{ $resume->experienceName }}</span></p></a>
+
+</div>
                                 </div>
+
                                
                            <?php if($incr == 6){ echo '</div></div>'; } if($incr == 6) $incr = 0; ?>
                        <?php $class = "";?>
                        @endforeach
-                    </div>
+                   
+ <!-- BOTTOM PAGINATION -->
+                        
                 </div>  
+
             </div>
-        </div>
-    </section>
-        <style>
-.wp-block.inverse small{    color: #fffefe;}
-.wp-block.inverse h2, .wp-block.inverse .title {color: #fff;}
-.wp-block.inverse p {color: white;}
-</style>      
-    @endif
-@endforeach    
+       
+    </section> 
+<div class="wp-block default product-list-filters light-gray">
+                            <div class="filter sort-filter">
+                                <div class="form-inline form-light">
+                                    <ul name="myjobstotalpage" class="pagination-sm pagination"><li class="disabled"><a>Page  / <b>1</b></a></li></ul>
+                                    
+                                </div>
+                            </div>
+                            <ul class="pagination pagination" name="jobslisttotalpage">
+                               
+                            </ul>
+                        </div>
 @endsection
 
 @section('after-scripts-end')
