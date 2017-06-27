@@ -1,7 +1,8 @@
-$(function(){ 
+/*
+ * $(function(){ 
 	$.choose_plan = {
 		init: function(callback) {
-			$("[name=choose_plan] .btnsubmit").click(function() { $.choose_plan.plan($(this),callback); });   
+			$("[name=expressPlan] .expressbtn").click(function() { $.choose_plan.plan($(this),callback); }); alert('hi')  ;
 		},
 		plan:function(ths,callback){
          
@@ -12,8 +13,8 @@ $(function(){
 			$('body').addClass('loaded');
 				if(response.success)
                                 {
-                                   alert('hi');
-                                    location.href = "company/payment";
+                                   //alert('hi');
+                                    location.href = "/company/payment";
                                 }
 					
 				else 
@@ -33,4 +34,24 @@ $(function(){
 		},
 	}
 	$.choose_plan.init();
+})(jQuery);
+
+ */
+$(function(){ 
+    $('#expressbtn').on('click', function() {
+
+     var expressdata = $("#expressPlan").serialize();
+      location.href = "/company/payment";
+});
+    $('#enterprisebtn').on('click', function() {
+
+     var enterprise = $("#enterprisePlan").serialize();
+       
+});
+$('#exclusivebtn').on('click', function() {
+
+     var exclusive = $("#exclusivePlan").serialize();
+       
+});
+    
 })(jQuery);

@@ -13,6 +13,7 @@ $(function(){
 			
 		},
 		validate:function(ths,callback){
+                    alert('validate');
 			if(ths.val()!="")ths.css('background-color', 'white').css('border-color','');
 		},
 		
@@ -61,7 +62,9 @@ $(function(){
 			$('body').removeClass('loaded');
 			$.post('/company/complete',postdata,function(response){ 
 			if(response.success){
-				location.href="/company/signup";
+                            alert('heloooo');
+				//location.href="/company/signup";
+                                 location.href = "/company/reg_complete";
 			}else 
 			{
 				$('body').addClass('loaded');
@@ -77,8 +80,10 @@ $(function(){
 		logo:function(thiss,ths,callback){
 			var proceed = true;
 		        var fname = thiss.value;
-		        var re = /(\.jpg|\.jpeg|\.png)$/i;
-			if(!re.exec(fname)){	
+		     //var re = /(\.jpg|\.jpeg|\.png)$/i;
+                      // var ext = fname.split('.').pop();
+                  var ext=  (/\.(gif|jpg|jpeg|tiff|png)$/i).test(fname);
+			if(!ext){	
 				proceed= false; 
 				$.alert({
 						title: 'Error!',
@@ -86,11 +91,12 @@ $(function(){
 						animation: 'rotate',
 						closeAnimation: 'right',
 					 });
+                                         
 				
 			}
-			if(proceed){
+			if(proceed){  
 		     $('body').removeClass('loaded'); 
-			 setTimeout(function(){ 
+			 setTimeout(function(){
 				var formData = new FormData(); 
 				formData.append("image_file[]",thiss.files[0]);
 				formData.append("_token",$('meta[name="csrf-token"]').attr('content'));
@@ -102,7 +108,9 @@ $(function(){
 					async: false,
 					data: formData,
 					type: 'post',
-					success: function(response) {  
+					success: function(response) { 
+                                          
+                                            
 						$('body').addClass('loaded'); 
 						if(response.success){  
 						  ths.closest('.row').find('[name=logoimage]').html('<img src="'+ response.imagepath +'" style="border:1px solid #ccc"><span id="close" class="close">x</span>				');
@@ -120,9 +128,12 @@ $(function(){
 			}
 		},
 		companyimages:function(thiss,ths,callback){ 
+                  
 			var proceed = true;
 		        var fname = thiss.value;
-		        var re = /(\.jpg|\.jpeg|\.png)$/i;
+		        //var re = /(\.jpg|\.jpeg|\.png)$/i;
+                      
+                      
 			if(!re.exec(fname)){	
 				proceed= false; 
 				$.alert({

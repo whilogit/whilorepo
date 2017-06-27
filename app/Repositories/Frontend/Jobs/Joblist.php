@@ -24,7 +24,8 @@ class Joblist extends Controller
 						$resume->where('l.locationId','=',$locations);
 						
 						if($keyword!="")
-						$resume->where('j.jobTitle','LIKE','%' . $keyword . '%'); 
+						$resume->where('j.jobTitle','LIKE','%' . $keyword . '%') 
+                                                  ->orWhere('j.keyskills','LIKE','%' . $keyword . '%');
 								
 					  })
 					->join('_salaryrange as s', 's.salaryId', '=', 'j.salaryId')

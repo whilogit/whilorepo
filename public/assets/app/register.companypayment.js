@@ -12,8 +12,9 @@ $(function(){
 			$('body').addClass('loaded');
 				if(response.success)
                                 {
-                                    // alert('hi');
-                                  location.href = "/company/reg_complete";
+        
+                                    location.href = "/company/image_upload_page";
+                                 
                                 }
 					
 				else 

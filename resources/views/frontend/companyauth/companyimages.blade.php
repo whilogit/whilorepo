@@ -44,8 +44,8 @@
                                                         </div>  
                                                     </div>               
                                                 </div>
-												 <div class="col-md-2" name="logoimage">
-                                                 @foreach ($companylogo as $logo) <img src="/display/image/{{ $logo->logoCategory }}/{{ $logo->dirYear }}/{{ $logo->dirMonth }}/{{ $logo->logoName }}/{{ $logo->crTime }}/s.{{ $logo->logExt }}" style="border:1px solid #ccc"> @endforeach             
+                                                <div class="col-md-2" name="logoimage">
+                                                           
                                                   <span id="close" class="close">x</span>       
                                                 </div>
 										<br></div>
@@ -60,12 +60,10 @@
                                                         </div>  
                                                     </div>               
                                                 </div><div name="companyimages">
-																	 @foreach ($companyimages as $images)
-                                                                                 <div class="col-md-2"><img  src="/display/image/{{ $images->imageCategory }}/{{ $images->dirYear }}/{{ $images->dirMonth }}/{{ $images->logoName }}/{{ $images->crTime }}/s.{{ $images->logExt }}" style="border:1px solid #ccc;width:100%">  
-<span id="close" class="close">x</span></div> @endforeach  
+						
 </div>
 												 
-                                                
+                                                --> 
                                             </div>   
 
                                         </section>

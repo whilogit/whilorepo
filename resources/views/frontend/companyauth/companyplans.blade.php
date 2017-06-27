@@ -1,303 +1,115 @@
 @extends('frontend.layouts.master')
 
 @section('content')
-<style>
-    body
-{
-    margin-top: 20px;
-}
-.panel
-{
-    text-align: center;
-}
-.panel:hover { box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4), 0 1px 5px rgba(130, 130, 130, 0.35); }
-.panel-body
-{
-    padding: 0px;
-    text-align: center;
-}
 
-.the-price
-{
-    background-color: rgba(220,220,220,.17);
-    box-shadow: 0 1px 0 #dcdcdc, inset 0 1px 0 #fff;
-    padding: 20px;
-    margin: 0;
-}
-
-.the-price h1
-{
-    line-height: 1em;
-    padding: 0;
-    margin: 0;
-}
-
-.subscript
-{
-    font-size: 25px;
-}
-
-/* CSS-only ribbon styles    */
-.cnrflash
-{
-    /*Position correctly within container*/
-    position: absolute;
-    top: -9px;
-    right: 4px;
-    z-index: 1; /*Set overflow to hidden, to mask inner square*/
-    overflow: hidden; /*Set size and add subtle rounding  		to soften edges*/
-    width: 100px;
-    height: 100px;
-    border-radius: 3px 5px 3px 0;
-}
-.cnrflash-inner
-{
-    /*Set position, make larger then 			container and rotate 45 degrees*/
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 145px;
-    height: 145px;
-    -ms-transform: rotate(45deg); /* IE 9 */
-    -o-transform: rotate(45deg); /* Opera */
-    -moz-transform: rotate(45deg); /* Firefox */
-    -webkit-transform: rotate(45deg); /* Safari and Chrome */
-    -webkit-transform-origin: 100% 100%; /*Purely decorative effects to add texture and stuff*/ /* Safari and Chrome */
-    -ms-transform-origin: 100% 100%;  /* IE 9 */
-    -o-transform-origin: 100% 100%; /* Opera */
-    -moz-transform-origin: 100% 100%; /* Firefox */
-    background-image: linear-gradient(90deg, transparent 50%, rgba(255,255,255,.1) 50%), linear-gradient(0deg, transparent 0%, rgba(1,1,1,.2) 50%);
-    background-size: 4px,auto, auto,auto;
-    background-color: #aa0101;
-    box-shadow: 0 3px 3px 0 rgba(1,1,1,.5), 0 1px 0 0 rgba(1,1,1,.5), inset 0 -1px 8px 0 rgba(255,255,255,.3), inset 0 -1px 0 0 rgba(255,255,255,.2);
-}
-.cnrflash-inner:before, .cnrflash-inner:after
-{
-    /*Use the border triangle trick to make  				it look like the ribbon wraps round it's 				container*/
-    content: " ";
-    display: block;
-    position: absolute;
-    bottom: -16px;
-    width: 0;
-    height: 0;
-    border: 8px solid #800000;
-}
-.cnrflash-inner:before
-{
-    left: 1px;
-    border-bottom-color: transparent;
-    border-right-color: transparent;
-}
-.cnrflash-inner:after
-{
-    right: 0;
-    border-bottom-color: transparent;
-    border-left-color: transparent;
-}
-.cnrflash-label
-{
-    /*Make the label look nice*/
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    display: block;
-    width: 100%;
-    padding-bottom: 5px;
-    color: #fff;
-    text-shadow: 0 1px 1px rgba(1,1,1,.8);
-    font-size: 0.95em;
-    font-weight: bold;
-    text-align: center;
-}
-</style>
-   <div class="pg-opt">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <h2>Company/Consultancy logo and images</h2>
-                </div>
-                <div class="col-md-6">
-                    <ol class="breadcrumb">
-                        <li><a href="#">Home</a></li>
-                       
-                        <li class="active">Sign up</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </div>
-    
+<!-- MAIN WRAPPER -->
+<div class="body-wrap">
    
-    <section class="slice slice-lg bg-image"  name="choose_plan" style="background-image:url(../images/mainbg.png)">
-        <div class="wp-section">
-                <div class="container">
-    <div class="row">
-        <div class="col-xs-12 col-md-3">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        Bronze</h3>
-                </div>
-                <div class="panel-body">
-                    <div class="the-price">
-                        <h1>
-                            $10<span class="subscript">/mo</span></h1>
-                        <small>1 month FREE trial</small>
-                    </div>
-                    <table class="table">
-                        <tr>
-                            <td>
-                                1 Account
-                            </td>
-                        </tr>
-                        <tr class="active">
-                            <td>
-                                1 Project
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                100K API Access
-                            </td>
-                        </tr>
-                        <tr class="active">
-                            <td>
-                                100MB Storage
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Custom Cloud Services
-                            </td>
-                        </tr>
-                        <tr class="active">
-                            <td>
-                                Weekly Reports
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="panel-footer">
-                    <a href="#" class="btn btn-success" role="button">Sign Up</a>
-                    1 month FREE trial</div>
-            </div>
-        </div>
-        <div class="col-xs-12 col-md-3">
-            <div class="panel panel-success">
-                <div class="cnrflash">
-                    <div class="cnrflash-inner">
-                        <span class="cnrflash-label">MOST
-                            <br>
-                            POPULAR</span>
-                    </div>
-                </div>
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        Silver</h3>
-                </div>
-                <div class="panel-body">
-                    <div class="the-price">
-                        <h1>
-                            $20<span class="subscript">/mo</span></h1>
-                        <small>1 month FREE trial</small>
-                    </div>
-                    <table class="table">
-                        <tr>
-                            <td>
-                                2 Account
-                            </td>
-                        </tr>
-                        <tr class="active">
-                            <td>
-                                5 Project
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                100K API Access
-                            </td>
-                        </tr>
-                        <tr class="active">
-                            <td>
-                                200MB Storage
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Custom Cloud Services
-                            </td>
-                        </tr>
-                        <tr class="active">
-                            <td>
-                                Weekly Reports
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="panel-footer">
-                    <a href="#" class="btn btn-success" role="button">Sign Up</a>
-                    1 month FREE trial</div>
-            </div>
-        </div>
-        <div class="col-xs-12 col-md-3">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        Gold</h3>
-                </div>
-                <div class="panel-body">
-                    <div class="the-price">
-                        <h1>
-                            $35<span class="subscript">/mo</span></h1>
-                        <small>1 month FREE trial</small>
-                    </div>
-                    <table class="table">
-                        <tr>
-                            <td>
-                                5 Account
-                            </td>
-                        </tr>
-                        <tr class="active">
-                            <td>
-                                20 Project
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                300K API Access
-                            </td>
-                        </tr>
-                        <tr class="active">
-                            <td>
-                                500MB Storage
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Custom Cloud Services
-                            </td>
-                        </tr>
-                        <tr class="active">
-                            <td>
-                                Weekly Reports
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="panel-footer">
-                   
-                 <button class="btn btn-success btnsubmit" type="button">
-                                                        Sign Up   </button>1 month FREE trial
-                                                 
-                </div>
-            </div>
+
+        <!-- Optional header components (ex: slider) -->
+  <!-- MAIN CONTENT -->
+        <div class="pg-opt" style="margin-top:5%;">
+        <div class="container">
+          
         </div>
     </div>
-</div>
 
+
+
+   <section class="slice bg-base"  name="choose_plan" style="background: #242738;">
+           <div class="wp-section">
+            <div class="container">
+                <div class="row"><h4 class="col-md-12 text-center">Pricing</h4>
+                    <div class="col-md-12">
+<div class="col-md-8 col-md-offset-2 col-sm-6 col-xs-12">
+
+    <table class="table  table-responsive"><tbody>     
+        {{  dd($complans) }}
+              @foreach ($complans as $complan)
+                  <tr>
+                    <th>&nbsp;
+               
+          
+                <th>{{  $complan->planname }}</th>
+               
+            </tr>
+              
+              <tr><th>{{ $complan->detail_name }} </th><td>{{ $complan->detail_value }}</td></tr>
+              @endforeach 
+              
+            
+            <tr>
+                <th>Job Post Limit</th>
+                <td>2</td>
+                <td>5</td>
+                <td>15</td>
+            </tr>
+            <tr>
+                <th>Duration</th>
+                <td>7</td>
+                <td>15</td>
+                <td>30</td>
+            </tr>
+            <tr><th>Search Criterion</th><td>Location Based</td><td>Location Based</td><td>Location Based</td></tr>
+            <tr><th>Emails</th><td>FREE</td><td>FREE</td><td>FREE</td></tr>
+            <tr><th>Price(Rs.)</th><td>2000</td><td>4200</td><td>8500</td></tr>
+            <tr><th>&nbsp;</th><td>
+                    <button class="btn btn-lg btnsubmit" id="expressbtn" type="button">
+                        Subscribe Now  </button>
+                </td><td>  <button class="btn btn-lg btnsubmit"  id="enterprisebtn" type="button">
+                        Subscribe Now  </button></td> <td><button id="exclusivebtn" class="btn btn-lg btnsubmit" type="button">
+                        Subscribe Now  </button></td></tr>
+            
+        <tbody>
+    </table>
+    <form name="expressPlan" id="expressPlan" method="post" action="" >
+        <input type="hidden" name="cvAccess" id="cvAccess" value="350 (50 Profiles per Day)"/>
+        <input type="hidden"  name="jobPosts" id="jobPosts" value="2"/>
+        <input type="hidden"  name="duration" id="duration" value="7"/>
+        <input type="hidden" name="searchC" id="searchC" value="Location Based"/>
+        <input type="hidden" name="emails" id="emails" value="Free"/>
+        <input type="hidden"  name="price" id="price" value="2000"/>
+    </form>
+    <form name="enterprisePlan" id="enterprisePlan" method="post" action="" >
+        <input type="hidden"  name="cvAccess" id="cvAccess1" value="975 (65 Profiles per Day)"/>
+        <input type="hidden"  name="jobPosts" id="jobPosts1" value="5"/>
+        <input type="hidden"  name="duration" id="duration1" value="15"/>
+        <input type="hidden"  name="searchC" id="searchC1" value="Location Based"/>
+        <input type="hidden"  name="emails" id="emails1" value="Free"/>
+        <input type="hidden"  name="price" id="price1" value="4200"/>
+    </form>
+    <form name="exclusivePlan" id="exclusivePlan" method="post" action="" >
+        <input type="hidden"  name="cvAccess" id="cvAccess2" value="2400 (80 Profiles per Day)"/>
+        <input type="hidden"  name="jobPosts" id="jobPosts2" value="15"/>
+        <input type="hidden"  name="duration" id="duration2" value="30"/>
+        <input type="hidden"  name="searchC" id="searchC2" value="Location Based"/>
+        <input type="hidden"  name="emails" id="emails2" value="Free"/>
+        <input type="hidden"  name="price" id="price2" value="8500"/>
+    </form>
+        </div>
+                    </div>
+                  
+
+                </div>
+            </div>
         </div>
     </section>
+
+
+</div>
+
+
+<style>
+body{font-family:Tw Cen MT !important;}
+ul li,p{    font-size: 16px;
+    line-height: 21px;}
+th, td {
+    border: 1px solid #b2aeae;
+    font-weight: 600;
+}
+</style>
 @endsection
+
 @section('after-scripts-end')
-    <script src="/assets/app/register.companyplan.js"></script>
-@stop
+<script src="/assets/app/register.companyplan.js"></script>
+@endsection

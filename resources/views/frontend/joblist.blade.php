@@ -13,11 +13,62 @@
             </div>
         </div>
     </div>
-    <br />
-    <section class="slice bg-white no-padding">
+ 
+   <section class="slice relative bg-white bb animate-hover-slide has-pattern" style="background-color: #217dbb !important;">
         <div class="wp-section">
             <div class="container">
+
+<form class="form-light" name="search">
+			
+                <div class="col-md-8 col-md-offset-2 pb-20 pt-20">  <!-- style="background: hsla(0, 100%, 100%, 0.34);box-shadow: 0px 0px 12px 1px hsla(0, 100%, 100%, 0.34);" -->
+				 <div class="section-title-wr">
+                <h3 class="section-title center">
+                    <span class="c-white">SEARCH YOUR DREAM JOB</span>
+                    
+                </h3>
+            </div>
+                     <div class="col-md-6">
+                                <div class="form-group form-group-lg">
+                                    <label class="c-white">KEYWORDS</label>
+                                    <input type="text" class="form-control input-lg" required="required" name="keyword" placeholder="Eg.Webdesign,Java,C#,etc ...">
+                                </div>
+                            </div>
+                    <div class="col-md-6">
+                                <div class="form-group form-group-lg">
+                                    <label  class="c-white">Location</label>
+                                    
+									<select type="text" class="form-control input-lg" required="required" name="locations"><option value="">-Locations-</option>
+                                     @foreach ($locations as $location)
+                                                  <option  value="{{ $location->locationId }}">{{ $location->locationName }}</option>
+                                     @endforeach
+                                    </select>
+                                </div>
+                            </div>
+              <div class="row">
+                    <div class="col-md-12 text-center">
+                       <a name="btnsearch" href="javascript:void(0)" class="btn btn-lg" title="">
+                            <span class="c-white">SEARCH</span>
+                        </a>
+<a href="#" class="form-control1" title="">
+                            <span>ADVANCED SEARCH</span>
+                        </a>
+                    </div>
+					
+                </div>   
+				</div>      
+            </form>
+
+</div>
+</div>
+</section>
+    <section class="slice bg-white no-padding" >
+        <div class="wp-section">
+            <div class="container"><br/>
+ <div class="row"> <div class="col-md-12"><h6>{{$count}} @if($keyword){{$keyword}} @endif
+             Results for HTML Developer</h6></div></div>
+
                 <div class="row">
+ <div class="col-md-4"></div>
                     <div class="col-md-8">
                         
                         <ul class="list-listings-2" name="joblist">
@@ -25,16 +76,19 @@
                          @foreach ($joblist as $list)
                             <li class="featured" id="{{ $list->jobId }}" style="box-shadow: 0 10px 6px -6px #777">
                                <div class="listing-header bg-base">{{ $list->companyName }}</div>
-                                 <div class="listing-image">                                  
-                                     <img src="/<?php echo $list->logoCategory == "" ? "" : "companylogo.get/" ?>{{ $list->logoCategory }}/{{ $list->dirYear }}/{{ $list->dirMonth }}/{{ $list->logoName }}/{{ $list->crTime }}/s.{{ $list->logExt }}" class="img-responsive" style="width:100%"  alt="{{ $list->companyName }}">
-                                                                            
+                                 <div class="col-md-2">                                  
+<a href="/jobdetails/{{ $list->jobId }}/<?php echo str_replace(" ", "-",$list->jobTitle) ?>"> 
+    @if($list->logoCategory)
+    <img src="/<?php echo $list->logoCategory == "" ? "" : "companylogo.get/" ?>{{ $list->logoCategory }}/{{ $list->dirYear }}/{{ $list->dirMonth }}/{{ $list->logoName }}/{{ $list->crTime }}/s.{{ $list->logExt }}" class="img-responsive" style="width:100%"  alt="{{ $list->companyName }}">
+@endif
+</a>                                                               
                                    
-                                    <a href="/jobdetails/{{ $list->jobId }}/<?php echo str_replace(" ", "-",$list->jobTitle) ?>" class="btn btn-lg btn-square btn-light btn-block-bm btn-icon">See more</a>
+                            <!--        <a href="/jobdetails/{{ $list->jobId }}/<?php echo str_replace(" ", "-",$list->jobTitle) ?>" class="btn btn-lg btn-square btn-light btn-block-bm btn-icon">See more</a>  -->
                                 </div>
-                                <div class="cell">
-                                    <div class="listing-body clearfix">
-                                        <h3><a href="/jobdetails/{{ $list->jobId }}/<?php echo str_replace(" ", "-",$list->jobTitle) ?>">{{ $list->jobTitle }}</a></h3>
-                                       <h4>{{ $list->jobTitle }}.</h4> 
+                                <div class="col-md-10">
+                                    <div>
+                                        <h5><a href="/jobdetails/{{ $list->jobId }}/<?php echo str_replace(" ", "-",$list->jobTitle) ?>">{{ $list->jobTitle }}</a></h5>
+                                       <p>{{ $list->jobTitle }}.</p> 
                                     </div>
                                     <div class="listing-footer">
                                         <ul class="aux-info">
@@ -71,7 +125,16 @@
     </section>   
 @endsection
 
+
+    <style>
+.wp-block.inverse small{    color: #fffefe;}
+.wp-block.inverse h2, .wp-block.inverse .title {color: #fff;}
+.wp-block.inverse p {color: white;}
+</style>
+
+
 @section('after-scripts-end')
+   <script src="/assets/app/froentend.js"></script> 
    <script type="text/javascript" src="/js/jquery.twbsPagination.js"></script>
    <script src="/assets/app/conpany.joblist.js"></script>
    @if ($count > 1)

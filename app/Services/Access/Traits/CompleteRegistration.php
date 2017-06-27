@@ -19,6 +19,7 @@ trait completeRegistration
     use RedirectsUsers;
 		public function companyplan(Request $request,Response $response)
             { 
+                      
                 DB::table('csteps')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->increment('steps');
                 return response()->json(array(
                                                     'success' => true,
@@ -45,7 +46,7 @@ trait completeRegistration
     public function compcomplete(Request $request,Response $response)
     { 
 		  
-		 $imagecount = DB::table('companyimages')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->count();
+		$imagecount = DB::table('companyimages')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->count();
 		 if($imagecount != 0){
 			DB::table('csteps')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->increment('steps');
 			return response()->json(array(
@@ -60,6 +61,13 @@ trait completeRegistration
 		 }
 			
 	}
-	
+     public function CompanyProfileDetails()
+     {
+         
+        return response()->json(array(
+					'success' => true,
+					'errors' => "Company registration completed"
+					));
+     }
 	
 }
