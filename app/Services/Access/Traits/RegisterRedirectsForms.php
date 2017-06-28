@@ -24,7 +24,7 @@ trait RegisterRedirectsForms
      */
     public function showRegistrationForm()
     {
-      	if(isset($_SESSION['WHILLO']['STATUS'])){ if($_SESSION['WHILLO']['TYPE']=="C")//return Redirect::to('company/signup'); 
+      	if(isset($_SESSION['WHILLO']['STATUS'])){ if($_SESSION['WHILLO']['TYPE']=="C")return Redirect::to('company/signup'); 
 		$steps = DB::table('userlogin as l')
 	  		         ->join('jmaster as m', 'm.userId', '=', 'l.userId')
 					 ->join('jsteps as s', 'm.seekerId', '=', 's.seekerId')
