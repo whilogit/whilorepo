@@ -44,25 +44,24 @@ trait completeRegistration
                          
 
              }
-              public function CompanyProfileDetails()
+    public function CompanyProfileDetails()
      {
           $compdetails = DB::table('comprofile as p')
                                         ->leftjoin('commaster as m', 'm.companyId','=','p.companyId')
                                         ->leftjoin('userlogin as u','u.userId','=','m.userId')
-                                        ->select('m.userId','u.emailAddress','p.companyName','p.mobileNumber','p.website','p.address','p.locationId')
+                                         ->leftjoin('_locations as l','l.locationId','=','p.locationId')
+                                         ->leftjoin('_industry as i','i.industryId','=','p.industry')
+                                        ->select('m.userId','u.emailAddress','p.companyName','p.mobileNumber','p.website','p.aboutbio','p.address','l.locationName','i.industryName')
                                          ->where('u.userId', '=', $_SESSION['WHILLO']['USERID'])
                                         ->first();
-          $data= json_encode($compdetails);
-        return response()->json(array(
-					'success' => true,
-                                        'compdetails'=>$data,
-					'errors' => "Company details"
-					));
+          $data['compdetails'] = $compdetails;
+ 
+        return response(view('frontend.myaccount.companydetails', $data),'200')->header('Content-Type', 'text/plain');  
      }
      public function GetCompanyPostedJobs()
      {
          
-           $jodetails = DB::table('companyjobs as j')
+           $jobdetails = DB::table('companyjobs as j')
                                        
                                         ->select('j.jobTitle', 'l.locationName','j.lastdate')
                                         ->leftjoin('_locations as l','l.locationId','=','j.locationId')
@@ -70,12 +69,9 @@ trait completeRegistration
                                         ->get();
            
           
-          $jobdata= json_encode($compdetails);
-        return response()->json(array(
-					'success' => true,
-                                        'compdetails'=>$jobdata,
-					'errors' => "Company job details"
-					));
+         $data['jobdetails'] = $jobdetails;
+ 
+        return response(view('frontend.myaccount.companyjoblisting', $data),'200')->header('Content-Type', 'text/plain');  
      }
 
   

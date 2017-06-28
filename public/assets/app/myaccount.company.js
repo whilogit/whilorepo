@@ -78,92 +78,43 @@ $(function(){
                 
                 
 	}
-        $('a[href="#CompanyProfile"]').click(function(){
-                    var postdata = {};
-		   postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
-			$('body').removeClass('loaded');
-			$.post('/company/getdetails',postdata,function(response){   
-			$('body').addClass('loaded');
-				if(response.success)
-                                {
-
-                                }
-					
-				else 
-					{
-					if ((typeof  response.errors) == 'object') { 
-						var errorsHtml = ""; 
-						$.each( response.errors, function( key, value ) {
-							errorsHtml += '<li><i class="fa fa-times" style="color:#F00;"></i>' + value[0] + '</li>';
-						});
-						$('[name=company]  .responsereport li').html('' + errorsHtml);
-					}else{
-						$('[name=company]  .responsereport li').html('' + response.errors);
-					}
-					
-					}
-			},'json');
-                }); 
-                   $('a[href="#postedjobs"]').click(function(){ 
-                          var postdata = {};
-		         postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
-			$('body').removeClass('loaded');
-			$.post('/company/postedjobs',postdata,function(response){   
-			$('body').addClass('loaded');
-				if(response.success)
-                                {
-                                         
-                                 
-                                }
-					
-				else 
-					{
-					if ((typeof  response.errors) == 'object') { 
-						var errorsHtml = ""; 
-						$.each( response.errors, function( key, value ) {
-							errorsHtml += '<li><i class="fa fa-times" style="color:#F00;"></i>' + value[0] + '</li>';
-						});
-						$('[name=company]  .responsereport li').html('' + errorsHtml);
-					}else{
-						$('[name=company]  .responsereport li').html('' + response.errors);
-					}
-					
-					}
-			},'json');
-                                    
-                         }); 
+        $('a[href="#CompanyProfile"]').click(function()
+        {
+            
+            var postdata = {};
+            postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
+                $('body').removeClass('loaded');
+                $.post('/company/getdetails',postdata,function(response){
+                $('body').addClass('loaded');
+                    $('#CompanyProfile').append(response);
+                });
+        }); 
+        $('a[href="#Postnewjobs"]').click(function()
+        {
+             var postdata = {};
+            postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
+                $('body').removeClass('loaded');
+                $.get('upload/jobs',postdata,function(response){
+                $('body').addClass('loaded');
+                 $('#Postnewjobs').append(response);
+                  
+                });
+           
+        }); 
+         $('a[href="#postedjobs"]').click(function()
+        {
+             var postdata = {};
+            postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
+                $('body').removeClass('loaded');
+                $.post('/company/postedjobs',postdata,function(response){
+                $('body').addClass('loaded');
+                 $('#postedjobs').append(response);
+                  
+                });
+           
+        });        
                    
-               $('#postjobform').on('submit',function(e){
-                    var postdata = {};
-		   postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
-			$('body').removeClass('loaded');
-			$.post('/company/postjobs',postdata,function(response){   
-			$('body').addClass('loaded');
-				if(response.success)
-                                {
-                                         console.log(response.compdetails);
-                                        var obj = JSON.parse(response.compdetails);
-                                        alert(obj.companyId);
-                                            $('#CompanyProfile').append('<div id="innerDiv"></div>');
->>>>>>> ec8d89321bd441426fadb84b4f5bb82484867473
-                                 
-                                }
-					
-				else 
-					{
-					if ((typeof  response.errors) == 'object') { 
-						var errorsHtml = ""; 
-						$.each( response.errors, function( key, value ) {
-							errorsHtml += '<li><i class="fa fa-times" style="color:#F00;"></i>' + value[0] + '</li>';
-						});
-						$('[name=company]  .responsereport li').html('' + errorsHtml);
-					}else{
-						$('[name=company]  .responsereport li').html('' + response.errors);
-					}
-					
-					}
-			},'json');
-                }); 
+              
 	$.companyacount.init();
 	$.companyacount.globalinit();
 })(jQuery);

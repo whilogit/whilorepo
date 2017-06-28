@@ -35,8 +35,9 @@ trait CompanyJobUpload
 		$defaults['joiningtime'] = DB::table('_joiningtime')->get();
 		
 		
-		
-		return view('frontend.company.uploadjob',array("response"=>$defaults));
+		$data=array("response"=>$defaults);
+		//return view('frontend.company.uploadjob',array("response"=>$defaults));
+                return response(view('frontend.company.uploadjob', $data),'200')->header('Content-Type', 'text/plain');  
 	}
 	
 	public function uploadjobs(Request $request,Response $response)

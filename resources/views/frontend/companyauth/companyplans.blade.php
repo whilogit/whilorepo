@@ -34,38 +34,6 @@
                     <button class="btn btn-lg btnsubmit" id="expressbtn" value="1" type="button">
 
 
-    <table class="table  table-responsive"><tbody>     
-  
-              @foreach ($complans as $complan)
-                  <tr>
-                    <th>&nbsp;
-               
-          
-                <th>{{  $complan->planname }}</th>
-               
-            </tr>
-              
-              <tr><th>{{ $complan->detail_name }} </th><td>{{ $complan->detail_value }}</td></tr>
-              @endforeach 
-              
-            
-            <tr>
-                <th>Job Post Limit</th>
-                <td>2</td>
-                <td>5</td>
-                <td>15</td>
-            </tr>
-            <tr>
-                <th>Duration</th>
-                <td>7</td>
-                <td>15</td>
-                <td>30</td>
-            </tr>
-            <tr><th>Search Criterion</th><td>Location Based</td><td>Location Based</td><td>Location Based</td></tr>
-            <tr><th>Emails</th><td>FREE</td><td>FREE</td><td>FREE</td></tr>
-            <tr><th>Price(Rs.)</th><td>2000</td><td>4200</td><td>8500</td></tr>
-            <tr><th>&nbsp;</th><td>
-                    <button class="btn btn-lg btnsubmit" id="expressbtn" type="button">
 
                         Subscribe Now  </button>
                 </td><td>  <button class="btn btn-lg btnsubmit"  id="enterprisebtn" value="2" type="button">

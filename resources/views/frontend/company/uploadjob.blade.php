@@ -1,29 +1,4 @@
-@extends('frontend.layouts.master')
-
-@section('content')
-   <div class="pg-opt">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <h2>Upload your job</h2>
-                </div>
-                <div class="col-md-6">
-                    <ol class="breadcrumb">
-                        <li><a href="#">Home</a></li>
-                       
-                        <li class="active">Upload your job</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-   
-    <section class="slice slice-lg bg-image" style="background-image:url(/images/mainbg.png)">
-        <div class="wp-section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2 col-sm-6 col-sm-offset-3">                   
+         @extends('frontend.layouts.master')        
                         <div class="wp-block default user-form no-margin">
                             <div class="form-header">
                                 <h2>Upload your job</h2> 
@@ -226,12 +201,10 @@
                             </div>
                           
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-@endsection
+          
+        
+
+     
 @section('after-scripts-end')
 
     <link rel="stylesheet" href="/assets/sceditor/minified/themes/default.min.css" media="all" />
@@ -285,7 +258,7 @@
 	});
 	</script>
     
-    <script src="/assets/app/upload.jobs.js"></script>
+ <script src="/assets/app/upload.jobs.js"></script>
     <script>
   $( function() {
 	  var today = new Date(); 
