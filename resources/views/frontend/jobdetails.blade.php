@@ -13,7 +13,8 @@
         </div>
     </div>
     <br />
-
+<?php //echo '<pre>'; print_r($jobdetails); ?>
+<input type="hidden" id="jobId" value="<?php echo $jobdetails->jobId ?>">
  <section class="slice bg-white">
         <div class="wp-section">
             <div class="container">
@@ -50,9 +51,15 @@
                     </div>
                     <div class="col-md-4">
 					<h3>{{ $jobdetails->companyName }}</h3>
+                                         @if($jobdetails->logoCategory=="")
 					 <img src="/<?php echo $jobdetails->logoCategory == "" ? "" : "companylogo.get/" ?>{{ $jobdetails->logoCategory }}/{{ $jobdetails->dirYear }}/{{ $jobdetails->dirMonth }}/{{ $jobdetails->logoName }}/{{ $jobdetails->crTime }}/s.{{ $jobdetails->logExt }}" class="img-responsive" style="width: 50%;border: 1px solid grey;margin-bottom: 5px;
 " alt="{{ $jobdetails->companyName }}">
-					<button type="submit" class="btn btn-alt btn-icon btn-icon-right btn-envelope">
+                                         
+    
+@else
+ <img src="{{ url('images/download.png') }}" alt="" >
+    @endif
+					<button type="submit" id="applynow" class="btn btn-alt btn-icon btn-icon-right btn-envelope">
                                     <span>Apply Now!</span>
                                 </button><br><br>
                         <!-- MAP -->
@@ -105,7 +112,30 @@
 @endsection
 
 @section('after-scripts-end')
+
     <script>
        
+      $(function () {
+    $('#applynow').on('click', function () {
+       // var app_url =  {{url('/')}} ;
+       
+    var url = "<?php echo url('/'); ?>";
+
+        alert("hi");
+      alert(url);
+        var jobId = $('#jobId').val();
+        alert(jobId);
+        $.ajax({
+            url: url+'/applyjob',
+            dataType : 'json',
+              data: { jobId : jobId },
+            success: function (data) {
+                alert("in");
+                alert(data);
+           // $(this).parents("tr").remove();
+        }
+        });
+    });
+});
     </script>
 @stop

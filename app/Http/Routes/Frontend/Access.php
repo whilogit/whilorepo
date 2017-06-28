@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Support\Facades\Mail;
 /**
  * Frontend Access Controllers
  */
@@ -68,7 +68,7 @@ Route::group(['namespace' => 'Auth'], function () {
                 Route::get('company/reg_complete', 'AuthController@regCompletepage');
                 Route::get('/company/image_upload_page', 'AuthController@CompanyImagesPage');
                 Route::post('/company/getdetails', 'AuthController@CompanyProfileDetails');
-                
+                Route::post('/company/postedjobs', 'AuthController@GetCompanyPostedJobs');
      
 		
 		Route::post('company/removelogo', 'AuthController@removelogo');
@@ -83,4 +83,20 @@ Route::group(['namespace' => 'Auth'], function () {
 		Route::get('display/image/{category}/{year}/{month}/{name}/{time}/{size}.{ext}', 'AuthController@displayimage');
 		
     });
+    Route::get('sendemail', function () {
+  $to ='anujavinodvg@gmail.com';
+$senderFromMail = 'anujasnair1989@gmail.com';
+$senderName ='anuja';
+$sub = 'Learning Laravel test email';
+$message ='Body of email';
+Mail::send(array(), array(), function ($email) use($to,$senderFromMail,$senderName,$sub,$message)
+{
+
+$email->to($to)->from($senderFromMail, $senderName)->subject($sub);
+$email->setBody($message, 'text/html');
+});
+    if (Mail::failures()) {
+       dd('errorrrrr');
+    }
+});
 });

@@ -36,51 +36,48 @@ $(function(){
 			}
 			
 			if(proceed) {
-				 var postdata={}
-				 $('body').removeClass('loaded');
-				 var input = $('[name=uploadjob]').serializeArray();
-					var formData = new FormData(); 
-					$.each(input, function() {  
-						if(this.name=="jobdescription")formData.append(this.name,$("[name=jobdescription]").sceditor('instance').getWysiwygEditorValue(false)); 
-							else formData.append(this.name,this.value);
-					});
-					$('body').removeClass('loaded');
-					formData.append("_token",$('meta[name="csrf-token"]').attr('content'));
-						$.ajax({
-							url:"/upload/jobs",
-							cache: false,
-							contentType: false,
-							processData: false,
-							async: false,
-							data: formData,
-							type: 'post',
-							success: function(response) {  $('body').addClass('loaded');  
-								$('body').addClass('loaded'); 
-								if(response.success){  
-								 	$.confirm({
-										title: 'Success!',
-										content: 'Job successfully uploaded',
-										confirmButton: 'View Dashboard',
-										cancelButton: 'Add more',
-										confirm: function(){
-											location.href="/myaccount"
-										},
-										cancel: function(){ location.href="/upload/jobs"
-										}
-									});
-								}else {
-									if ((typeof  response.errors) == 'object') { 
-										var errorsHtml = ""; 
-										$.each( response.errors, function( key, value ) {
-											errorsHtml += '<li><i class="fa fa-times" style="color:#F00;"></i>' + value[0] + '</li>'; //showing only the first error.
-										});
-										$('[name=jobseeker]  .responsereport').html('' + errorsHtml);
-									}else{
-										$('[name=jobseeker]  .responsereport').html('<li>' + response.errors + '</li>');
-									}
-								}
-							}
-						});
+
+                                   var postdata = {}
+                                   var input = $('[name=uploadjob]').serialize();
+                                   postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
+                                   postdata['jobtitle']=$('input[name="jobtitle"]').val();
+                                   postdata['experience']=$('select[name="experience"]').val();
+                                   postdata['joblocation']=$('select[name="joblocation"]').val();
+                                   postdata['lastdate']=$('input[name="lastdate"]').val();
+                                   postdata['shortdescription']=$('textarea#shortdescription').val();
+                                   postdata['jobdescription']=$('textarea#jobdescription').val()
+                                   postdata['salary']=$('select[name="salary"]').val();
+                                   postdata['functionalarea']=$('select[name="functionalarea"]').val();
+                                   postdata['rolecategory']=$('select[name="rolecategory"]').val();
+                                   postdata['role']=$('select[name="role"]').val();
+                                   postdata['joiningtime']=$('select[name="joiningtime"]').val();
+                                   postdata['keyskills']=$('input[name="keyskills"]').val();
+                                   postdata['education']=$('select[name="education"]').val();
+                                   postdata['modeofemployeement']=$('select[name="modeofemployeement"]').val();
+                                         $('body').removeClass('loaded');
+                                         $.post('/upload/jobs',postdata,function(response){   
+                                         $('body').addClass('loaded');
+                                                 if(response.success)
+                                                 {
+
+                                                    location.href = "/myaccount";
+
+                                                 }
+
+                                                 else 
+                                                         {
+                                                         if ((typeof  response.errors) == 'object') { 
+                                                                 var errorsHtml = ""; 
+                                                                 $.each( response.errors, function( key, value ) {
+                                                                         errorsHtml += '<li><i class="fa fa-times" style="color:#F00;"></i>' + value[0] + '</li>';
+                                                                 });
+                                                                 $('[name=company]  .responsereport li').html('' + errorsHtml);
+                                                         }else{
+                                                                 $('[name=company]  .responsereport li').html('' + response.errors);
+                                                         }
+
+                                                         }
+                                         },'json');
 				}
 			
 		 

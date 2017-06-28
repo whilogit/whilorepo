@@ -58,6 +58,7 @@ $(function(){
 		},
 		
 		btnsubmit:function(ths,callback){
+                   
 			var postdata =  { "_token" : $('meta[name="csrf-token"]').attr('content')};
 			$('body').removeClass('loaded');
 			$.post('/company/complete',postdata,function(response){ 
