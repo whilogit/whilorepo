@@ -78,6 +78,32 @@ class JobController extends Controller
 					
 		return view('frontend.jobdetails')->with("jobdetails",$jobs);
     }
+    
+  	public function applyjob(Request $request)
+    {
+                   
+                 echo   $jobId = $request->input('jobId');
+                 echo "seekerid".$_SESSION['WHILLO']['SEEKERID'];
+                    $res = DB::update('insert userappliedjobs set status=? where jobId=?',array($request->input('status'),$id));
+		$createdDate = date("d-m-Y h:i:s");
+		$res = DB::insert('insert into jdocpermision(seekerId,companyId,status,createdDate) 
+	   				values (?,?,?,?)',array($id,$_SESSION['WHILLO']['COMPAnyID'],1,$createdDate));
+					
+		$permissionid =  DB::getPdo()->lastInsertId();
+		$res = DB::insert('insert into companypayments(companyId,permissionId,amount,status) 
+	   				values (?,?,?,?)',array($_SESSION['WHILLO']['COMPAnyID'],$permissionid,4,0));			
+		
+		return response()->json(array(
+					'success' => true,
+					'errors' => "You got the full permission"
+					));
 
+//print_r($request);
+                //return response()->json(array(
+					//'success' => true,
+					//'data' => $request)
+					//);
+	}
+	
    
 }

@@ -86,7 +86,8 @@ class JobController extends Controller
 					'data' => Joblist::get($limit,$offset),
 					));
 	}
-	
+        
+      
 }
 
 
