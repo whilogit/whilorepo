@@ -41,7 +41,8 @@ trait CompanyJobUpload
 	
 	public function uploadjobs(Request $request,Response $response)
     {
-		$rules = array('jobtitle' => 'required', 'experience' => 'required','joblocation' => 'required', 'lastdate' => 'required','jobdescription' => 'required','shortdescription'=>'required','salary' => 'required', 'industry' => 'required','functionalarea' => 'required', 'rolecategory' => 'required', 'role' => 'required','keyskills'=> 'required', 'education' => 'required','modeofemployeement'=> 'required');
+		//$rules = array('jobtitle' => 'required', 'experience' => 'required','joblocation' => 'required', 'lastdate' => 'required','jobdescription' => 'required','shortdescription'=>'required','salary' => 'required', 'industry' => 'required','functionalarea' => 'required', 'rolecategory' => 'required', 'role' => 'required','keyskills'=> 'required', 'education' => 'required','modeofemployeement'=> 'required');
+            $rules = array('jobtitle' => 'required');
 	   $validator = Validator::make($request->all(), $rules); 
 		
 	   if ($validator->fails()) {
@@ -55,9 +56,26 @@ trait CompanyJobUpload
 	   $data = $request->all();
 	   $createdDate = date("Y-m-d H:i:s");
 	   $status = 1;
-	   
-	   $res = DB::insert('insert into companyjobs (companyId,jobTitle,shortdescription,jobDescription,experienceId,lastdate,locationId,salaryId,functionalId,jobroleId,educationId,modeofEmployment,keyskills,joiningtime,createdDate,status) 
-	   				values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array($_SESSION['WHILLO']['COMPAnyID'],$data['jobtitle'],$data['shortdescription'],$data['jobdescription'],$data['experience'],$data['lastdate'],$data['joblocation'],$data['salary'],$data['functionalarea'],$data['role'],$data['education'],$data['modeofemployeement'],$data['keyskills'],$data['joiningtime'],$createdDate,$status));
+          $res = DB::table('companyjobs')->insert(
+                                                ['companyId' => $_SESSION['WHILLO']['COMPAnyID'], 
+                                                  'jobTitle' => $data['jobtitle'],
+                                                  'shortdescription' =>$data['shortdescription'],
+                                                  'jobDescription' =>$data['jobdescription'],
+                                                   'experienceId' =>$data['experience'],
+                                                    'lastdate' => $data['lastdate'],
+                                                   'locationId' =>$data['joblocation'],
+                                                  'salaryId' => $data['salary'],
+                                                   'functionalId'=>$data['functionalarea'],
+                                                   'jobroleId' =>$data['role'],
+                                                    'educationId'=>$data['education'],
+                                                    'modeofEmployment'=>$data['modeofemployeement'],
+                                                    'keyskills' =>$data['keyskills'],
+                                                   'joiningtime'=>$data['joiningtime'],
+                                                   'createdDate'=> $createdDate,
+                                                    'status'=>$status
+                                                  ]
+                                            );
+	  
 	   $jobId =  DB::getPdo()->lastInsertId();
 	  
 	  if($jobId != 0){

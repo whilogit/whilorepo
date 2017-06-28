@@ -101,7 +101,7 @@
                           <div class="panel-body">
                                  <h4 class="col-md-12  pull-left">Post New Jobs</h4>
                                <div class="form-body col-md-12 ">
-                                <form action="" id="frmLogin" class="sky-form">                                    
+                                <form action="" id="postjobform" class="sky-form">                                    
                                     <fieldset>                  
                                     
                                         <section>

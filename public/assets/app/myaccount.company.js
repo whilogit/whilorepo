@@ -86,8 +86,69 @@ $(function(){
 			$('body').addClass('loaded');
 				if(response.success)
                                 {
-        
-                                    alert('sucess');
+                                         console.log(response.compdetails);
+                                        var obj = JSON.parse(response.compdetails);
+                                        alert(obj.companyId);
+                                            $('#CompanyProfile').append('<div id="innerDiv"></div>');
+                                 
+                                }
+					
+				else 
+					{
+					if ((typeof  response.errors) == 'object') { 
+						var errorsHtml = ""; 
+						$.each( response.errors, function( key, value ) {
+							errorsHtml += '<li><i class="fa fa-times" style="color:#F00;"></i>' + value[0] + '</li>';
+						});
+						$('[name=company]  .responsereport li').html('' + errorsHtml);
+					}else{
+						$('[name=company]  .responsereport li').html('' + response.errors);
+					}
+					
+					}
+			},'json');
+                }); 
+                   $('a[href="#postedjobs"]').click(function(){ 
+                          var postdata = {};
+		         postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
+			$('body').removeClass('loaded');
+			$.post('/company/postedjobs',postdata,function(response){   
+			$('body').addClass('loaded');
+				if(response.success)
+                                {
+                                         
+                                 
+                                }
+					
+				else 
+					{
+					if ((typeof  response.errors) == 'object') { 
+						var errorsHtml = ""; 
+						$.each( response.errors, function( key, value ) {
+							errorsHtml += '<li><i class="fa fa-times" style="color:#F00;"></i>' + value[0] + '</li>';
+						});
+						$('[name=company]  .responsereport li').html('' + errorsHtml);
+					}else{
+						$('[name=company]  .responsereport li').html('' + response.errors);
+					}
+					
+					}
+			},'json');
+                                    
+                         }); 
+                   
+               $('#postjobform').on('submit',function(e){
+                    var postdata = {};
+		   postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
+			$('body').removeClass('loaded');
+			$.post('/company/postjobs',postdata,function(response){   
+			$('body').addClass('loaded');
+				if(response.success)
+                                {
+                                         console.log(response.compdetails);
+                                        var obj = JSON.parse(response.compdetails);
+                                        alert(obj.companyId);
+                                            $('#CompanyProfile').append('<div id="innerDiv"></div>');
                                  
                                 }
 					

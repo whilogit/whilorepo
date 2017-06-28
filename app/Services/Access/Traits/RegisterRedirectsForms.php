@@ -24,7 +24,7 @@ trait RegisterRedirectsForms
      */
     public function showRegistrationForm()
     {
-      	if(isset($_SESSION['WHILLO']['STATUS'])){ if($_SESSION['WHILLO']['TYPE']=="C")return Redirect::to('company/signup'); 
+      	if(isset($_SESSION['WHILLO']['STATUS'])){ if($_SESSION['WHILLO']['TYPE']=="C")//return Redirect::to('company/signup'); 
 		$steps = DB::table('userlogin as l')
 	  		         ->join('jmaster as m', 'm.userId', '=', 'l.userId')
 					 ->join('jsteps as s', 'm.seekerId', '=', 's.seekerId')
@@ -103,7 +103,7 @@ trait RegisterRedirectsForms
                                         ->leftjoin('_plandetails as p', 'c.id', '=', 'p.plan_id')
                                         ->select('c.*','p.*')
                                         ->get();
-                                                dd($complans);
+                                               
 							//$companyimages = DB::table('companyimages')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->get();// die(json_encode($companyimages));
 							//return view('frontend.companyauth.companyimages')->with(array("companylogo"=>$companylogo,"companyimages"=>$companyimages));
                                             
@@ -170,6 +170,7 @@ trait RegisterRedirectsForms
      public function showPaymentpage()
         {  
                if(isset($_SESSION['WHILLO']['STATUS'])){ if($_SESSION['WHILLO']['TYPE']=="C")
+                  
               return view('frontend.companyauth.companyplanpayment');
                }
 

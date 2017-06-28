@@ -24,7 +24,7 @@
 <div class="col-md-8 col-md-offset-2 col-sm-6 col-xs-12">
 
     <table class="table  table-responsive"><tbody>     
-        {{  dd($complans) }}
+  
               @foreach ($complans as $complan)
                   <tr>
                     <th>&nbsp;

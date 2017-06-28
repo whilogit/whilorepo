@@ -26,7 +26,7 @@
                     <div class="col-md-8 col-md-offset-2 col-sm-6 col-sm-offset-3">                   
                         <div class="wp-block default user-form no-margin">
                             <div class="form-header">
-                                <h2>Upload your job</h2>
+                                <h2>Upload your job</h2> 
                             </div>
                             <div class="form-body">
                                 <form  name="uploadjob" class="sky-form">                                    
@@ -87,7 +87,7 @@
                                                     <div class="form-group">
                                                        <label class="label">Short Description (It will display only in list page)<span style="color:red">*</span></label>
                                             <label class="textarea">
-                                                <textarea rows="4"  style="width:100%" name="shortdescription" placeholder="Short Description"></textarea>
+                                                <textarea rows="4"  style="width:100%" id="shortdescription" name="shortdescription" placeholder="Short Description"></textarea>
                                             </label>
                                                     </div>               
                                                 </div>
@@ -96,7 +96,7 @@
                                                     <div class="form-group">
                                                        <label class="label">Job Description <span style="color:red">*</span></label>
                                             <label class="textarea">
-                                                <textarea rows="10"  style="width:100%" name="jobdescription" placeholder="Job Description"></textarea>
+                                                <textarea rows="10"  style="width:100%" id ="jobdescription" name="jobdescription" placeholder="Job Description"></textarea>
                                             </label>
                                                     </div>               
                                                 </div>
@@ -129,7 +129,7 @@
                                                         <label class="label">Functional area <span style="color:red">*</span></label>
                                                         <label class="select">
                                                         <i class="icon-append fa fa-building"></i>
-                                                        <select required="required" name="functionalarea"><option value="" selected="selected" disabled="disabled">-Select-</option>@foreach ($response['jobrole'] as $jobrole)<option value="{{ $jobrole->jobroleId }}">{{ $jobrole->jobroleName }}</option>@endforeach</select>
+                                                        <select required="required" name="functionalarea"><option value="" selected="selected" disabled="disabled">-Select-</option>@foreach ($response['functionalarea'] as $functionalarea)<option value="{{ $functionalarea->functionalId }}">{{ $functionalarea->functionalName }}</option>@endforeach</select>
                                                     </label>
                                                     </div>               
                                                 </div>
@@ -143,17 +143,17 @@
                                                     </div>               
                                                 </div>
                                             </div>
-                                            
-                                            <div class="row">
+                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label class="label">Role <span style="color:red">*</span></label>
                                                         <label class="select">
                                                         <i class="icon-append fa fa-user"></i>
-                                                        <select required="required" name="role"><option value="" selected="selected" disabled="disabled">-Select-</option>@foreach ($response['locations'] as $locations)<option value="{{ $locations->locationId }}">{{ $locations->locationName }}</option>@endforeach</select>
+                                                        <select required="required" name="role"><option value="" selected="selected" disabled="disabled">-Select-</option>@foreach ($response['jobrole'] as $jobroles)<option value="{{ $jobroles->jobroleId }}">{{ $jobroles->jobroleName }}</option>@endforeach</select>
                                                     </label>
                                                     </div>               
                                                 </div>
+                                          
                                                 
                                                 <div class="col-md-6">
                                                     <div class="form-group">
