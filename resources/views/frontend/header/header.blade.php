@@ -18,8 +18,10 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-left">
+                   @if(isset($_SESSION['WHILLO']['COMPAnyID']))
                    
                     <li class=" mega-dropdown-fluid"><a href="{{ url('/talents') }}"><i class="fa fa-universal-access" aria-hidden="true"></i>  TALENTS</a></li>
+                    @endif
                     <li class=" mega-dropdown-fluid"><a href="{{ url('/jobs') }}"><i class="fa fa-universal-access" aria-hidden="true"></i>  Jobs</a></li>
 					<li class=" mega-dropdown-fluid"><a href="{{ url('/companies')}}"><i class="fa fa-briefcase" aria-hidden="true"></i>  COMPANIES</a></li>
 					<li class=" mega-dropdown-fluid"><a href="{{ url('/consultants') }}"><i class="fa fa-globe" aria-hidden="true"></i>  CONSULTANTS</a></li>

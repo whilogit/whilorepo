@@ -50,8 +50,9 @@
 
                     </div>
                     <div class="col-md-4">
+                       <?php  ?>
 					<h3>{{ $jobdetails->companyName }}</h3>
-                                         @if($jobdetails->logoCategory=="")
+                                         @if($jobdetails->logoCategory != "")
 					 <img src="/<?php echo $jobdetails->logoCategory == "" ? "" : "companylogo.get/" ?>{{ $jobdetails->logoCategory }}/{{ $jobdetails->dirYear }}/{{ $jobdetails->dirMonth }}/{{ $jobdetails->logoName }}/{{ $jobdetails->crTime }}/s.{{ $jobdetails->logExt }}" class="img-responsive" style="width: 50%;border: 1px solid grey;margin-bottom: 5px;
 " alt="{{ $jobdetails->companyName }}">
                                          
@@ -59,9 +60,16 @@
 @else
  <img src="{{ url('images/download.png') }}" alt="" >
     @endif
-					<button type="submit" id="applynow" class="btn btn-alt btn-icon btn-icon-right btn-envelope">
+					
+                                @if($jobapplycheck >0)
+                                <button type="submit" id="applied" class="btn btn-alt btn-icon btn-icon-right btn-envelope">
+                                    <span>Already applied!</span>
+                                </button><br><br>
+                                @else
+                                <button type="submit" id="applynow" class="btn btn-alt btn-icon btn-icon-right btn-envelope">
                                     <span>Apply Now!</span>
                                 </button><br><br>
+                                @endif
                         <!-- MAP -->
                         <div class="panel panel-default panel-sidebar-1">
                             <div class="panel-heading"><h2>Location</h2></div>
@@ -114,28 +122,31 @@
 @section('after-scripts-end')
 
     <script>
-       
-      $(function () {
+        $( document ).ready(function() {
+           
+        // $("#applied").hide();
+    
     $('#applynow').on('click', function () {
        // var app_url =  {{url('/')}} ;
        
     var url = "<?php echo url('/'); ?>";
 
-        alert("hi");
-      alert(url);
+       
         var jobId = $('#jobId').val();
-        alert(jobId);
+      
         $.ajax({
             url: url+'/applyjob',
             dataType : 'json',
               data: { jobId : jobId },
             success: function (data) {
-                alert("in");
-                alert(data);
+           location.reload();
+            // $("#applynow").hide();
+             // $("#applied").show();
            // $(this).parents("tr").remove();
         }
         });
     });
+    
 });
     </script>
 @stop
