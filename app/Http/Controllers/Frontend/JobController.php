@@ -75,9 +75,9 @@ class JobController extends Controller
 					->select('j.jobId','j.jobTitle','j.jobDescription','j.lastdate','j.keyskills','j.createdDate','com.companyName','com.mobileNumber','com.phone','com.website','e.experienceName','l.locationName','s.salaryName','f.functionalName','rc.rolecategoryName','jr.jobroleName','edu.educationName','m.employmentmodeName','m.employmentmodeName','jt.joiningtimeName','li.logoCategory','li.logoName','li.dirYear','li.dirMonth','li.crTime','li.logExt',DB::raw('count(uaj.jobId) as totalapplied'))					
 					->distinct('j.jobId')
 					->first();
-					
-					
-		return view('frontend.jobdetails')->with("jobdetails",$jobs);
+		$jobapplycheck = DB::table('userappliedjobs')->where('seekerId',$_SESSION['WHILLO']['SEEKERID'])->where('jobId',$jobid)->count();
+                       
+		return view('frontend.jobdetails')->with("jobdetails",$jobs)->with("jobapplycheck",$jobapplycheck);
     }
 	public function joblistpagination($offset = 1, $limit = 10)
     {
