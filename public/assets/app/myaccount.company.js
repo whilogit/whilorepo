@@ -87,7 +87,7 @@ $(function(){
 				if(response.success)
                                 {
         
-                                    alert('sucess');
+                                    alert(response.plantypes);
                                  
                                 }
 					

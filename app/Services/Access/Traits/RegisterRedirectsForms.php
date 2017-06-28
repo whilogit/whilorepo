@@ -154,15 +154,43 @@ trait RegisterRedirectsForms
 	    public function showCompanyPlans()
         {  
                if(isset($_SESSION['WHILLO']['STATUS'])){ if($_SESSION['WHILLO']['TYPE']=="C")
-                     $plantypes = DB::table('_plantypes as c')
+                    /* $plantypes = DB::table('_plantypes as c')
                                         ->select('c.*')
                                         ->get();
-                          $complans = DB::table('_plantypes as c')
+                          $complans1 = DB::table('_plantypes as c')
                           
                                         ->leftjoin('_plandetails as p', 'c.id', '=', 'p.plan_id')
-                                        ->select('c.*','p.*')
+                                        ->select('c.planname','p.detail_name','p.detail_value')
+                                        ->where('p.plan_id', 1)
                                         ->get();
-                    return view('frontend.companyauth.companyplans')->with(array("complans"=>$complans,"plantypes"=> $plantypes));
+                          $complans2 = DB::table('_plantypes as c')
+                          
+                                        ->leftjoin('_plandetails as p', 'c.id', '=', 'p.plan_id')
+                                        ->select('c.planname','p.detail_name','p.detail_value')
+                                        ->where('p.plan_id', 2)
+                                        ->get();
+                           $complans3 = DB::table('_plantypes as c')
+                          
+                                        ->leftjoin('_plandetails as p', 'c.id', '=', 'p.plan_id')
+                                        ->select('c.planname','p.detail_name','p.detail_value')
+                                        ->where('p.plan_id', 3)
+                                        ->get();
+                          
+                         dd($complans1,$complans2,$complans3);
+                           
+                         $planDetailName['plan1']= $complans1[0]->planname;
+                         $planDetailName['plan2']= $complans2[0]->planname;
+                         $planDetailName['plan3']= $complans3[0]->planname;
+                         dd($planDetailName);
+                         for($i=0; $i<6; $i++)
+                         {
+                             //$planDetailName[$i] = 
+                         }
+                         
+                            dd($complans1,$complans2,$complans3);
+                       
+                    return view('frontend.companyauth.companyplans')->with(array("complans"=>$plans));*/
+                   return view('frontend.companyauth.companyplans');
                }
 
 
