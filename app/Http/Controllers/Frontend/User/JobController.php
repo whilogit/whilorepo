@@ -78,6 +78,19 @@ class JobController extends Controller
 					
 		return view('frontend.jobdetails')->with("jobdetails",$jobs);
     }
-
+    
+  	public function applyjob(Request $request)
+    {
+                   
+                 echo   $jobId = $request->input('jobId');
+                 echo "seekerid".$_SESSION['WHILLO']['SEEKERID'];
+                    $res = DB::update('update userappliedjobs set status=? where jobId=?',array($request->input('status'),$id));
+		//print_r($request);
+                //return response()->json(array(
+					//'success' => true,
+					//'data' => $request)
+					//);
+	}
+	
    
 }

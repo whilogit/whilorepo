@@ -33,8 +33,13 @@
 				 <p class="text-medium text-magenta ">{{ $profile->shortBio }}</p>
                 </div>  
 				                  <div class="col-md-6">
+                                                      
+                                                       @if($profile->imageCategory=="")
 								  <img src="/companylogo.get/{{ $profile->imageCategory }}/{{ $profile->dirYear }}/{{ $profile->dirMonth }}/{{ $profile->imageName }}/{{ $profile->crTime }}/s.{{ $profile->imgExt }}" alt="" class="img-responsive" style="    width: 100%;">
-                                    </div>
+                                                                  @else
+                                                                <img src="images/download.png" alt="" >
+                                                              @endif
+                                                  </div>
                    
             </div>
 			</div>

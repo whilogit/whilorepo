@@ -38,7 +38,7 @@ Route::group(['middleware' => 'AuthResumelist'], function () {
         Route::get('talents/keyword={keyword}/location={locations}', 'ResumeController@searchtalentlist')->name('frontend.jobjoblist');
         Route::get('companies', 'CompanyController@index')->name('frontend.company');
 	Route::get('consultants', 'ConsultantController@index')->name('frontend.consultant');
-	Route::get('talentdetails/{id}/{name}', 'ResumeController@talentdetails')->name('frontend.talentdetails');
+	
 	Route::post('resume/permission/{id}', 'ResumeController@permission')->name('frontend.permission');
 	Route::post('resume/addfavorite/{id}', 'ResumeController@addfavorite')->name('frontend.addfavorite');
 	Route::post('resume/removefavorite/{id}', 'ResumeController@removefavorite')->name('frontend.removefavorite');
@@ -58,7 +58,7 @@ Route::get('companylogo.get/{category}/{year}/{month}/{name}/{time}/{size}.{ext}
  });
 
          Route::group(['middleware' => 'talent'], function () {
-    
+    Route::get('talentdetails/{id}/{name}', 'ResumeController@talentdetails')->name('frontend.talentdetails');
                Route::get('jobdetails/{id}/{title}', 'JobController@jobdetails')->name('frontend.jobdetails');
 	});
 	
@@ -69,6 +69,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['namespace' => 'User'], function() {
         Route::get('dashboard', 'DashboardController@index')->name('frontend.user.dashboard');
         Route::get('profile/edit', 'ProfileController@edit')->name('frontend.user.profile.edit');
+        Route::get('applyjob', 'JobController@applyjob');
         Route::patch('profile/update', 'ProfileController@update')->name('frontend.user.profile.update');
 		Route::get('myaccount', 'DashboardController@index')->name('myaccount.index');
 		Route::post('job/changestatus/{id}', 'JobController@changestatus');

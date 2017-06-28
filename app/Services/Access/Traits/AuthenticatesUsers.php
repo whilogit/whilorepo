@@ -26,7 +26,7 @@ trait AuthenticatesUsers
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function showLoginForm()
+    public function showLoginForm(Request $request)
     {
         return view('frontend.auth.login')
             ->withSocialiteLinks($this->getSocialLinks());
@@ -39,7 +39,7 @@ trait AuthenticatesUsers
     public function login(Request $request)
     {
         
-        dd($request);
+        //dd($request);
         //exit;
        $rules = array('username' => 'required|Min:6','password' => 'required|Min:6');
 	   $validator = Validator::make($request->all(), $rules); 
