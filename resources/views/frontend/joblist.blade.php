@@ -78,7 +78,7 @@
                                <div class="listing-header bg-base">{{ $list->companyName }}</div>
                                  <div class="col-md-2">                                  
 <a href="/jobdetails/{{ $list->jobId }}/<?php echo str_replace(" ", "-",$list->jobTitle) ?>"> 
-    @if($list->logoCategory=="")
+    @if(($list->logoCategory != "")&&($list->logoName))
     <img src="/<?php echo $list->logoCategory == "" ? "" : "companylogo.get/" ?>{{ $list->logoCategory }}/{{ $list->dirYear }}/{{ $list->dirMonth }}/{{ $list->logoName }}/{{ $list->crTime }}/s.{{ $list->logExt }}" class="img-responsive" style="width:100%"  alt="{{ $list->companyName }}">
 @else
  <img src="images/download.png" alt="" >
@@ -120,8 +120,76 @@
                         </div>
                     </div>
                     
-                        
-                    
+                   	                    <div class="col-md-3">  <section class="slice relative bg-white bb animate-hover-slide gradient-1  has-pattern" style="background-image: url(/images/parallax1.jpg) !important;background-size: cover;">		
+        <div class="wp-section">		
+            <div class="col-md-12">		
+                <div class="section-title-wr">		
+                    <h3 class="section-title left"><span>Featured Employers</span></h3>		
+                </div>		
+                		
+                <div id="carouselEmployers" class="carousel carousel-3 slide animate-hover-slide">		
+                 		
+                    		                    
+                    <!-- Wrapper for slides -->		
+                    <div class="carousel-inner">		
+                        <div class="item active">		
+						  <div class="row">		
+                               <div class="col-md-12">		
+                                    <div class="wp-block inverse">		
+                           <a href="#"> 		
+						   <div class="client">		
+                            <a href="#">		
+                                <img src="images/clients/client-2.png" alt="" >		
+                            </a>		
+                        </div>		
+                           </a>		
+                        </div>		
+                                </div>		
+                         		
+								<div class="col-md-12">		
+                                    <div class="wp-block inverse">		
+                         <a href="#"> 		
+						   <div class="client">		
+                            <a href="#">		
+                                <img src="images/clients/client-2.png" alt="" >		
+                            </a>		
+                        </div>		
+                           </a>		
+                        </div>		
+                                </div>		
+								<div class="col-md-12">		
+                                    <div class="wp-block inverse">		
+                           <a href="#"> 		
+						   <div class="client">		
+                            <a href="#">		
+                                <img src="images/clients/client-1.png" alt="" >		
+                            </a>		
+                        </div>		
+                           </a>		
+                        </div>		
+                                </div>		
+								<div class="col-md-12">		
+                                    <div class="wp-block inverse">		
+                       <a href="#"> 		
+						   <div class="client">		
+                            <a href="#">		
+                                <img src="images/clients/client-3.png" alt="" >		
+                            </a>		
+                        </div>		
+                           </a>		
+                        </div>		
+                                </div>		
+										
+                            </div>		
+							
+                        </div>		
+                       		
+                </div>  		
+            </div>		
+        </div>		
+    </section>		
+</div>     
+                 </div>   
                 </div>
             </div>
         </div>

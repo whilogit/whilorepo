@@ -606,11 +606,15 @@ label {
     background: #fff !important
 }
 .bg-base {
-    background: #3498db;
+    background-color: #fd677d;
+    background-image: -webkit-gradient(linear,left top,right top,from(#fd677d),to(#df9124));
+    background-image: -webkit-linear-gradient(left,#fd677d,#df9124);
     color: #fff
 }
 .bg-base {
-    background: #3498db;
+    background-color: #fd677d;
+    background-image: -webkit-gradient(linear,left top,right top,from(#fd677d),to(#df9124));
+    background-image: -webkit-linear-gradient(left,#fd677d,#df9124);
     color: #fff
 }
 .bg-base-alt {
@@ -7603,7 +7607,7 @@ ul.list-listings-2>li:after {
     clear: both
 }
 ul.list-listings-2>li.featured {
-    border-color: #3498db
+   /*  border-color: #3498db  */
 }
 ul.list-listings-2 .listing-header {
     clear: both;
@@ -7657,7 +7661,7 @@ ul.list-listings-2 .listing-footer ul.aux-info {
 }
 ul.list-listings-2 .listing-footer ul.aux-info li {
     display: table-cell;
-    padding: 11px 15px;
+    padding: 5px 5px;
     vertical-align: middle;
     border-right: 1px solid #e0eded
 }
