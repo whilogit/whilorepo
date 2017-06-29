@@ -16,7 +16,7 @@
             </div>
         </div>
     </div>
-<button type=button">shortlist</button>
+
  @foreach($data['profile'] as $profile)
  <script>var seekerid = "{{ $profile->seekerId }}";</script>   
 <section class="slice bg-white">
@@ -44,6 +44,19 @@
             </div>
 			</div>
         </div>
+  
+  
+     @if($shortlistcheck >0)
+     <button type="submit" id="shortlisted" class="btn btn-alt btn-icon btn-icon-right btn-envelope">
+                                    <span>Already Shortlisted</span>
+                                </button><br><br>
+                                
+                                @else
+                                
+                                <button type="submit" id="shortlist" class="btn btn-alt btn-icon btn-icon-right btn-envelope">
+                                    <span>Shortlist</span>
+                                </button><br><br>
+                                @endif
     </section>
    @endforeach 
     @foreach($data['profile'] as $profile)  
@@ -56,6 +69,8 @@
                 </div>  
 				                  <div class="col-md-6">
                 <table>
+                   
+                    <input type="hidden" id="seekerId" value="<?php echo $profile->seekerId ?>">
                                             <tbody>
                                                 <tr>
                                                     <td>Location:</td>
@@ -513,5 +528,35 @@ span.onclick = function() {
 @section('after-scripts-end')
   
    <script src="/assets/app/resume.permession.js"></script>
+
+
+    <script>
+        $( document ).ready(function() {
+           
+        // $("#applied").hide();
+    
+    $('#shortlist').on('click', function () {
+       // var app_url =  {{url('/')}} ;
+       
+    var url = "<?php echo url('/'); ?>";
+
+       
+        var seekerId = $('#seekerId').val();
+      //alert(seekerId);
+        $.ajax({
+            url: url+'/shortlist',
+            dataType : 'json',
+              data: { seekerId : seekerId },
+            success: function (data) {
+           location.reload();
+         
+          
+        }
+        });
+    });
+    
+});
+    </script>
+
   
 @stop

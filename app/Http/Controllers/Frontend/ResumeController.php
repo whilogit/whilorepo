@@ -31,11 +31,16 @@ class ResumeController extends Controller
     {
         $count = ceil(DB::table('jmaster')->where('accountStatus',1)->count()/10); 
 			return view('frontend.resumelist')->with(array("data"=>ResumesList::get(), "count"=>$count,"keyword"=>""))->with("locations",DB::table('_locations')->get() );
+    
+                        
     }
 	public function talentdetails($id, $name)
     {
-			ResumesDetails::getdetails($id);return view('frontend.resumedetails')->with(array("data"=>ResumesDetails::getdetails($id)));
+         $shortlistcheck = DB::table('shortlistjobs')->where('companyId',$_SESSION['WHILLO']['COMPAnyID'])->where('seekerId',$id)->where('Status',0)->orWhere('Status',1)->count();
+			ResumesDetails::getdetails($id);return view('frontend.resumedetails')->with(array("data"=>ResumesDetails::getdetails($id)))->with("shortlistcheck",$shortlistcheck);                       
+                       
     }
+  
 	
 	public function permission($id)
     {

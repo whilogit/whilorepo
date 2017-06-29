@@ -28,16 +28,23 @@ Route::get('/Corporate-Leadership-Program', 'FrontendController@corporateleaders
 Route::group(['middleware' => 'AuthJoblist'], function () {
 	Route::get('jobs', 'JobController@index')->name('frontend.joblist');
 	Route::get('search/joblist/{offset}', 'JobController@joblistpagination')->name('frontend.joblistpagination');
+	Route::get('jobs/keyword={keyword}/location={locations}', 'JobController@searchjobjoblist')->name('frontend.jobjoblist');
+
+        Route::get('companies', 'CompanyController@index')->name('frontend.company');
+        Route::get('search/companylist/{offset}', 'CompanyController@joblistpagination')->name('frontend.joblistpagination');	
+        Route::get('company/keyword={keyword}/location={locations}', 'CompanyController@searchjobjoblist')->name('frontend.jobjoblist');
+
+        Route::get('consultants', 'ConsultantController@index')->name('frontend.consultant');
+        Route::get('search/consultancylist/{offset}', 'ConsultantController@joblistpagination')->name('frontend.joblistpagination');	
+        Route::get('consultancy/keyword={keyword}/location={locations}', 'ConsultantController@searchjobjoblist')->name('frontend.jobjoblist');
 	
-Route::get('jobs/keyword={keyword}/location={locations}', 'JobController@searchjobjoblist')->name('frontend.jobjoblist');
 });
 
 
 Route::group(['middleware' => 'AuthResumelist'], function () {
 	Route::get('talents', 'ResumeController@index')->name('frontend.resumelist');
         Route::get('talents/keyword={keyword}/location={locations}', 'ResumeController@searchtalentlist')->name('frontend.jobjoblist');
-        Route::get('companies', 'CompanyController@index')->name('frontend.company');
-	Route::get('consultants', 'ConsultantController@index')->name('frontend.consultant');
+        
 	
 	Route::post('resume/permission/{id}', 'ResumeController@permission')->name('frontend.permission');
 	Route::post('resume/addfavorite/{id}', 'ResumeController@addfavorite')->name('frontend.addfavorite');
@@ -60,6 +67,8 @@ Route::get('companylogo.get/{category}/{year}/{month}/{name}/{time}/{size}.{ext}
          Route::group(['middleware' => 'talent'], function () {
     Route::get('talentdetails/{id}/{name}', 'ResumeController@talentdetails')->name('frontend.talentdetails');
                Route::get('jobdetails/{id}/{title}', 'JobController@jobdetails')->name('frontend.jobdetails');
+               Route::get('companydetails/{id}/{title}', 'CompanyController@jobdetails');
+               Route::get('consultancydetails/{id}/{title}', 'ConsultantController@jobdetails');
 	});
 	
 
@@ -70,6 +79,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('dashboard', 'DashboardController@index')->name('frontend.user.dashboard');
         Route::get('profile/edit', 'ProfileController@edit')->name('frontend.user.profile.edit');
         Route::get('applyjob', 'JobController@applyjob');
+        Route::get('shortlist', 'JobController@shortlist');       
         Route::patch('profile/update', 'ProfileController@update')->name('frontend.user.profile.update');
 		Route::get('myaccount', 'DashboardController@index')->name('myaccount.index');
 		Route::post('job/changestatus/{id}', 'JobController@changestatus');
