@@ -112,7 +112,44 @@ $(function(){
                   
                 });
            
-        });        
+        }); 
+          $('a[href="#ShortlistedCandidates"]').click(function()
+        {
+             var postdata = {};
+            postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
+                $('body').removeClass('loaded');
+                $.post('/company/shortlist',postdata,function(response){
+                $('body').addClass('loaded');
+                 $('#ShortlistedCandidates').append(response);
+                  
+                });
+           
+        });   
+           $('a[href="#SearchedCandidates"]').click(function()
+        {
+             var postdata = {};
+            postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
+                $('body').removeClass('loaded');
+                $.post('/company/searchedcandy',postdata,function(response){
+                $('body').addClass('loaded');
+                 $('#SearchedCandidates').append(response);
+                  
+                });
+           
+        });
+                   $('a[href="#AppliedCandidates"]').click(function()
+        {
+             var postdata = {};
+            postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
+                $('body').removeClass('loaded');
+                $.post('/company/appliedcandy',postdata,function(response){
+                $('body').addClass('loaded');
+                 $('#AppliedCandidates').append(response);
+                  
+                });
+           
+        });
+        
                    
               
 	$.companyacount.init();

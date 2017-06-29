@@ -73,6 +73,53 @@ trait completeRegistration
  
         return response(view('frontend.myaccount.companyjoblisting', $data),'200')->header('Content-Type', 'text/plain');  
      }
+      public function GetShorlistedCandidates()
+     {
+         
+           $jobdetails = DB::table('companyjobs as j')
+                                       
+                                        ->select('j.jobTitle', 'l.locationName','j.lastdate')
+                                        ->leftjoin('_locations as l','l.locationId','=','j.locationId')
+                                         ->where('j.companyId', '=', $_SESSION['WHILLO']['COMPAnyID'])
+                                        ->get();
+           
+          
+         $data['jobdetails'] = $jobdetails;
+ 
+        return response(view('frontend.myaccount.candidateshortlisting', $data),'200')->header('Content-Type', 'text/plain');  
+     }
+           public function SearchedCandidates()
+     {
+         
+           $jobdetails = DB::table('companyjobs as j')
+                                       
+                                        ->select('j.jobTitle', 'l.locationName','j.lastdate')
+                                        ->leftjoin('_locations as l','l.locationId','=','j.locationId')
+                                         ->where('j.companyId', '=', $_SESSION['WHILLO']['COMPAnyID'])
+                                        ->get();
+           
+          
+         $data['jobdetails'] = $jobdetails;
+ 
+        return response(view('frontend.myaccount.searchedcandidates', $data),'200')->header('Content-Type', 'text/plain');  
+     }
+      public function AppliedCandidates()
+     {
+         
+           $jobdetails = DB::table('companyjobs as j')
+                                       
+                                        ->select('j.jobTitle', 'l.locationName','j.lastdate')
+                                        ->leftjoin('_locations as l','l.locationId','=','j.locationId')
+                                         ->where('j.companyId', '=', $_SESSION['WHILLO']['COMPAnyID'])
+                                        ->get();
+           
+          
+         $data['jobdetails'] = $jobdetails;
+ 
+        return response(view('frontend.myaccount.appliedcandidates', $data),'200')->header('Content-Type', 'text/plain');  
+     }
+     
+     
 
   
 }

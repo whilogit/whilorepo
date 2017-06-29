@@ -53,48 +53,14 @@
 
 </div>
 <div class="tab-pane active" id="ShortlistedCandidates">
-<h4>Shortlisted Candidates</h4>
-<table class="table table-orders table-bordered table-striped table-responsive no-margin">
-<tbody>
-<tr><th>Name</th><th>Qualification</th><th>Experience</th><th>Status</th></tr>
-<tr><td><a href="#">Nidhi</a></td><td>BE</td><td>3 Years</td><td><select><option>Selected</option><option>Rejected</option></select></td></tr>
-<tr><td><a href="#">Nidhi</a></td><td>BE</td><td>3 Years</td><td><select><option>Selected</option><option>Rejected</option></select></td></tr>
-<tr><td><a href="#">Nidhi</a></td><td>BE</td><td>3 Years</td><td><select><option>Selected</option><option>Rejected</option></select></td></tr>
-</tbody>
-</table>                        
+                 
 </div>
 
 <div class="tab-pane" id="SearchedCandidates">
-<div class="col-md-12">
-                        <h4>Searched Candidates</h4>
-<table class="table table-orders table-bordered table-striped table-responsive no-margin">
-<tbody>
-<tr><th>Name</th><th>Qualification</th><th>Experience</th><th>View Profile</th><th>Status</th></tr>
-<tr><td><a href="#">Nidhi</a></td><td>BE</td><td>3 Years</td><td><a href="">View</a></td><td><a href="">Call For Interview</a></td></tr>
-<tr><td><a href="#">Nidhi</a></td><td>BE</td><td>3 Years</td><td><a href="">View</a></td><td><a href="">Call For Interview</a></td></tr>
-<tr><td><a href="#">Nidhi</a></td><td>BE</td><td>3 Years</td><td><a href="">View</a></td><td><a href="">Call For Interview</a></td></tr>
-<tr><td><a href="#">Nidhi</a></td><td>BE</td><td>3 Years</td><td><a href="">View</a></td><td><a href="">Called For Interview</a></td></tr>
-</tbody>
-</table>                 
-                         
-                     
-</div>
+
 </div>
 <div class="tab-pane" id="AppliedCandidates">
-<div class="col-md-12">
-<h4>Applied Candidates</h4>
-        <table class="table table-orders table-bordered table-striped table-responsive no-margin">
-<tbody>
-<tr><th>Name</th><th>Job Title</th><th>Qualification</th><th>Experience</th><th>View Profile</th><th>Status</th></tr>
-<tr><td><a href="#">Nidhi</a></td><td>Tester</td><td>BE</td><td>3 Years</td><td><a href="">View</a></td><td><a href="">Call For Interview</a></td></tr>
-<tr><td><a href="#">Nidhi</a></td><td>Tester</td><td>BE</td><td>3 Years</td><td><a href="">View</a></td><td><a href="">Call For Interview</a></td></tr>
-<tr><td><a href="#">Nidhi</a></td><td>Tester</td><td>BE</td><td>3 Years</td><td><a href="">View</a></td><td><a href="">Call For Interview</a></td></tr>
-<tr><td><a href="#">Nidhi</a></td><td>Tester</td><td>BE</td><td>3 Years</td><td><a href="">View</a></td><td><a href="">Called For Interview</a></td></tr>
-</tbody>
-</table>                     
-                         
-                       
-                    </div>
+
 
 </div>
 

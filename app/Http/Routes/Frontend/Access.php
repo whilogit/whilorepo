@@ -69,7 +69,10 @@ Route::group(['namespace' => 'Auth'], function () {
                 Route::get('/company/image_upload_page', 'AuthController@CompanyImagesPage');
                 Route::post('/company/getdetails', 'AuthController@CompanyProfileDetails');
                 Route::post('/company/postedjobs', 'AuthController@GetCompanyPostedJobs');
-     
+                Route::post('/company/shortlist', 'AuthController@GetShorlistedCandidates');
+                Route::post('/company/searchedcandy', 'AuthController@SearchedCandidates');
+                Route::post('/company/appliedcandy', 'AuthController@AppliedCandidates');
+                
 		
 		Route::post('company/removelogo', 'AuthController@removelogo');
 		Route::post('company/removeimages', 'AuthController@removeimages');
