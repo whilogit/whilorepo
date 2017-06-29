@@ -173,7 +173,7 @@ $(function(){
              var postdata = {};
             postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
                 $('body').removeClass('loaded');
-                $.post('/company/changepassword',postdata,function(response){
+                $.post('/password/change',postdata,function(response){
                 $('body').addClass('loaded');
                  $('#EditCompanyDeatils').append(response);
                   
