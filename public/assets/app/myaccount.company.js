@@ -80,7 +80,7 @@ $(function(){
 	}
         $('a[href="#CompanyProfile"]').click(function()
         {
-            
+             $('#CompanyProfile').empty();
             var postdata = {};
             postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
                 $('body').removeClass('loaded');
@@ -91,6 +91,7 @@ $(function(){
         }); 
         $('a[href="#Postnewjobs"]').click(function()
         {
+             $('#Postnewjobs').empty();
              var postdata = {};
             postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
                 $('body').removeClass('loaded');
@@ -103,6 +104,7 @@ $(function(){
         }); 
          $('a[href="#postedjobs"]').click(function()
         {
+             $('#postedjobs').empty();
              var postdata = {};
             postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
                 $('body').removeClass('loaded');
@@ -115,6 +117,7 @@ $(function(){
         }); 
           $('a[href="#ShortlistedCandidates"]').click(function()
         {
+             $('#ShortlistedCandidates').empty();
              var postdata = {};
             postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
                 $('body').removeClass('loaded');
@@ -127,6 +130,7 @@ $(function(){
         });   
            $('a[href="#SearchedCandidates"]').click(function()
         {
+             $('#SearchedCandidates').empty();
              var postdata = {};
             postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
                 $('body').removeClass('loaded');
@@ -137,8 +141,9 @@ $(function(){
                 });
            
         });
-                   $('a[href="#AppliedCandidates"]').click(function()
+        $('a[href="#AppliedCandidates"]').click(function()
         {
+             $('#AppliedCandidates').empty();
              var postdata = {};
             postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
                 $('body').removeClass('loaded');
@@ -149,8 +154,33 @@ $(function(){
                 });
            
         });
+        $('a[href="#EditCompany"]').click(function()
+        {
+           alert('hi');
+             var postdata = {};
+            postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
+                $('body').removeClass('loaded');
+                $.post('/company/editdetails',postdata,function(response){
+                $('body').addClass('loaded');
+                 $('#EditCompanyDeatils').append(response);
+                  
+                });
+           
+        });
+          $('a[href="#ChangePassword"]').click(function()
+        {
+           alert('hi');
+             var postdata = {};
+            postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
+                $('body').removeClass('loaded');
+                $.post('/company/changepassword',postdata,function(response){
+                $('body').addClass('loaded');
+                 $('#EditCompanyDeatils').append(response);
+                  
+                });
+           
+        });
         
-                   
               
 	$.companyacount.init();
 	$.companyacount.globalinit();

@@ -2,7 +2,7 @@
                           
                           <div class="panel-body">
                                  <h4 class="col-md-4 pull-left">Company Name</h4>
-<a href="edit" class="btn btn-base pull-right ">Edit</a>
+<a href="#EditCompany" class="btn btn-base pull-right ">Edit</a>
                                  
 <div class="col-md-12">
 <h4>Basic info</h4>
