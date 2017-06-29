@@ -270,9 +270,9 @@
 @endsection
 
 @section('after-scripts-end')
-   <script src="/assets/app/froentend.js"></script> 
+   <script src="/assets/app/froentend_consultancy.js"></script> 
    <script type="text/javascript" src="/js/jquery.twbsPagination.js"></script>
-   <script src="/assets/app/conpany.joblist.js"></script>
+   <script src="/assets/app/conpany.consultancylist.js"></script>
    @if ($count > 1)
      <script>
 	 $(function(){ 

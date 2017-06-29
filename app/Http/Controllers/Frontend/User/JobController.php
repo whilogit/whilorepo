@@ -100,6 +100,21 @@ class JobController extends Controller
 					//'data' => $request)
 					//);
 	}
+          public function shortlist(Request $request)
+    {
+     
+      $seekerId = $request->input('seekerId');
+                
+		$createdDate = date("d-m-Y h:i:s");
+		$res = DB::insert('insert into shortlistjobs(seekerId,companyId,ShortlistedDate) 
+	   				values (?,?,?)',array($seekerId, $_SESSION['WHILLO']['COMPAnyID'],$createdDate));
+					
+		
+		return response()->json(array(
+					'success' => true,
+					'errors' => "You got the full permission"
+					));
+    }
 	
    
 }
