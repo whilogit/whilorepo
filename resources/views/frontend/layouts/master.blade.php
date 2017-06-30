@@ -71,8 +71,9 @@
   ga('send', 'pageview');
  
 </script>
+<!--
 <script src="{{ url('/assets/extra/jquery_new.min.js')}}"></script>
 <link rel="stylesheet" href="{{ url('/assets/extra/jquery-confirm.min.css') }}">
-<script src="{{ url('/assets/extra/jquery-confirm.min.js')}}"></script>
-    </body>
+<script src="{{ url('/assets/extra/jquery-confirm.min.js')}}"></script> -->
+    </body> 
 </html>
