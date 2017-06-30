@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\Frontend\Resumes\ResumesList;
-use App\Repositories\Frontend\Resumes\ResumesDetails;
+use App\Repositories\Frontend\Resumes\TalentList;
+use App\Repositories\Frontend\Resumes\TalentDetails;
 use App\Repositories\Frontend\Resumes\ResumesPermession;
 use App\Repositories\Frontend\Jobs\Joblist;
 
@@ -15,7 +15,7 @@ use DB;
  * @package App\Http\Controllers
  */
 
-class ResumeController extends Controller
+class TalentController extends Controller
 {
     /**
      * @return \Illuminate\View\View
@@ -30,14 +30,14 @@ class ResumeController extends Controller
     public function index($limit = 12, $offset = 1)
     {
         $count = ceil(DB::table('jmaster')->where('accountStatus',1)->count()/12); 
-			return view('frontend.resumelist')->with(array("data"=>ResumesList::get(), "count"=>$count,"keyword"=>""))->with("locations",DB::table('_locations')->get() );
+			return view('frontend.talentlist')->with(array("data"=>TalentList::get(), "count"=>$count,"keyword"=>""))->with("locations",DB::table('_locations')->get() );
     
                         
     }
 	public function talentdetails($id, $name)
     {
          $shortlistcheck = DB::table('shortlistjobs')->where('companyId',$_SESSION['WHILLO']['COMPAnyID'])->where('seekerId',$id)->where('Status',0)->orWhere('Status',1)->count();
-			ResumesDetails::getdetails($id);return view('frontend.resumedetails')->with(array("data"=>ResumesDetails::getdetails($id)))->with("shortlistcheck",$shortlistcheck);                       
+			TalentList::getdetails($id);return view('frontend.talentdetails')->with(array("data"=>TalentList::getdetails($id)))->with("shortlistcheck",$shortlistcheck);                       
                        
     }
   
@@ -68,7 +68,7 @@ class ResumeController extends Controller
 					->leftjoin('jprofileimage as i', 'i.seekerId', '=', 'm.seekerId')
                                 ->leftjoin('jkeyskill as js', 'js.seekerId', '=', 'm.seekerId')
 					->join('jproffessional as jp', 'jp.seekerId', '=', 'm.seekerId')
-					
+					>leftjoin('jfeedbacklink as jf', 'jf.seekerId', '=', 'i.seekerId')
 					->leftjoin('_locations as l', 'p.locationId', '=', 'l.locationId')
                                 ->where(function($resume) use ($keyword,$locations)
 					  {
@@ -78,10 +78,13 @@ class ResumeController extends Controller
 						if($keyword!="")
 						$resume->where('js.keyskills','LIKE','%' . $keyword . '%');
                                          })
-					 ->where('m.accountStatus',1)->count() / 12);  
+                                         
+					 ->where('m.accountStatus',1)->where('jf.Status',1)
+                                                  ->groupBy('i.seekerId')
+                                                 ->count() / 12);  
                                            
 			//return view('frontend.joblist')->with(array("joblist"=>Joblist::get(10,1,$keyword,$locations), "count"=>$count,"keyword"=>$keyword))->with("locations",DB::table('_locations')->get());
-                                          return view('frontend.resumelist1')->with(array("data"=>ResumesList::getlist(12,1,$keyword,$locations),"count"=>$count,"keyword"=>$keyword))->with("locations",DB::table('_locations')->get());
+                                          return view('frontend.talentlist1')->with(array("data"=>TalentList::getlist(12,1,$keyword,$locations),"count"=>$count,"keyword"=>$keyword))->with("locations",DB::table('_locations')->get());
     }
 	
 
@@ -107,13 +110,13 @@ class ResumeController extends Controller
 					->first();
 					
 					
-		return view('frontend.jobdetails')->with("jobdetails",$jobs);
+		return view('frontend.talentdetails')->with("jobdetails",$jobs);
     }
 	public function joblistpagination($offset = 1, $limit = 12)
     {
 		return response()->json(array(
 					'success' => true,
-					'data' => ResumesList::getlist($limit,$offset),
+					'data' => TalentList::getlist($limit,$offset),
 					));
 	}
 	

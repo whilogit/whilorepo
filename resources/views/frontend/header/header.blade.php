@@ -24,7 +24,7 @@
                     @endif
 					 @if(isset($_SESSION['WHILLO']['COMPAnyID']))
 					 
-                    <li class=" mega-dropdown-fluid"><a href="{{ url('/talents') }}"><i class="fa fa-universal-access" aria-hidden="true"></i>  Bonafied talent</a></li>@endif
+                    <li class=" mega-dropdown-fluid"><a href="{{ url('/bonafiedtalents') }}"><i class="fa fa-universal-access" aria-hidden="true"></i>  Bonafied talent</a></li>@endif
 					 @if(!isset($_SESSION['WHILLO']['COMPAnyID']))
 					 
                     <li class=" mega-dropdown-fluid"><a href="{{ url('/jobs') }}"><i class="fa fa-universal-access" aria-hidden="true"></i>  Jobs</a></li>@endif
