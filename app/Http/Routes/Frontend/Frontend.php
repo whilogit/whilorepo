@@ -44,7 +44,8 @@ Route::group(['middleware' => 'AuthJoblist'], function () {
 Route::group(['middleware' => 'AuthResumelist'], function () {
 	Route::get('talents', 'ResumeController@index')->name('frontend.resumelist');
         Route::get('talents/keyword={keyword}/location={locations}', 'ResumeController@searchtalentlist')->name('frontend.jobjoblist');
-        
+        Route::get('bonafiedtalents', 'TalentController@index')->name('frontend.resumelist');
+        Route::get('bonafiedtalents/keyword={keyword}/location={locations}', 'TalentController@searchtalentlist')->name('frontend.jobjoblist');
 	
 	Route::post('resume/permission/{id}', 'ResumeController@permission')->name('frontend.permission');
 	Route::post('resume/addfavorite/{id}', 'ResumeController@addfavorite')->name('frontend.addfavorite');
@@ -64,8 +65,9 @@ Route::get('companylogo.get/{category}/{year}/{month}/{name}/{time}/{size}.{ext}
           
  });
 
-         Route::group(['middleware' => 'talent'], function () {
-    Route::get('talentdetails/{id}/{name}', 'ResumeController@talentdetails')->name('frontend.talentdetails');
+               Route::group(['middleware' => 'talent'], function () {
+               Route::get('bonafiedtalentdetails/{id}/{name}', 'TalentController@talentdetails')->name('frontend.talentdetails');
+               Route::get('talentdetails/{id}/{name}', 'ResumeController@talentdetails')->name('frontend.talentdetails');
                Route::get('jobdetails/{id}/{title}', 'JobController@jobdetails')->name('frontend.jobdetails');
                Route::get('companydetails/{id}/{title}', 'CompanyController@jobdetails');
                Route::get('consultancydetails/{id}/{title}', 'ConsultantController@jobdetails');
