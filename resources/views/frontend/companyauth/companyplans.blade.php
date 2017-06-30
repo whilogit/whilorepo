@@ -42,28 +42,16 @@
 <tbody>
 </table>
     <form name="expressPlan" id="expressPlan" method="post" action="" >
-        <input type="hidden" name="cvAccess" id="cvAccess" value="350 (50 Profiles per Day)"/>
-        <input type="hidden"  name="jobPosts" id="jobPosts" value="2"/>
-        <input type="hidden"  name="duration" id="duration" value="7"/>
-        <input type="hidden" name="searchC" id="searchC" value="Location Based"/>
-        <input type="hidden" name="emails" id="emails" value="Free"/>
-        <input type="hidden"  name="price" id="price" value="2000"/>
+         <input type="hidden" name="companyid" id="express_company_id" value="{{ $_SESSION['WHILLO']['COMPAnyID'] }}"/>
+           <input type="hidden" name="planid" id="express_plan_id" value="1"/>
     </form>
     <form name="enterprisePlan" id="enterprisePlan" method="post" action="" >
-        <input type="hidden"  name="cvAccess" id="cvAccess1" value="975 (65 Profiles per Day)"/>
-        <input type="hidden"  name="jobPosts" id="jobPosts1" value="5"/>
-        <input type="hidden"  name="duration" id="duration1" value="15"/>
-        <input type="hidden"  name="searchC" id="searchC1" value="Location Based"/>
-        <input type="hidden"  name="emails" id="emails1" value="Free"/>
-        <input type="hidden"  name="price" id="price1" value="4200"/>
+     <input type="hidden" name="companyid" id="enterprise_company_id" value="{{ $_SESSION['WHILLO']['COMPAnyID'] }}"/>
+           <input type="hidden" name="planid" id="enterprise_plan_id" value="2"/>
     </form>
     <form name="exclusivePlan" id="exclusivePlan" method="post" action="" >
-        <input type="hidden"  name="cvAccess" id="cvAccess2" value="2400 (80 Profiles per Day)"/>
-        <input type="hidden"  name="jobPosts" id="jobPosts2" value="15"/>
-        <input type="hidden"  name="duration" id="duration2" value="30"/>
-        <input type="hidden"  name="searchC" id="searchC2" value="Location Based"/>
-        <input type="hidden"  name="emails" id="emails2" value="Free"/>
-        <input type="hidden"  name="price" id="price2" value="8500"/>
+      <input type="hidden" name="companyid" id="exclusive_company_id" value="{{ $_SESSION['WHILLO']['COMPAnyID'] }}"/>
+           <input type="hidden" name="planid" id="exclusive_plan_id" value="3"/>
     </form>
         </div>
                     </div>

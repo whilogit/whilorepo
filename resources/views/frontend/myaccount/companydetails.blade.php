@@ -136,7 +136,7 @@
 </div>
 
 
-
+<script src="{{ url('/assets/extra/jquery_new.min.js')}}"></script>
 <script type="text/javascript">
 $(function() {
    
