@@ -2,7 +2,8 @@
                           
                           <div class="panel-body">
                                  <h4 class="col-md-4 pull-left">Company Name</h4>
-<a href="#EditCompany" class="btn btn-base pull-right ">Edit</a>
+
+<button id="edit_test" class="btn btn-base btn-icon btn-icon-right  pull-right"value=""> <span>Edit</span></button>
                                  
 <div class="col-md-12">
 <h4>Basic info</h4>
@@ -47,3 +48,16 @@
 </div>
 
 </div>
+
+<script type="text/javascript">
+$(function() {
+    alert('hii');
+       $('#edit_test').click(function()
+        { 
+            alert('hiii');
+            
+        });
+      
+
+});
+</script>

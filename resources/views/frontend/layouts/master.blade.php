@@ -71,5 +71,6 @@
   ga('send', 'pageview');
  
 </script>
+<script src="{{ url('/assets/extra/jquery_new.min.js')}}"></script>
     </body>
 </html>

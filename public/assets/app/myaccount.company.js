@@ -1,5 +1,5 @@
 var fetch = false;
-$(function(){ 
+$(function(){
 	$.companyacount = {
 		init: function(callback) {
 			
@@ -80,7 +80,7 @@ $(function(){
 	}
         $('a[href="#CompanyProfile"]').click(function()
         {
-             $('#CompanyProfile').empty();
+             $('#CompanyProfile').html('');
             var postdata = {};
             postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
                 $('body').removeClass('loaded');
@@ -154,22 +154,9 @@ $(function(){
                 });
            
         });
-        $('a[href="#EditCompany"]').click(function()
-        {
-           alert('hi');
-             var postdata = {};
-            postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
-                $('body').removeClass('loaded');
-                $.post('/company/editdetails',postdata,function(response){
-                $('body').addClass('loaded');
-                 $('#EditCompanyDeatils').append(response);
-                  
-                });
-           
-        });
+        
           $('a[href="#ChangePassword"]').click(function()
-        {
-           alert('hi');
+        {          
              var postdata = {};
             postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
                 $('body').removeClass('loaded');

@@ -132,10 +132,5 @@
 @section('after-scripts-end')
 
    <script type="text/javascript" src="/js/jquery.twbsPagination.js"></script>
-   <script>
-        var sitUrl = '<?php echo url('/'); ?>';
-   </script>
    <script src="/assets/app/myaccount.company.js"></script>
-  
-   
 @stop
