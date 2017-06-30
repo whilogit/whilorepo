@@ -72,8 +72,9 @@ Route::group(['namespace' => 'Auth'], function () {
                 Route::post('/company/shortlist', 'AuthController@GetShorlistedCandidates');
                 Route::post('/company/searchedcandy', 'AuthController@SearchedCandidates');
                 Route::post('/company/appliedcandy', 'AuthController@AppliedCandidates');
-                Route::get('/company/editdetails', 'AuthController@EditCompanyDeatils');
-              
+                Route::post('/company/editdetails', 'AuthController@EditCompanyDeatils');
+                Route::post('/company/accesscandidate', 'AuthController@AccessCandidates');
+             
 		
 		Route::post('company/removelogo', 'AuthController@removelogo');
 		Route::post('company/removeimages', 'AuthController@removeimages');

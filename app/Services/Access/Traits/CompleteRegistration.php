@@ -46,16 +46,21 @@ trait completeRegistration
              }
     public function CompanyProfileDetails()
      {
+        	
+		
           $compdetails = DB::table('comprofile as p')
                                         ->leftjoin('commaster as m', 'm.companyId','=','p.companyId')
                                         ->leftjoin('userlogin as u','u.userId','=','m.userId')
                                          ->leftjoin('_locations as l','l.locationId','=','p.locationId')
                                          ->leftjoin('_industry as i','i.industryId','=','p.industry')
-                                        ->select('m.userId','u.emailAddress','p.companyName','p.mobileNumber','p.website','p.aboutbio','p.address','l.locationName','i.industryName')
+                                        ->select('m.userId','u.emailAddress','p.companyName','p.mobileNumber','p.website','p.aboutbio','p.address','l.locationName','i.industryName','p.locationId','p.industry')
                                          ->where('u.userId', '=', $_SESSION['WHILLO']['USERID'])
                                         ->first();
-          $data['compdetails'] = $compdetails;
- 
+         $defaults['locations'] = DB::table('_locations')->get();
+        $defaults['industry'] = DB::table('_industry')->get();	
+          //$data['compdetails'] = $compdetails;
+      $data=array('compdetails'=>$compdetails, 'response'=>$defaults);
+
         return response(view('frontend.myaccount.companydetails', $data),'200')->header('Content-Type', 'text/plain');  
      }
      public function GetCompanyPostedJobs()
@@ -63,13 +68,14 @@ trait completeRegistration
          
            $jobdetails = DB::table('companyjobs as j')
                                        
-                                        ->select('j.jobTitle', 'l.locationName','j.lastdate')
+                                        ->select('j.jobTitle', 'l.locationName','j.lastdate','j.locationId')
                                         ->leftjoin('_locations as l','l.locationId','=','j.locationId')
                                          ->where('j.companyId', '=', $_SESSION['WHILLO']['COMPAnyID'])
                                         ->get();
            
-          
-         $data['jobdetails'] = $jobdetails;
+          $defaults['locations'] = DB::table('_locations')->get();
+            $data=array('jobdetails'=>$jobdetails, 'response'=>$defaults);
+        
  
         return response(view('frontend.myaccount.companyjoblisting', $data),'200')->header('Content-Type', 'text/plain');  
      }
@@ -134,12 +140,22 @@ trait completeRegistration
          $data['appliedcandidates'] = $appliedcandidates;
         return response(view('frontend.myaccount.appliedcandidates', $data),'200')->header('Content-Type', 'text/plain');  
      }
-        public function EditCompanyDeatils()
+        public function EditCompanyDeatils(Request $request)
      {
-         
-           
- 
-        return response(view('frontend.myaccount.editcompanydetails'));  
+          $data = $request->all();
+           $res = DB::update('update comprofile set companyName=?,mobileNumber=?,website=?,industry=?,locationId=?,address=? where companyId=?',array($data,$_SESSION['WHILLO']['COMPAnyID']));
+	   if($res){
+		   return response()->json(array(
+					'success' => true,
+					'errors' => "Status successfully changed"
+					));
+	   }else {
+		   return response()->json(array(
+					'success' => false,
+					'errors' => "Failed to change status"
+					));
+	   }
+
      }
      
 

@@ -1,4 +1,3 @@
-         @extends('frontend.layouts.master')        
                         <div class="wp-block default user-form no-margin">
                             <div class="form-header">
                                 <h2>Upload your job</h2> 
