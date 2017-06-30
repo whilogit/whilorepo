@@ -36,6 +36,13 @@ class ResumeController extends Controller
     }
 	public function talentdetails($id, $name)
     {
+            $searched_date = date("d-m-Y h:i:s");
+           $search= DB::table('searched_candidates')->where('companyId',$_SESSION['WHILLO']['COMPAnyID'])->where('seekerId',$id)->where('Status',0)->orWhere('Status',1)->count();
+		if($search==0)
+                {
+           $res = DB::insert('insert into searched_candidates(seekerId,companyId,searched_date) 
+                    values (?,?,?)',array($id,$_SESSION['WHILLO']['COMPAnyID'],$searched_date));
+                }
          $shortlistcheck = DB::table('shortlistjobs')->where('companyId',$_SESSION['WHILLO']['COMPAnyID'])->where('seekerId',$id)->where('Status',0)->orWhere('Status',1)->count();
 			ResumesDetails::getdetails($id);return view('frontend.resumedetails')->with(array("data"=>ResumesDetails::getdetails($id)))->with("shortlistcheck",$shortlistcheck);                       
                        

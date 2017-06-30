@@ -22,7 +22,7 @@ class TalentList extends Controller
 					->leftjoin('jprofileimage as i', 'i.seekerId', '=', 'm.seekerId')
                                 ->leftjoin('jkeyskill as js', 'js.seekerId', '=', 'm.seekerId')
 					->join('jproffessional as jp', 'jp.seekerId', '=', 'm.seekerId')
-                                >leftjoin('jfeedbacklink as jf', 'jf.seekerId', '=', 'i.seekerId')
+                                ->leftjoin('jfeedbacklink as jf', 'jf.seekerId', '=', 'i.seekerId')
 					->leftjoin('_locations as l', 'p.locationId', '=', 'l.locationId')
                                 ->where(function($resume) use ($keyword,$locations)
 					  {
@@ -62,6 +62,7 @@ class TalentList extends Controller
                                 ->leftjoin('jkeyskill as js', 'js.seekerId', '=', 'm.seekerId')
 					->join('jproffessional as jp', 'jp.seekerId', '=', 'm.seekerId')
 					->where('jp.industryId',$key->industryId)
+                                 ->leftjoin('jfeedbacklink as jf', 'jf.seekerId', '=', 'i.seekerId')
 					->leftjoin('_locations as l', 'p.locationId', '=', 'l.locationId')
                                 ->where(function($resume) use ($keyword,$locations)
 					  {
