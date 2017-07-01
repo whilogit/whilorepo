@@ -14,7 +14,7 @@ class ResumesPermession extends Controller
 	public static function insert($id)
 	{
 		
-		$createdDate = date("d-m-Y h:i:s");
+		 $createdDate = new DateTime();
 		$res = DB::insert('insert into jdocpermision(seekerId,companyId,status,createdDate) 
 	   				values (?,?,?,?)',array($id,$_SESSION['WHILLO']['COMPAnyID'],1,$createdDate));
 					
@@ -33,7 +33,7 @@ class ResumesPermession extends Controller
 	public static function addfavorite($id)
 	{
 		
-		$createdDate = date("d-m-Y h:i:s");
+		 $createdDate = new DateTime();
 		$res = DB::insert('insert into addtofavorite(companyId,seekerId,createdDate) 
 	   				values (?,?,?)',array($_SESSION['WHILLO']['COMPAnyID'],$id,$createdDate));
 					

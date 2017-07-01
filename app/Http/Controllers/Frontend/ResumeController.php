@@ -8,6 +8,8 @@ use App\Repositories\Frontend\Resumes\ResumesDetails;
 use App\Repositories\Frontend\Resumes\ResumesPermession;
 use App\Repositories\Frontend\Jobs\Joblist;
 
+use DateTime;
+
 
 use DB;
 /**
@@ -36,7 +38,7 @@ class ResumeController extends Controller
     }
 	public function talentdetails($id, $name)
     {
-            $searched_date = date("d-m-Y h:i:s");
+          $searched_date = new DateTime();
            $search= DB::table('searched_candidates')->where('companyId',$_SESSION['WHILLO']['COMPAnyID'])->where('seekerId',$id)->where('Status',0)->orWhere('Status',1)->count();
 		if($search==0)
                 {
