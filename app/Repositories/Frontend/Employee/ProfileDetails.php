@@ -22,7 +22,7 @@ class ProfileDetails extends Controller
 		      ->where('jq.seekerId', $_SESSION['WHILLO']['SEEKERID'])
 			  ->join('_qualification as q','q.qualificationId','=','jq.qualificationId')
 			  ->join('jkeyskill as k','k.seekerId','=','jq.seekerId')
-			  ->select('jq.passingYear','jq.courceName','jq.specilizationName','jq.universityName','jq.courcetypeId','q.qualificationName','k.keyskills')
+			  ->select('jq.id','jq.seekerId','jq.passingYear','jq.courceName','jq.specilizationName','jq.universityName','jq.courcetypeId','q.qualificationName','k.keyskills')
 			  ->get();
 				
 	}
