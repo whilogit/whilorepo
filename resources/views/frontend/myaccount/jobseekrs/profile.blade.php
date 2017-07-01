@@ -252,6 +252,10 @@
                 var university = currentRow.find("td:eq(3)").text();
                 var courseType = currentRow.find("td:eq(4)").text();
                 var passYear = currentRow.find("td:eq(5)").text();
+                var result = [hQuali, cources, specalization, university,courseType,passYear];
+                var r=[];
+                r.push(result);
+                console.log(r);
               //console.log("hQuali"+hQuali);console.log("cources"+cources);console.log("specalization"+specalization);
              // console.log("university"+university);console.log("courseType"+courseType);console.log("passYear"+passYear);
 
