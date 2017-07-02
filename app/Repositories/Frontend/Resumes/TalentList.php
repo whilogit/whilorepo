@@ -11,7 +11,7 @@ use DB;
  */
 class TalentList extends Controller
 {
-	public static function getlist($limit = 10, $offset = 1,$keyword="",$locations="")
+	public static function getlist($limit = 12, $offset = 1,$keyword="",$locations="")
 	{
 		$response = array();
 		$industry = DB::table('_industry')->select('industryId','industryName')->get(); 

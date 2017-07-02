@@ -9,6 +9,7 @@ use App\Services\Access\Company\MyJobs;
 use App\Repositories\Frontend\Jobs\Joblist;
 use Validator;
 use DB;
+use DateTime;
 /**
  * Class ProfileController
  * @package App\Http\Controllers\Frontend

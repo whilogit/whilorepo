@@ -44,10 +44,14 @@ Route::group(['middleware' => 'AuthJoblist'], function () {
 
 Route::group(['middleware' => 'AuthResumelist'], function () {
 	Route::get('talents', 'ResumeController@index')->name('frontend.resumelist');
+        Route::get('search/talentlist/{offset}', 'ResumeController@joblistpagination')->name('frontend.joblistpagination');
         Route::get('talents/keyword={keyword}/location={locations}', 'ResumeController@searchtalentlist')->name('frontend.jobjoblist');
+        
         Route::get('bonafiedtalents', 'TalentController@index')->name('frontend.resumelist');
+        Route::get('search/bonafiedtalentlist/{offset}', 'TalentController@joblistpagination')->name('frontend.joblistpagination');
         Route::get('bonafiedtalents/keyword={keyword}/location={locations}', 'TalentController@searchtalentlist')->name('frontend.jobjoblist');
 	
+        
 	Route::post('resume/permission/{id}', 'ResumeController@permission')->name('frontend.permission');
 	Route::post('resume/addfavorite/{id}', 'ResumeController@addfavorite')->name('frontend.addfavorite');
 	Route::post('resume/removefavorite/{id}', 'ResumeController@removefavorite')->name('frontend.removefavorite');

@@ -52,7 +52,7 @@
                 
                 
                 
-                 
+                      <ul class="list-listings-2" name="joblist">
                    <?php $incr = 0; $class = "active"; ?>
                    @foreach($data as $resume)
                     <?php $incr++;  ?>
@@ -66,7 +66,7 @@
  <div class="figure">
 <img  style="width:100%;height:150px" alt="" src=@if($resume->imageCategory != "") "/display/image/{{ $resume->imageCategory }}/{{ $resume->dirYear }}/{{ $resume->dirMonth }}/{{ $resume->imageName }}/{{ $resume->crTime }}/s.{{ $resume->imgExt }}" @else "http://www.oldpotterybarn.co.uk/wp-content/uploads/2015/06/default-medium.png" @endif class="img-responsive"></div>
 
-                                      <h2>{{ $resume->firstName }} {{ $resume->lastName }}<small>Location: {{ $resume->locationName }}</small></h2><p>{{ $resume->experienceName }}</span></p></a>
+                                      <h2>{{ $resume->firstName }} {{ $resume->lastName }}<small>Location: {{ $resume->locationName }}</small></h2><p>{{ $resume->experienceName }}</p></a>
 
 </div>
                                 </div>
@@ -75,7 +75,7 @@
                            <?php if($incr == 6){ echo '</div></div>'; } if($incr == 6) $incr = 0; ?>
                        <?php $class = "";?>
                        @endforeach
-                   
+                      </ul>
  <!-- BOTTOM PAGINATION -->
                         
                 </div>  
@@ -97,9 +97,12 @@
 @endsection
 
 @section('after-scripts-end')
+<script type="text/javascript">
+ var url = "<?php echo url('/'); ?>";
+</script>
    <script src="/assets/app/bonafiedtalent.js"></script> 
      <script type="text/javascript" src="/js/jquery.twbsPagination.js"></script>
-   <script src="/assets/app/conpany.joblist.js"></script>
+   <script src="/assets/app/conpany.bonafiedtalent.js"></script>
    @if ($count > 1)
      <script>
 	 $(function(){ 

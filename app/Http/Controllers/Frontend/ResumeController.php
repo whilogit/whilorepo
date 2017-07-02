@@ -88,7 +88,8 @@ class ResumeController extends Controller
 						$resume->where('js.keyskills','LIKE','%' . $keyword . '%');
                                          })
 					 ->where('m.accountStatus',1)->count() / 12);  
-                                           
+                                      //echo '<pre>'; print_r(ResumesList::getlist(12,1,$keyword,$locations));
+                                          // exit;
 			//return view('frontend.joblist')->with(array("joblist"=>Joblist::get(10,1,$keyword,$locations), "count"=>$count,"keyword"=>$keyword))->with("locations",DB::table('_locations')->get());
                                           return view('frontend.resumelist1')->with(array("data"=>ResumesList::getlist(12,1,$keyword,$locations),"count"=>$count,"keyword"=>$keyword))->with("locations",DB::table('_locations')->get());
     }

@@ -78,7 +78,7 @@
                                <div class="listing-header bg-base">{{ $list->companyName }}</div>
                                  <div class="col-md-2">                                  
 <a href="/companydetails/{{ $list->jobId }}/<?php echo str_replace(" ", "-",$list->jobTitle) ?>"> 
-    @if($list->logoCategory=="")
+    @if($list->logoCategory != "")
     <img src="/<?php echo $list->logoCategory == "" ? "" : "companylogo.get/" ?>{{ $list->logoCategory }}/{{ $list->dirYear }}/{{ $list->dirMonth }}/{{ $list->logoName }}/{{ $list->crTime }}/s.{{ $list->logExt }}" class="img-responsive" style="width:100%"  alt="{{ $list->companyName }}">
 @else
  <img src="images/download.png" alt="" >
