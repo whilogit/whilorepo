@@ -62,57 +62,7 @@
 </div>
 
 <div class="tab-pane " id="ChangePassword">
-<div class="col-md-6 col-md-offset-2 col-sm-6 col-sm-offset-3">
-                        <div class="wp-block default user-form"> 
-                            <div class="form-header">
-                                <h2>Change your Password</h2>
-                            </div>
-                            <div class="form-body">
-                                <form action="" id="frmLogin" class="sky-form">                                    
-                                    <fieldset>                  
-                                    
-                                        <section>
-                                            <div class="form-group">
-                                                <label class="label">Enter Current Password</label>
-                                                <label class="input">
-                                                    <i class="icon-append fa fa-lock" aria-hidden="true"></i>
-                                                    <input type="password" name="Password">
-                                                </label>
-                                            </div>     
-                                        </section> 
-                                        
- <section>
-                                            <div class="form-group">
-                                                <label class="label">Enter New Password</label>
-                                                <label class="input">
-                                                    <i class="icon-append fa fa-lock" aria-hidden="true"></i>
-                                                    <input type="password" name="Password">
-                                                </label>
-                                            </div>     
-                                        </section> 
-                                        
- <section>
-                                            <div class="form-group">
-                                                <label class="label">Confirm New Password</label>
-                                                <label class="input">
-                                                    <i class="icon-append fa fa-lock" aria-hidden="true"></i>
-                                                    <input type="password" name="Password">
-                                                </label>
-                                            </div>     
-                                        </section> 
-                                        
-                                        <section>
-                                            <button class="btn btn-base btn-icon btn-icon-right btn-sign-in pull-right" type="submit">
-                                                <span>Change Password</span>
-                                            </button>
-                                        </section>
-                                    </fieldset>  
-                                </form>    
-                            </div>
-                         
-                        </div>
-                    </div>
-
+     
 </div>
 <!-- new one -->
                              

@@ -9,9 +9,16 @@
      <td>{{ $list->qualificationName }}</td>
      <td>{{ $list->experienceName }} </td>
      <td><a href="talentdetails/{{ $list->seekerId }}/{{ $list->userName }}">
-     <input type="hidden" value="{{ $list->seekerId }}"> View</a></td>
-     <td><button id="search_email_button" class="btn btn-base btn-icon btn-icon-right  pull-right"value="" onclick="emailfunction('{{ $list->emailAddress }}')"> 
-    <span>Call For Interview</span></button></td></tr>
+     <input type="hidden" id="seekerId" name="seekerId" value="{{ $list->seekerId }}"> View</a></td>
+     <td id="statustd_{{$key}}">
+         @if( $list->status==0)
+         <button id="search_email_button_{{ $key }}" class="btn btn-base btn-icon btn-icon-right  pull-right"value="" onclick="emailfunction('{{ $list->emailAddress }}',{{ $list->seekerId }},{{$key}})"> 
+      <span>Call For Interview</span></button>
+         @else
+         <span><b>Email Sent</b></span>
+         @endif
+         
+     </td></tr>
  @endforeach
 </tbody>
 </table>                                   
@@ -21,26 +28,29 @@
 <script src="{{ url('/assets/extra/jquery-confirm.min.js')}}"></script> 
 <script type="text/javascript">
 
-     function emailfunction(emailAddress)
+     function emailfunction(emailAddress,seekerId,buttonid)
      {
        
             $.confirm({
                 title: 'Confirm!',
-                content: 'Simple confirm!',
+                content: 'Do you want to send email?',
                 buttons: {
                     confirm: function () {
-                        $.alert('Confirmed!');
+                       
                                var postdata = {};
                                 postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
-                                postdata['email_id']=emailAddress;
-                                postdata['subject']='Call for Interview';
-                                 postdata['body']='This is a test mail ';
+                                postdata['seekerId']=seekerId;
+                                postdata['email_id']=emailAddress; 
+                                postdata['button_id']=buttonid;
                                 $('body').removeClass('loaded');
-                                                        $.post('send/email',postdata,function(response){ 
+                                                        $.post('send/interviewemail',postdata,function(response){ 
 
                                                         $('body').addClass('loaded');
                                                                 if(response.success)
                                                                 {
+                                                                    $.alert('EmailSend!');
+                                                                   $('#search_email_button_'+response.buttonid).remove();
+                                                                   $('#statustd_'+response.buttonid).append('<span><b>Email Sent</b></span>');
                                                                    
                                                                     
                                                                 }

@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Validator;
 use App\Http\Controllers\CcavenueHelperController;
-
+use App\Services\Access\Traits\MailController;
+use Redirect;
 use DB;
 use Hash;
 /**
@@ -85,7 +86,7 @@ trait completeRegistration
          
           $shortlist = DB::table('shortlistjobs as sc')
                                        
-                                        ->select('q.qualificationName','u.userName','j.seekerId','ep.experienceName')
+                                        ->select('q.qualificationName','u.userName','j.seekerId','ep.experienceName','u.emailAddress','sc.status')
                                         ->leftjoin('jmaster as j','j.seekerId','=','sc.seekerId')
                                          ->leftjoin('jqualification as jq','jq.seekerId','=','sc.seekerId')
                                           ->leftjoin('_qualification as q','q.qualificationId','=','jq.qualificationId')
@@ -101,12 +102,12 @@ trait completeRegistration
  
         return response(view('frontend.myaccount.candidateshortlisting', $data),'200')->header('Content-Type', 'text/plain');  
      }
-           public function SearchedCandidates()
+ public function SearchedCandidates()
      {
          
            $searchcand = DB::table('searched_candidates as sc')
                                        
-                                        ->select('q.qualificationName','u.userName','j.seekerId','ep.experienceName','u.emailAddress')
+                                        ->select('q.qualificationName','u.userName','j.seekerId','ep.experienceName','u.emailAddress','sc.status')
                                         ->leftjoin('jmaster as j','j.seekerId','=','sc.seekerId')
                                          ->leftjoin('jqualification as jq','jq.seekerId','=','sc.seekerId')
                                           ->leftjoin('_qualification as q','q.qualificationId','=','jq.qualificationId')
@@ -117,16 +118,100 @@ trait completeRegistration
                                         ->get();
 
          $data['searchcand'] = $searchcand;
+         
  
         return response(view('frontend.myaccount.searchedcandidates', $data),'200')->header('Content-Type', 'text/plain');  
      }
+     public function CallForInterview(Request $request)
+     {
+         
+         $data = $request->all();
+         $buttonid=$data['button_id'];
+         $id=$data['seekerId'];
+         $to=$data['email_id'];
+         $sub='Test Interview Call Subject';
+         $message='Interview Test body';
+         $sendmail= MailController::sendmail($to,$sub,$message);
+         $res = DB::table('searched_candidates')
+                    ->where('seekerId',$id )
+                    ->where('companyId', $_SESSION['WHILLO']['COMPAnyID'] )
+                    ->update(array('status' =>1));
+         return response()->json(array(
+                                                    'success' => true,
+                                                    'buttonid' =>$buttonid,
+                                                    'errors' => "No"
+                                                    ));
+                   
+         
+     }
+        public function CallforApplied(Request $request)
+        {
+
+            $data = $request->all();
+            $buttonid=$data['button_id'];
+            $id=$data['seekerId'];
+            $to=$data['email_id'];
+            $sub='Test Interview Call Subject';
+            $message='Interview Test body';
+            $sendmail= MailController::sendmail($to,$sub,$message);
+            $res = DB::table('userappliedjobs')
+                        ->where('seekerId',$id )
+                         ->where('companyId', $_SESSION['WHILLO']['COMPAnyID'] )
+                        ->update(array('status' =>1));
+            return response()->json(array(
+                                                        'success' => true,
+                                                        'buttonid' =>$buttonid,
+                                                        'errors' => "No"
+                                                        ));
+
+
+        }
+        public function ShortListStatus(Request $request)
+        {
+           
+            $data = $request->all();
+            $buttonid=$data['button_id'];
+            $status_option=$data['status_option']; 
+            $id=$data['seekerId'];
+            $to=$data['email_id'];
+            $sub='Test Selected ';
+            $message='Selected Email';
+            if($status_option=='selected')
+            {
+                
+                $sendmail= MailController::sendmail($to,$sub,$message);
+                $res = DB::table('shortlistjobs')
+                            ->where('seekerId',$id )
+                            ->where('companyId', $_SESSION['WHILLO']['COMPAnyID'] )
+                            ->update(array('email_status' =>1,'status' =>1));
+                return response()->json(array(
+                                                            'success' => true,
+                                                            'buttonid' =>$buttonid,
+                                                            'msg' => "Candidate Selected"
+                                                            ));
+            }
+            else if($status_option=='rejected')
+            {
+                
+                $res = DB::table('shortlistjobs')
+                            ->where('seekerId',$id )
+                            ->where('companyId', $_SESSION['WHILLO']['COMPAnyID'] )
+                            ->update(array('email_status' =>0,'status' =>2));
+                return response()->json(array(
+                                                            'success' => true,
+                                                            'buttonid' =>$buttonid,
+                                                            'msg' => "Candidate Rejected"
+                                                            ));
+            }
+
+        }
       public function AppliedCandidates()
      {
          
            
            $appliedcandidates = DB::table('userappliedjobs as sc')
                                        
-                                        ->select('q.qualificationName','u.userName','j.seekerId','ep.experienceName','cb.jobTitle')
+                                        ->select('q.qualificationName','u.userName','j.seekerId','ep.experienceName','cb.jobTitle','u.emailAddress','sc.status')
                                         ->leftjoin('jmaster as j','j.seekerId','=','sc.seekerId')
                                          ->leftjoin('jqualification as jq','jq.seekerId','=','sc.seekerId')
                                           ->leftjoin('_qualification as q','q.qualificationId','=','jq.qualificationId')
@@ -137,7 +222,7 @@ trait completeRegistration
                                          
                                          ->where('cb.companyId', '=', $_SESSION['WHILLO']['COMPAnyID'])
                                         ->get();
-
+           
          $data['appliedcandidates'] = $appliedcandidates;
         return response(view('frontend.myaccount.appliedcandidates', $data),'200')->header('Content-Type', 'text/plain');  
      }
@@ -161,7 +246,7 @@ trait completeRegistration
           
           
      }
-        public function EditCompanyDeatils(Request $request)
+    public function EditCompanyDeatils(Request $request)
             {
                 $data = $request->all();
                 $res = DB::table('comprofile')
@@ -186,6 +271,40 @@ trait completeRegistration
                                                 ));
                 }
 
+     }
+      public function compPasswordChangeForm()
+        {
+          
+           return response(view('frontend.myaccount.changePassword'));
+        }
+     
+     public function changeCompanyPassword(Request $request)
+     {
+         $oldPassword = $request->oldPassword;
+         //Check passwrod exist in DB
+         $user = DB::table('userlogin')->where('userId',$_SESSION['WHILLO']['USERID'])->first();
+         //Check user password
+         if (Hash::check($oldPassword, $user->password)) 
+         {
+             $newpassword = Hash::make($request->newpassword); 
+             
+             DB::table('userlogin')
+                     ->where('userId',$_SESSION['WHILLO']['USERID'])
+                     ->update(['password' => $newpassword]);
+             return response()->json(array(
+                                                'success' => true,
+                                                'msg' => "Password updated successfully"
+                                                ));
+             
+         }
+         else {
+                        return response()->json(array(
+                                                'success' => false,
+                                                'msg' => "Wrong password"
+                                                ));
+                }
+       
+                  
      }
       public function PaymentPlanDetails(Request $request)
             {
@@ -258,6 +377,7 @@ return $form_style;
            $data = $request->all();
           dd($data);
        }
+       
 
 
 

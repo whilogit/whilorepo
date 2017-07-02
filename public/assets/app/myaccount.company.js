@@ -157,14 +157,14 @@ $(function(){
         
           $('a[href="#ChangePassword"]').click(function()
         {          
-             var postdata = {};
-            postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
+                   $('#ChangePassword   ').empty();
                 $('body').removeClass('loaded');
-                $.post('/password/change',postdata,function(response){
+                $.get('/company/passwordform',function(response){
                 $('body').addClass('loaded');
-                 $('#EditCompanyDeatils').append(response);
+                 $('#ChangePassword').append(response);
                   
                 });
+           
            
         });
         
