@@ -99,7 +99,7 @@
                 <td>{{ $education->courcetypeId == 1 ? "Fulltime" : "Parttime" }}</td>
                 <td>{{ $education->passingYear }}</td> 
                 <td><button class="btn btn-xs btn-info editTest" title="edit"
-                            data-id="{{$education->id }}">edit
+                            data-id="{{$education->id }}">Edit
                     </button></td>
                 </tr>
                 @endforeach  
@@ -252,21 +252,21 @@
                 var university = currentRow.find("td:eq(3)").text();
                 var courseType = currentRow.find("td:eq(4)").text();
                 var passYear = currentRow.find("td:eq(5)").text();
-                var result = [hQuali, cources, specalization, university,courseType,passYear];
-                var r=[];
-                r.push(result);
-                console.log(r);
-              //console.log("hQuali"+hQuali);console.log("cources"+cources);console.log("specalization"+specalization);
-             // console.log("university"+university);console.log("courseType"+courseType);console.log("passYear"+passYear);
-
+       
             }
-
-            // console.log("tdPhone"+tdPhone);
-            // console.log("tdEmail"+tdEmail);console.log("tdButtons"+tdButtons);*/
-
+       
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
 
-
+            $.ajax({
+                url: '/auth/updateEducation',
+                type: 'POST',
+                data: {"_token": "{{ csrf_token() }}","id":id,"hQuali":hQuali,"cources":cources, "specalization":specalization,"university":university,"courseType":courseType,"passYear":passYear},
+                dataType: 'JSON',
+                success: function (data) {
+                   // console.log(data);
+                }
+            });
 
         });
 
