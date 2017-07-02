@@ -137,6 +137,7 @@
 
 
 <script src="{{ url('/assets/extra/jquery_new.min.js')}}"></script>
+
 <script type="text/javascript">
 $(function() {
    
@@ -148,6 +149,8 @@ $(function() {
         });
    $('#company_detail_update').click(function()
         { 
+           
+             var postdata = {};
              var input = $('[name=update_company_details]').serialize();
              postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
               postdata['website']=$('input[name="website"]').val();
@@ -160,7 +163,7 @@ $(function() {
               postdata['industry']=$('select[name="industry"]').val();
                 $('body').removeClass('loaded');
                                          $.post('/company/editdetails',postdata,function(response){ 
-                                             alert(response);
+                                            
                                          $('body').addClass('loaded');
                                                  if(response.success)
                                                  {

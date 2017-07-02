@@ -99,15 +99,16 @@ trait RegisterRedirectsForms
 				switch($step->steps){
 					case 1: { 
 					        //$companylogo = DB::table('companylogo')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->get();
-                                                $complans = DB::table('_plantypes as c')
+                                               /* $complans = DB::table('_plantypes as c')
                                         ->leftjoin('_plandetails as p', 'c.id', '=', 'p.plan_id')
                                         ->select('c.*','p.*')
-                                        ->get();
+                                        ->get();*/
                                                
 							//$companyimages = DB::table('companyimages')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->get();// die(json_encode($companyimages));
 							//return view('frontend.companyauth.companyimages')->with(array("companylogo"=>$companylogo,"companyimages"=>$companyimages));
                                             
-                                               return view('frontend.companyauth.companyplans')->with(array("complans"=>$complans));
+                                              // return view('frontend.companyauth.companyplans')->with(array("complans"=>$complans));
+                                               return view('frontend.companyauth.companyplans');
                                             break;
                                             }
                                          case 2: { 
@@ -195,15 +196,7 @@ trait RegisterRedirectsForms
 
 
         }
-     public function showPaymentpage()
-        {  
-               if(isset($_SESSION['WHILLO']['STATUS'])){ if($_SESSION['WHILLO']['TYPE']=="C")
-                  
-              return view('frontend.companyauth.companyplanpayment');
-               }
-
-
-        }
+   
 public function CompanyImagesPage()
         {  
                 

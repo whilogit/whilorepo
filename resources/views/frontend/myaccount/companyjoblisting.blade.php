@@ -11,8 +11,17 @@
                                             <tr><th>Job Title</th><th>Valid Till</th><th>Location</th><th>Edit</th></tr>
                                             
                                             @foreach($jobdetails as $key=> $list)
-                                            <tr><td><a href="#"></a> {{ $list->jobTitle }}</td><td>{{ $list->lastdate }}</td><td>{{ $list->locationName }}</td><td><button class="btn btn-base btn-icon btn-icon-right  pull-right jobedit"value=""> <span>Edit</span></button><i class="fa fa-pencil"></i></td></tr>
-                                               @endforeach
+                                                <tr>
+                                                    <td><a href="#"></a> {{ $list->jobTitle }}</td>
+                                                    <td>{{ $list->lastdate }}</td>
+                                                    <td>{{ $list->locationName }}</td>
+                                                    <td><input type="hidden" class="job_id" value="{{ $list->jobId }}">
+                                                    <button class="btn btn-base btn-icon btn-icon-right  pull-right jobedit" id="edit_{{$key}}" value="" onclick="jobfunction({{ $list->jobId }})"> 
+                                                    <span>Edit</span></button>
+                                                    <i class="fa fa-pencil"></i>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
             </tbody>
             </table>
              </div>
@@ -28,7 +37,8 @@
                                                     <label class="label">Job Title <span style="color:red">*</span></label>
                                                         <label class="input">
                                                             <i class="icon-append fa fa-pencil"></i>
-                                                            <input type="text" name="website" required="required" value="">
+                                                               <td><input type="hidden" name="hide_jid" id="hide_jid" class="job_id" value="">
+                                                            <input type="text" name="jobtitle" id="jobtitle"required="required" value="">
                                                        </label>
                                                     </div>     
                                                 </div>
@@ -38,36 +48,13 @@
                                                         <label class="label">Valid Till <span style="color:red">*</span></label>
                                                              <label class="input">
                                                             <i class="icon-append fa fa-pencil"></i>
-                                                            <input type="text" name="mobileno" required="required" value="">
+                                                            <input type="text" name="validtill" id="validtill" required="required" value="">
                                                        </label>
                                                         </div>  
                                                     </div>               
                                                 </div>
                                             </div>  
-                                                <div class="row">
-                                                <div class="col-xs-6">
-                                                    <div class="form-group">
-                                                    <label class="label">Location <span style="color:red">*</span></label>
-                                                    
-                                                          <label class="select">
-                                                            <i class="icon-append fa fa-map"></i>
-                                                            <select type="text" name="comlocation" required="required" placeholder="Job Location"><option value="" selected="selected" disabled="disabled">-Select-</option>
-                                                            @foreach($response['locations'] as $locations)<option value="">{{ $locations->locationName }}</option>@endforeach</select>
-                                                        </label>
-                                                    </div>     
-                                                </div>
-                                                 <div class="col-xs-6">
-                                                    <div class="form-group">
-                                                        <div class="form-group">
-                                                        <label class="label">Email ID <span style="color:red">*</span></label>
-                                                             <label class="input">
-                                                            <i class="icon-append fa fa-pencil"></i>
-                                                            <input type="text" name="emailadd" required="required" value="">
-                                                       </label>
-                                                        </div>  
-                                                    </div>               
-                                                </div>
-                                            </div>   
+                                             
                                          
                                         </section>
                                           <button id="job_detail_update" class="btn btn-base btn-icon btn-icon-right btn-sign-in pull-right" type="button">
@@ -80,19 +67,59 @@
         </div>
 </div>
 </div>
-
+<script src="{{ url('/assets/extra/jquery_new.min.js')}}"></script>
 <script type="text/javascript">
-$(function() {
+    function jobfunction(id)
+    {
+        
+         $('#job_detail_table').hide();
+                
+                 var postdata = {};
+                postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
+                postdata['job_id']=id;
+                 $('body').removeClass('loaded');
+                                         $.post('/company/editjobs',postdata,function(response){ 
+                                           
+                                         $('body').addClass('loaded');
+                                                 if(response.success)
+                                                 {
+                                                     var jobtitle=response.jdetails.jobTitle;
+                                                     var validtill=response.jdetails.lastdate;
+                                                       var jobId=response.jdetails.jobId;
+                                                      $('#hide_jid').val(jobId);
+                                                     $('#jobtitle').val(jobtitle);
+                                                       $('#validtill').val(validtill);
+                                                     $('#edit_posted_job').show();
+                                                  
+                                                 }
+    });
+    }
+    $(function() {
    
-       $('.jobedit').click(function()
+    
+   $('#job_detail_update').click(function()
         { 
-             $('#job_detail_table').hide();
-           $('#edit_posted_job').show();
-            
+           
+             var postdata = {};
+             var input = $('[name=update_job_details]').serialize();
+             postdata['_token'] = $('meta[name="csrf-token"]').attr('content');
+             postdata['jobid']=$('input[name="hide_jid"]').val();
+              postdata['jobtitle']=$('input[name="jobtitle"]').val();
+                postdata['validtill']=$('input[name="validtill"]').val();
+              
+                $('body').removeClass('loaded');
+                                         $.post('/company/updatejob',postdata,function(response){ 
+                                            
+                                         $('body').addClass('loaded');
+                                                 if(response.success)
+                                                 {
+
+                                                   alert('scueess');
+
+                                                 }
+
         });
-   $('#company_detail_update').click(function()
-        { 
-          
+                                 
 });
 });
 </script>

@@ -7,6 +7,7 @@ use App\Http\Requests\Frontend\Auth\RegisterRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Validator;
+use App\Http\Controllers\CcavenueHelperController;
 
 use DB;
 use Hash;
@@ -68,7 +69,7 @@ trait completeRegistration
          
            $jobdetails = DB::table('companyjobs as j')
                                        
-                                        ->select('j.jobTitle', 'l.locationName','j.lastdate','j.locationId')
+                                        ->select('j.jobTitle', 'l.locationName','j.lastdate','j.locationId','j.jobId')
                                         ->leftjoin('_locations as l','l.locationId','=','j.locationId')
                                          ->where('j.companyId', '=', $_SESSION['WHILLO']['COMPAnyID'])
                                         ->get();
@@ -105,7 +106,7 @@ trait completeRegistration
          
            $searchcand = DB::table('searched_candidates as sc')
                                        
-                                        ->select('q.qualificationName','u.userName','j.seekerId','ep.experienceName')
+                                        ->select('q.qualificationName','u.userName','j.seekerId','ep.experienceName','u.emailAddress')
                                         ->leftjoin('jmaster as j','j.seekerId','=','sc.seekerId')
                                          ->leftjoin('jqualification as jq','jq.seekerId','=','sc.seekerId')
                                           ->leftjoin('_qualification as q','q.qualificationId','=','jq.qualificationId')
@@ -140,24 +141,128 @@ trait completeRegistration
          $data['appliedcandidates'] = $appliedcandidates;
         return response(view('frontend.myaccount.appliedcandidates', $data),'200')->header('Content-Type', 'text/plain');  
      }
-        public function EditCompanyDeatils(Request $request)
+     public  function GetJobDetails(Request $request)
      {
           $data = $request->all();
-           $res = DB::update('update comprofile set companyName=?,mobileNumber=?,website=?,industry=?,locationId=?,address=? where companyId=?',array($data,$_SESSION['WHILLO']['COMPAnyID']));
-	   if($res){
-		   return response()->json(array(
-					'success' => true,
-					'errors' => "Status successfully changed"
-					));
-	   }else {
-		   return response()->json(array(
-					'success' => false,
-					'errors' => "Failed to change status"
-					));
-	   }
+           $jobdetails = DB::table('companyjobs as j')
+                                       
+                                        ->select('j.jobTitle','j.lastdate','j.jobId')
+                                        
+                                         ->where('j.jobId', '=',$data['job_id'])
+                                        ->first();
+           
+                  
+                return response()->json(array(
+                                                    'success' => true,
+                                                     'jdetails'=>$jobdetails,
+                                                    'errors' => "Payment completed"
+                                                    ));
+           
+          
+          
+     }
+        public function EditCompanyDeatils(Request $request)
+            {
+                $data = $request->all();
+                $res = DB::table('comprofile')
+                    ->where('companyId',$_SESSION['WHILLO']['COMPAnyID'] )
+                    ->update(array('website' =>"".$data['website']."",
+                            'mobileNumber'=>$data['mobileNumber'],
+                            'industry'=>$data['industry'],
+                            'locationId'=>$data['locationId'],
+                            'address'=>"".$data['address'].""
+
+                            ));
+
+                if($res){
+                        return response()->json(array(
+                                                'success' => true,
+                                                'errors' => "Status successfully changed"
+                                                ));
+                }else {
+                        return response()->json(array(
+                                                'success' => false,
+                                                'errors' => "Failed to change status"
+                                                ));
+                }
 
      }
-     
+      public function PaymentPlanDetails(Request $request)
+            {
+                $data = $request->all();
+               
+                $plan_price= DB::table('_plandetails')
+                                        ->select('price')
+                                        ->where('plan_id', '=',$data['planId'])
+                                        ->first();
+                $data['merchant_id'] = \Config::get('constant.MERCHANT_ID');
+                $data['amount']= $plan_price->price;
+                // $data['amount']= .01;
+                $data['working_key']= \Config::get('constant.WORKING_KEY');
+                $data['access_code']=\Config::get('constant.ACCESS_CODE');
+                $data['order_id']='123456';
+                $data['encRequest'] = CcavenueHelperController::encrypt($data['merchant_id'],$data['working_key']);
+                $data['redirect_url']=url('/').'/ccavenue/responseurl';
+                $data['cancel_url']=url('/').'/ccavenue/cancelurl';
+                $data['language']='EN';
+              
+   $form_style= '<form method="post" id="ccavenu_form" name="ccavenu_form" action="https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction"> 
+				<input type="hidden" name="encRequest" value="'.$data['encRequest'].'">
+				<input type="hidden" name="access_code" value="'.$data['access_code'].'">
+				<input type="hidden" name="merchant_id" value="'.$data['merchant_id'].'">
+				<input type="hidden" name="order_id" value="'.$data['order_id'].'">
+				<input type="hidden" name="amount" value="'.$data['amount'].'">
+				<input type="hidden" name="currency" value="INR">
+				<input type="hidden" name="redirect_url" value="'.$data['redirect_url'].'">
+				<input type="hidden" name="cancel_url" value="'.$data['cancel_url'].'">
+				<input type="hidden" name="language" value="EN">
+				<input type="submit" value="Submit">
+				</form> '   ;                                                                       
 
-  
+              
+return $form_style;
+              //view('frontend.companyauth.companyplanpayment', $data); 
+            }
+     public function UpdateJobDetails(Request $request)
+     {
+           $data = $request->all();
+           $res = DB::table('companyjobs')
+                    ->where('jobId',$data['jobid'] )
+                    ->update(array('jobTitle' =>"".$data['jobtitle']."",
+                            'lastdate'=>$data['validtill']
+                           
+                            ));
+
+                if($res){
+                        return response()->json(array(
+                                                'success' => true,
+                                                'errors' => "Status successfully changed"
+                                                ));
+                }else {
+                        return response()->json(array(
+                                                'success' => false,
+                                                'errors' => "Failed to change status"
+                                                ));
+                }
+          
+         
+     }
+    
+       public function CcavenuResponse(Request $request)
+       {
+          $data = $request->all();
+          dd($data);
+       }
+       public function CcavenuCancel(Request $request)
+       {
+           $data = $request->all();
+          dd($data);
+       }
+
+
+
+
+
+
+
 }

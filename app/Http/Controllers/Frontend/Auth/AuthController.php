@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\Access\Traits\ConfirmUsers;
 use App\Services\Access\Traits\UseSocialite;
 use App\Services\Access\Traits\CompanyJobUpload;
+use App\Services\Access\Traits\MailController;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use App\Services\Access\Traits\AuthenticatesAndRegistersUsers;
 use App\Repositories\Frontend\Access\User\UserRepositoryContract;
@@ -17,7 +18,7 @@ use App\Repositories\Frontend\Access\User\UserRepositoryContract;
 class AuthController extends Controller
 {
 
-    use AuthenticatesAndRegistersUsers, CompanyJobUpload, ConfirmUsers, ThrottlesLogins, UseSocialite;
+    use AuthenticatesAndRegistersUsers, CompanyJobUpload, ConfirmUsers, ThrottlesLogins, UseSocialite,MailController;
 
     /**
      * Where to redirect users after login / registration.
