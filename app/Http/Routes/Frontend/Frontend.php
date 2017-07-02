@@ -27,6 +27,7 @@ Route::get('/Corporate-Leadership-Program', 'FrontendController@corporateleaders
 
 Route::group(['middleware' => 'AuthJoblist'], function () {
 	Route::get('jobs', 'JobController@index')->name('frontend.joblist');
+     
 	Route::get('search/joblist/{offset}', 'JobController@joblistpagination')->name('frontend.joblistpagination');
 	Route::get('jobs/keyword={keyword}/location={locations}', 'JobController@searchjobjoblist')->name('frontend.jobjoblist');
 
