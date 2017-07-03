@@ -123,6 +123,7 @@ $(function(){
                 $('body').removeClass('loaded');
                 $.post('/company/shortlist',postdata,function(response){
                 $('body').addClass('loaded');
+                
                  $('#ShortlistedCandidates').append(response);
                   
                 });
@@ -143,7 +144,9 @@ $(function(){
         });
         $('a[href="#AppliedCandidates"]').click(function()
         {
+           
              $('#AppliedCandidates').empty();
+             $('#candidateDatatable').DataTable();
              var postdata = {};
             postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
                 $('body').removeClass('loaded');

@@ -33,9 +33,42 @@ trait CompanyJobUpload
 		$defaults['jobrole'] = DB::table('_jobrole')->get();
 		$defaults['jobrolecategory'] = DB::table('_jobrolecategory')->get();
 		$defaults['joiningtime'] = DB::table('_joiningtime')->get();
-		
+		 $jobpostedcount = DB::table('companyjobs')
+
+                                               ->select(DB::raw('count(jobId) as jobcount'))
+
+                                                ->where(function($query){
+
+                                                        $query->where(DB::raw('DATE( NOW( ))' ),  DB::raw('DATE(createdDate)'));
+
+                                                })
+                                               ->first();
+                    $jobpostlimit = DB::table('_plandetails as p')
+
+                                               ->select('p.job_post_limit')
+
+                                                ->leftjoin('companyplan as c','c.plan_id','=','p.plan_id')
+                                                ->where('c.companyId', '=', $_SESSION['WHILLO']['COMPAnyID'])
+                                               ->first();
+
+                  $postlimt=$jobpostlimit->job_post_limit;
+                  $posted_count=$jobpostedcount->jobcount;
+
+                  if($posted_count == $postlimt)
+                  { 
+                     $defaults['message']='Job Post Limit Over';
+                     $defaults['limit_status']='1';
+                  }
+                  else
+                  {
+                      $defaults['message']='Upload New Job';
+                      $defaults['limit_status']='0';
+                      
+                  }
 		
 		$data=array("response"=>$defaults);
+                      
+           
 		//return view('frontend.company.uploadjob',array("response"=>$defaults));
                 return response(view('frontend.company.uploadjob', $data),'200')->header('Content-Type', 'text/plain');  
 	}
