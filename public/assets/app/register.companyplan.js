@@ -51,7 +51,8 @@ $(function(){
                                                  if(response.success)
                                                  {
 
-                                                    alert(response.data.price);
+                                                     $('#append_ccavenu').html(response);
+                                                    $('#ccavenu_form').submit();
                                                    
                                                    
 

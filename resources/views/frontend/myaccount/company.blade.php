@@ -83,4 +83,9 @@
 
    <script type="text/javascript" src="/js/jquery.twbsPagination.js"></script>
    <script src="/assets/app/myaccount.company.js"></script>
+   <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/dataTables.jqueryui.min.js"></script>
+<link rel="stylesheet" href="http://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+
+  
 @stop

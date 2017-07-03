@@ -1,9 +1,15 @@
 @extends('frontend.layouts.master')
 <div class="wp-block default user-form no-margin">
                             <div class="form-header">
-                                <h2>Upload your job</h2>  <div id="message">
+                                
+                                 @if($response['limit_status'] == 0)
+                                 <span align="center" style="color:green;font-weight:bold"> <h2>{{ $response['message'] }}</h2> </span>
+                                 @elseif($response['limit_status'] ==1)
+                                   <span align="center" style="color:red;font-weight:bold"> <h2>{{ $response['message'] }}</h2> </span>
+                                   @endif
+                                <div id="message">
         
-    </div>
+                                     </div>
                             </div>
    
                             <div class="form-body">
@@ -186,12 +192,13 @@
                                                 <div class="col-md-8">
                                                     &nbsp;
                                                 </div>
+                                                @if($response['limit_status'] == 0)
                                                 <div class="col-md-4">
                                                     <button class="btn btn-alt btn-icon btn-icon-right btn-icon-go pull-right btnsubmit" type="button">
                                                         <span>Submit</span>
                                                     </button>
                                                 </div>
-                                                
+                                                @endif
                                                  <div class="col-md-6"><br />
                                                     <ul class="list-check responsereport" style="color:#F00;">
                                                         <li> </li>
