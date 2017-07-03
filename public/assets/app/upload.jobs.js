@@ -60,8 +60,9 @@ $(function(){
                                                  if(response.success)
                                                  {
 
-                                                    location.href = "/myaccount";
+                                                  $('#message').append('<span align="center" style="color:red;font-weight:bold"">'+response.msg+'</b></span>');
 
+  
                                                  }
 
                                                  else 

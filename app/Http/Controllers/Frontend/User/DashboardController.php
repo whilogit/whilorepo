@@ -14,8 +14,10 @@ class DashboardController extends Controller
 
     public function index()
     {
-       //echo $_SESSION['WHILLO']['SEEKERID'];exit;
+
+   
         return view('frontend.myaccount.' . $GLOBALS['redirect'])->with("data" , access()->$GLOBALS['redirect']());
-        //return view('frontend.myaccount.' . $GLOBALS['redirect']);
+
+       // return view('frontend.myaccount.' . $GLOBALS['redirect']);
     }
 }

@@ -80,7 +80,8 @@ Route::group(['namespace' => 'Auth'], function () {
                 Route::post('/company/accesscandidate', 'AuthController@AccessCandidates');
                 Route::post('/company/editjobs', 'AuthController@GetJobDetails');
                 Route::post('/company/updatejob', 'AuthController@UpdateJobDetails');
-                
+                Route::get('/company/passwordform', 'AuthController@compPasswordChangeForm');
+                Route::post('/company/changePassword', 'AuthController@changeCompanyPassword');
              
                 Route::post('/company/payment', 'AuthController@PaymentPlanDetails');
 		Route::post('/ccavenue/responseurl', 'AuthController@CcavenuResponse');
@@ -95,6 +96,13 @@ Route::group(['namespace' => 'Auth'], function () {
 		
 		
 		Route::post('send/email', 'AuthController@sendmail');
+                Route::post('send/interviewemail', 'AuthController@CallForInterview');
+                Route::post('send/appliedemail', 'AuthController@CallforApplied');
+                Route::post('send/shortliststatus', 'AuthController@ShortListStatus');
+               
+               
+                
+                
 		Route::get('display/image/{category}/{year}/{month}/{name}/{time}/{size}.{ext}', 'AuthController@displayimage');
 		
     });

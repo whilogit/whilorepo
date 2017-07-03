@@ -57,41 +57,71 @@ trait CompanyJobUpload
 	   $data = $request->all();
 	   $createdDate = date("Y-m-d H:i:s");
 	   $status = 1;
-          $res = DB::table('companyjobs')->insert(
-                                                ['companyId' => $_SESSION['WHILLO']['COMPAnyID'], 
-                                                  'jobTitle' => $data['jobtitle'],
-                                                  'shortdescription' =>$data['shortdescription'],
-                                                  'jobDescription' =>$data['jobdescription'],
-                                                   'experienceId' =>$data['experience'],
-                                                    'lastdate' => $data['lastdate'],
-                                                   'locationId' =>$data['joblocation'],
-                                                  'salaryId' => $data['salary'],
-                                                   'functionalId'=>$data['functionalarea'],
-                                                   'jobroleId' =>$data['role'],
-                                                    'educationId'=>$data['education'],
-                                                    'modeofEmployment'=>$data['modeofemployeement'],
-                                                    'keyskills' =>$data['keyskills'],
-                                                   'joiningtime'=>$data['joiningtime'],
-                                                   'createdDate'=> $createdDate,
-                                                    'status'=>$status
-                                                  ]
-                                            );
-	  
-	   $jobId =  DB::getPdo()->lastInsertId();
-	  
-	  if($jobId != 0){
-	 	 return response()->json(array(
-					'success' => true,
-					'errors' => "Job successfully updated"
-					));
-	  }else {
-		   return response()->json(array(
-					'success' => false,
-					'errors' => "Failed to update jobs"
-					));
-	  }
-	   
-	   
+           $jobpostedcount = DB::table('companyjobs')
+                                       
+                                        ->select(DB::raw('count(jobId) as jobcount'))
+                                        
+                                         ->where(function($query){
+                                                 
+                                                 $query->where(DB::raw('DATE( NOW( ))' ),  DB::raw('DATE(createdDate)'));
+                                                         
+                                         })
+                                        ->first();
+             $jobpostlimit = DB::table('_plandetails as p')
+                                       
+                                        ->select('p.job_post_limit')
+                                        
+                                         ->leftjoin('companyplan as c','c.plan_id','=','p.plan_id')
+                                         ->where('c.companyId', '=', $_SESSION['WHILLO']['COMPAnyID'])
+                                        ->first();
+
+           $postlimt=$jobpostlimit->job_post_limit;
+           $posted_count=$jobpostedcount->jobcount;
+         
+           if($posted_count < $postlimt)
+           {   
+                $res = DB::table('companyjobs')->insert(
+                                                        ['companyId' => $_SESSION['WHILLO']['COMPAnyID'], 
+                                                        'jobTitle' => $data['jobtitle'],
+                                                        'shortdescription' =>$data['shortdescription'],
+                                                        'jobDescription' =>$data['jobdescription'],
+                                                        'experienceId' =>$data['experience'],
+                                                            'lastdate' => $data['lastdate'],
+                                                        'locationId' =>$data['joblocation'],
+                                                        'salaryId' => $data['salary'],
+                                                        'functionalId'=>$data['functionalarea'],
+                                                        'jobroleId' =>$data['role'],
+                                                            'educationId'=>$data['education'],
+                                                            'modeofEmployment'=>$data['modeofemployeement'],
+                                                            'keyskills' =>$data['keyskills'],
+                                                        'joiningtime'=>$data['joiningtime'],
+                                                        'createdDate'=> $createdDate,
+                                                            'status'=>$status
+                                                        ]
+                                                    );
+
+                $jobId =  DB::getPdo()->lastInsertId();
+
+                if($jobId != 0){
+                        return response()->json(array(
+                                                'success' => true,
+                                                'msg' => "Job Posted successfully"
+                                                ));
+                }else {
+                        return response()->json(array(
+                                                'success' => false,
+                                                'msg' => "Failed to add jobs"
+                                                ));
+                }
+
+           }
+            else {
+                     return response()->json(array(
+                                                'success' => true,
+                                                'msg' => "Job Post Limit Exceeded"
+                                                ));
+                
+                    }
 	}
 	
 	
