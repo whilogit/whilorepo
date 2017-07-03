@@ -1,8 +1,11 @@
 @extends('frontend.layouts.master')
 <div class="wp-block default user-form no-margin">
                             <div class="form-header">
-                                <h2>Upload your job</h2> 
+                                <h2>Upload your job</h2>  <div id="message">
+        
+    </div>
                             </div>
+   
                             <div class="form-body">
                                 <form  name="uploadjob" class="sky-form">                                    
                                     <fieldset class="no-padding">           

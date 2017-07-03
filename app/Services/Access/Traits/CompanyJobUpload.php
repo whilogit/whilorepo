@@ -66,7 +66,7 @@ trait CompanyJobUpload
                                                  $query->where(DB::raw('DATE( NOW( ))' ),  DB::raw('DATE(createdDate)'));
                                                          
                                          })
-                                        ->get();
+                                        ->first();
              $jobpostlimit = DB::table('_plandetails as p')
                                        
                                         ->select('p.job_post_limit')
@@ -76,7 +76,9 @@ trait CompanyJobUpload
                                         ->first();
 
            $postlimt=$jobpostlimit->job_post_limit;
-           if($jobpostedcount < $postlimt)
+           $posted_count=$jobpostedcount->jobcount;
+         
+           if($posted_count < $postlimt)
            {   
                 $res = DB::table('companyjobs')->insert(
                                                         ['companyId' => $_SESSION['WHILLO']['COMPAnyID'], 
@@ -103,12 +105,12 @@ trait CompanyJobUpload
                 if($jobId != 0){
                         return response()->json(array(
                                                 'success' => true,
-                                                'errors' => "Job successfully updated"
+                                                'msg' => "Job Posted successfully"
                                                 ));
                 }else {
                         return response()->json(array(
                                                 'success' => false,
-                                                'errors' => "Failed to update jobs"
+                                                'msg' => "Failed to add jobs"
                                                 ));
                 }
 
@@ -116,7 +118,7 @@ trait CompanyJobUpload
             else {
                      return response()->json(array(
                                                 'success' => true,
-                                                'errors' => "Job Post Limit Exceed"
+                                                'msg' => "Job Post Limit Exceeded"
                                                 ));
                 
                     }
