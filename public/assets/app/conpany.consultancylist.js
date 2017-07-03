@@ -9,20 +9,28 @@ $(function(){
 				$('body').removeClass('loaded');
 				$.get('/search/consultancylist/' + page,function(response){ $('body').addClass('loaded'); 
 					if(response.success){
+                                           
 						var display = "";
 						for(var i = 0; i<response.data.length; i++){
+                                                  
 							display+='<li class="featured" id="'+ response.data[i].jobId +'" style="box-shadow: 0 10px 6px -6px #777">'+
                                '<div class="listing-header bg-base">'+ response.data[i].companyName +'</div>'+
-                                '<div class="listing-image">'+ 
+                                '<div class="listing-image">';
 								     
-									 '<img src="companylogo.get/'+ response.data[i].logoCategory + '/' + response.data[i].dirYear + '/' + response.data[i].dirMonth + '/' + response.data[i].logoName + '/' + response.data[i].crTime + '/s.'+ response.data[i].logExt +'" class="img-responsive" style="width:100%"  alt="'+ response.data[i].companyName +'">'+
-                                                                            
+                                                                        if(response.data[i].logoCategory != null)
+{
+display+= '<img src="'+url+'companylogo.get/'+ response.data[i].logoCategory + '/' + response.data[i].dirYear + '/' + response.data[i].dirMonth + '/' + response.data[i].logoName + '/' + response.data[i].crTime + '/s.'+ response.data[i].logExt +'" class="img-responsive" style="width:100%"  alt="'+ response.data[i].companyName +'">';
+        }
+        else
+    {
+       display+='<img style="width:100%;height:150px" src="'+url+'/images/download.png"  class="img-responsive">';
+    }    
                                    
-                                    '<a href="/consultancydetails/'+ response.data[i].jobId +'/'+ response.data[i].jobTitle +'" class="btn btn-lg btn-square btn-light btn-block-bm btn-icon">See more</a>'+
+                                    display+='<a href="/consultancydetails/'+ response.data[i].jobId +'/'+ response.data[i].jobTitle +'" class="btn btn-lg btn-square btn-light btn-block-bm btn-icon">See more</a>'+
                                 '</div>'+
                                 '<div class="cell">'+
                                     '<div class="listing-body clearfix">'+
-                                        '<h3><a href="/jobdetails/'+ response.data[i].jobId +'/'+ response.data[i].jobTitle +'">'+ response.data[i].jobTitle +'</a></h3>'+
+                                        '<h3><a href="/consultancydetails/'+ response.data[i].jobId +'/'+ response.data[i].jobTitle +'">'+ response.data[i].jobTitle +'</a></h3>'+
                                        '<h4>'+ response.data[i].jobTitle +'</h4>'+ 
                                     '</div>'+
                                     '<div class="listing-footer">'+
@@ -51,7 +59,7 @@ $(function(){
 					confirm: function () {
 						var postdata =  { "status" : status,}
 						postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
-						$.post('/job/changestatus/' + id ,postdata,function(response){ 
+						$.post('/company/changestatus/' + id ,postdata,function(response){ 
 							 if(response.success){
 								 ths.closest('tr').animate({ backgroundColor: status == 1 ? '#BFF6AB' :'#f3ab9a' }, 'slow').animate({ backgroundColor:'#ffffff' }, 'slow');
 								 ths.closest('tr').find('td:first').next('td').next('td').next('td').next('td').next('td').html(status == 1 ? '<span class="label label-success">Active</span>' : '<span class="label label-default">Inactive</span>');

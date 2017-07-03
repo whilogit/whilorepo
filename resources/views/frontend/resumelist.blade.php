@@ -4,7 +4,11 @@
 <section class="slice relative bg-white bb animate-hover-slide has-pattern" style="background-color: #217dbb !important; margin-top:5%">
         <div class="wp-section">
             <div class="container">
-
+@if (session('status'))
+    <div class="alert alert-success">
+        {{ session('status') }}
+    </div>
+@endif
        
             <form class="form-light " name="search">
 			

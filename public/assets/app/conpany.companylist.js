@@ -9,16 +9,24 @@ $(function(){
 				$('body').removeClass('loaded');
 				$.get('/search/companylist/' + page,function(response){ $('body').addClass('loaded'); 
 					if(response.success){
+                                           
 						var display = "";
 						for(var i = 0; i<response.data.length; i++){
+                                                  
 							display+='<li class="featured" id="'+ response.data[i].jobId +'" style="box-shadow: 0 10px 6px -6px #777">'+
                                '<div class="listing-header bg-base">'+ response.data[i].companyName +'</div>'+
-                                '<div class="listing-image">'+ 
+                                '<div class="listing-image">';
 								     
-									 '<img src="companylogo.get/'+ response.data[i].logoCategory + '/' + response.data[i].dirYear + '/' + response.data[i].dirMonth + '/' + response.data[i].logoName + '/' + response.data[i].crTime + '/s.'+ response.data[i].logExt +'" class="img-responsive" style="width:100%"  alt="'+ response.data[i].companyName +'">'+
-                                                                            
+                                                                        if(response.data[i].logoCategory != null)
+{
+display+= '<img src="'+url+'companylogo.get/'+ response.data[i].logoCategory + '/' + response.data[i].dirYear + '/' + response.data[i].dirMonth + '/' + response.data[i].logoName + '/' + response.data[i].crTime + '/s.'+ response.data[i].logExt +'" class="img-responsive" style="width:100%"  alt="'+ response.data[i].companyName +'">';
+        }
+        else
+    {
+       display+='<img style="width:100%;height:150px" src="'+url+'/images/download.png"  class="img-responsive">';
+    }    
                                    
-                                    '<a href="/companydetails/'+ response.data[i].jobId +'/'+ response.data[i].jobTitle +'" class="btn btn-lg btn-square btn-light btn-block-bm btn-icon">See more</a>'+
+                                    display+='<a href="/companydetails/'+ response.data[i].jobId +'/'+ response.data[i].jobTitle +'" class="btn btn-lg btn-square btn-light btn-block-bm btn-icon">See more</a>'+
                                 '</div>'+
                                 '<div class="cell">'+
                                     '<div class="listing-body clearfix">'+

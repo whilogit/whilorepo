@@ -81,7 +81,7 @@
     @if(($list->logoCategory != "")&&($list->logoName))
     <img src="/<?php echo $list->logoCategory == "" ? "" : "companylogo.get/" ?>{{ $list->logoCategory }}/{{ $list->dirYear }}/{{ $list->dirMonth }}/{{ $list->logoName }}/{{ $list->crTime }}/s.{{ $list->logExt }}" class="img-responsive" style="width:100%"  alt="{{ $list->companyName }}">
 @else
- <img src="images/download.png" alt="" >
+ <img src="<?php echo url('/'); ?>/images/download.png" alt="" >
     @endif
 
 </a>                                                               
@@ -119,77 +119,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <section class="slice relative bg-white bb animate-hover-slide gradient-1  has-pattern" style="background-image: url(/images/parallax1.jpg) !important;background-size: cover;">
-        <div class="wp-section">
-            <div class="col-md-12">
-                <div class="section-title-wr">
-                    <h3 class="section-title left"><span>Featured Employers</span></h3>
-                </div>
-                
-                <div id="carouselEmployers" class="carousel carousel-3 slide animate-hover-slide">
-                 
-                    
-                    <!-- Wrapper for slides -->
-                    <div class="carousel-inner">
-                        <div class="item active">
-						  <div class="row">
-                               <div class="col-md-12">
-                                    <div class="wp-block inverse">
-                           <a href="#"> 
-						   </a><div class="client"><a href="#">
-                            </a><a href="#">
-                                <img src="images/clients/client-2.png" alt="">
-                            </a>
-                        </div>
-                           
-                        </div>
-                                </div>
-                         
-								<div class="col-md-12">
-                                    <div class="wp-block inverse">
-                         <a href="#"> 
-						   </a><div class="client"><a href="#">
-                            </a><a href="#">
-                                <img src="images/clients/client-2.png" alt="">
-                            </a>
-                        </div>
-                           
-                        </div>
-                                </div>
-								<div class="col-md-12">
-                                    <div class="wp-block inverse">
-                           <a href="#"> 
-						   </a><div class="client"><a href="#">
-                            </a><a href="#">
-                                <img src="images/clients/client-1.png" alt="">
-                            </a>
-                        </div>
-                           
-                        </div>
-                                </div>
-								<div class="col-md-12">
-                                    <div class="wp-block inverse">
-                       <a href="#"> 
-						   </a><div class="client"><a href="#">
-                            </a><a href="#">
-                                <img src="images/clients/client-3.png" alt="">
-                            </a>
-                        </div>
-                           
-                        </div>
-                                </div>
-								
-                            </div>
-					
-                        </div>
-                       
-                </div>  
-            </div>
-        </div>
-    </div></section>
-                        
-                    </div>
+                   
                     
                    	                    <div class="col-md-3">  <section class="slice relative bg-white bb animate-hover-slide gradient-1  has-pattern" style="background-image: url(/images/parallax1.jpg) !important;background-size: cover;">		
         <div class="wp-section">		
@@ -210,7 +140,7 @@
                            <a href="#"> 		
 						   <div class="client">		
                             <a href="#">		
-                                <img src="images/clients/client-2.png" alt="" >		
+                                <img src="<?php echo url('/'); ?>/images/clients/client-2.png" alt="" >		
                             </a>		
                         </div>		
                            </a>		
@@ -222,7 +152,7 @@
                          <a href="#"> 		
 						   <div class="client">		
                             <a href="#">		
-                                <img src="images/clients/client-2.png" alt="" >		
+                                <img src="<?php echo url('/'); ?>/images/clients/client-2.png" alt="" >		
                             </a>		
                         </div>		
                            </a>		
@@ -233,7 +163,7 @@
                            <a href="#"> 		
 						   <div class="client">		
                             <a href="#">		
-                                <img src="images/clients/client-1.png" alt="" >		
+                                <img src="<?php echo url('/'); ?>/images/clients/client-1.png" alt="" >		
                             </a>		
                         </div>		
                            </a>		
@@ -244,7 +174,7 @@
                        <a href="#"> 		
 						   <div class="client">		
                             <a href="#">		
-                                <img src="images/clients/client-3.png" alt="" >		
+                                <img src="<?php echo url('/'); ?>/images/clients/client-3.png" alt="" >		
                             </a>		
                         </div>		
                            </a>		
@@ -276,6 +206,9 @@
 
 
 @section('after-scripts-end')
+<script type="text/javascript">
+ var url = "<?php echo url('/'); ?>";
+</script>
    <script src="/assets/app/froentend.js"></script> 
    <script type="text/javascript" src="/js/jquery.twbsPagination.js"></script>
    <script src="/assets/app/conpany.joblist.js"></script>
