@@ -11,7 +11,7 @@ use DB;
  */
 class ResumesList extends Controller
 {
-	public static function getlist($limit = 10, $offset = 1,$keyword="",$locations="")
+	public static function getlist($limit = 12, $offset = 1,$keyword="",$locations="")
 	{
 		$response = array();
 		$industry = DB::table('_industry')->select('industryId','industryName')->get(); 
@@ -36,7 +36,7 @@ class ResumesList extends Controller
 					->leftjoin('_experience as e', 'jp.exprstatus', '=', 'e.experienceId')
 					->select('i.*','p.seekerId','p.firstName','p.lastName','l.locationName','e.experienceName')
 					->skip($limit * ($offset -1))
-       				->take($limit)
+       				->take(12)
 					->get();
 		
 		
@@ -73,7 +73,7 @@ class ResumesList extends Controller
 					->leftjoin('_experience as e', 'jp.exprstatus', '=', 'e.experienceId')
 					->select('i.*','p.seekerId','p.firstName','p.lastName','l.locationName','e.experienceName')
 					->skip($limit * ($offset -1))
-       				->take($limit)
+       				->take(12)
 					->get();
 		}
 		

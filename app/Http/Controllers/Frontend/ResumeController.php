@@ -8,6 +8,8 @@ use App\Repositories\Frontend\Resumes\ResumesDetails;
 use App\Repositories\Frontend\Resumes\ResumesPermession;
 use App\Repositories\Frontend\Jobs\Joblist;
 
+use DateTime;
+
 
 use DB;
 /**
@@ -36,6 +38,13 @@ class ResumeController extends Controller
     }
 	public function talentdetails($id, $name)
     {
+          $searched_date = new DateTime();
+           $search= DB::table('searched_candidates')->where('companyId',$_SESSION['WHILLO']['COMPAnyID'])->where('seekerId',$id)->where('Status',0)->orWhere('Status',1)->count();
+		if($search==0)
+                {
+           $res = DB::insert('insert into searched_candidates(seekerId,companyId,searched_date) 
+                    values (?,?,?)',array($id,$_SESSION['WHILLO']['COMPAnyID'],$searched_date));
+                }
          $shortlistcheck = DB::table('shortlistjobs')->where('companyId',$_SESSION['WHILLO']['COMPAnyID'])->where('seekerId',$id)->where('Status',0)->orWhere('Status',1)->count();
 			ResumesDetails::getdetails($id);return view('frontend.resumedetails')->with(array("data"=>ResumesDetails::getdetails($id)))->with("shortlistcheck",$shortlistcheck);                       
                        
@@ -79,7 +88,8 @@ class ResumeController extends Controller
 						$resume->where('js.keyskills','LIKE','%' . $keyword . '%');
                                          })
 					 ->where('m.accountStatus',1)->count() / 12);  
-                                           
+                                      //echo '<pre>'; print_r(ResumesList::getlist(12,1,$keyword,$locations));
+                                          // exit;
 			//return view('frontend.joblist')->with(array("joblist"=>Joblist::get(10,1,$keyword,$locations), "count"=>$count,"keyword"=>$keyword))->with("locations",DB::table('_locations')->get());
                                           return view('frontend.resumelist1')->with(array("data"=>ResumesList::getlist(12,1,$keyword,$locations),"count"=>$count,"keyword"=>$keyword))->with("locations",DB::table('_locations')->get());
     }

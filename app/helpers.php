@@ -80,4 +80,9 @@ if (! function_exists('getLanguageBlock')) {
             return view($fallback, $data);
         }
     }
+    function testfunction()
+    {
+        
+        return 'helllo';
+    }
 }

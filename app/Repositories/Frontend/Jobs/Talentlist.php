@@ -11,7 +11,7 @@ use DB;
  */
 class Talentlist extends Controller
 {
-	public static function get($limit = 10, $offset = 1,$keyword="",$locations="")
+	public static function get($limit = 12, $offset = 1,$keyword="",$locations="")
 	{
 		$resume =  DB::table('companyjobs as j')
 					->leftjoin('companylogo as li', 'li.companyId', '=', 'j.companyId')

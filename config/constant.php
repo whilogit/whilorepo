@@ -1,0 +1,10 @@
+<?php
+
+return [
+    'MERCHANT_ID' => '139203',
+    'WORKING_KEY' => '7D0E5BE0E27DE8244DD51DEF616F862C',
+    'ACCESS_CODE' => 'AVDZ71EF60CE26ZDEC'
+   
+];
+
+?>

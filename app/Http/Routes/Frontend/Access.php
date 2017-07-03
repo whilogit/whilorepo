@@ -1,5 +1,5 @@
 <?php
-use Illuminate\Support\Facades\Mail;
+
 /**
  * Frontend Access Controllers
  */
@@ -23,9 +23,9 @@ Route::group(['namespace' => 'Auth'], function () {
         // Authentication Routes
         Route::get('auth/signin', 'AuthController@showLoginForm')->name('auth.signin');
         Route::post('auth/signin', 'AuthController@login');
-		Route::get('company/signin', 'AuthController@showCompanyLoginForm');
-		Route::get('auth/signout', 'AuthController@logout');
-		
+        Route::get('company/signin', 'AuthController@showCompanyLoginForm');
+        Route::get('auth/signout', 'AuthController@logout');
+
 
         // Socialite Routes
         Route::get('login/{provider}', 'AuthController@loginThirdParty')->name('auth.provider');
@@ -33,16 +33,20 @@ Route::group(['namespace' => 'Auth'], function () {
         // Registration Routes
         Route::get('auth/signup', 'AuthController@showRegistrationForm')->name('auth.signup');
         Route::post('auth/signup', 'AuthController@register');
-		Route::post('auth/personal', 'AuthController@personal');
+        Route::post('auth/personal', 'AuthController@personal');
         Route::post('auth/qualification', 'AuthController@qualification');
-		Route::post('auth/proffessional', 'AuthController@proffessional');
-		Route::post('/documents/educational/upload', 'AuthController@updloadcertificates');
-		Route::post('/documents/remove/{id}', 'AuthController@removecertificates');
-		Route::post('/jobseeker/complete', 'AuthController@completeuploads');
-		Route::post('/jobseeker/removeresume', 'AuthController@removeresume');
-		Route::post('/auth/jcomplete', 'AuthController@jcomplete');
-		Route::post('/auth/ccomplete', 'AuthController@ccomplete');
-		
+        Route::post('auth/proffessional', 'AuthController@proffessional');
+        Route::post('/documents/educational/upload', 'AuthController@updloadcertificates');
+        Route::post('/documents/remove/{id}', 'AuthController@removecertificates');
+        Route::post('/jobseeker/complete', 'AuthController@completeuploads');
+        Route::post('/jobseeker/removeresume', 'AuthController@removeresume');
+        Route::post('/auth/jcomplete', 'AuthController@jcomplete');
+        Route::post('/auth/ccomplete', 'AuthController@ccomplete');
+
+//jobseeker education update
+        Route::post('/auth/updateEducation', 'AuthController@updateEducation');
+
+
         // Confirm Account Routes
         Route::get('account/confirm/{token}', 'AuthController@confirmAccount')->name('account.confirm');
         Route::get('account/confirm/resend/{user_id}', 'AuthController@resendConfirmationEmail')->name('account.confirm.resend');
@@ -51,6 +55,7 @@ Route::group(['namespace' => 'Auth'], function () {
         Route::get('password/reset/{token?}', 'PasswordController@showResetForm')->name('auth.password.reset');
         Route::post('password/email', 'PasswordController@sendResetLinkEmail');
         Route::post('password/reset', 'PasswordController@reset');
+
 		
 		Route::post('auth/profileimage', 'AuthController@profileimage');
 		Route::post('auth/userresume', 'AuthController@resumeupdloads');
@@ -64,7 +69,6 @@ Route::group(['namespace' => 'Auth'], function () {
 		Route::post('company/companyimages', 'AuthController@imageupload');	  
 		Route::post('company/dopayment', 'AuthController@dopayment');
 		Route::post('company/planselect', 'AuthController@companyplan');
-                Route::get('company/payment', 'AuthController@showPaymentpage');
                 Route::get('company/reg_complete', 'AuthController@regCompletepage');
                 Route::get('/company/image_upload_page', 'AuthController@CompanyImagesPage');
                 Route::post('/company/getdetails', 'AuthController@CompanyProfileDetails');
@@ -74,8 +78,15 @@ Route::group(['namespace' => 'Auth'], function () {
                 Route::post('/company/appliedcandy', 'AuthController@AppliedCandidates');
                 Route::post('/company/editdetails', 'AuthController@EditCompanyDeatils');
                 Route::post('/company/accesscandidate', 'AuthController@AccessCandidates');
+                Route::post('/company/editjobs', 'AuthController@GetJobDetails');
+                Route::post('/company/updatejob', 'AuthController@UpdateJobDetails');
+                Route::get('/company/passwordform', 'AuthController@compPasswordChangeForm');
+                Route::post('/company/changePassword', 'AuthController@changeCompanyPassword');
              
-		
+                Route::post('/company/payment', 'AuthController@PaymentPlanDetails');
+		Route::post('/ccavenue/responseurl', 'AuthController@CcavenuResponse');
+                Route::post('/ccavenue/cancelurl', 'AuthController@CcavenuCancel');
+                
 		Route::post('company/removelogo', 'AuthController@removelogo');
 		Route::post('company/removeimages', 'AuthController@removeimages');
 		
@@ -84,24 +95,18 @@ Route::group(['namespace' => 'Auth'], function () {
 		
 		
 		
-			
+		Route::post('send/email', 'AuthController@sendmail');
+                Route::post('send/interviewemail', 'AuthController@CallForInterview');
+                Route::post('send/appliedemail', 'AuthController@CallforApplied');
+                Route::post('send/shortliststatus', 'AuthController@ShortListStatus');
+               
+               
+                
+                
 		Route::get('display/image/{category}/{year}/{month}/{name}/{time}/{size}.{ext}', 'AuthController@displayimage');
 		
     });
-    Route::get('sendemail', function () {
-  $to ='anujavinodvg@gmail.com';
-$senderFromMail = 'anujasnair1989@gmail.com';
-$senderName ='anuja';
-$sub = 'Learning Laravel test email';
-$message ='Body of email';
-Mail::send(array(), array(), function ($email) use($to,$senderFromMail,$senderName,$sub,$message)
-{
+    });
+   
 
-$email->to($to)->from($senderFromMail, $senderName)->subject($sub);
-$email->setBody($message, 'text/html');
-});
-    if (Mail::failures()) {
-       dd('errorrrrr');
-    }
-});
-});
+

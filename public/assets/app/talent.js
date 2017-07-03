@@ -18,5 +18,10 @@ $(function(){
 			}
 		},
 	}
+        
+        
 	$.talent.init();
 })(jQuery);
+
+
+

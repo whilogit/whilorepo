@@ -9,6 +9,7 @@ use App\Services\Access\Company\MyJobs;
 use App\Repositories\Frontend\Jobs\Joblist;
 use Validator;
 use DB;
+use DateTime;
 /**
  * Class ProfileController
  * @package App\Http\Controllers\Frontend
@@ -83,8 +84,7 @@ class JobController extends Controller
     {
                    
                  $jobId = $request->input('jobId');
-                 
-		$createdDate = date("d-m-Y h:i:s");
+                  $createdDate = new DateTime();
 		$res = DB::insert('insert into userappliedjobs(seekerId,jobId,appliedDate) 
 	   				values (?,?,?)',array($_SESSION['WHILLO']['SEEKERID'],$jobId,$createdDate));
 					
@@ -105,7 +105,7 @@ class JobController extends Controller
      
       $seekerId = $request->input('seekerId');
                 
-		$createdDate = date("d-m-Y h:i:s");
+		$createdDate = new DateTime();
 		$res = DB::insert('insert into shortlistjobs(seekerId,companyId,ShortlistedDate) 
 	   				values (?,?,?)',array($seekerId, $_SESSION['WHILLO']['COMPAnyID'],$createdDate));
 					
