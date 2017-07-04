@@ -85,7 +85,6 @@ Route::group(['namespace' => 'Auth'], function () {
              
                 Route::post('/company/payment', 'AuthController@PaymentPlanDetails');
 		Route::post('/ccavenue/responseurl', 'AuthController@CcavenuResponse');
-                Route::post('/ccavenue/cancelurl', 'AuthController@CcavenuCancel');
                 
 		Route::post('company/removelogo', 'AuthController@removelogo');
 		Route::post('company/removeimages', 'AuthController@removeimages');
@@ -100,7 +99,7 @@ Route::group(['namespace' => 'Auth'], function () {
                 Route::post('send/appliedemail', 'AuthController@CallforApplied');
                 Route::post('send/shortliststatus', 'AuthController@ShortListStatus');
                
-               
+               Route::get('test/testform', 'AuthController@TestForm');
                 
                 
 		Route::get('display/image/{category}/{year}/{month}/{name}/{time}/{size}.{ext}', 'AuthController@displayimage');

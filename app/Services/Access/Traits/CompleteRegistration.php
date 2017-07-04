@@ -309,38 +309,30 @@ trait completeRegistration
       public function PaymentPlanDetails(Request $request)
             {
                 $data = $request->all();
+                $t_id=strtotime(date("Y-m-d H:i:s")).$_SESSION['WHILLO']['USERID'];
                
                 $plan_price= DB::table('_plandetails')
                                         ->select('price')
                                         ->where('plan_id', '=',$data['planId'])
                                         ->first();
-                $data['merchant_id'] = \Config::get('constant.MERCHANT_ID');
-                $data['amount']= $plan_price->price;
+                $merchant_id = \Config::get('constant.MERCHANT_ID');
+                $amount= $plan_price->price;
                 // $data['amount']= .01;
-                $data['working_key']= \Config::get('constant.WORKING_KEY');
-                $data['access_code']=\Config::get('constant.ACCESS_CODE');
-                $data['order_id']='123456';
-                $data['encRequest'] = CcavenueHelperController::encrypt($data['merchant_id'],$data['working_key']);
-                $data['redirect_url']=url('/').'/ccavenue/responseurl';
-                $data['cancel_url']=url('/').'/ccavenue/cancelurl';
-                $data['language']='EN';
+                $working_key= \Config::get('constant.WORKING_KEY');
+                $access_code = \Config::get('constant.ACCESS_CODE');
+                $order_id = CcavenueHelperController::random_num(6); 
+                $redirect_url = url('/').'/ccavenue/responseurl';
+                $cancel_url = url('/').'/ccavenue/responseurl';
+                $marchant_data = "tid=$t_id&merchant_id=$merchant_id&order_id=$order_id&amount=$amount&currency=INR&redirect_url=$redirect_url&cancel_url=$cancel_url&language=EN";
+                $encRequest = CcavenueHelperController::encrypt($marchant_data,$working_key);
               
-   $form_style= '<form method="post" id="ccavenu_form" name="ccavenu_form" action="https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction"> 
-				<input type="hidden" name="encRequest" value="'.$data['encRequest'].'">
-				<input type="hidden" name="access_code" value="'.$data['access_code'].'">
-				<input type="hidden" name="merchant_id" value="'.$data['merchant_id'].'">
-				<input type="hidden" name="order_id" value="'.$data['order_id'].'">
-				<input type="hidden" name="amount" value="'.$data['amount'].'">
-				<input type="hidden" name="currency" value="INR">
-				<input type="hidden" name="redirect_url" value="'.$data['redirect_url'].'">
-				<input type="hidden" name="cancel_url" value="'.$data['cancel_url'].'">
-				<input type="hidden" name="language" value="EN">
-				<input type="submit" value="Submit">
-				</form> '   ;                                                                       
+                $form_style= '<form method="post" id="ccavenu_form" name="ccavenu_form" action="https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction"> 
+                    <input type="hidden" name="encRequest" value="'.$encRequest.'">
+                    <input type="hidden" name="access_code" value="'.$access_code.'">					
+                    </form>';                                                                       
 
               
-return $form_style;
-              //view('frontend.companyauth.companyplanpayment', $data); 
+                return $form_style; 
             }
      public function UpdateJobDetails(Request $request)
      {
@@ -369,20 +361,41 @@ return $form_style;
     
        public function CcavenuResponse(Request $request)
        {
-          $data = $request->all();
-          dd($data);
-       }
-       public function CcavenuCancel(Request $request)
-       {
            $data = $request->all();
-          dd($data);
+          $workingKey=\Config::get('constant.WORKING_KEY');;		//Working Key should be provided here.
+	$encResponse= $request->encResp;			//This is the response sent by the CCAvenue Server
+	$rcvdString = CcavenueHelperController::decrypt($encResponse,$workingKey);		//Crypto Decryption used as per the specified working key.
+	$order_status="";
+	$decryptValues=explode('&', $rcvdString);
+	$dataSize=sizeof($decryptValues);
+	echo "<center>";
+
+	for($i = 0; $i < $dataSize; $i++) 
+	{
+		$information=explode('=',$decryptValues[$i]);
+		if($i==3)
+                $data['order_status']=$information[1];
+	}
+
+
+         
+
+	
+	for($i = 0; $i < $dataSize; $i++) 
+	{
+		$information=explode('=',$decryptValues[$i]);
+                
+	    	$data['info'][$information[0]] = $information[1];
+	}
+         if($order_status==="Success")
+	{  
+        return view('frontend.companyauth.planpaymentsucess', $data);
+        }
+       else if($order_status==="Aborted" || $order_status==="Failure")
+	{
+             return view('frontend.companyauth.planpaymentfailed', $data);
+        }
+          
+        }
        }
-       
-
-
-
-
-
-
-
 }
