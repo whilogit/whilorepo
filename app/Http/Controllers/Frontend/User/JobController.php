@@ -1,6 +1,6 @@
 <?php
-namespace App\Http\Controllers\Frontend\User;
 
+namespace App\Services\Access\Traits;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
