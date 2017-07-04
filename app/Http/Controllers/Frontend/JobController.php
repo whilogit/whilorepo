@@ -1,31 +1,120 @@
 <?php
-
 namespace App\Http\Controllers\Frontend;
 
+//namespace App\Services\Access\Traits;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use App\Services\Access\Traits\MailController;
+use App\Services\Access\Company\MyJobs;
 use App\Repositories\Frontend\Jobs\Joblist;
-
-
+use Validator;
 use DB;
+use DateTime;
 /**
- * Class FrontendController
- * @package App\Http\Controllers
+ * Class ProfileController
+ * @package App\Http\Controllers\Frontend
  */
 class JobController extends Controller
 {
     /**
-     * @return \Illuminate\View\View
+     * @return mixed
      */
-	
-	
-	public function companylogo($category,$year,$month,$name,$time,$size,$ext)
-    {
-		header('Content-type: image/jpeg'); 
-		 die(file_get_contents(app_path(). "/Storage/Images/$category/$year/$month/$year" . "_" . $month . "_" . $time ."_" . $name . "_" . $size ."." . $ext));
+	public function myjobsbypage($page)
+	{
+		return response()->json(array(
+			'success' => true,
+			'data' => MyJobs::get(10,$page)
+			));
 	}
+	 
+    public function changestatus($id,Request $request)
+    {
+       $rules = array('status' => 'required');
+	   $validator = Validator::make($request->all(), $rules); 
 	
-    public function index($limit = 10, $offset = 1)
+	   if ($validator->fails()) {	
+			return response()->json(array(
+					'success' => false,
+					'errors' => "Required fields missing"
+					));
+	   }
+	   
+	   $res = DB::update('update companyjobs set status=? where jobId=?',array($request->input('status'),$id));
+	   if($res){
+		   return response()->json(array(
+					'success' => true,
+					'errors' => "Status successfully changed"
+					));
+	   }else {
+		   return response()->json(array(
+					'success' => false,
+					'errors' => "Failed to change status"
+					));
+	   }
+	   
+	   
+    }
+    
+	
+    
+  	public function applyjob(Request $request)
+    {
+                   
+                $jobId = $request->input('jobId');
+                
+		 
+      $companyid = DB::table('companyjobs')->select('companyId')->where('jobId',$jobId)->first();
+			$companyid=$companyid->companyId;
+                         $userId = DB::table('commaster')->select('userId')->where('companyId',$companyid)->first();
+			 $userId=$userId->userId;
+         $email = DB::table('userlogin as ul')->select('emailAddress')->where('userId',$userId)->first();
+       $createdDate = new DateTime();
+		$res = DB::insert('insert into userappliedjobs(seekerId,jobId,appliedDate) 
+	   				values (?,?,?)',array($_SESSION['WHILLO']['SEEKERID'],$jobId,$createdDate));
+         $to=$email->emailAddress;
+         $sub='Test shortlist';
+         $message='you are shortlisted';
+         $sendmail= MailController::sendmail($to,$sub,$message); 			
+		 
+		return response()->json(array(
+					'success' => true,
+					'errors' => "errors"
+					));
+
+//print_r($request);
+                //return response()->json(array(
+					//'success' => true,
+					//'data' => $request)
+					//);
+	}
+          public function shortlist(Request $request)
+    {
+        $seekerId = $request->input('seekerId');
+         
+            //$userid=$_SESSION['WHILLO']['USERID'];
+      
+              
+		
+					
+		$seeker_userid = DB::table('jmaster')->select('userId')->where('seekerId',$seekerId)->first();
+			$seeker_userid=$seeker_userid->userId;		
+         $email = DB::table('userlogin as ul')->select('emailAddress')->where('userId',$seeker_userid)->first();
+         $to=$email->emailAddress;
+         $sub='Test shortlist';
+         $message='you are shortlisted';
+         $sendmail= MailController::sendmail($to,$sub,$message); 
+         $createdDate = new DateTime();
+		$res = DB::insert('insert into shortlistjobs(seekerId,companyId,ShortlistedDate) 
+	   				values (?,?,?)',array($seekerId, $_SESSION['WHILLO']['COMPAnyID'],$createdDate));
+		return response()->json(array(
+					'success' => true,
+					'errors' => "errors"
+					));
+   
+    }
+    
+      public function index($limit = 10, $offset = 1)
     {
 			$count = ceil(DB::table('companyjobs')->where('status',1)->count()/10);  
 			return view('frontend.joblist')->with(array("joblist"=>Joblist::get(), "count"=>$count,"keyword"=>""))->with("locations",DB::table('_locations')->get() );
@@ -87,7 +176,5 @@ class JobController extends Controller
 					));
 	}
         
-      
 }
-
-
+   

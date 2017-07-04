@@ -30,7 +30,9 @@ Route::group(['middleware' => 'AuthJoblist'], function () {
      
 	Route::get('search/joblist/{offset}', 'JobController@joblistpagination')->name('frontend.joblistpagination');
 	Route::get('jobs/keyword={keyword}/location={locations}', 'JobController@searchjobjoblist')->name('frontend.jobjoblist');
-
+         Route::get('applyjob', 'JobController@applyjob');
+        Route::get('shortlist', 'JobController@shortlist');   
+        Route::post('job/changestatus/{id}', 'JobController@changestatus');
         Route::get('companies', 'CompanyController@index')->name('frontend.company');
         Route::get('search/companylist/{offset}', 'CompanyController@joblistpagination')->name('frontend.joblistpagination');	
         Route::get('company/keyword={keyword}/location={locations}', 'CompanyController@searchjobjoblist')->name('frontend.jobjoblist');
@@ -85,11 +87,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['namespace' => 'User'], function() {
         Route::get('dashboard', 'DashboardController@index')->name('frontend.user.dashboard');
         Route::get('profile/edit', 'ProfileController@edit')->name('frontend.user.profile.edit');
-        Route::get('applyjob', 'JobController@applyjob');
-        Route::get('shortlist', 'JobController@shortlist');       
+           
         Route::patch('profile/update', 'ProfileController@update')->name('frontend.user.profile.update');
 		Route::get('myaccount', 'DashboardController@index')->name('myaccount.index');
-		Route::post('job/changestatus/{id}', 'JobController@changestatus');
+		
               // Route::get('jobdetails/{id}/{title}', 'JobController@jobdetails')->name('frontend.jobdetails');
 	});
 	
