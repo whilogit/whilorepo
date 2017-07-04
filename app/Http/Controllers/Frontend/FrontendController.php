@@ -19,8 +19,25 @@ class FrontendController extends Controller
         javascript()->put([
             'test' => 'it works!',
         ]);
+        $jobs=DB::table('companyjobs as j')
+                ->select('li.logoCategory','li.logoName','li.dirYear','li.dirMonth','li.crTime','li.logExt','j.companyId','j.jobId','l.locationName','com.companyName','j.shortDescription','j.jobTitle','j.jobDescription','sr.salaryName','f.functionalName','e.experienceName','com.aboutbio','cp.plan_id','p.planname')
+					->leftjoin('companylogo as li', 'li.companyId', '=', 'j.companyId')
+					->join('comprofile as com', 'com.companyId', '=', 'j.companyId')
+                                        ->leftjoin('companyplan as cp', 'cp.companyId', '=', 'j.companyId')
+                                           ->leftjoin('_plantypes as p', 'p.plan_id', '=', 'cp.plan_id')
+					->join('_experience as e', 'e.experienceId', '=', 'j.experienceId')
+					->join('_locations as l', 'l.locationId', '=', 'j.locationId')
+                                       ->join('_functionalarea as f', 'f.functionalId', '=', 'j.functionalId')
+                                ->join('_salaryrange as sr', 'sr.salaryId', '=', 'j.salaryId')
+                                ->where('p.planname','Exclusive Plan')
+               
+					  ->where('j.status',1)->get();
+       //echo '<pre>';
+       // print_r($jobs);
+  
 
-        return view('frontend.index')->with("locations",DB::table('_locations')->get() );
+        //exit;
+        return view('frontend.index')->with("locations",DB::table('_locations')->get() )->with("data",$jobs);
     }
      public function verifytalent(){ return view('frontend.verifytalent');   }
     

@@ -37,7 +37,7 @@ class ResumeController extends Controller {
         $search = DB::table('searched_candidates')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->where('seekerId', $id)->where('Status', 0)->orWhere('Status', 1)->count();
         $searchtotal = DB::table('searched_candidates')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->where('searched_date', $date)->where('Status', 0)->orWhere('Status', 1)->count();
         $searchlimit = DB::table('_plandetails')->select('cv_access_per_day')->where('plan_id', $plan_id)->first();
-        $searchlimit = $searchlimit->detail_value;
+        $searchlimit = $searchlimit->cv_access_per_day;
         //exit;
         if ($searchtotal <= $searchlimit) {
             if ($search == 0) {

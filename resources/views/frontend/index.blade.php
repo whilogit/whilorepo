@@ -123,20 +123,47 @@
                     
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner"><br/>
-                        <div class="item active">
+                       <?php $i=0; 
+                              $result = array(); ?>
+
+  
+                          @foreach($data as $datas)
+                        <?php  //print_r($datas);
+                            
+     
+                    
+                    
+                    
+                     echo $id = $datas->companyId; 
+                     
+                     if (isset($result[$id])) {
+     $result[$id][] = $datas;
+  } else {
+     $result[$id] = array($datas);
+  }
+ 
+                     ?>
+                             
+                        <div class="item <?php if($i==0){echo 'active';} ?>">
+                             <?php $i++;?>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="wp-block inverse">
                            <div class="col-md-6">
 						    <div class="embed-responsive embed-responsive-16by9">
-                            <iframe class="embed-responsive-item" src="http://player.vimeo.com/video/22439234"></iframe>
-                        </div>
+                           <!-- <iframe class="embed-responsive-item" src="http://player.vimeo.com/video/22439234"></iframe>-->
+                            @if(($datas->logoCategory != "")&&($datas->logoName))
+                                                        <img src="/companylogo.get/" ?>{{ $datas->logoCategory }}/{{ $datas->dirYear }}/{{ $datas->dirMonth }}/{{ $datas->logoName }}/{{ $datas->crTime }}/s.{{ $datas->logExt }}" class="img-responsive" style="width:1000%"  alt="{{ $datas->companyName }}">
+                       @else
+ <img src="<?php echo url('/'); ?>/images/download.png" alt="" >
+    @endif
+                                                    </div>
 						   </div>
 						   <div class="col-md-6">
-						   <h2 class="c-black">Alpha Technologies</h2>
+						   <h2 class="c-black">{{$datas->companyName}}</h2>
 						   <div class="post-tags">Openings For:<a href="#"> Accounts Manager (1)</a>, <a href="#">, Android Developers (13)</a>, <a href="#">SEO Expert (3)</a>
 						   </div>
-						    <div class="post-tags">Location:<a> Bangalore</a>
+						    <div class="post-tags">Location:<a>{{$datas->locationName}}</a>
 						   </div>
 						    <div class="post-tags">Experience:<a href="#">  Accounts Manager - Max 8 Years</a>, <a href="#">, Android Developer - Max 2 years</a>
 						   </div>
@@ -144,7 +171,7 @@
 						   </div>
 						    <div class="post-tags">Salary:<a href="#"> Accounts Manager - 8 lakh PA</a>, <a href="#">Android Developer - 4 lakh PA</a>
 						   </div>
-						    <div class="post-tags">Company Profile:<a> Alpha Technologies is a technology start-up founded by IIT, Mumbai alumina's Shreyas Rao and Manoj Bhatia in 2012, funded by Accel Partners, company is operational from Bangalore with current employment base of 93 members. Company is working on tech in healthcare platform with several apps helping people to have better and health life.</a>
+                                                   <div class="post-tags">Company Profile:<a>{{$datas->shortDescription}}</a>
 						   </div>
 						   </div>
                         </div>
@@ -224,107 +251,11 @@
 							
                             </div>
                         </div>
-                        <div class="item">
-                               <div class="row">
-                                <div class="col-md-12">
-                                    <div class="wp-block inverse">
-                           <div class="col-md-6">
-						    <div class="embed-responsive embed-responsive-16by9">
-                            <iframe class="embed-responsive-item" src="http://player.vimeo.com/video/22439234"></iframe>
-                        </div>
-						   </div>
-						   <div class="col-md-6">
-						   <h2  class="c-black">Alpha Technologies</h2>
-						   <div class="post-tags">Openings For:<a href="#"> Accounts Manager (1)</a>, <a href="#">, Android Developers (13)</a>, <a href="#">SEO Expert (3)</a>
-						   </div>
-						    <div class="post-tags">Location:<a> Bangalore</a>
-						   </div>
-						    <div class="post-tags">Experience:<a href="#">  Accounts Manager - Max 8 Years</a>, <a href="#">, Android Developer - Max 2 years</a>
-						   </div>
-						    <div class="post-tags">Job Type:<a href="#">Full Time</a>, <a href="#">,  Day Job</a>
-						   </div>
-						    <div class="post-tags">Salary:<a href="#"> Accounts Manager - 8 lakh PA</a>, <a href="#">Android Developer - 4 lakh PA</a>
-						   </div>
-						    <div class="post-tags">Company Profile:<a> Alpha Technologies is a technology start-up founded by IIT, Mumbai alumina's Shreyas Rao and Manoj Bhatia in 2012, funded by Accel Partners, company is operational from Bangalore with current employment base of 93 members. Company is working on tech in healthcare platform with several apps helping people to have better and health life.</a>
-						   </div>
-						   </div>
-                        </div>
-                                </div>
                          
-                            <div class="col-md-12">
-                               <div class="col-md-2">
-                                    <div class="wp-block inverse">
-                           <a href="#"> 
-						   <div class="client">
-                            <a href="#">
-                                <img src="images/clients/client-2.png" alt="" >
-                            </a>
-                        </div>
-                           </a>
-                        </div>
-                                </div>
-                              <div class="col-md-2">
-                                    <div class="wp-block inverse">
-                           <a href="#"> 
-						   <div class="client">
-                            <a href="#">
-                                <img src="images/clients/client-1.png" alt="" >
-                            </a>
-                        </div>
-                           </a>
-                        </div>
-						</div>
-                               
-                              <div class="col-md-2">
-                                    <div class="wp-block inverse">
-                          <a href="#"> 
-						   <div class="client">
-                            <a href="#">
-                                <img src="images/clients/client-3.png" alt="" >
-                            </a>
-                        </div>
-                           </a>
-                        </div>
-                                </div>
-								<div class="col-md-2">
-                                    <div class="wp-block inverse">
-                         <a href="#"> 
-						   <div class="client">
-                            <a href="#">
-                                <img src="images/clients/client-2.png" alt="" >
-                            </a>
-                        </div>
-                           </a>
-                        </div>
-                                </div>
-								<div class="col-md-2">
-                                    <div class="wp-block inverse">
-                           <a href="#"> 
-						   <div class="client">
-                            <a href="#">
-                                <img src="images/clients/client-1.png" alt="" >
-                            </a>
-                        </div>
-                           </a>
-                        </div>
-                                </div>
-								<div class="col-md-2">
-                                    <div class="wp-block inverse">
-                       <a href="#"> 
-						   <div class="client">
-                            <a href="#">
-                                <img src="images/clients/client-3.png" alt="" >
-                            </a>
-                        </div>
-                           </a>
-                        </div>
-                                </div>
-								
-                            </div>
-                               
-							
-                            </div>
-                        </div>
+                      @endforeach
+                  <?php  echo '<pre>';
+  print_r($result); ?>
+                    
                     </div>
                 </div>  
             </div>
