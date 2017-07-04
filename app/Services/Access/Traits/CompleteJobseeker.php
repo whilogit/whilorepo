@@ -185,5 +185,19 @@ trait CompleteJobseeker {
             ));
         }
     }
+    
+    public function getallAppliedJobs() {
+        
+        $result=  DB::table('userappliedjobs as u')
+                ->join('companyjobs as c','c.jobId','=','u.jobId')
+                ->join('comprofile as cp','cp.companyId','=','c.companyId')
+                ->join('_locations as l','l.locationId','=','c.locationId')
+                  ->join('_experience as e','e.experienceId','=','c.experienceId')
+                ->select('c.jobTitle','c.experienceId','cp.companyName','l.locationName','e.experienceName')
+                ->where('u.seekerId',$_SESSION['WHILLO']['SEEKERID'])
+                ->get();
+        echo json_encode($result);
+        
+    }
 
 }

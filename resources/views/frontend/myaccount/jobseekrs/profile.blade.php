@@ -128,7 +128,7 @@
             <h4 class="col-md-4 pull-left">Applied Jobs</h4>
 
 
-            <table class="table table-orders table-bordered table-striped table-responsive no-margin">
+            <table id="appliedTable" class="table table-orders table-bordered table-striped table-responsive no-margin">
               <!--   <tbody>
                 @foreach($data['personal'] as $personal)
                  <tr><th>Date Of Birth</th>   <td>{{ $personal->dob }}</td></tr>
@@ -144,9 +144,6 @@
                   </tbody> -->
                 <thead><th>Company Name</th><th>Job Title</th><th>Designation</th><th>Experience(Years)</th><th>Location</th></tr></thead>
                 <tbody>
-                    <tr><td>Robosoft</td><td><a href="whilo.in/pricing">Job Title must be displayed here</a></td><td>Sernior.Engineer</td><td>2</td><td>Bangalore</td></tr>
-                    <tr><td>Robosoft</td><td><a href="whilo.in/pricing">Job Title must be displayed here</a></td><td>Sernior.Engineer</td><td>2</td><td>Bangalore</td></tr>
-                    <tr><td>Robosoft</td><td><a href="whilo.in/pricing">Job Title must be displayed here</a></td><td>Sernior.Engineer</td><td>2</td><td>Bangalore</td></tr>
                 </tbody>
             </table>
 
@@ -171,15 +168,7 @@
                   </tbody> -->
                 <thead><th>Company Name</th><th>Job Title</th><th>Designation</th><th>Experience(Years)</th><th>Location</th><th>Apply Now</th></tr></thead>
                 <tbody>
-                    <tr><td>Robosoft</td><td><a href="whilo.in/pricing">Job Title must be displayed here</a></td><td>Sernior.Engineer</td><td>2</td><td>Bangalore</td><td><a name="btnsearch" href="javascript:void(0)" class="btn btn-lg " title="">
-                                <span class="c-white">Apply Now</span>
-                            </a></td></tr>
-                    <tr><td>Robosoft</td><td><a href="whilo.in/pricing">Job Title must be displayed here</a></td><td>Sernior.Engineer</td><td>2</td><td>Bangalore</td><td><a name="btnsearch" href="javascript:void(0)" class="btn btn-lg " title="">
-                                <span class="c-white">Apply Now</span>
-                            </a></td></tr>
-                    <tr><td>Robosoft</td><td><a href="whilo.in/pricing">Job Title must be displayed here</a></td><td>Sernior.Engineer</td><td>2</td><td>Bangalore</td><td><a name="btnsearch" href="javascript:void(0)" class="btn btn-lg" title="">
-                                <span class="c-white">Apply Now</span>
-                            </a></td></tr>
+
                 </tbody>
             </table>
 
@@ -243,6 +232,7 @@
 
         getAllEdcucationDetails();
         getAllProfileDetails();
+        getAllAppliedJobsDetails();
         $(".btnEdit").bind("click", educationEdit);
 
         $("#btnAdd").bind("click", educationAdd);
@@ -619,15 +609,6 @@
         var currentRow = $(this).closest("tr");
 
         id = $(this).data('id');
-
-
-
-
-
-
-
-
-
         var fullName = $("td:eq(0) input[type=text]").val();
         var mobileNum = $("td:eq(1) input[type=text]").val();
         var city = $("td:eq(2) input[type=text]").val();
@@ -706,6 +687,33 @@
 
 
 
+//applied jobs
 
+    function getAllAppliedJobsDetails()
+    {
+
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+            url: '/auth/getallAppliedJobs',
+            type: 'GET',
+            data: {"_token": "{{ csrf_token() }}"},
+            dataType: 'JSON',
+            success: function (data) {
+
+                data.forEach(function (item) {
+
+                    //  $('#peofileEditButton').html("<button   class='btn btn-lg pull-right btnEdit'data-id=" + item.seekerId +"><span class='c-white'>Edit</span></button>");
+                   
+                   $("#appliedTable tbody").append("<tr>" +
+                            "<td>" + item.companyName + "</td>" +
+                            "<td>" + item.jobTitle + "</td>" +
+                            "<td>" + item.jobTitle + "</td>" +
+                            "<td>" + item.experienceName + "</td>" +
+                            "<td>" + item.locationName + "</td>" );
+                });
+            }
+        });
+    }
+    
 
 </script>
