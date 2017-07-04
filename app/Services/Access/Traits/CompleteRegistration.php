@@ -398,4 +398,3 @@ trait completeRegistration
           
         }
        }
-}
