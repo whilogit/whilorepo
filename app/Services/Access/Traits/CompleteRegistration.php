@@ -19,6 +19,24 @@ use Hash;
 trait completeRegistration
 {
     use RedirectsUsers;
+     public function compcomplete(Request $request,Response $response)
+    { 
+		  
+		 $imagecount = DB::table('companyimages')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->count();
+		 if($imagecount != 0){
+			DB::table('csteps')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->increment('steps');
+			return response()->json(array(
+					'success' => true,
+					'errors' => "Company registration completed"
+					));
+		 }else {
+			 return response()->json(array(
+					'success' => false,
+					'errors' => "Please uploade the company images"
+					));
+		 }
+			
+	}
 		public function companyplan(Request $request,Response $response)
             { 
                       
@@ -204,6 +222,12 @@ trait completeRegistration
                                                             ));
             }
 
+        }
+        public function sendRegistarionMail(Request $request)
+        {
+             $data = $request->all();
+             dd($data);
+            
         }
       public function AppliedCandidates()
      {

@@ -17,8 +17,8 @@
             </div>
         </div>
     </div>
-    
-   
+
+
     <section class="slice slice-lg bg-image" name="ccomplete" style="background-image:url(../images/mainbg.png)">
         <div class="wp-section">
             <div class="container">
@@ -71,7 +71,9 @@
                                                         <p class="p1"><span>Mobile</span>:{{ $commaster->mobileNumber }}</p>--> 
 														 <p class="p1"><span>Phone</span>:{{ $commaster->phone }}</p>
 														  <p class="p1"><span>Email</span>:{{ $commaster->emailAddress }}</p>
-														 
+														     
+    <input type="hidden" id="companyid" name="companyid" value="$_SESSION['WHILLO']['COMPAnyID']">
+     <input type="hidden" id="emailAdd" name="emailAdd" value="{{ $commaster->emailAddress }}">
                                                       
                                                     </div>
                                                 </div>
@@ -119,8 +121,8 @@
                         </div> </div>
                     <div class="col-md-2">
                         <div class="form-group">
-                           <a class="btn btn-lg btn-block btn-alt btn-icon btn-icon-right btn-icon-go pull-right btnsubmit">
-        <span>Complete</span>
+                           <button class="btn btn-lg btn-block btn-alt btn-icon btn-icon-right btn-icon-go pull-right btnsubmit" id="complete_btn">
+                               <span>Complete</span></button>
     </a>
                         </div> </div>              
                     </div>

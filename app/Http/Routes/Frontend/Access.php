@@ -98,6 +98,7 @@ Route::group(['namespace' => 'Auth'], function () {
 
 
         Route::post('send/email', 'AuthController@sendmail');
+        Route::post('send/registrationmail', 'AuthController@sendRegistarionMail');
         Route::post('send/interviewemail', 'AuthController@CallForInterview');
         Route::post('send/appliedemail', 'AuthController@CallforApplied');
         Route::post('send/shortliststatus', 'AuthController@ShortListStatus');

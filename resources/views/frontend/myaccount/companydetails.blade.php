@@ -6,7 +6,7 @@
 <button id="edit_test" class="btn btn-base btn-icon btn-icon-right  pull-right"value=""> <span>Edit</span></button>
 <div id="compnay_detail_table" >
 <div class="col-md-12">
-<h4>Basic info</h4>
+    <h4>Basic info</h4> <div id="update_message"></div>
 <table class="table table-orders table-bordered table-striped table-responsive no-margin" id="company_table">
 <thead>
 <tr><th>Website</th><th>Phone</th><th>Location</th><th>Email ID</th><th>Industry</th><th>Address</th></tr>
@@ -168,7 +168,7 @@ $(function() {
                                                  if(response.success)
                                                  {
 
-                                                   alert('scueess');
+                                                    $('#update_message').append('<span><b>Data Updated</b></span>');
 
                                                  }
 
