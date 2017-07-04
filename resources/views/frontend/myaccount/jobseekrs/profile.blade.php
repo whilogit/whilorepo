@@ -64,16 +64,18 @@
 
         <div class="tab-pane" id="educational">
             <h4 class="col-md-4 pull-left">Educational Details</h4>
-            <div class="col-md-3 pull-right"><a name="btnsearch" href="javascript:void(0)" class="btn btn-lg  pull-right" title="" style="margin-left:1%;">
+            <div id="Edumess"></div>
+            <!--div class="col-md-3 pull-right"><a name="btnsearch" href="javascript:void(0)" class="btn btn-lg  pull-right" title="" style="margin-left:1%;">
                     <span class="c-white">Edit</span>
                 </a>
                 <a name="btnsearch" href="javascript:void(0)" class="btn btn-lg  pull-right" title="">
                     <span class="c-white">Add New</span>
                 </a>
-            </div>
-
+            </div>-->
+            <button id="btnAdd" class="btn btn-lg  pull-right c-white" style="float:left">Add New</button>
             <table id="educationalTable" class="table table-orders table-bordered table-striped table-responsive no-margin">
-                <tbody>
+                <thead> 
+
 
                     <tr>
                         <th>Highest Qualification</th>
@@ -85,27 +87,32 @@
                         <th>Action</th> 
                     </tr>
 
-                    <?php
-                    echo "<pre>";
-                    print_r($data['education']);
-                    ?>
-                    @foreach($data['education'] as $education)
-                    <tr>
-                <input type="hidden" value="{{ $education->id }}" id="id" name="id"/>
-                <td >{{ $education->qualificationName }}</td>
-                <td>{{ $education->courceName }}</td>
-                <td>{{ $education->specilizationName }}</td>
-                <td>{{ $education->universityName }}</td>
-                <td>{{ $education->courcetypeId == 1 ? "Fulltime" : "Parttime" }}</td>
-                <td>{{ $education->passingYear }}</td> 
-                <td><button class="btn btn-xs btn-info editTest" title="edit"
-                            data-id="{{$education->id }}">Edit
-                    </button></td>
-                </tr>
-                @endforeach  
 
-                </tbody>
+                </thead>
+                <tbody> 
+                </tbody> 
             </table>
+            <?php
+            // echo "<pre>";
+            // print_r($data['education']);
+            ?>
+            <!--@foreach($data['education'] as $education)
+            <tr>
+        <input type="hidden" value="{{ $education->id }}" id="id" name="id"/>
+        <td >{{ $education->qualificationName }}</td>
+        <td>{{ $education->courceName }}</td>
+        <td>{{ $education->specilizationName }}</td>
+        <td>{{ $education->universityName }}</td>
+        <td>{{ $education->courcetypeId == 1 ? "Fulltime" : "Parttime" }}</td>
+        <td>{{ $education->passingYear }}</td> 
+        <td><button class="btn btn-xs btn-info editTest" title="edit"
+                    data-id="{{$education->id }}">Edit
+            </button></td>
+        </tr>
+        @endforeach  
+
+        </tbody>
+    </table>-->
 
         </div>
 
@@ -226,53 +233,209 @@
 <script>
 
     $(document).ready(function () {
-        table = $('#educationalTable');
 
-        $('.editTest').click(function () {
-            var currentTD = $(this).parents('tr').find('td');
+        getAllEdcucationDetails();
+        $(".btnEdit").bind("click", Edit);
 
-            if ($(this).html() == 'Edit') {
-                $.each(currentTD, function () {
-                    $(this).prop('contenteditable', true)
-                });
-            } else {
-                $.each(currentTD, function () {
-                    $(this).prop('contenteditable', false)
-                });
+        $("#btnAdd").bind("click", Add);
+        
+        
+        //select uery
+            /*    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+        $.ajax({
+            url: '/auth/getAllqualificationList',
+            type: 'GET',
+            data: {"_token": "{{ csrf_token() }}"},
+            dataType: 'JSON',
+            success: function (data) {
+
+                console.log(data.id);
             }
-
-            $(this).html($(this).html() == 'Edit' ? 'Save' : 'Edit')
-
-            if ($(this).html() == 'Edit') {
-                var currentRow = $(this).closest("tr");
-                id = $(this).data('id');
-                var hQuali = currentRow.find("td:eq(0)").text();
-                var cources = currentRow.find("td:eq(1)").text();
-                var specalization = currentRow.find("td:eq(2)").text();
-                var university = currentRow.find("td:eq(3)").text();
-                var courseType = currentRow.find("td:eq(4)").text();
-                var passYear = currentRow.find("td:eq(5)").text();
-       
-            }
-       
-            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-
-
-            $.ajax({
-                url: '/auth/updateEducation',
-                type: 'POST',
-                data: {"_token": "{{ csrf_token() }}","id":id,"hQuali":hQuali,"cources":cources, "specalization":specalization,"university":university,"courseType":courseType,"passYear":passYear},
-                dataType: 'JSON',
-                success: function (data) {
-                   // console.log(data);
-                }
-            });
-
-        });
+                    
+                    
+                });*/
+        
 
 
     });
 
 
+    function Add()
+    {
 
+        $("#educationalTable tbody").append("<tr>" + "<td><input type='text'/></td>" +
+                "<td><input type='text'/></td>" +
+                "<td><input type='text'/></td>" +
+                "<td><input type='text'/></td>" +
+                "<td><input type='text'/></td>" +
+                "<td><input type='text'/></td>" +
+                "<td><button   class='btnSave'>Save</button>\n\
+<button   class='btnDelete'>Delete</button></td>" + "</tr>");
+        $(".btnSave").bind("click", Save);
+        $(".btnDelete").bind("click", Delete);
+    }
+
+    function Edit() {
+
+        var currentRow = $(this).closest("tr");
+        id = $(this).data('id');
+
+
+        var par = $(this).parent().parent(); //tr
+
+        var hQuali = par.children("td:nth-child(1)");
+        var cources = par.children("td:nth-child(2)");
+        var specalization = par.children("td:nth-child(3)");
+        var university = par.children("td:nth-child(4)");
+
+        var courseType = par.children("td:nth-child(5)");
+
+        var passYear = par.children("td:nth-child(6)");
+
+        var tdButtons = par.children("td:nth-child(7)");
+        hQuali.html("<input type='text' name='hQuali' id='hQuali' value='" + hQuali.html() + "'/>");
+        cources.html("<input type='text'name='cources'  id='cources' value='" + cources.html() + "'/>");
+        specalization.html("<input type='text'  name='specalization' id='specalization' value='" + specalization.html() + "'/>");
+        university.html("<input type='text' name='university' id='university' value='" + university.html() + "'/>");
+
+        courseType.html("<input type='text'  name='courseType' id='courseType' value='" + courseType.html() + "'/>");
+
+        passYear.html("<input type='text' name='passYear' id='passYear' value='" + passYear.html() + "'/>");
+
+
+        tdButtons.html("<button src='images/disk.png' class='btnSave' data-id=" + id + ">Save</button>");
+        $(".btnSave").bind("click", Save);
+        $(".btnEdit").bind("click", Edit);
+        //   $(".btnDelete").bind("click", Delete);
+
+
+
+
+
+    }
+
+
+    function Save() {
+
+
+        var currentRow = $(this).closest("tr");
+
+        id = $(this).data('id');
+
+        var hQualiSave = currentRow.find("td:eq(0) input[type=text]").val();
+        var courcesSave = currentRow.find("td:eq(1) input[type=text]").val();
+        var specalizationSave = currentRow.find("td:eq(2) input[type=text]").val();
+        var universitySave = currentRow.find("td:eq(3) input[type=text]").val();
+        var courseTypeSave = currentRow.find("td:eq(4) input[type=text]").val();
+        var passYearSave = currentRow.find("td:eq(5) input[type=text]").val();
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        /*  console.log(hQualiSave);
+         console.log(courcesSave);
+         console.log(specalizationSave);
+         console.log(universitySave);
+         console.log(courseTypeSave);
+         console.log(passYearSave);*/
+        $.each(currentRow, function () {
+            $.ajax({
+                url: '/auth/updateEducation',
+                type: 'POST',
+                async: true,
+
+                data: {"_token": "{{ csrf_token() }}", "id": id, "hQuali": hQualiSave, "cources": courcesSave, "specalization": specalizationSave, "university": universitySave, "courseType": courseTypeSave, "passYear": passYearSave},
+                dataType: 'JSON',
+                success: function (data) {
+
+
+                    if (success = "true") {
+                        $('#Edumess').html("<div class='alert alert-success'><strong>Success!</strong> SucessFully Updated</div>");
+                        window.setTimeout(function () {
+                            $('#Edumess').fadeOut();
+                        }, 2000);
+                    } else
+                    {
+                        $('#Edumess').html("<div class='alert alert-danger'><strong>Success!</strong> Error in Updating</div>");
+                        window.setTimeout(function () {
+                            $('#Edumess').fadeOut();
+                        }, 2000);
+
+                    }
+
+
+                }
+
+
+            });
+
+        });
+
+
+        var par = $(this).parent().parent(); //tr 
+        var hQuali = par.children("td:nth-child(1)");
+        var cources = par.children("td:nth-child(2)");
+        var specalization = par.children("td:nth-child(3)");
+        var university = par.children("td:nth-child(4)");
+
+        var courseType = par.children("td:nth-child(5)");
+
+        var passYear = par.children("td:nth-child(6)");
+
+        var tdButtons = par.children("td:nth-child(7)");
+
+
+        hQuali.html(hQuali.children("input[type=text]").val());
+        cources.html(cources.children("input[type=text]").val());
+        specalization.html(specalization.children("input[type=text]").val());
+        university.html(university.children("input[type=text]").val());
+
+        courseType.html(courseType.children("input[type=text]").val());
+
+        passYear.html(passYear.children("input[type=text]").val());
+
+
+
+
+        tdButtons.html("<button class='btnDelete'>Delete</button><button class='btnEdit' data-id=" + id + ">Edit</button>");
+        $(".btnEdit").bind("click", Edit);
+
+
+
+    }
+
+    function getAllEdcucationDetails()
+    {
+
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+        $.ajax({
+            url: '/auth/getAllEducationDetails',
+            type: 'GET',
+            data: {"_token": "{{ csrf_token() }}"},
+            dataType: 'JSON',
+            success: function (data) {
+
+                data.forEach(function (item) {
+                  
+
+                    $("#educationalTable tbody").append("<tr>" +
+                            "<td>" + item.qualificationName + "</td>" +
+                            "<td>" + item.courceName + "</td>" +
+                            "<td>" + item.specilizationName + "</td>" +
+                            "<td>" + item.universityName + "</td>" +
+                            "<td>" + item.universityName + "</td>" +
+                            "<td>" + item.passingYear + "</td>" +
+                            "<td><button   class='btnEdit' data-id=" + item.id + ">Edit</button>\n\
+<button   class='btnDelete'>Delete</button></td>" + "</tr>");
+                    $(".btnEdit").bind("click", Edit);
+
+                });
+
+            }
+        });
+    }
+    
+    
+    
+    
+    
 </script>

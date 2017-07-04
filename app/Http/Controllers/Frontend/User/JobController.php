@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Frontend\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-
+use App\Services\Access\Traits\MailController;
 use App\Services\Access\Company\MyJobs;
 use App\Repositories\Frontend\Jobs\Joblist;
 use Validator;
@@ -87,7 +87,14 @@ class JobController extends Controller
                   $createdDate = new DateTime();
 		$res = DB::insert('insert into userappliedjobs(seekerId,jobId,appliedDate) 
 	   				values (?,?,?)',array($_SESSION['WHILLO']['SEEKERID'],$jobId,$createdDate));
-					
+		 
+      $seeker_userid = DB::table('commaster')->select('userId')->where('seekerId',$seekerId)->first();
+			$seeker_userid=$seeker_userid->userId;		
+         $email = DB::table('userlogin as ul')->select('emailAddress')->where('userId',$seeker_userid)->first();
+         $to=$email->emailAddress;
+         $sub='Test shortlist';
+         $message='you are shortlisted';
+         $sendmail= MailController::sendmail($to,$sub,$message); 			
 		
 		return response()->json(array(
 					'success' => true,
@@ -102,19 +109,27 @@ class JobController extends Controller
 	}
           public function shortlist(Request $request)
     {
-     
-      $seekerId = $request->input('seekerId');
-                
+        $seekerId = $request->input('seekerId');
+         
+            //$userid=$_SESSION['WHILLO']['USERID'];
+      
+              
 		$createdDate = new DateTime();
 		$res = DB::insert('insert into shortlistjobs(seekerId,companyId,ShortlistedDate) 
 	   				values (?,?,?)',array($seekerId, $_SESSION['WHILLO']['COMPAnyID'],$createdDate));
 					
-		
+		$seeker_userid = DB::table('jmaster')->select('userId')->where('seekerId',$seekerId)->first();
+			$seeker_userid=$seeker_userid->userId;		
+         $email = DB::table('userlogin as ul')->select('emailAddress')->where('userId',$seeker_userid)->first();
+         $to=$email->emailAddress;
+         $sub='Test shortlist';
+         $message='you are shortlisted';
+         $sendmail= MailController::sendmail($to,$sub,$message); 
 		return response()->json(array(
 					'success' => true,
-					'errors' => "You got the full permission"
+					'errors' => "shortlisted"
 					));
-    }
-	
    
+    }
 }
+   

@@ -77,33 +77,74 @@ trait CompleteJobseeker {
         ));
     }
 
-    public function updateEducation(Request $request) {
+    public function getAllEducationDetails() {
 
-        $result = DB::table('jqualification')->where('id', $request->id)
-                ->update(array('passingYear' => $request->passYear,"seekerId"=>$_SESSION['WHILLO']['SEEKERID'],
-            'courceName' => $request->cources, 'specilizationName' => $request->specalization,
-            'universityName' => $request->university
-        ));
 
-        if (empty($result)) {
-            return response()->json(array(
-					'success' => false,
-					'errors' => "Failed to change status"
-					));
-            
-            
-            
-            
-            
-        } else { {
-            
-            return response()->json(array(
-					'success' => true,
-					'errors' => "Status successfully changed"
-					));
-                
-            }
-        }
+        return DB::table('jqualification as jq')
+                        ->where('jq.seekerId', $_SESSION['WHILLO']['SEEKERID'])
+                        ->join('_qualification as q', 'q.qualificationId', '=', 'jq.qualificationId')
+                        ->join('jkeyskill as k', 'k.seekerId', '=', 'jq.seekerId')
+                        ->select('jq.id', 'jq.seekerId', 'jq.passingYear', 'jq.courceName', 'jq.specilizationName', 'jq.universityName', 'jq.courcetypeId', 'q.qualificationName', 'k.keyskills')
+                        ->get();
     }
 
-}
+    public function updateEducation(Request $request) {
+
+        if ($request->id) {
+
+            $result = DB::table('jqualification')->where('id', $request->id)
+                    ->update(array('passingYear' => $request->passYear, "seekerId" => $_SESSION['WHILLO']['SEEKERID'],
+                'courceName' => $request->cources, 'specilizationName' => $request->specalization,
+                'universityName' => $request->university
+            ));
+
+
+            if (empty($result)) {
+                return response()->json(array(
+                            'success' => false,
+                            'errors' => "Failed to change status"
+                ));
+            } else { {
+
+                    return response()->json(array(
+                                'success' => true,
+                                'errors' => "Status successfully changed"
+                    ));
+                }
+            }
+        } else {
+            $result = DB::table('jqualification')->insert([
+                ['passingYear' => $request->passYear, "seekerId" => $_SESSION['WHILLO']['SEEKERID'],
+                    'courceName' => $request->cources, 'specilizationName' => $request->specalization,
+                    'universityName' => $request->university]]);
+
+
+            if (empty($result)) {
+                return response()->json(array(
+                            'success' => false,
+                            'errors' => "Failed to change status"
+                ));
+            } else { 
+
+                    return response()->json(array(
+                                'success' => true,
+                                'errors' => "Status successfully changed"
+                    ));
+                }
+            }
+        }
+        
+        
+        public function getAllqualificationList() {
+            
+            $result= DB::table('_qualification')->get();
+            foreach($result as $row){
+                $id[]=$row->qualificationId;
+                $name[]=$row->qualificationName;
+            }
+            $value=array("id"=>$id,"name"=>$name);
+           echo json_encode($value);
+            
+        }
+    }
+    
