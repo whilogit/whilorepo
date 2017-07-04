@@ -95,7 +95,7 @@ trait RegisterRedirectsForms
 					 
 		foreach ($steps as $step){
                  
-			    if($step->accountStatus == 0){ 
+			    if($step->accountStatus <= 4){ 
 				switch($step->steps){
 					case 1: { 
 					        //$companylogo = DB::table('companylogo')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->get();

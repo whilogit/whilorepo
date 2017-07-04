@@ -226,7 +226,18 @@ trait completeRegistration
         public function sendRegistarionMail(Request $request)
         {
              $data = $request->all();
-             dd($data);
+             $to=$data['emailAdd'];
+            $sub='Registration Completed';
+            $message='This is test for registarion complete email';
+            $sendmail= MailController::sendmail($to,$sub,$message);
+            $res = DB::table('commaster')
+                         ->where('companyId', $_SESSION['WHILLO']['COMPAnyID'] )
+                        ->update(array('accountStatus' =>1));
+            return response()->json(array(
+                                                        'success' => true,
+                                                        'errors' => "No"
+                                                        ));
+            
             
         }
       public function AppliedCandidates()
@@ -330,9 +341,22 @@ trait completeRegistration
        
                   
      }
-      public function PaymentPlanDetails(Request $request)
+public function PaymentPlanDetails(Request $request)
             {
                 $data = $request->all();
+                $createdDate = date("Y-m-d H:i:s");
+                 $status = 0;
+                $user = DB::table('companyplan')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->get();
+                if(!$user)
+                {
+                $res = DB::table('companyplan')->insert(
+                                                        ['companyId' => $_SESSION['WHILLO']['COMPAnyID'], 
+                                                        'plan_id' => $data['planId'],    
+                                                        'created_at'=> $createdDate,
+                                                         'status'=>$status
+                                                        ]
+                                                    );
+               }
                 $t_id=strtotime(date("Y-m-d H:i:s")).$_SESSION['WHILLO']['USERID'];
                
                 $plan_price= DB::table('_plandetails')
@@ -352,7 +376,7 @@ trait completeRegistration
               
                 $form_style= '<form method="post" id="ccavenu_form" name="ccavenu_form" action="https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction"> 
                     <input type="hidden" name="encRequest" value="'.$encRequest.'">
-                    <input type="hidden" name="access_code" value="'.$access_code.'">					
+                    <input type="hidden" name="access_code" value="'.$access_code.'">				
                     </form>';                                                                       
 
               
@@ -411,11 +435,11 @@ trait completeRegistration
                 
 	    	$data['info'][$information[0]] = $information[1];
 	}
-         if($order_status==="Success")
+        if($data['order_status']=="Success")
 	{  
         return view('frontend.companyauth.planpaymentsucess', $data);
         }
-       else if($order_status==="Aborted" || $order_status==="Failure")
+       else if($data['order_status']=="Aborted" || $data['order_status']=="Failure")
 	{
              return view('frontend.companyauth.planpaymentfailed', $data);
         }

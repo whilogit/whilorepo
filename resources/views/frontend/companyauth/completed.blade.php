@@ -72,7 +72,7 @@
 														 <p class="p1"><span>Phone</span>:{{ $commaster->phone }}</p>
 														  <p class="p1"><span>Email</span>:{{ $commaster->emailAddress }}</p>
 														     
-    <input type="hidden" id="companyid" name="companyid" value="$_SESSION['WHILLO']['COMPAnyID']">
+    <input type="hidden" id="companyid" name="companyid" value="{{ $_SESSION['WHILLO']['COMPAnyID']}}">
      <input type="hidden" id="emailAdd" name="emailAdd" value="{{ $commaster->emailAddress }}">
                                                       
                                                     </div>
@@ -137,4 +137,6 @@
 @endsection
 @section('after-scripts-end')
     <script src="/assets/app/register.ccomplete.js"></script>
+    <link rel="stylesheet" href="{{ url('/assets/extra/jquery-confirm.min.css') }}">
+<script src="{{ url('/assets/extra/jquery-confirm.min.js')}}"></script> 
 @stop
