@@ -83,18 +83,20 @@ trait CompleteJobseeker {
         return DB::table('jqualification as jq')
                         ->where('jq.seekerId', $_SESSION['WHILLO']['SEEKERID'])
                         ->join('_qualification as q', 'q.qualificationId', '=', 'jq.qualificationId')
+                        ->join('_employmentmode as e', 'e.employmentmodeId', '=', 'jq.courcetypeId')
                         ->join('jkeyskill as k', 'k.seekerId', '=', 'jq.seekerId')
-                        ->select('jq.id', 'jq.seekerId', 'jq.passingYear', 'jq.courceName', 'jq.specilizationName', 'jq.universityName', 'jq.courcetypeId', 'q.qualificationName', 'k.keyskills')
+                        ->select('jq.id', 'jq.seekerId', 'jq.passingYear', 'jq.courceName', 'jq.specilizationName', 'jq.universityName', 'e.employmentmodeName', 'q.qualificationName', 'k.keyskills')
                         ->get();
     }
 
     public function updateEducation(Request $request) {
+        //echo '<pre>';print_r($request->all());exit;
 
         if ($request->id) {
 
             $result = DB::table('jqualification')->where('id', $request->id)
-                    ->update(array('passingYear' => $request->passYear, "seekerId" => $_SESSION['WHILLO']['SEEKERID'],
-                'courceName' => $request->cources, 'specilizationName' => $request->specalization,
+                    ->update(array('passingYear' => $request->passYear, "qualificationId" => $request->hQuali, "seekerId" => $_SESSION['WHILLO']['SEEKERID'],
+                'courceName' => $request->cources, 'courcetypeId' => $request->courseType, 'specilizationName' => $request->specalization,
                 'universityName' => $request->university
             ));
 
@@ -114,9 +116,10 @@ trait CompleteJobseeker {
             }
         } else {
             $result = DB::table('jqualification')->insert([
-                ['passingYear' => $request->passYear, "seekerId" => $_SESSION['WHILLO']['SEEKERID'],
-                    'courceName' => $request->cources, 'specilizationName' => $request->specalization,
+                ['passingYear' => $request->passYear, "qualificationId" => $request->hQuali, "seekerId" => $_SESSION['WHILLO']['SEEKERID'],
+                    'courceName' => $request->cources, 'courcetypeId' => $request->courseType, 'specilizationName' => $request->specalization,
                     'universityName' => $request->university]]);
+            $ids = DB::getPdo()->lastInsertId();
 
 
             if (empty($result)) {
@@ -124,27 +127,28 @@ trait CompleteJobseeker {
                             'success' => false,
                             'errors' => "Failed to change status"
                 ));
-            } else { 
+            } else {
 
-                    return response()->json(array(
-                                'success' => true,
-                                'errors' => "Status successfully changed"
-                    ));
-                }
+                return response()->json(array(
+                            'success' => true,
+                            'errors' => "Status successfully changed",
+                            'id' => $ids,
+                            'insert'=>1,
+                ));
             }
-        }
-        
-        
-        public function getAllqualificationList() {
-            
-            $result= DB::table('_qualification')->get();
-            foreach($result as $row){
-                $id[]=$row->qualificationId;
-                $name[]=$row->qualificationName;
-            }
-            $value=array("id"=>$id,"name"=>$name);
-           echo json_encode($value);
-            
         }
     }
-    
+
+    public function getAllqualificationList() {
+
+        $result = DB::table('_qualification')->get();
+        echo json_encode($result);
+    }
+
+    public function getcourseTypes() {
+
+        $result = DB::table('_employmentmode')->get();
+        echo json_encode($result);
+    }
+
+}

@@ -44,10 +44,10 @@ Route::group(['namespace' => 'Auth'], function () {
         Route::post('/auth/ccomplete', 'AuthController@ccomplete');
 
 //jobseeker education update
-        Route::post('/auth/updateEducation', 'AuthController@updateEducation');
+         Route::post('/auth/updateEducation', 'AuthController@updateEducation');
         Route::get('/auth/getAllEducationDetails', 'AuthController@getAllEducationDetails');
         Route::get('/auth/getAllqualificationList', 'AuthController@getAllqualificationList');
-
+         Route::get('/auth/getcourseTypes', 'AuthController@getcourseTypes');
 
         // Confirm Account Routes
         Route::get('account/confirm/{token}', 'AuthController@confirmAccount')->name('account.confirm');
