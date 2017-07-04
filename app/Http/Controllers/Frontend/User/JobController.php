@@ -83,22 +83,25 @@ class JobController extends Controller
   	public function applyjob(Request $request)
     {
                    
-                 $jobId = $request->input('jobId');
-                  $createdDate = new DateTime();
+                $jobId = $request->input('jobId');
+                
+		 
+      $companyid = DB::table('companyjobs')->select('companyId')->where('jobId',$jobId)->first();
+			$companyid=$companyid->companyId;
+                         $userId = DB::table('commaster')->select('userId')->where('companyId',$companyid)->first();
+			 $userId=$userId->userId;
+         $email = DB::table('userlogin as ul')->select('emailAddress')->where('userId',$userId)->first();
+       $createdDate = new DateTime();
 		$res = DB::insert('insert into userappliedjobs(seekerId,jobId,appliedDate) 
 	   				values (?,?,?)',array($_SESSION['WHILLO']['SEEKERID'],$jobId,$createdDate));
-		 
-      $seeker_userid = DB::table('commaster')->select('userId')->where('seekerId',$seekerId)->first();
-			$seeker_userid=$seeker_userid->userId;		
-         $email = DB::table('userlogin as ul')->select('emailAddress')->where('userId',$seeker_userid)->first();
          $to=$email->emailAddress;
          $sub='Test shortlist';
          $message='you are shortlisted';
          $sendmail= MailController::sendmail($to,$sub,$message); 			
-		
+		 
 		return response()->json(array(
 					'success' => true,
-					'errors' => "You got the full permission"
+					'errors' => "errors"
 					));
 
 //print_r($request);
@@ -114,9 +117,7 @@ class JobController extends Controller
             //$userid=$_SESSION['WHILLO']['USERID'];
       
               
-		$createdDate = new DateTime();
-		$res = DB::insert('insert into shortlistjobs(seekerId,companyId,ShortlistedDate) 
-	   				values (?,?,?)',array($seekerId, $_SESSION['WHILLO']['COMPAnyID'],$createdDate));
+		
 					
 		$seeker_userid = DB::table('jmaster')->select('userId')->where('seekerId',$seekerId)->first();
 			$seeker_userid=$seeker_userid->userId;		
@@ -125,9 +126,12 @@ class JobController extends Controller
          $sub='Test shortlist';
          $message='you are shortlisted';
          $sendmail= MailController::sendmail($to,$sub,$message); 
+         $createdDate = new DateTime();
+		$res = DB::insert('insert into shortlistjobs(seekerId,companyId,ShortlistedDate) 
+	   				values (?,?,?)',array($seekerId, $_SESSION['WHILLO']['COMPAnyID'],$createdDate));
 		return response()->json(array(
 					'success' => true,
-					'errors' => "shortlisted"
+					'errors' => "errors"
 					));
    
     }
