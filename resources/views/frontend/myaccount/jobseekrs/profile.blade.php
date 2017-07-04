@@ -10,25 +10,32 @@
     <div class="tab-content tab-content-inverse">
         <div class="tab-pane active" id="tabprofiledetails">
             <h4 class="col-md-4 pull-left">Profile Details</h4>
-            <div class="col-md-3 pull-right"><a name="btnsearch" href="javascript:void(0)" class="btn btn-lg pull-right" title="">
-                    <span class="c-white">Edit</span>
-                </a>
+            <div id="profilemess"></div>
+            <div id="peofileEditButton" >
 
             </div>
-            <table class="table table-orders table-bordered table-striped table-responsive no-margin">
-                <tbody>
-                    @foreach($data['profile'] as $profile)
-                    <tr><th>Full Name</th>   <td>{{ $profile->firstName }} {{ $profile->lastName }}</td></tr>
-                    <tr> <th>Mobile Number</th> <td>{{ $profile->mobileNumber }}</td></tr>
-                    <tr> <th>City</th>  <td>{{ $profile->city }}</td></tr>
-                    <tr> <th>Pincode</th><td>{{ $profile->pinCode }}</td></tr>
-                    <tr> <th>Address</th> <td>{{ $profile->address }}</td></tr>
-                    <tr> <th>Gender</th><td>{{ $profile->Gender == 1 ? "Male" : "Female"  }}</td></tr>
-                    <tr><th>Short Bio</th> <td>{{ $profile->shortBio }}</td></tr>
+            <table id="profilelTable" class="table table-orders table-bordered table-striped table-responsive no-margin">
+                <thead>
 
-                    @endforeach  
-                </tbody>
+                </thead>
             </table>
+
+
+
+<!-- <table class="table table-orders table-bordered table-striped table-responsive no-margin">
+    <tbody>
+        @foreach($data['profile'] as $profile)
+        <tr><th>Full Name</th>   <td>{{ $profile->firstName }} {{ $profile->lastName }}</td></tr>
+        <tr> <th>Mobile Number</th> <td>{{ $profile->mobileNumber }}</td></tr>
+        <tr> <th>City</th>  <td>{{ $profile->city }}</td></tr>
+        <tr> <th>Pincode</th><td>{{ $profile->pinCode }}</td></tr>
+        <tr> <th>Address</th> <td>{{ $profile->address }}</td></tr>
+        <tr> <th>Gender</th><td>{{ $profile->Gender == 1 ? "Male" : "Female"  }}</td></tr>
+        <tr><th>Short Bio</th> <td>{{ $profile->shortBio }}</td></tr>
+
+        @endforeach  
+    </tbody>
+</table>-->
         </div>
         <div class="tab-pane" id="professional">
             <h4 class="col-md-4 pull-left">Professional Details</h4>
@@ -235,6 +242,7 @@
     $(document).ready(function () {
 
         getAllEdcucationDetails();
+        getAllProfileDetails();
         $(".btnEdit").bind("click", educationEdit);
 
         $("#btnAdd").bind("click", educationAdd);
@@ -365,9 +373,9 @@
 
 
         var currentRow = $(this).closest("tr");
-      
-        
-         var id ;
+
+
+        var id;
 
         if ($(this).data('id') !== 'undefined')
         {
@@ -396,13 +404,13 @@
                         if (data.insert == 1 && data.insert != 'undefined')
 
                         {
-                           
+
                             id = data.id;
-                            
+
                             var tdButtons = par.children("td:nth-child(7)");
                         }
-                        
-                        
+
+
 
                         $('#Edumess').html("<div class='alert alert-success'><strong>Success!</strong> SucessFully Updated</div>");
                         window.setTimeout(function () {
@@ -418,17 +426,17 @@
 
 
 
-                 
+
 
                 }
-                
-               
+
+
 
             });
-            
+
         });
-       
-        
+
+
         var par = $(this).parent().parent(); //tr 
         var hQuali = par.children("td:nth-child(1)");
         var cources = par.children("td:nth-child(2)");
@@ -519,6 +527,181 @@
 
 
         });
+    }
+
+
+
+
+
+
+    //profile page ajax
+    function getAllProfileDetails() {
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+            url: '/auth/getallProfileDetails',
+            type: 'GET',
+            data: {"_token": "{{ csrf_token() }}"},
+            dataType: 'JSON',
+            success: function (data) {
+
+                data.forEach(function (item) {
+
+                    //  $('#peofileEditButton').html("<button   class='btn btn-lg pull-right btnEdit'data-id=" + item.seekerId +"><span class='c-white'>Edit</span></button>");
+                    gender = item.Gender = 1 ? "Male" : "Female"
+                    $("#profilelTable thead").append("<tr><th>Full Name" +
+                            "<td>" + item.firstname + "" + item.lastName + "</td></th></tr>" +
+                            "<tr><th>Mobile Number<td>" + item.mobileNumber + "</td></th></tr>" +
+                            "<tr><th>City<td>" + item.city + "</td></th></tr>" +
+                            "<tr><th>Pincode<td>" + item.pinCode + "</td></th></tr>" +
+                            "<tr><th>Address<td>" + item.address + "</td></th></tr>" +
+                            "<tr><th>Gender<td>" + gender + "</td></th></tr>" +
+                            "<tr><th>Short Bio<td>" + item.shortBio + "</td></th></tr>\n\
+                                  <tr><th><td><button   class='btn btn-lg pull-right btnProfileEdit'data-id=" + item.seekerId + "><span class='c-white'>Edit</span></button></td></th></tr>");
+                    $(".btnProfileEdit").bind("click", profileEdit);
+                });
+            }
+        });
+
+    }
+
+
+
+    function profileEdit() {
+
+
+
+        var currentRow = $(this).closest("tr");
+        id = $(this).data('id');
+
+
+        var par = $(this).parent(); //tr
+
+        var fullName = $("td").eq(0);
+
+        var mobileNum = $("td").eq(1);
+        var city = $("td").eq(2);
+        var pincode = $("td").eq(3);
+
+        var address = $("td").eq(4);
+
+        var gender = $("td").eq(5);
+
+        var bio = $("td").eq(6);
+        var tdButtons = $("td").eq(7);
+
+
+
+
+
+
+
+
+
+        fullName.html("<input type='text'  name='cources' id='cources' value='" + fullName.html() + "'/>");
+        mobileNum.html("<input type='text'  name='specalization' id='specalization' value='" + mobileNum.html() + "'/>");
+        city.html("<input type='text' name='university' id='university' value='" + city.html() + "'/>");
+        pincode.html("<input type='text' name='passYear' id='passYear' value='" + pincode.html() + "'/>");
+        address.html("<input type='text' name='passYear' id='passYear' value='" + address.html() + "'/>");
+        gender.html("<select name='genders' id='genders'><option value='1'>Male</option><option value='2'>Female</option></select>");
+
+        bio.html("<input type='text' name='passYear' id='passYear' value='" + bio.html() + "'/>");
+
+        tdButtons.html("<button src='images/disk.png' class='btnprofileSave' data-id=" + id + ">Save</button>");
+        $(".btnprofileSave").bind("click", profileSave);
+        $(".btnProfileEdit").bind("click", profileEdit);
+
+    }
+
+
+    function profileSave() {
+
+
+        var currentRow = $(this).closest("tr");
+
+        id = $(this).data('id');
+
+
+
+
+
+
+
+
+
+        var fullName = $("td:eq(0) input[type=text]").val();
+        var mobileNum = $("td:eq(1) input[type=text]").val();
+        var city = $("td:eq(2) input[type=text]").val();
+        var pincode = $("td:eq(3) input[type=text]").val();
+        var address = $("td:eq(4) input[type=text]").val();
+        var gender = $("td:eq(5) select").val();
+        var bio = $("td:eq(6) input[type=text]").val();
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $.each(currentRow, function () {
+
+            $.ajax({
+                url: '/auth/updateProfileDetails',
+                type: 'POST',
+                async: false,
+                data: {"_token": "{{ csrf_token() }}", "id": id, "fullName": fullName, "mobileNum": mobileNum,
+                    "city": city, "pincode": pincode, "address": address, "gender": gender, "bio": bio},
+                dataType: 'JSON',
+                success: function (data) {
+
+
+                    if (success = "true") {
+
+
+
+
+                        $('#profilemess').html("<div class='alert alert-success'><strong>Success!</strong> SucessFully Updated</div>");
+                        window.setTimeout(function () {
+                            $('#profilemess').fadeOut();
+                        }, 2000);
+                    } else
+                    {
+                        $('#profilemess').html("<div class='alert alert-danger'><strong>Success!</strong> Error in Updating</div>");
+                        window.setTimeout(function () {
+                            $('#profilemess').fadeOut();
+                        }, 2000);
+                    }
+
+
+
+
+
+                }
+
+
+
+            });
+
+        });
+
+
+        var fullName = $("td").eq(0);
+
+        var mobileNum = $("td").eq(1);
+        var city = $("td").eq(2);
+        var pincode = $("td").eq(3);
+
+        var address = $("td").eq(4);
+        //  var courseTypeSave = currentRow.find("td:eq(4) select").val();
+        var gender = $("td").eq(5);
+
+        //var gender = $("td:eq(5) option:selected").text();
+
+        var bio = $("td").eq(6);
+        var tdButtons = $("td").eq(7);
+
+        fullName.html($("input[type=text]").val());
+        mobileNum.html($("input[type=text]").val());
+        city.html($("input[type=text]").val());
+        pincode.html($("input[type=text]").val());
+        address.html($("input[type=text]").val())
+        gender.html($("select option:selected").text())
+        bio.html($("input[type=text]").val())
+        tdButtons.html("<button class='btnProfileEdit' data-id=" + id + ">Edit</button>");
+        $(".btnProfileEdit").bind("click", profileEdit);
     }
 
 

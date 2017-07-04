@@ -133,7 +133,7 @@ trait CompleteJobseeker {
                             'success' => true,
                             'errors' => "Status successfully changed",
                             'id' => $ids,
-                            'insert'=>1,
+                            'insert' => 1,
                 ));
             }
         }
@@ -149,6 +149,41 @@ trait CompleteJobseeker {
 
         $result = DB::table('_employmentmode')->get();
         echo json_encode($result);
+    }
+
+    //profile
+
+    public function getallProfileDetails() {
+
+        $result = DB::table('jprofile')->where('seekerId', $_SESSION['WHILLO']['SEEKERID'])->get();
+        echo json_encode($result);
+    }
+
+    public function updateProfileDetails(Request $request) {
+        // echo "<pre>";echo $_SESSION['WHILLO']['SEEKERID'];
+        //  print_r($request->all());exit;
+        $result = DB::table('jprofile')->where('seekerId', $request->id)
+        ->update(array('mobileNumber' => $request->mobileNum, "firstName" => $request->fullName,
+        "lastName" => $request->fullName,
+        'city' => $request->city,
+        'pinCode' => $request->pincode,
+        'address' => $request->address,
+        'gender' => $request->gender,
+        'shortBio' => $request->bio,
+        ));
+
+        if (empty($result)) {
+            return response()->json(array(
+                        'success' => false,
+                        'errors' => "Failed to change status"
+            ));
+        } else {
+
+            return response()->json(array(
+                        'success' => true,
+                        'errors' => "Status successfully changed"
+            ));
+        }
     }
 
 }

@@ -48,6 +48,8 @@ Route::group(['namespace' => 'Auth'], function () {
         Route::get('/auth/getAllEducationDetails', 'AuthController@getAllEducationDetails');
         Route::get('/auth/getAllqualificationList', 'AuthController@getAllqualificationList');
          Route::get('/auth/getcourseTypes', 'AuthController@getcourseTypes');
+           Route::get('/auth/getallProfileDetails', 'AuthController@getallProfileDetails');
+            Route::post('/auth/updateProfileDetails', 'AuthController@updateProfileDetails');
 
         // Confirm Account Routes
         Route::get('account/confirm/{token}', 'AuthController@confirmAccount')->name('account.confirm');
