@@ -46,7 +46,7 @@
                     <span class="c-white">Add New</span>
                 </a>
             </div>
-            <table class="table table-orders table-bordered table-striped table-responsive no-margin">
+            <table id="professionalTable" class="table table-orders table-bordered table-striped table-responsive no-margin">
               <!--   <tbody>
                 @foreach($data['personal'] as $personal)
                  <tr><th>Date Of Birth</th>   <td>{{ $personal->dob }}</td></tr>
@@ -62,9 +62,7 @@
                   </tbody> -->
                 <thead><th>Company Name</th><th>Job Title</th><th>Designation</th><th>Experience(Years)</th></tr></thead>
                 <tbody>
-                    <tr><td>Robosoft</td><td>Sernior.Engineer</td><td>2</td></tr>
-                    <tr><td>Robosoft</td><td>Sernior.Engineer</td><td>2</td></tr>
-                    <tr><td>Robosoft</td><td>Sernior.Engineer</td><td>2</td></tr>
+                    
                 </tbody>
             </table>
         </div>
@@ -152,7 +150,7 @@
             <h4 class="col-md-4 pull-left">Shortlisted Jobs</h4>
 
 
-            <table class="table table-orders table-bordered table-striped table-responsive no-margin">
+            <table id="shortlistedJobs" class="table table-orders table-bordered table-striped table-responsive no-margin">
               <!--   <tbody>
                 @foreach($data['personal'] as $personal)
                  <tr><th>Date Of Birth</th>   <td>{{ $personal->dob }}</td></tr>
@@ -231,6 +229,7 @@
     $(document).ready(function () {
 
         getAllEdcucationDetails();
+        getAllShortListedJobsDetails();
         getAllProfileDetails();
         getAllAppliedJobsDetails();
         $(".btnEdit").bind("click", educationEdit);
@@ -703,17 +702,47 @@
                 data.forEach(function (item) {
 
                     //  $('#peofileEditButton').html("<button   class='btn btn-lg pull-right btnEdit'data-id=" + item.seekerId +"><span class='c-white'>Edit</span></button>");
-                   
-                   $("#appliedTable tbody").append("<tr>" +
+
+                    $("#appliedTable tbody").append("<tr>" +
                             "<td>" + item.companyName + "</td>" +
                             "<td>" + item.jobTitle + "</td>" +
                             "<td>" + item.jobTitle + "</td>" +
                             "<td>" + item.experienceName + "</td>" +
-                            "<td>" + item.locationName + "</td>" );
+                            "<td>" + item.locationName + "</td>");
                 });
             }
         });
     }
-    
+
+
+
+    //shortlistedJobs
+
+    function getAllShortListedJobsDetails()
+    {
+
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+            url: '/auth/getallShortListedJobs',
+            type: 'GET',
+            data: {"_token": "{{ csrf_token() }}"},
+            dataType: 'JSON',
+            success: function (data) {
+
+                data.forEach(function (item) {
+
+                    //  $('#peofileEditButton').html("<button   class='btn btn-lg pull-right btnEdit'data-id=" + item.seekerId +"><span class='c-white'>Edit</span></button>");
+
+                    $("#shortlistedJobs tbody").append("<tr>" +
+                            "<td>" + item.companyName + "</td>" +
+                            "<td>" + item.jobTitle + "</td>" +
+                            "<td>" + item.jobTitle + "</td>" +
+                            "<td>" + item.experienceName + "</td>" +
+                            "<td>" + item.locationName + "</td><td><button>apply</button>");
+                });
+            }
+        });
+    }
+
 
 </script>

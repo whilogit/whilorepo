@@ -52,6 +52,8 @@ Route::group(['namespace' => 'Auth'], function () {
         Route::post('/auth/updateProfileDetails', 'AuthController@updateProfileDetails');
         //applied jobs
         Route::get('/auth/getallAppliedJobs', 'AuthController@getallAppliedJobs');
+        Route::get('/auth/getallShortListedJobs', 'AuthController@getallShortListedJobs');
+
 
         // Confirm Account Routes
         Route::get('account/confirm/{token}', 'AuthController@confirmAccount')->name('account.confirm');

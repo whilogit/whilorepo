@@ -199,5 +199,20 @@ trait CompleteJobseeker {
         echo json_encode($result);
         
     }
+    
+    
+        public function getallShortListedJobs() {
+        
+       $result= DB::table('shortlistjobs as s')
+                 ->join('comprofile as cp','cp.companyId','=','s.companyId')
+                ->join('companyjobs as c','c.companyId','=','cp.companyId')
+                ->join('_locations as l','l.locationId','=','c.locationId')
+                  ->join('_experience as e','e.experienceId','=','c.experienceId')
+                ->select('c.jobTitle','c.experienceId','cp.companyName','l.locationName','e.experienceName')
+                ->where('s.seekerId',$_SESSION['WHILLO']['SEEKERID'])
+                ->get();
+      echo json_encode($result);
+        
+    }
 
 }
