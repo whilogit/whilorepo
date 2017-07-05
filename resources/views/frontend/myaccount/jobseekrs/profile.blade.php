@@ -734,13 +734,9 @@
         id = $(this).data('id');
         title = $(this).data('title');
 
-        $.each(currentRow, function () {
+        $.each(currentRow, function () {    
             
             window.open("companydetails/"+id+"/"+title,"_blank")
-            //window.location.replace("companydetails/id/title","_blank");
-
-
-
         });
     }
 
