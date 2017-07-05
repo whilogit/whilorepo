@@ -131,16 +131,6 @@
                         <?php  //print_r($datas);
                             
      
-                    
-                    
-                    
-                     echo $id = $datas->companyId; 
-                     
-                     if (isset($result[$id])) {
-     $result[$id][] = $datas;
-  } else {
-     $result[$id] = array($datas);
-  }
  
                      ?>
                              
@@ -153,7 +143,7 @@
 						    <div class="embed-responsive embed-responsive-16by9">
                            <!-- <iframe class="embed-responsive-item" src="http://player.vimeo.com/video/22439234"></iframe>-->
                             @if(($datas->logoCategory != "")&&($datas->logoName))
-                                                        <img src="/companylogo.get/" ?>{{ $datas->logoCategory }}/{{ $datas->dirYear }}/{{ $datas->dirMonth }}/{{ $datas->logoName }}/{{ $datas->crTime }}/s.{{ $datas->logExt }}" class="img-responsive" style="width:1000%"  alt="{{ $datas->companyName }}">
+                                                        <img src="<?php echo url('/'); ?>/companylogo.get/"{{ $datas->logoCategory }}/{{ $datas->dirYear }}/{{ $datas->dirMonth }}/{{ $datas->logoName }}/{{ $datas->crTime }}/s.{{ $datas->logExt }}" class="img-responsive" style="width:1000%"  alt="{{ $datas->companyName }}">
                        @else
  <img src="<?php echo url('/'); ?>/images/download.png" alt="" >
     @endif
@@ -161,15 +151,28 @@
 						   </div>
 						   <div class="col-md-6">
 						   <h2 class="c-black">{{$datas->companyName}}</h2>
-						   <div class="post-tags">Openings For:<a href="#"> Accounts Manager (1)</a>, <a href="#">, Android Developers (13)</a>, <a href="#">SEO Expert (3)</a>
+						   <div class="post-tags">Openings For: @foreach (explode(', ', $datas->jobtitle) as $jobtitle)
+                                                       <a href="#">
+                                                    {{$jobtitle}}           
+                                                    </a>@endforeach
 						   </div>
 						    <div class="post-tags">Location:<a>{{$datas->locationName}}</a>
 						   </div>
-						    <div class="post-tags">Experience:<a href="#">  Accounts Manager - Max 8 Years</a>, <a href="#">, Android Developer - Max 2 years</a>
+						    <div class="post-tags">Experience: @foreach (explode(', ', $datas->expname) as $expname)
+                                                       <a href="#">
+                                                    {{$expname}}           
+                                                    </a>@endforeach
 						   </div>
-						    <div class="post-tags">Job Type:<a href="#">Full Time</a>, <a href="#">,  Day Job</a>
+						    <div class="post-tags">Job Type:<a href="#">@foreach (explode(', ', $datas->emplmode) as $emplmode)
+                                                       <a href="#">
+                                                    {{$emplmode}}           
+                                                    </a>@endforeach
 						   </div>
-						    <div class="post-tags">Salary:<a href="#"> Accounts Manager - 8 lakh PA</a>, <a href="#">Android Developer - 4 lakh PA</a>
+						   
+						    <div class="post-tags">Salary:<a href="#">@foreach (explode(', ', $datas->salary) as $salary)
+                                                       <a href="#">
+                                                    {{$salary}}           
+                                                    </a>@endforeach
 						   </div>
                                                    <div class="post-tags">Company Profile:<a>{{$datas->shortDescription}}</a>
 						   </div>
