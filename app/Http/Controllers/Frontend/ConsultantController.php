@@ -27,8 +27,23 @@ class ConsultantController extends Controller
 	
      public function index($limit = 10, $offset = 1)
     {
+                        $jobs=DB::table('companyjobs as j')
+                ->select(DB::raw('group_concat(j.jobTitle) as jobtitle'),DB::raw('group_concat(j.jobId) as jobid'),DB::raw('group_concat(sr.salaryName) as salary'),DB::raw('group_concat(em.employmentmodeName) as emplmode'),DB::raw('group_concat(e.experienceName) as expname'),	'li.logoCategory','li.logoName','li.dirYear','li.dirMonth','li.crTime','li.logExt','j.companyId','j.jobId','l.locationName','com.companyName','j.shortDescription','j.jobTitle','j.jobDescription','sr.salaryName','f.functionalName','e.experienceName','com.aboutbio','cp.plan_id','p.planname')
+					->leftjoin('companylogo as li', 'li.companyId', '=', 'j.companyId')
+					->join('comprofile as com', 'com.companyId', '=', 'j.companyId')
+                                        ->leftjoin('companyplan as cp', 'cp.companyId', '=', 'j.companyId')
+                                           ->leftjoin('_plantypes as p', 'p.plan_id', '=', 'cp.plan_id')
+                 ->leftjoin('_employmentmode as em', 'em.employmentmodeId', '=', 'j.modeofEmployment')
+					->join('_experience as e', 'e.experienceId', '=', 'j.experienceId')
+					->join('_locations as l', 'l.locationId', '=', 'j.locationId')
+                                       ->join('_functionalarea as f', 'f.functionalId', '=', 'j.functionalId')
+                                ->join('_salaryrange as sr', 'sr.salaryId', '=', 'j.salaryId')
+                                ->where('p.planname','Exclusive Plan')
+                        ->where('j.status',1)
+                        ->groupBy('j.companyId')
+                        ->get();
 			$count = DB::table('companyjobs')->where('status',1)->count();  
-			return view('frontend.consultant')->with(array("joblist"=>Consultancylist::get(), "count"=>$count,"keyword"=>""))->with("locations",DB::table('_locations')->get() );
+			return view('frontend.consultant')->with(array("joblist"=>Consultancylist::get(),"data"=>$jobs, "count"=>$count,"keyword"=>""))->with("locations",DB::table('_locations')->get() );
     }
 	
 	

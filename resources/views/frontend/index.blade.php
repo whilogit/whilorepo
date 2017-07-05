@@ -128,11 +128,7 @@
 
   
                           @foreach($data as $datas)
-                        <?php  //print_r($datas);
-                            
-     
- 
-                     ?>
+                      
                              
                         <div class="item <?php if($i==0){echo 'active';} ?>">
                              <?php $i++;?>
@@ -151,10 +147,19 @@
 						   </div>
 						   <div class="col-md-6">
 						   <h2 class="c-black">{{$datas->companyName}}</h2>
-						   <div class="post-tags">Openings For: @foreach (explode(', ', $datas->jobtitle) as $jobtitle)
-                                                       <a href="#">
-                                                    {{$jobtitle}}           
-                                                    </a>@endforeach
+						   
+                                                     <div class="post-tags">Openings For:
+                                                  <?php  $jobtitle = explode(",",  $datas->jobtitle);
+$jobid = explode(",", $datas->jobid);?>
+ 
+   <?php for($i=0; $i<count($jobtitle); $i++)
+     { ?>
+                                                         <a href="jobdetails/<?php echo $jobid[$i];?>/<?php echo $jobtitle[$i];?>">
+<?php echo $jobtitle[$i];?>
+      </a>                                                  
+ <?php }
+?>
+     
 						   </div>
 						    <div class="post-tags">Location:<a>{{$datas->locationName}}</a>
 						   </div>
@@ -256,9 +261,7 @@
                         </div>
                          
                       @endforeach
-                  <?php  echo '<pre>';
-  print_r($result); ?>
-                    
+                 
                     </div>
                 </div>  
             </div>

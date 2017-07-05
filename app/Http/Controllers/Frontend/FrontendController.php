@@ -20,7 +20,7 @@ class FrontendController extends Controller
             'test' => 'it works!',
         ]);
         $jobs=DB::table('companyjobs as j')
-                ->select(DB::raw('group_concat(j.jobTitle) as jobtitle'),DB::raw('group_concat(sr.salaryName) as salary'),DB::raw('group_concat(em.employmentmodeName) as emplmode'),DB::raw('group_concat(e.experienceName) as expname'),	'li.logoCategory','li.logoName','li.dirYear','li.dirMonth','li.crTime','li.logExt','j.companyId','j.jobId','l.locationName','com.companyName','j.shortDescription','j.jobTitle','j.jobDescription','sr.salaryName','f.functionalName','e.experienceName','com.aboutbio','cp.plan_id','p.planname')
+                ->select(DB::raw('group_concat(j.jobTitle) as jobtitle'),DB::raw('group_concat(j.jobId) as jobid'),DB::raw('group_concat(sr.salaryName) as salary'),DB::raw('group_concat(em.employmentmodeName) as emplmode'),DB::raw('group_concat(e.experienceName) as expname'),	'li.logoCategory','li.logoName','li.dirYear','li.dirMonth','li.crTime','li.logExt','j.companyId','j.jobId','l.locationName','com.companyName','j.shortDescription','j.jobTitle','j.jobDescription','sr.salaryName','f.functionalName','e.experienceName','com.aboutbio','cp.plan_id','p.planname')
 					->leftjoin('companylogo as li', 'li.companyId', '=', 'j.companyId')
 					->join('comprofile as com', 'com.companyId', '=', 'j.companyId')
                                         ->leftjoin('companyplan as cp', 'cp.companyId', '=', 'j.companyId')
@@ -36,11 +36,6 @@ class FrontendController extends Controller
                         ->get();
 
 
-       // echo '<pre>';
-       // print_r($jobs);
-  
-
-        //exit;
         return view('frontend.index')->with("locations",DB::table('_locations')->get() )->with("data",$jobs);
     }
      public function verifytalent(){ return view('frontend.verifytalent');   }
