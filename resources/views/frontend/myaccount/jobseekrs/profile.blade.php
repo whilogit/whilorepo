@@ -39,10 +39,11 @@
         </div>
         <div class="tab-pane" id="professional">
             <h4 class="col-md-4 pull-left">Professional Details</h4>
-            <div class="col-md-3 pull-right"><a name="btnsearch" href="javascript:void(0)" class="btn btn-lg  pull-right" title="" style="margin-left:1%;">
-                    <span class="c-white">Edit</span>
+            <div id="profemess"></div>
+            <div class="col-md-3 pull-right"><!--<a name="btnsearch" href="javascript:void(0)" class="btn btn-lg  pull-right" title="" style="margin-left:1%;">
+                    <span class="c-white">Edit</span>-->
                 </a>
-                <a name="btnsearch" href="javascript:void(0)" class="btn btn-lg  pull-right" title="">
+                <a name="btnsearch" href="javascript:void(0)" class="btn btn-lg  pull-right" title="" id="btnprofessionalAdd">
                     <span class="c-white">Add New</span>
                 </a>
             </div>
@@ -60,9 +61,9 @@
                 @endforeach    
                 
                   </tbody> -->
-                <thead><th>Company Name</th><th>Job Title</th><th>Designation</th><th>Experience(Years)</th></tr></thead>
+                <thead><th>Professional Name</th><th>Functional Area</th><th>Experience(Years)</th><th>Action</th></tr></thead>
                 <tbody>
-                    
+
                 </tbody>
             </table>
         </div>
@@ -127,19 +128,9 @@
 
 
             <table id="appliedTable" class="table table-orders table-bordered table-striped table-responsive no-margin">
-              <!--   <tbody>
-                @foreach($data['personal'] as $personal)
-                 <tr><th>Date Of Birth</th>   <td>{{ $personal->dob }}</td></tr>
-                    <tr>   <th>Passport</th> <td>{{ $personal->passport }}</td></tr>
-                      <tr> <th>Adhar Card</th>  <td>{{ $personal->adharcard }}</td></tr>
-                      <tr> <th>PAN Card</th><td>{{ $personal->pancard }}</td></tr>
-                      <tr> <th>Marital Status</th> <td>{{ $personal->marital == 1 ? "Yes" : "No" }}</td></tr>
-                      <tr> <th>Willing to relocate??</th><td>{{ $personal->relocate == 1 ? "Yes" : "No" }}</td></tr>
-                  <tr><th>Flexible with shifts??</th> <td>{{ $personal->shifts == 1 ? "Yes" : "No" }}</td></tr>
-                 <tr> <th>Owning a vehicle??</th><td>{{ $personal->vehicle == 1 ? "Yes" : "No" }}</td></tr>
-                @endforeach    
-                
-                  </tbody> -->
+
+
+                </tbody> 
                 <thead><th>Company Name</th><th>Job Title</th><th>Designation</th><th>Experience(Years)</th><th>Location</th></tr></thead>
                 <tbody>
                 </tbody>
@@ -151,19 +142,7 @@
 
 
             <table id="shortlistedJobs" class="table table-orders table-bordered table-striped table-responsive no-margin">
-              <!--   <tbody>
-                @foreach($data['personal'] as $personal)
-                 <tr><th>Date Of Birth</th>   <td>{{ $personal->dob }}</td></tr>
-                    <tr>   <th>Passport</th> <td>{{ $personal->passport }}</td></tr>
-                      <tr> <th>Adhar Card</th>  <td>{{ $personal->adharcard }}</td></tr>
-                      <tr> <th>PAN Card</th><td>{{ $personal->pancard }}</td></tr>
-                      <tr> <th>Marital Status</th> <td>{{ $personal->marital == 1 ? "Yes" : "No" }}</td></tr>
-                      <tr> <th>Willing to relocate??</th><td>{{ $personal->relocate == 1 ? "Yes" : "No" }}</td></tr>
-                  <tr><th>Flexible with shifts??</th> <td>{{ $personal->shifts == 1 ? "Yes" : "No" }}</td></tr>
-                 <tr> <th>Owning a vehicle??</th><td>{{ $personal->vehicle == 1 ? "Yes" : "No" }}</td></tr>
-                @endforeach    
-                
-                  </tbody> -->
+
                 <thead><th>Company Name</th><th>Job Title</th><th>Designation</th><th>Experience(Years)</th><th>Location</th><th>Apply Now</th></tr></thead>
                 <tbody>
 
@@ -230,11 +209,15 @@
 
         getAllEdcucationDetails();
         getAllShortListedJobsDetails();
+        getAllProfessionalDetails();
         getAllProfileDetails();
         getAllAppliedJobsDetails();
         $(".btnEdit").bind("click", educationEdit);
 
         $("#btnAdd").bind("click", educationAdd);
+
+        $("#btnprofessionalAdd").bind("click", professionalAdd);
+
 
 
         //select uery
@@ -257,7 +240,7 @@
                 "<td><input type='text'/></td>" +
                 "<td><select name='courseType' class='courseType'></select></td>" +
                 "<td><input type='text' /></td>" +
-                "<td><button   class='btnSave'>Save</button>\n\</td>" + "</tr>");
+                "<td><button   class='btnSave c-white btn btn-lg'>Save</button>\n\</td>" + "</tr>");
         $(".btnSave").bind("click", educationSave);
 
     }
@@ -346,7 +329,7 @@
         passYear.html("<input type='text' name='passYear' id='passYear' value='" + passYear.html() + "'/>");
 
 
-        tdButtons.html("<button src='images/disk.png' class='btnSave' data-id=" + id + ">Save</button>");
+        tdButtons.html("<button src='images/disk.png' class='btnSave c-white btn btn-lg' data-id=" + id + ">Save</button>");
         $(".btnSave").bind("click", educationSave);
         $(".btnEdit").bind("click", educationEdit);
         //   $(".btnDelete").bind("click", Delete);
@@ -470,7 +453,7 @@
                             "<td>" + item.universityName + "</td>" +
                             "<td>" + item.employmentmodeName + "</td>" +
                             "<td>" + item.passingYear + "</td>" +
-                            "<td><button   class='btnEdit' data-id=" + item.id + ">Edit</button></td>" + "</tr>");
+                            "<td><button   class='btnEdit c-white btn btn-lg' data-id=" + item.id + ">Edit</button></td>" + "</tr>");
                     $(".btnEdit").bind("click", educationEdit);
                 });
             }
@@ -545,7 +528,7 @@
                             "<tr><th>Address<td>" + item.address + "</td></th></tr>" +
                             "<tr><th>Gender<td>" + gender + "</td></th></tr>" +
                             "<tr><th>Short Bio<td>" + item.shortBio + "</td></th></tr>\n\
-                                  <tr><th><td><button   class='btn btn-lg pull-right btnProfileEdit'data-id=" + item.seekerId + "><span class='c-white'>Edit</span></button></td></th></tr>");
+                                  <tr><th><td><button   class='btn btn-lg btnProfileEdit'data-id=" + item.seekerId + "><span class='c-white'>Edit</span></button></td></th></tr>");
                     $(".btnProfileEdit").bind("click", profileEdit);
                 });
             }
@@ -595,7 +578,7 @@
 
         bio.html("<input type='text' name='passYear' id='passYear' value='" + bio.html() + "'/>");
 
-        tdButtons.html("<button src='images/disk.png' class='btnprofileSave' data-id=" + id + ">Save</button>");
+        tdButtons.html("<button src='images/disk.png' class='btnprofileSave c-white btn btn-lg' data-id=" + id + ">Save</button>");
         $(".btnprofileSave").bind("click", profileSave);
         $(".btnProfileEdit").bind("click", profileEdit);
 
@@ -680,7 +663,7 @@
         address.html($("input[type=text]").val())
         gender.html($("select option:selected").text())
         bio.html($("input[type=text]").val())
-        tdButtons.html("<button class='btnProfileEdit' data-id=" + id + ">Edit</button>");
+        tdButtons.html("<button class='btnProfileEdit c-white btn btn-lg' data-id=" + id + ">Edit</button>");
         $(".btnProfileEdit").bind("click", profileEdit);
     }
 
@@ -738,11 +721,243 @@
                             "<td>" + item.jobTitle + "</td>" +
                             "<td>" + item.jobTitle + "</td>" +
                             "<td>" + item.experienceName + "</td>" +
-                            "<td>" + item.locationName + "</td><td><button>apply</button>");
+                            "<td>" + item.locationName + "</td><td><button class='c-white btn btn-lg'>apply</button>");
                 });
             }
         });
     }
+
+
+
+//profession details
+
+    function professionalAdd()
+    {
+        getAllProfessionalList();
+        getAllFuncationalArea();
+        $("#professionalTable tbody").append("<tr>" + "<td><select name='pNames' class='pNames'></select></td>" +
+                "<td><select name='pAreas' class='pAreas'></select></td>" +
+                "<td><input type='text' /></td>" +
+                "<td><button   class='btnprofessionalSave c-white btn btn-lg'>Save</button>\n\</td>" + "</tr>");
+        $(".btnprofessionalSave").bind("click", professionalSave);
+
+    }
+    function getAllProfessionalDetails()
+    {
+
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+            url: '/auth/getAllProfessionalDetails',
+            type: 'GET',
+            data: {"_token": "{{ csrf_token() }}"},
+            dataType: 'JSON',
+            success: function (data) {
+                // console.log(data)
+                data.forEach(function (item) {
+
+
+                    $("#professionalTable tbody").append("<tr>" +
+                            "<td>" + item.industryName + "</td>" +
+                            "<td>" + item.functionalName + "</td>" +
+                            "<td>" + item.exprstatus + "</td>" +
+                            "<td><button   class='btnprofessionalEdit c-white btn btn-lg' data-id=" + item.id + ">Edit</button></td>" + "</tr>");
+                    $(".btnprofessionalEdit").bind("click", professionalEdit);
+                });
+            }
+        });
+    }
+
+    function professionalEdit()
+    {
+
+        var currentRow = $(this).closest("tr");
+        id = $(this).data('id');
+
+        var par = $(this).parent().parent();
+        var pName = par.children("td:nth-child(1)");
+        var pArea = par.children("td:nth-child(2)");
+        var exp = par.children("td:nth-child(3)");
+        var tdButtons = par.children("td:nth-child(4)");
+
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $.each(par, function () {
+            $.ajax({
+                url: '/auth/getAllProfessionalList',
+                type: 'GET',
+                data: {"_token": "{{ csrf_token() }}"},
+                dataType: 'JSON',
+                success: function (data) {
+
+
+
+                    $.each(data, function (key, value)
+                    {
+                        //  console.log(value.qualificationName);
+
+                        $("#pNames").append('<option value=' + value.industryId + '>' + value.industryName + '</option>');
+
+
+                    });
+                }
+
+            });
+            pName.html("<select name='pNames' id='pNames'></select>");
+        });
+
+        $.each(par, function () {
+            $.ajax({
+                url: '/auth/getAllFuncationalArea',
+                type: 'GET',
+                data: {"_token": "{{ csrf_token() }}"},
+                dataType: 'JSON',
+                success: function (data) {
+
+
+
+                    $.each(data, function (key, value)
+                    {
+                        //  console.log(value.qualificationName);
+
+                        $("#pAreas").append('<option value=' + value.functionalId + '>' + value.functionalName + '</option>');
+
+
+                    });
+                }
+
+            });
+            pArea.html("<select name='pAreas' id='pAreas'></select>");
+        });
+
+        exp.html("<input type='text'  name='cources' id='cources' value='" + exp.html() + "'/>");
+        tdButtons.html("<button src='images/disk.png' class='btnprofessionalSave c-white btn btn-lg' data-id=" + id + ">Save</button>");
+        $(".btnprofessionalSave").bind("click", professionalSave);
+        $(".btnprofessionalEdit").bind("click", professionalEdit);
+
+    }
+
+    function professionalSave()
+    {
+        var currentRow = $(this).closest("tr");
+        var id;
+        if ($(this).data('id') !== 'undefined')
+        {
+            id = $(this).data('id');
+           
+        }
+        var pNameSave = currentRow.find("td:eq(0) select").val();
+        var pAreaSave = currentRow.find("td:eq(1) select").val();
+        var expSave = currentRow.find("td:eq(2) input[type=text]").val();
+        $.each(currentRow, function () {
+
+            $.ajax({
+                url: '/auth/updateProfessionalDetails',
+                type: 'POST',
+                async: false,
+                data: {"_token": "{{ csrf_token() }}", "id": id, "pName": pNameSave, "pArea": pAreaSave, "exp": expSave},
+                dataType: 'JSON',
+                success: function (data) {
+
+
+                    if (success = "true") {
+
+                        if (data.insert == 1 && data.insert != 'undefined')
+
+                        {
+
+                            id = data.id;
+
+                            var tdButtons = par.children("td:nth-child(3)");
+                        }
+
+
+
+                        $('#profemess').html("<div class='alert alert-success'><strong>Success!</strong> SucessFully Updated</div>");
+                        window.setTimeout(function () {
+                            $('#profemess').fadeOut();
+                        }, 2000);
+                    } else
+                    {
+                        $('#profemess').html("<div class='alert alert-danger'><strong>Success!</strong> Error in Updating</div>");
+                        window.setTimeout(function () {
+                            $('#profemess').fadeOut();
+                        }, 2000);
+                    }
+
+
+
+
+
+                }
+
+
+
+            });
+
+        });
+
+        var par = $(this).parent().parent(); //tr 
+        var pName = par.children("td:nth-child(1)");
+        var pArea = par.children("td:nth-child(2)");
+        var exp = par.children("td:nth-child(3)");
+        var tdButtons = par.children("td:nth-child(4)");
+        var pNameSaveText = currentRow.find("td:eq(0) option:selected").text();
+        var pAreaSaveText = currentRow.find("td:eq(1) option:selected").text();
+        $.each(currentRow, function () {
+            pName.html(pNameSaveText);
+            pArea.html(pAreaSaveText);
+
+        });
+        exp.html(exp.children("input[type=text]").val());
+        tdButtons.html("<button class='btnprofessionalEdit c-white btn btn-lg' data-id=" + id + ">Edit</button>");
+        $(".btnprofessionalEdit").bind("click", professionalEdit);
+
+    }
+
+    function getAllProfessionalList() {
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+            url: '/auth/getAllProfessionalList',
+            type: 'GET',
+            data: {"_token": "{{ csrf_token() }}"},
+            dataType: 'JSON',
+            success: function (data) {
+                //console.log(data);
+
+                $.each(data, function (key, value)
+                {
+                        $(".pNames").append('<option value=' + value.industryId + '>' + value.industryName + '</option>');
+                });
+            }
+
+
+        });
+    }
+
+
+    function getAllFuncationalArea() {
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+            url: '/auth/getAllFuncationalArea',
+            type: 'GET',
+            data: {"_token": "{{ csrf_token() }}"},
+            dataType: 'JSON',
+            success: function (data) {
+                //console.log(data);
+
+                $.each(data, function (key, value)
+                {
+                    $(".pAreas").append('<option value=' + value.functionalId + '>' + value.functionalName + '</option>');
+                });
+            }
+
+
+        });
+    }
+
+
+
+
+
 
 
 </script>

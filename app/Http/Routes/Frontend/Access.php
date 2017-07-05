@@ -53,7 +53,11 @@ Route::group(['namespace' => 'Auth'], function () {
         //applied jobs
         Route::get('/auth/getallAppliedJobs', 'AuthController@getallAppliedJobs');
         Route::get('/auth/getallShortListedJobs', 'AuthController@getallShortListedJobs');
-
+        Route::get('/auth/getAllProfessionalDetails', 'AuthController@getAllProfessionalDetails');
+        //professional
+        Route::get('/auth/getAllProfessionalList', 'AuthController@getAllProfessionalList');
+        Route::get('/auth/getAllFuncationalArea', 'AuthController@getAllFuncationalArea');
+        Route::post('/auth/updateProfessionalDetails', 'AuthController@updateProfessionalDetails');
 
         // Confirm Account Routes
         Route::get('account/confirm/{token}', 'AuthController@confirmAccount')->name('account.confirm');

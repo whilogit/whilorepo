@@ -163,13 +163,13 @@ trait CompleteJobseeker {
         // echo "<pre>";echo $_SESSION['WHILLO']['SEEKERID'];
         //  print_r($request->all());exit;
         $result = DB::table('jprofile')->where('seekerId', $request->id)
-        ->update(array('mobileNumber' => $request->mobileNum, "firstName" => $request->fullName,
-        "lastName" => $request->fullName,
-        'city' => $request->city,
-        'pinCode' => $request->pincode,
-        'address' => $request->address,
-        'gender' => $request->gender,
-        'shortBio' => $request->bio,
+                ->update(array('mobileNumber' => $request->mobileNum, "firstName" => $request->fullName,
+            "lastName" => $request->fullName,
+            'city' => $request->city,
+            'pinCode' => $request->pincode,
+            'address' => $request->address,
+            'gender' => $request->gender,
+            'shortBio' => $request->bio,
         ));
 
         if (empty($result)) {
@@ -185,34 +185,101 @@ trait CompleteJobseeker {
             ));
         }
     }
-    
+
     public function getallAppliedJobs() {
-        
-        $result=  DB::table('userappliedjobs as u')
-                ->join('companyjobs as c','c.jobId','=','u.jobId')
-                ->join('comprofile as cp','cp.companyId','=','c.companyId')
-                ->join('_locations as l','l.locationId','=','c.locationId')
-                  ->join('_experience as e','e.experienceId','=','c.experienceId')
-                ->select('c.jobTitle','c.experienceId','cp.companyName','l.locationName','e.experienceName')
-                ->where('u.seekerId',$_SESSION['WHILLO']['SEEKERID'])
+
+        $result = DB::table('userappliedjobs as u')
+                ->join('companyjobs as c', 'c.jobId', '=', 'u.jobId')
+                ->join('comprofile as cp', 'cp.companyId', '=', 'c.companyId')
+                ->join('_locations as l', 'l.locationId', '=', 'c.locationId')
+                ->join('_experience as e', 'e.experienceId', '=', 'c.experienceId')
+                ->select('c.jobTitle', 'c.experienceId', 'cp.companyName', 'l.locationName', 'e.experienceName')
+                ->where('u.seekerId', $_SESSION['WHILLO']['SEEKERID'])
                 ->get();
         echo json_encode($result);
-        
     }
-    
-    
-        public function getallShortListedJobs() {
-        
-       $result= DB::table('shortlistjobs as s')
-                 ->join('comprofile as cp','cp.companyId','=','s.companyId')
-                ->join('companyjobs as c','c.companyId','=','cp.companyId')
-                ->join('_locations as l','l.locationId','=','c.locationId')
-                  ->join('_experience as e','e.experienceId','=','c.experienceId')
-                ->select('c.jobTitle','c.experienceId','cp.companyName','l.locationName','e.experienceName')
-                ->where('s.seekerId',$_SESSION['WHILLO']['SEEKERID'])
+
+    public function getallShortListedJobs() {
+
+        $result = DB::table('shortlistjobs as s')
+                ->join('comprofile as cp', 'cp.companyId', '=', 's.companyId')
+                ->join('companyjobs as c', 'c.companyId', '=', 'cp.companyId')
+                ->join('_locations as l', 'l.locationId', '=', 'c.locationId')
+                ->join('_experience as e', 'e.experienceId', '=', 'c.experienceId')
+                ->select('c.jobTitle', 'c.experienceId', 'cp.companyName', 'l.locationName', 'e.experienceName')
+                ->where('s.seekerId', $_SESSION['WHILLO']['SEEKERID'])
                 ->get();
-      echo json_encode($result);
-        
+        echo json_encode($result);
+    }
+
+    public function getAllProfessionalDetails() {
+
+        $result = DB::table('jproffessional as jp')
+                ->join('_industry as i', 'i.industryId', '=', 'jp.industryId')
+                ->join('_functionalarea as f', 'f.functionalId', '=', 'jp.functionalarea')
+                ->select('jp.exprstatus', 'f.functionalName', 'i.industryName','jp.id')
+                ->where('jp.seekerId', $_SESSION['WHILLO']['SEEKERID'])
+                ->get();
+        echo json_encode($result);
+    }
+
+    public function getAllProfessionalList() {
+        $result = DB::table('_industry')->get();
+        echo json_encode($result);
+    }
+
+    public function getAllFuncationalArea() {
+        $result = DB::table('_functionalarea')->get();
+        echo json_encode($result);
+    }
+
+    public function updateProfessionalDetails(Request $request) {
+        //echo '<pre>';print_r($request->all());exit;
+
+        if ($request->id) {
+
+            $result = DB::table('jproffessional')->where('id', $request->id)
+                    ->update(array('industryId' => $request->pName, "functionalarea" => $request->pArea,
+                "seekerId" => $_SESSION['WHILLO']['SEEKERID'],
+                "exprstatus" => $request->exp
+            ));
+
+
+            if (empty($result)) {
+                return response()->json(array(
+                            'success' => false,
+                            'errors' => "Failed to change status"
+                ));
+            } else {
+
+                return response()->json(array(
+                            'success' => true,
+                            'errors' => "Status successfully changed"
+                ));
+            }
+        } else {
+            $result = DB::table('jproffessional')->insert([
+                ['industryId' => $request->pName, "functionalarea" => $request->pArea,
+                    "seekerId" => $_SESSION['WHILLO']['SEEKERID'],
+                    "exprstatus" => $request->exp]]);
+            $ids = DB::getPdo()->lastInsertId();
+
+
+            if (empty($result)) {
+                return response()->json(array(
+                            'success' => false,
+                            'errors' => "Failed to change status"
+                ));
+            } else {
+
+                return response()->json(array(
+                            'success' => true,
+                            'errors' => "Status successfully changed",
+                            'id' => $ids,
+                            'insert' => 1,
+                ));
+            }
+        }
     }
 
 }
