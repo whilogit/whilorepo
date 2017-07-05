@@ -61,7 +61,7 @@
                 @endforeach    
                 
                   </tbody> -->
-                <thead><th>Professional Name</th><th>Functional Area</th><th>Experience(Years)</th><th>Action</th></tr></thead>
+                <thead><th>Company Name</th><th>Designation</th><th>start(Years)</th><th>End(Years)</th><th>Action</th></tr></thead>
                 <tbody>
 
                 </tbody>
@@ -521,7 +521,7 @@
                     //  $('#peofileEditButton').html("<button   class='btn btn-lg pull-right btnEdit'data-id=" + item.seekerId +"><span class='c-white'>Edit</span></button>");
                     gender = item.Gender = 1 ? "Male" : "Female"
                     $("#profilelTable thead").append("<tr><th>Full Name" +
-                            "<td>" + item.firstname + "" + item.lastName + "</td></th></tr>" +
+                            "<td>" + item.firstName + "" + item.lastName + "</td></th></tr>" +
                             "<tr><th>Mobile Number<td>" + item.mobileNumber + "</td></th></tr>" +
                             "<tr><th>City<td>" + item.city + "</td></th></tr>" +
                             "<tr><th>Pincode<td>" + item.pinCode + "</td></th></tr>" +
@@ -733,10 +733,17 @@
 
     function professionalAdd()
     {
-        getAllProfessionalList();
-        getAllFuncationalArea();
-        $("#professionalTable tbody").append("<tr>" + "<td><select name='pNames' class='pNames'></select></td>" +
-                "<td><select name='pAreas' class='pAreas'></select></td>" +
+        // getAllProfessionalList();
+        //getAllFuncationalArea();
+        /*$("#professionalTable tbody").append("<tr>" + "<td><select name='pNames' class='pNames'></select></td>" +
+         "<td><select name='pAreas' class='pAreas'></select></td>" +
+         "<td><input type='text' /></td>" +
+         "<td><button   class='btnprofessionalSave c-white btn btn-lg'>Save</button>\n\</td>" + "</tr>");*/
+
+
+        $("#professionalTable tbody").append("<tr>" + "<td><input type='text' /></td>" +
+                "<td><input type='text' /></td>" +
+                "<td><input type='text' /></td>" +
                 "<td><input type='text' /></td>" +
                 "<td><button   class='btnprofessionalSave c-white btn btn-lg'>Save</button>\n\</td>" + "</tr>");
         $(".btnprofessionalSave").bind("click", professionalSave);
@@ -744,10 +751,11 @@
     }
     function getAllProfessionalDetails()
     {
+       
 
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         $.ajax({
-            url: '/auth/getAllProfessionalDetails',
+            url: '/auth/comonylist',
             type: 'GET',
             data: {"_token": "{{ csrf_token() }}"},
             dataType: 'JSON',
@@ -757,9 +765,10 @@
 
 
                     $("#professionalTable tbody").append("<tr>" +
-                            "<td>" + item.industryName + "</td>" +
-                            "<td>" + item.functionalName + "</td>" +
-                            "<td>" + item.exprstatus + "</td>" +
+                            "<td>" + item.companyName + "</td>" +
+                            "<td>" + item.description + "</td>" +
+                            "<td>" + item.startYear + "</td>" +
+                            "<td>" + item.endYear + "</td>" +
                             "<td><button   class='btnprofessionalEdit c-white btn btn-lg' data-id=" + item.id + ">Edit</button></td>" + "</tr>");
                     $(".btnprofessionalEdit").bind("click", professionalEdit);
                 });
@@ -774,61 +783,15 @@
         id = $(this).data('id');
 
         var par = $(this).parent().parent();
-        var pName = par.children("td:nth-child(1)");
-        var pArea = par.children("td:nth-child(2)");
-        var exp = par.children("td:nth-child(3)");
-        var tdButtons = par.children("td:nth-child(4)");
-
-        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-        $.each(par, function () {
-            $.ajax({
-                url: '/auth/getAllProfessionalList',
-                type: 'GET',
-                data: {"_token": "{{ csrf_token() }}"},
-                dataType: 'JSON',
-                success: function (data) {
-
-
-
-                    $.each(data, function (key, value)
-                    {
-                        //  console.log(value.qualificationName);
-
-                        $("#pNames").append('<option value=' + value.industryId + '>' + value.industryName + '</option>');
-
-
-                    });
-                }
-
-            });
-            pName.html("<select name='pNames' id='pNames'></select>");
-        });
-
-        $.each(par, function () {
-            $.ajax({
-                url: '/auth/getAllFuncationalArea',
-                type: 'GET',
-                data: {"_token": "{{ csrf_token() }}"},
-                dataType: 'JSON',
-                success: function (data) {
-
-
-
-                    $.each(data, function (key, value)
-                    {
-                        //  console.log(value.qualificationName);
-
-                        $("#pAreas").append('<option value=' + value.functionalId + '>' + value.functionalName + '</option>');
-
-
-                    });
-                }
-
-            });
-            pArea.html("<select name='pAreas' id='pAreas'></select>");
-        });
-
-        exp.html("<input type='text'  name='cources' id='cources' value='" + exp.html() + "'/>");
+        var cName = par.children("td:nth-child(1)");
+        var des = par.children("td:nth-child(2)");
+        var start = par.children("td:nth-child(3)");
+        var end = par.children("td:nth-child(4)");
+        var tdButtons = par.children("td:nth-child(5)");
+        cName.html("<input type='text'  name='cName' id='cName' value='" + cName.html() + "'/>");
+        des.html("<input type='text'  name='des' id='des' value='" + des.html() + "'/>");
+        start.html("<input type='text'  name='start' id='start' value='" + start.html() + "'/>");
+        end.html("<input type='text'  name='end' id='end' value='" + end.html() + "'/>");
         tdButtons.html("<button src='images/disk.png' class='btnprofessionalSave c-white btn btn-lg' data-id=" + id + ">Save</button>");
         $(".btnprofessionalSave").bind("click", professionalSave);
         $(".btnprofessionalEdit").bind("click", professionalEdit);
@@ -842,18 +805,20 @@
         if ($(this).data('id') !== 'undefined')
         {
             id = $(this).data('id');
-           
+
         }
-        var pNameSave = currentRow.find("td:eq(0) select").val();
-        var pAreaSave = currentRow.find("td:eq(1) select").val();
-        var expSave = currentRow.find("td:eq(2) input[type=text]").val();
+
+        var cNameSave = currentRow.find("td:eq(0) input[type=text]").val();
+        var desSave = currentRow.find("td:eq(1) input[type=text]").val();
+        var startSave = currentRow.find("td:eq(2) input[type=text]").val();
+        var endSave = currentRow.find("td:eq(3) input[type=text]").val();
         $.each(currentRow, function () {
 
             $.ajax({
-                url: '/auth/updateProfessionalDetails',
+                url: '/auth/companyUpdate',
                 type: 'POST',
                 async: false,
-                data: {"_token": "{{ csrf_token() }}", "id": id, "pName": pNameSave, "pArea": pAreaSave, "exp": expSave},
+                data: {"_token": "{{ csrf_token() }}", "id": id, "cName": cNameSave, "des": desSave, "start": startSave, "end": endSave},
                 dataType: 'JSON',
                 success: function (data) {
 
@@ -866,7 +831,7 @@
 
                             id = data.id;
 
-                            var tdButtons = par.children("td:nth-child(3)");
+                            var tdButtons = par.children("td:nth-child(4)");
                         }
 
 
@@ -896,18 +861,16 @@
         });
 
         var par = $(this).parent().parent(); //tr 
-        var pName = par.children("td:nth-child(1)");
-        var pArea = par.children("td:nth-child(2)");
-        var exp = par.children("td:nth-child(3)");
-        var tdButtons = par.children("td:nth-child(4)");
-        var pNameSaveText = currentRow.find("td:eq(0) option:selected").text();
-        var pAreaSaveText = currentRow.find("td:eq(1) option:selected").text();
-        $.each(currentRow, function () {
-            pName.html(pNameSaveText);
-            pArea.html(pAreaSaveText);
+        var cName = par.children("td:nth-child(1)");
+        var des = par.children("td:nth-child(2)");
+        var start = par.children("td:nth-child(3)");
+        var end = par.children("td:nth-child(4)");
 
-        });
-        exp.html(exp.children("input[type=text]").val());
+        var tdButtons = par.children("td:nth-child(5)");
+        cName.html(cName.children("input[type=text]").val());
+        des.html(des.children("input[type=text]").val());
+        start.html(start.children("input[type=text]").val());       
+        end.html(end.children("input[type=text]").val());
         tdButtons.html("<button class='btnprofessionalEdit c-white btn btn-lg' data-id=" + id + ">Edit</button>");
         $(".btnprofessionalEdit").bind("click", professionalEdit);
 
@@ -925,7 +888,7 @@
 
                 $.each(data, function (key, value)
                 {
-                        $(".pNames").append('<option value=' + value.industryId + '>' + value.industryName + '</option>');
+                    $(".pNames").append('<option value=' + value.industryId + '>' + value.industryName + '</option>');
                 });
             }
 
