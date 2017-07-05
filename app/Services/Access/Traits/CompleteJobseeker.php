@@ -212,36 +212,89 @@ trait CompleteJobseeker {
         echo json_encode($result);
     }
 
-    public function getAllProfessionalDetails() {
+    /* public function getAllProfessionalDetails() {
 
-        $result = DB::table('jproffessional as jp')
-                ->join('_industry as i', 'i.industryId', '=', 'jp.industryId')
-                ->join('_functionalarea as f', 'f.functionalId', '=', 'jp.functionalarea')
-                ->select('jp.exprstatus', 'f.functionalName', 'i.industryName','jp.id')
-                ->where('jp.seekerId', $_SESSION['WHILLO']['SEEKERID'])
-                ->get();
+      $result = DB::table('jproffessional as jp')
+      ->join('_industry as i', 'i.industryId', '=', 'jp.industryId')
+      ->join('_functionalarea as f', 'f.functionalId', '=', 'jp.functionalarea')
+      ->select('jp.exprstatus', 'f.functionalName', 'i.industryName','jp.id')
+      ->where('jp.seekerId', $_SESSION['WHILLO']['SEEKERID'])
+      ->get();
+      echo json_encode($result);
+      }
+
+      public function getAllProfessionalList() {
+      $result = DB::table('_industry')->get();
+      echo json_encode($result);
+      }
+
+      public function getAllFuncationalArea() {
+      $result = DB::table('_functionalarea')->get();
+      echo json_encode($result);
+      }
+
+      public function updateProfessionalDetails(Request $request) {
+      //echo '<pre>';print_r($request->all());exit;
+
+      if ($request->id) {
+
+      $result = DB::table('jproffessional')->where('id', $request->id)
+      ->update(array('industryId' => $request->pName, "functionalarea" => $request->pArea,
+      "seekerId" => $_SESSION['WHILLO']['SEEKERID'],
+      "exprstatus" => $request->exp
+      ));
+
+
+      if (empty($result)) {
+      return response()->json(array(
+      'success' => false,
+      'errors' => "Failed to change status"
+      ));
+      } else {
+
+      return response()->json(array(
+      'success' => true,
+      'errors' => "Status successfully changed"
+      ));
+      }
+      } else {
+      $result = DB::table('jproffessional')->insert([
+      ['industryId' => $request->pName, "functionalarea" => $request->pArea,
+      "seekerId" => $_SESSION['WHILLO']['SEEKERID'],
+      "exprstatus" => $request->exp]]);
+      $ids = DB::getPdo()->lastInsertId();
+
+
+      if (empty($result)) {
+      return response()->json(array(
+      'success' => false,
+      'errors' => "Failed to change status"
+      ));
+      } else {
+
+      return response()->json(array(
+      'success' => true,
+      'errors' => "Status successfully changed",
+      'id' => $ids,
+      'insert' => 1,
+      ));
+      }
+      }
+      } */
+
+    public function comonylist() {
+        $result = DB::table('jexperience')->where("seekerId", $_SESSION['WHILLO']['SEEKERID'])->get();
         echo json_encode($result);
     }
 
-    public function getAllProfessionalList() {
-        $result = DB::table('_industry')->get();
-        echo json_encode($result);
-    }
-
-    public function getAllFuncationalArea() {
-        $result = DB::table('_functionalarea')->get();
-        echo json_encode($result);
-    }
-
-    public function updateProfessionalDetails(Request $request) {
-        //echo '<pre>';print_r($request->all());exit;
-
+    public function companyUpdate(Request $request) {
+//echo '<pre>';print_r($request->all());exit;
         if ($request->id) {
 
-            $result = DB::table('jproffessional')->where('id', $request->id)
-                    ->update(array('industryId' => $request->pName, "functionalarea" => $request->pArea,
-                "seekerId" => $_SESSION['WHILLO']['SEEKERID'],
-                "exprstatus" => $request->exp
+            $result = DB::table('jexperience')->where('id', $request->id)
+                    ->update(array('companyName' => $request->cName, "description" => $request->des,
+                "startYear" => $request->start,
+                "endYear" => $request->end,
             ));
 
 
@@ -258,10 +311,12 @@ trait CompleteJobseeker {
                 ));
             }
         } else {
-            $result = DB::table('jproffessional')->insert([
-                ['industryId' => $request->pName, "functionalarea" => $request->pArea,
+            $result = DB::table('jexperience')->insert([
+                ['companyName' => $request->cName, "description" => $request->des,
+                    "startYear" => $request->start,
+                    "endYear" => $request->end,
                     "seekerId" => $_SESSION['WHILLO']['SEEKERID'],
-                    "exprstatus" => $request->exp]]);
+            ]]);
             $ids = DB::getPdo()->lastInsertId();
 
 
@@ -281,5 +336,5 @@ trait CompleteJobseeker {
             }
         }
     }
-
 }
+    
