@@ -206,7 +206,7 @@ trait CompleteJobseeker {
                 ->join('companyjobs as c', 'c.companyId', '=', 'cp.companyId')
                 ->join('_locations as l', 'l.locationId', '=', 'c.locationId')
                 ->join('_experience as e', 'e.experienceId', '=', 'c.experienceId')
-                ->select('c.jobTitle', 'c.experienceId', 'cp.companyName', 'l.locationName', 'e.experienceName')
+                ->select('c.jobTitle', 'c.experienceId', 'cp.companyName', 'l.locationName', 'e.experienceName','c.jobId')
                 ->where('s.seekerId', $_SESSION['WHILLO']['SEEKERID'])
                 ->get();
         echo json_encode($result);

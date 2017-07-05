@@ -721,12 +721,28 @@
                             "<td>" + item.jobTitle + "</td>" +
                             "<td>" + item.jobTitle + "</td>" +
                             "<td>" + item.experienceName + "</td>" +
-                            "<td>" + item.locationName + "</td><td><button class='c-white btn btn-lg'>apply</button>");
+                            "<td>" + item.locationName + "</td><td><button class='c-white btn btn-lg btnShortlistedJobs' data-id=" + item.jobId + " data-title=" + item.jobTitle + ">apply</button>");
+                    $(".btnShortlistedJobs").bind("click", shortlistedJobs);
+
                 });
             }
         });
     }
+    function shortlistedJobs()
+    {
+        var currentRow = $(this).closest("tr");
+        id = $(this).data('id');
+        title = $(this).data('title');
 
+        $.each(currentRow, function () {
+            
+            window.open("companydetails/"+id+"/"+title,"_blank")
+            //window.location.replace("companydetails/id/title","_blank");
+
+
+
+        });
+    }
 
 
 //profession details
@@ -751,7 +767,7 @@
     }
     function getAllProfessionalDetails()
     {
-       
+
 
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         $.ajax({
@@ -869,7 +885,7 @@
         var tdButtons = par.children("td:nth-child(5)");
         cName.html(cName.children("input[type=text]").val());
         des.html(des.children("input[type=text]").val());
-        start.html(start.children("input[type=text]").val());       
+        start.html(start.children("input[type=text]").val());
         end.html(end.children("input[type=text]").val());
         tdButtons.html("<button class='btnprofessionalEdit c-white btn btn-lg' data-id=" + id + ">Edit</button>");
         $(".btnprofessionalEdit").bind("click", professionalEdit);
