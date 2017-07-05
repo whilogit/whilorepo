@@ -32,7 +32,7 @@ class ResumeController extends Controller {
     public function talentdetails($id, $name) {
         $searched_date = new DateTime();
         $date = date('Y-m-d');
-       echo  "plan".$plan = DB::table('companyplan')->select('plan_id')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->first();
+       $plan = DB::table('companyplan')->select('plan_id')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->first();
          
        
        if ($plan==""){
