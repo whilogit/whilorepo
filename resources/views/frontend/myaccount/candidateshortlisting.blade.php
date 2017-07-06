@@ -1,4 +1,4 @@
-<h4>Shortlisted Candidates</h4>
+<div id="post-ajax"><h4>Shortlisted Candidates</h4>
 <table class="table table-orders table-bordered table-striped table-responsive no-margin">
 <tbody>
 <tr><th>Name</th><th>Qualification</th><th>Experience</th><th>Status</th></tr>
@@ -21,10 +21,14 @@
          @endif
     </td>
     
+    
 </tr>
  @endforeach
+
 </tbody>
-</table>       
+</table>   
+ {{ $shortlist->links() }}  
+</div>
 <script src="{{ url('/assets/extra/jquery_new.min.js')}}"></script>
 <link rel="stylesheet" href="{{ url('/assets/extra/jquery-confirm.min.css') }}">
 <script src="{{ url('/assets/extra/jquery-confirm.min.js')}}"></script> 
@@ -70,6 +74,23 @@
                
    
      }
-     
+     $(function() {
+            $('#post-ajax').on('click', '.pagination a', function (e) {
+               var pageno=$(this).attr('href').split('page=')[1];
+               e.preventDefault();
+               $('#ShortlistedCandidates').empty();
+             var postdata = {};
+               postdata['page']=pageno;
+              postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
+                $('body').removeClass('loaded');
+                $.post('/company/shortlist',postdata,function(response){
+                $('body').addClass('loaded');
+                
+                 $('#ShortlistedCandidates').append(response);
+                  
+                });
+            });
+        });
+
 
 </script>
