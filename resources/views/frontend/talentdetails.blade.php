@@ -34,7 +34,7 @@
                 </div>  
 				                  <div class="col-md-6">
                                                       
-                                                       @if($profile->imageCategory=="")
+                                                       @if($profile->imageCategory!="")
 								  <img src="/companylogo.get/{{ $profile->imageCategory }}/{{ $profile->dirYear }}/{{ $profile->dirMonth }}/{{ $profile->imageName }}/{{ $profile->crTime }}/s.{{ $profile->imgExt }}" alt="" class="img-responsive" style="    width: 100%;">
                                                                   @else
                                                                 <img src="images/download.png" alt="" >

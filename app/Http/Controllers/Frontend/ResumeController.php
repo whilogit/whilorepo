@@ -32,7 +32,7 @@ class ResumeController extends Controller {
     public function talentdetails($id, $name) {
         $searched_date = new DateTime();
         $date = date('Y-m-d');
-       $plan = DB::table('companyplan')->select('plan_id')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->first();
+       $plan = DB::table('companyplan')->select('plan_id')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->where('status', 1)->first();
          
        
        if ($plan==""){
@@ -52,7 +52,7 @@ class ResumeController extends Controller {
                     values (?,?,?,?)', array($id, $_SESSION['WHILLO']['COMPAnyID'], $plan_id, $searched_date));
             }
             $shortlistcheck = DB::table('shortlistjobs')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->where('seekerId', $id)->where('Status', 0)->orWhere('Status', 1)->count();
-            ResumesDetails::getdetails($id);
+           
             return view('frontend.resumedetails')->with(array("data" => ResumesDetails::getdetails($id)))->with("shortlistcheck", $shortlistcheck);
         } else {
             return redirect('talents')->with('status', 'Cv search limit exceeded');

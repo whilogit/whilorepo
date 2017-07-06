@@ -76,7 +76,7 @@
 						    <div class="embed-responsive embed-responsive-16by9">
                            <!-- <iframe class="embed-responsive-item" src="http://player.vimeo.com/video/22439234"></iframe>-->
                             @if(($datas->logoCategory != "")&&($datas->logoName))
-                                                        <img src="<?php echo url('/'); ?>/companylogo.get/"{{ $datas->logoCategory }}/{{ $datas->dirYear }}/{{ $datas->dirMonth }}/{{ $datas->logoName }}/{{ $datas->crTime }}/s.{{ $datas->logExt }}" class="img-responsive" style="width:1000%"  alt="{{ $datas->companyName }}">
+                                                        <img src="<?php echo url('/'); ?>/companylogo.get/{{ $datas->logoCategory }}/{{ $datas->dirYear }}/{{ $datas->dirMonth }}/{{ $datas->logoName }}/{{ $datas->crTime }}/s.{{ $datas->logExt }}" class="img-responsive" style="width:1000%"  alt="{{ $datas->companyName }}">
                        @else
  <img src="<?php echo url('/'); ?>/images/download.png" alt="" >
     @endif

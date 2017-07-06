@@ -95,18 +95,22 @@ class JobController extends Controller
             //$userid=$_SESSION['WHILLO']['USERID'];
       
               
-		
 					
 		$seeker_userid = DB::table('jmaster')->select('userId')->where('seekerId',$seekerId)->first();
 			$seeker_userid=$seeker_userid->userId;		
          $email = DB::table('userlogin as ul')->select('emailAddress')->where('userId',$seeker_userid)->first();
-         $to=$email->emailAddress;
+         
+          $createdDate = new DateTime();
+          
+   
+         $res = DB::insert('insert into shortlistjobs(seekerId,companyId,ShortlistedDate) 
+	   				values (?,?,?)',array($seekerId, $_SESSION['WHILLO']['COMPAnyID'],$createdDate));
+        $to=$email->emailAddress;
          $sub='Test shortlist';
          $message='you are shortlisted';
          $sendmail= MailController::sendmail($to,$sub,$message); 
-         $createdDate = new DateTime();
-		$res = DB::insert('insert into shortlistjobs(seekerId,companyId,ShortlistedDate) 
-	   				values (?,?,?)',array($seekerId, $_SESSION['WHILLO']['COMPAnyID'],$createdDate));
+         
+		
 		return response()->json(array(
 					'success' => true,
 					'errors' => "errors"
@@ -168,6 +172,12 @@ class JobController extends Controller
                        
 		return view('frontend.jobdetails')->with("jobdetails",$jobs)->with("jobapplycheck",$jobapplycheck);
     }
+    
+    public function companylogo($category,$year,$month,$name,$time,$size,$ext)
+    {
+		header('Content-type: image/jpeg'); 
+		 die(file_get_contents(app_path(). "/Storage/Images/$category/$year/$month/$year" . "_" . $month . "_" . $time ."_" . $name . "_" . $size ."." . $ext));
+	}
 	public function joblistpagination($offset = 1, $limit = 10)
     {
 		return response()->json(array(
