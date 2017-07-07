@@ -1,3 +1,23 @@
+<?php
+ if(isset($_SESSION)  &&  isset($_SESSION['WHILLO']['COMPAnyID']))
+      {
+$userid=$_SESSION['WHILLO']['USERID'];
+        $companyid=$_SESSION['WHILLO']['COMPAnyID'];
+        $type= $companyid=$_SESSION['WHILLO']['TYPE'];
+$res = DB::table('commaster')     
+                    ->where('userId', $userid )
+                    ->first();
+            if($res->accountStatus == 0 && $type="C")
+            {
+                $planExpiered = 'true';
+            }
+            else
+            {
+                 $planExpiered = 'false';
+            }
+      }
+?>
+
 <!-- MAIN WRAPPER -->
 <div class="body-wrap">
    <!-- HEADER -->
@@ -34,7 +54,7 @@
 					<li class=" mega-dropdown-fluid"><a href="{{ url('/consultants') }}"><i class="fa fa-globe" aria-hidden="true"></i>  CONSULTANTS</a></li>@endif
 			
 <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book" aria-hidden="true"></i>  COURSES <i class="fa fa-caret-down" aria-hidden="true"></i></a>
+<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book" aria-hidden="true"></i>  COURSES <i class="fa fa-caret-down" aria-hidden="true"></i></a>
                         <ul class="dropdown-menu">
                             <li><a href="{{ url('/Corporate-Leadership-Program')}}"><i class="fa fa-graduation-cap" aria-hidden="true"></i>  Corporate Leadership Program</a></li>
                             <li><a href="{{ url('/Language-Training')}}"><i class="fa fa-language" aria-hidden="true"></i>  Language Training</a></li>
@@ -54,9 +74,22 @@
 </li>
                                      
 		        </ul>
-				<ul class="nav navbar-nav navbar-right">
-                   <?php if(isset($_SESSION['WHILLO']['STATUS'])){ ?>
-                   <li class=" mega-dropdown-fluid"><a href="{{ url('/myaccount')}}" ><i class="fa fa-user" aria-hidden="true" ></i>  My Account</a>
+<ul class="nav navbar-nav navbar-right">
+        <?php if(isset($_SESSION['WHILLO']['STATUS']) && $planExpiered=='false'){ ?>
+             <li class=" mega-dropdown-fluid"><a href="{{ url('/myaccount')}}" ><i class="fa fa-user" aria-hidden="true" ></i>  My Account</a>
+                 <ul class="dropdown-menu">
+<li><a data-toggle="modal" data-target="#changepassword"><i class="fa fa-user" aria-hidden="true"></i>  Change Password</a></li>
+                         </ul>
+</li>
+					<li class=" mega-dropdown-fluid"><a href="{{ url('/logout')}}"><i class="fa fa-sign-out" aria-hidden="true"></i>  Logout</a></li>
+                   else { ?>
+                    <li class=" mega-dropdown-fluid"><a href="{{ url('/company/choose_plans')}}" ><i class="fa fa-user" aria-hidden="true" ></i>Renew Plan</a>
+                        <li class=" mega-dropdown-fluid"><a href="{{ url('/logout')}}"><i class="fa fa-sign-out" aria-hidden="true"></i>  Logout</a></li>
+                    <?php } 
+                    
+                    if(isset($_SESSION['WHILLO']['TYPE'])=='E')
+                   { ?>
+                          <li class=" mega-dropdown-fluid"><a href="{{ url('/myaccount')}}" ><i class="fa fa-user" aria-hidden="true" ></i>  My Account</a>
 
  <ul class="dropdown-menu">
                             <li><a data-toggle="modal" data-target="#changepassword"><i class="fa fa-user" aria-hidden="true"></i>  Change Password</a></li>
@@ -64,13 +97,17 @@
                          </ul>
 </li>
 					<li class=" mega-dropdown-fluid"><a href="{{ url('/logout')}}"><i class="fa fa-sign-out" aria-hidden="true"></i>  Logout</a></li>
-                   <?php } else { ?>
-                   <li class=" mega-dropdown-fluid"><a href="{{ url('/auth/signin')}}"><i class="fa fa-sign-in" aria-hidden="true"></i>  LOGIN</a></li>
+                  <?php     
+                   }?>
+                   
+                   
+                  
+		        </ul>
+                <?php if(!isset($_SESSION)){ ?>
+                 <li class=" mega-dropdown-fluid"><a href="{{ url('/auth/signin')}}"><i class="fa fa-sign-in" aria-hidden="true"></i>  LOGIN</a></li>
 					<li class=" mega-dropdown-fluid"><a href="{{ url('/auth/signup')}}"><i class="fa fa-registered" aria-hidden="true"></i>  Talent's SignUp</a></li>
 					<li class=" mega-dropdown-fluid"><a href="{{ url('/company/signup') }}" ><i class="fa fa-user-plus" aria-hidden="true"></i>  FOR Employers</a></li>
-                    <?php } ?>
-		        </ul>
-               
+               <?php } ?>
             </div><!--/.nav-collapse -->
         </div>
     </div>

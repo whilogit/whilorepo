@@ -83,6 +83,7 @@ trait RegisterRedirectsForms
 
     public function showCompanyRegisterForm()
     {
+       
 		if(isset($_SESSION['WHILLO']['STATUS'])){ 
 			if($_SESSION['WHILLO']['TYPE']=="E")return Redirect::to('auth/signup');
 			

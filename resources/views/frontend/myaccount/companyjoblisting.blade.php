@@ -2,6 +2,7 @@
 
   <div class="panel-body">
          <h4 class="col-md-4 pull-left">Posted Jobs</h4>
+         <div id="post-ajax">
          <div id="job_detail_table" >
 
          <table class="table table-orders table-bordered table-striped table-responsive no-margin">
@@ -24,6 +25,8 @@
                                             @endforeach
             </tbody>
             </table>
+               {{ $jobdetails ->links() }} 
+         </div> 
              </div>
          <div id="edit_posted_job" style="display:none;">
     <div class="col-md-12">
@@ -122,4 +125,21 @@
                                  
 });
 });
+ $(function() {
+            $('#post-ajax').on('click', '.pagination a', function (e) {
+               var pageno=$(this).attr('href').split('page=')[1];
+               e.preventDefault();
+
+           	 $('#postedjobs').empty();
+             var postdata = {};
+             postdata['page']=pageno;
+            postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
+                $('body').removeClass('loaded');
+                $.post('/company/postedjobs',postdata,function(response){
+                $('body').addClass('loaded');
+                 $('#postedjobs').append(response);
+                  
+                });
+            });
+        });
 </script>

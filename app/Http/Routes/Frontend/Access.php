@@ -4,36 +4,86 @@
  * Frontend Access Controllers
  */
 Route::group(['namespace' => 'Auth'], function () {
+    
+        Route::group(['middleware' => ['web','auth']] , function () {
+                    Route::get('company/choose_plans', 'AuthController@showCompanyPlans');
+            
+        });
 
     /**
      * These routes require the user to be logged in
      */
-    Route::group(['middleware' => 'auth'], function () {
-        Route::get('logout', 'AuthController@logout')->name('auth.logout');
+    Route::group(['middleware' => ['web','auth', 'planexpiry']] , function () {
+      
 
         // Change Password Routes
         Route::get('password/change', 'PasswordController@showChangePasswordForm')->name('auth.password.change');
         Route::post('password/change', 'PasswordController@changePassword')->name('auth.password.update');
+        
+        //Company Routes
+        
+        Route::get('company/signup', 'AuthController@showCompanyRegisterForm')->name('company.signup');
+        Route::post('company/signup', 'AuthController@cregister');
+        Route::post('company/logo', 'AuthController@logoupload');
+        Route::post('company/complete', 'AuthController@compcomplete');
+        Route::post('company/companyimages', 'AuthController@imageupload');
+        Route::post('company/dopayment', 'AuthController@dopayment');
+        Route::post('company/planselect', 'AuthController@companyplan');
+        Route::get('company/reg_complete', 'AuthController@regCompletepage');
+        Route::get('/company/image_upload_page', 'AuthController@CompanyImagesPage');
+        Route::post('/company/getdetails', 'AuthController@CompanyProfileDetails');
+        Route::post('/company/postedjobs', 'AuthController@GetCompanyPostedJobs');
+        Route::post('/company/shortlist', 'AuthController@GetShorlistedCandidates');
+        Route::post('/company/searchedcandy', 'AuthController@SearchedCandidates');
+        Route::post('/company/appliedcandy', 'AuthController@AppliedCandidates');
+        Route::post('/company/editdetails', 'AuthController@EditCompanyDeatils');
+        Route::post('/company/accesscandidate', 'AuthController@AccessCandidates');
+        Route::post('/company/editjobs', 'AuthController@GetJobDetails');
+        Route::post('/company/updatejob', 'AuthController@UpdateJobDetails');
+        Route::get('/company/passwordform', 'AuthController@compPasswordChangeForm');
+        Route::post('/company/changePassword', 'AuthController@changeCompanyPassword');
+
+        Route::post('/company/payment', 'AuthController@PaymentPlanDetails');
+        Route::post('/ccavenue/responseurl', 'AuthController@CcavenuResponse');
+        Route::post('/ccavenue/cancelurl', 'AuthController@CcavenuCancel');
+
+        Route::post('company/removelogo', 'AuthController@removelogo');
+        Route::post('company/removeimages', 'AuthController@removeimages');
+
+        Route::get('upload/jobs', 'AuthController@showCompanyJobuploadForm');
+        Route::post('upload/jobs', 'AuthController@uploadjobs');
+
+
+
+        Route::post('send/email', 'AuthController@sendmail');
+        Route::post('send/registrationmail', 'AuthController@sendRegistarionMail');
+        Route::post('send/interviewemail', 'AuthController@CallForInterview');
+        Route::post('send/appliedemail', 'AuthController@CallforApplied');
+        Route::post('send/shortliststatus', 'AuthController@ShortListStatus');
+         Route::post('auth/signin', 'AuthController@login');
+
     });
+     Route::get('auth/signin', 'AuthController@showLoginForm')->name('auth.signin');
+     Route::get('company/signin', 'AuthController@showCompanyLoginForm');
+     Route::post('auth/signin', 'AuthController@login');
+     Route::get('auth/signout', 'AuthController@logout');
+     Route::get('logout', 'AuthController@logout')->name('auth.logout');
+
+        // Socialite Routes
+     Route::get('login/{provider}', 'AuthController@loginThirdParty')->name('auth.provider');
+       
+     // Registration Routes
+     Route::get('auth/signup', 'AuthController@showRegistrationForm')->name('auth.signup');
+     Route::post('auth/signup', 'AuthController@register');
+     Route::post('auth/personal', 'AuthController@personal');
 
     /**
      * These routes require the user NOT be logged in
      */
     Route::group(['middleware' => 'guest'], function () {
         // Authentication Routes
-        Route::get('auth/signin', 'AuthController@showLoginForm')->name('auth.signin');
-        Route::post('auth/signin', 'AuthController@login');
-        Route::get('company/signin', 'AuthController@showCompanyLoginForm');
-        Route::get('auth/signout', 'AuthController@logout');
+       
 
-
-        // Socialite Routes
-        Route::get('login/{provider}', 'AuthController@loginThirdParty')->name('auth.provider');
-
-        // Registration Routes
-        Route::get('auth/signup', 'AuthController@showRegistrationForm')->name('auth.signup');
-        Route::post('auth/signup', 'AuthController@register');
-        Route::post('auth/personal', 'AuthController@personal');
         Route::post('auth/qualification', 'AuthController@qualification');
         Route::post('auth/proffessional', 'AuthController@proffessional');
         Route::post('/documents/educational/upload', 'AuthController@updloadcertificates');
@@ -75,46 +125,6 @@ Route::group(['namespace' => 'Auth'], function () {
         Route::post('auth/profileimage', 'AuthController@profileimage');
         Route::post('auth/userresume', 'AuthController@resumeupdloads');
 
-
-        Route::get('company/signup', 'AuthController@showCompanyRegisterForm')->name('company.signup');
-        Route::get('company/choose_plans', 'AuthController@showCompanyPlans');
-        Route::post('company/signup', 'AuthController@cregister');
-        Route::post('company/logo', 'AuthController@logoupload');
-        Route::post('company/complete', 'AuthController@compcomplete');
-        Route::post('company/companyimages', 'AuthController@imageupload');
-        Route::post('company/dopayment', 'AuthController@dopayment');
-        Route::post('company/planselect', 'AuthController@companyplan');
-        Route::get('company/reg_complete', 'AuthController@regCompletepage');
-        Route::get('/company/image_upload_page', 'AuthController@CompanyImagesPage');
-        Route::post('/company/getdetails', 'AuthController@CompanyProfileDetails');
-        Route::post('/company/postedjobs', 'AuthController@GetCompanyPostedJobs');
-        Route::post('/company/shortlist', 'AuthController@GetShorlistedCandidates');
-        Route::post('/company/searchedcandy', 'AuthController@SearchedCandidates');
-        Route::post('/company/appliedcandy', 'AuthController@AppliedCandidates');
-        Route::post('/company/editdetails', 'AuthController@EditCompanyDeatils');
-        Route::post('/company/accesscandidate', 'AuthController@AccessCandidates');
-        Route::post('/company/editjobs', 'AuthController@GetJobDetails');
-        Route::post('/company/updatejob', 'AuthController@UpdateJobDetails');
-        Route::get('/company/passwordform', 'AuthController@compPasswordChangeForm');
-        Route::post('/company/changePassword', 'AuthController@changeCompanyPassword');
-
-        Route::post('/company/payment', 'AuthController@PaymentPlanDetails');
-        Route::post('/ccavenue/responseurl', 'AuthController@CcavenuResponse');
-        Route::post('/ccavenue/cancelurl', 'AuthController@CcavenuCancel');
-
-        Route::post('company/removelogo', 'AuthController@removelogo');
-        Route::post('company/removeimages', 'AuthController@removeimages');
-
-        Route::get('upload/jobs', 'AuthController@showCompanyJobuploadForm');
-        Route::post('upload/jobs', 'AuthController@uploadjobs');
-
-
-
-        Route::post('send/email', 'AuthController@sendmail');
-        Route::post('send/registrationmail', 'AuthController@sendRegistarionMail');
-        Route::post('send/interviewemail', 'AuthController@CallForInterview');
-        Route::post('send/appliedemail', 'AuthController@CallforApplied');
-        Route::post('send/shortliststatus', 'AuthController@ShortListStatus');
 
 
 

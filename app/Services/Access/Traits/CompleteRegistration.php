@@ -9,6 +9,7 @@ use Illuminate\Http\Response;
 use Validator;
 use App\Http\Controllers\CcavenueHelperController;
 use App\Services\Access\Traits\MailController;
+use Illuminate\Pagination\Paginator;
 use Redirect;
 use DB;
 use Hash;
@@ -91,7 +92,7 @@ trait completeRegistration
                                         ->select('j.jobTitle', 'l.locationName','j.lastdate','j.locationId','j.jobId')
                                         ->leftjoin('_locations as l','l.locationId','=','j.locationId')
                                          ->where('j.companyId', '=', $_SESSION['WHILLO']['COMPAnyID'])
-                                        ->get();
+                                        ->paginate(2);
            
           $defaults['locations'] = DB::table('_locations')->get();
             $data=array('jobdetails'=>$jobdetails, 'response'=>$defaults);
@@ -112,7 +113,7 @@ trait completeRegistration
                                          ->leftjoin('_experience as ep','ep.experienceId','=','jp.exprstatus')
                                          ->leftjoin('userlogin as u','u.userId','=','j.userId')
                                          ->where('sc.companyId', '=', $_SESSION['WHILLO']['COMPAnyID'])
-                                        ->get();
+                                        ->paginate(2);
 
          $data['shortlist'] = $shortlist;
           

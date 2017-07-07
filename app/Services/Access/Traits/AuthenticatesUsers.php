@@ -63,6 +63,7 @@ trait AuthenticatesUsers
 			if (Hash::check($request->input('password'), $user->password)) {
 				$url ="";
 				if($user->roleCode=="WHILLO001"){
+                                    dd('hellooo');
 					$url="/auth/signup";
 					$_SESSION['WHILLO']['STATUS']=true;
 					$_SESSION['WHILLO']['USERID']=$user->userId;
@@ -70,7 +71,7 @@ trait AuthenticatesUsers
 					$_SESSION['WHILLO']['TYPE']="E";
 				}
 				if($user->roleCode=="WHILLO002"){
-					$url="/company/signup";
+					$url="/myaccount";
 					$_SESSION['WHILLO']['STATUS']=true;
 					$_SESSION['WHILLO']['USERID']=$user->userId;
 					$_SESSION['WHILLO']['COMPAnyID']=$user->companyId;

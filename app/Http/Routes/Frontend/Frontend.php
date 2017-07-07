@@ -83,7 +83,7 @@ Route::get('companylogo.get/{category}/{year}/{month}/{name}/{time}/{size}.{ext}
 
 
  
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => ['auth','planexpiry']], function () {
     Route::group(['namespace' => 'User'], function() {
         Route::get('dashboard', 'DashboardController@index')->name('frontend.user.dashboard');
         Route::get('profile/edit', 'ProfileController@edit')->name('frontend.user.profile.edit');

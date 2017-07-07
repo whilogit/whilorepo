@@ -66,7 +66,7 @@ class Kernel extends HttpKernel
 		'superadmin' => \App\Http\Middleware\Superadmin::class,
 		'authadmin' => \App\Http\Middleware\AuthAdmin::class,
 		
-		
+		'planexpiry' => \App\Http\Middleware\PlanExpiryMiddleware::class,
 		
 
         /**
