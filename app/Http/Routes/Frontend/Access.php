@@ -7,6 +7,7 @@ Route::group(['namespace' => 'Auth'], function () {
     
         Route::group(['middleware' => ['web','auth']] , function () {
                     Route::get('company/choose_plans', 'AuthController@showCompanyPlans');
+                    Route::get('company/plan_expiry', 'AuthController@showEpiryPage');
             
         });
 
@@ -22,8 +23,8 @@ Route::group(['namespace' => 'Auth'], function () {
         
         //Company Routes
         
-        Route::get('company/signup', 'AuthController@showCompanyRegisterForm')->name('company.signup');
-        Route::post('company/signup', 'AuthController@cregister');
+    
+       
         Route::post('company/logo', 'AuthController@logoupload');
         Route::post('company/complete', 'AuthController@compcomplete');
         Route::post('company/companyimages', 'AuthController@imageupload');
@@ -68,7 +69,8 @@ Route::group(['namespace' => 'Auth'], function () {
      Route::post('auth/signin', 'AuthController@login');
      Route::get('auth/signout', 'AuthController@logout');
      Route::get('logout', 'AuthController@logout')->name('auth.logout');
-
+     Route::get('company/signup', 'AuthController@showCompanyRegisterForm')->name('company.signup');
+     Route::post('company/signup', 'AuthController@cregister');
         // Socialite Routes
      Route::get('login/{provider}', 'AuthController@loginThirdParty')->name('auth.provider');
        

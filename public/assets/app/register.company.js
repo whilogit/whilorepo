@@ -30,8 +30,9 @@ $(function(){
 					$.post('/company/signup',postdata,function(response){   
 					$('body').addClass('loaded');
 						if(response.success)
-					
+                                                {
 							location.href = "/company/choose_plans";
+                                                    }
 						else 
 							{
 							if ((typeof  response.errors) == 'object') { 

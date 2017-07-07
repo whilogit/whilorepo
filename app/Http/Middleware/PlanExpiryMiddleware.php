@@ -38,6 +38,12 @@ class PlanExpiryMiddleware
                 //return redirect()->route('company/choose_plans');
                 return redirect('company/choose_plans');
             }
+           else if($res->accountStatus == 2 && $type="C")
+            {
+                //return response('frontend.myaccount.companyplans');
+                //return redirect()->route('company/choose_plans');
+                return redirect('company/plan_expiry');
+            }
             else
             {
                 return $next($request);

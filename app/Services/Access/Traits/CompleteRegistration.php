@@ -20,6 +20,12 @@ use Hash;
 trait completeRegistration
 {
     use RedirectsUsers;
+    public function showEpiryPage()
+    {
+        
+         return response(view('frontend.companyauth.planexpiry'));
+        
+    }
      public function compcomplete(Request $request,Response $response)
     { 
 		  

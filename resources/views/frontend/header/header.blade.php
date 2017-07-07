@@ -7,7 +7,7 @@ if (isset($_SESSION) && isset($_SESSION['WHILLO']['COMPAnyID'])) {
     $res = DB::table('commaster')
             ->where('userId', $userid)
             ->first();
-    if ($res->accountStatus == 0 && $type = "C") {
+    if ($res->accountStatus == 0 || $res->accountStatus == 2 && $type = "C") {
         $planExpiered = 'true';
     } else {
         $planExpiered = 'false';
@@ -35,11 +35,11 @@ if (isset($_SESSION) && isset($_SESSION['WHILLO']['COMPAnyID'])) {
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-left">
-                            @if(!isset($_SESSION['WHILLO']['SEEKERID']))
+                            @if(!isset($_SESSION['WHILLO']['SEEKERID'])&& $planExpiered =='false' )
 
                             <li class=" mega-dropdown-fluid"><a href="{{ url('/talents') }}"><i class="fa fa-universal-access" aria-hidden="true"></i>  TALENTS</a></li>
                             @endif
-                            @if(isset($_SESSION['WHILLO']['COMPAnyID']))
+                            @if(isset($_SESSION['WHILLO']['COMPAnyID'])&&  $planExpiered =='false')
 
                             <li class=" mega-dropdown-fluid"><a href="{{ url('/bonafiedtalents') }}"><i class="fa fa-universal-access" aria-hidden="true"></i>  Bonafied talent</a></li>@endif
                             @if(!isset($_SESSION['WHILLO']['COMPAnyID']))
