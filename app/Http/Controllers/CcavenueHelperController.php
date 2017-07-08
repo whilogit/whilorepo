@@ -95,6 +95,12 @@ class CcavenueHelperController extends Controller
 
 	return $alpha_key . $key;
     }
+    public static function getExpiryDate($planDuration, $planPurchaseDate)
+        {
+                $planDurationInDays = "+ $planDuration days";
+                $newDate = strtotime($planDurationInDays, strtotime($planPurchaseDate));
+                return date('d-m-Y H:i:s',  $newDate);
+        }
 	
 }
 

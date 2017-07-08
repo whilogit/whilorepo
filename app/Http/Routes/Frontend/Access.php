@@ -6,8 +6,12 @@
 Route::group(['namespace' => 'Auth'], function () {
     
         Route::group(['middleware' => ['web','auth']] , function () {
-                    Route::get('company/choose_plans', 'AuthController@showCompanyPlans');
-                    Route::get('company/plan_expiry', 'AuthController@showEpiryPage');
+		        Route::get('company/choose_plans', 'AuthController@showCompanyPlans');
+		        Route::get('company/plan_expiry', 'AuthController@showEpiryPage');		    
+			Route::post('/company/payment', 'AuthController@PaymentPlanDetails');
+			Route::post('/ccavenue/responseurl', 'AuthController@CcavenuResponse');
+			Route::post('/ccavenue/cancelurl', 'AuthController@CcavenuCancel');
+			Route::post('company/planselect', 'AuthController@companyplan');
             
         });
 
@@ -29,7 +33,7 @@ Route::group(['namespace' => 'Auth'], function () {
         Route::post('company/complete', 'AuthController@compcomplete');
         Route::post('company/companyimages', 'AuthController@imageupload');
         Route::post('company/dopayment', 'AuthController@dopayment');
-        Route::post('company/planselect', 'AuthController@companyplan');
+        
         Route::get('company/reg_complete', 'AuthController@regCompletepage');
         Route::get('/company/image_upload_page', 'AuthController@CompanyImagesPage');
         Route::post('/company/getdetails', 'AuthController@CompanyProfileDetails');
@@ -44,10 +48,6 @@ Route::group(['namespace' => 'Auth'], function () {
         Route::get('/company/passwordform', 'AuthController@compPasswordChangeForm');
         Route::post('/company/changePassword', 'AuthController@changeCompanyPassword');
 
-        Route::post('/company/payment', 'AuthController@PaymentPlanDetails');
-        Route::post('/ccavenue/responseurl', 'AuthController@CcavenuResponse');
-        Route::post('/ccavenue/cancelurl', 'AuthController@CcavenuCancel');
-
         Route::post('company/removelogo', 'AuthController@removelogo');
         Route::post('company/removeimages', 'AuthController@removeimages');
 
@@ -61,9 +61,10 @@ Route::group(['namespace' => 'Auth'], function () {
         Route::post('send/interviewemail', 'AuthController@CallForInterview');
         Route::post('send/appliedemail', 'AuthController@CallforApplied');
         Route::post('send/shortliststatus', 'AuthController@ShortListStatus');
-         Route::post('auth/signin', 'AuthController@login');
+        
 
     });
+    Route::post('auth/signin', 'AuthController@login');
      Route::get('auth/signin', 'AuthController@showLoginForm')->name('auth.signin');
      Route::get('company/signin', 'AuthController@showCompanyLoginForm');
      Route::post('auth/signin', 'AuthController@login');

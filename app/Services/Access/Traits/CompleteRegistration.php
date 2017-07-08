@@ -357,13 +357,24 @@ public function PaymentPlanDetails(Request $request)
                 if(!$user)
                 {
                 $res = DB::table('companyplan')->insert(
-                                                        ['companyId' => $_SESSION['WHILLO']['COMPAnyID'], 
+                                                        ['companyId' =>$data['companyId'], 
                                                         'plan_id' => $data['planId'],    
                                                         'created_at'=> $createdDate,
                                                          'status'=>$status
                                                         ]
                                                     );
                }
+               else
+               {
+                    $res = DB::table('companyplan')
+                        ->where('companyId', $data['companyId'])
+                        ->update(array('plan_id' =>$data['planId'],
+                                'created_at'=>$createdDate,
+                                'status'=>$status
+
+                                ));
+               }
+         
                 $t_id=strtotime(date("Y-m-d H:i:s")).$_SESSION['WHILLO']['USERID'];
                
                 $plan_price= DB::table('_plandetails')
@@ -371,8 +382,8 @@ public function PaymentPlanDetails(Request $request)
                                         ->where('plan_id', '=',$data['planId'])
                                         ->first();
                 $merchant_id = \Config::get('constant.MERCHANT_ID');
-                $amount= $plan_price->price;
-                // $data['amount']= .01;
+               // $amount= $plan_price->price;
+                $amount= 0.01;
                 $working_key= \Config::get('constant.WORKING_KEY');
                 $access_code = \Config::get('constant.ACCESS_CODE');
                 $order_id = CcavenueHelperController::random_num(6); 
@@ -417,34 +428,102 @@ public function PaymentPlanDetails(Request $request)
        public function CcavenuResponse(Request $request)
        {
            $data = $request->all();
+            $createdDate = date("Y-m-d H:i:s");
           $workingKey=\Config::get('constant.WORKING_KEY');;		//Working Key should be provided here.
 	$encResponse= $request->encResp;			//This is the response sent by the CCAvenue Server
 	$rcvdString = CcavenueHelperController::decrypt($encResponse,$workingKey);		//Crypto Decryption used as per the specified working key.
 	$order_status="";
 	$decryptValues=explode('&', $rcvdString);
 	$dataSize=sizeof($decryptValues);
-	echo "<center>";
 
 	for($i = 0; $i < $dataSize; $i++) 
 	{
 		$information=explode('=',$decryptValues[$i]);
+		if($i==0)
+                $data['order_id']=$information[1];
+		if($i==1)
+                $data['tracking_id']=$information[1];
+		if($i==2)
+                $data['bank_ref_no']=$information[1];
 		if($i==3)
                 $data['order_status']=$information[1];
+		if($i==5)
+                $data['payment_mode']=$information[1];
+		if($i==10)
+                $data['amount']=$information[1];
 	}
 
-
-         
-
-	
 	for($i = 0; $i < $dataSize; $i++) 
 	{
 		$information=explode('=',$decryptValues[$i]);
                 
 	    	$data['info'][$information[0]] = $information[1];
 	}
+        $companyid=$_SESSION['WHILLO']['COMPAnyID'];
+	$paymentamount=$data['amount'];
         if($data['order_status']=="Success")
 	{  
-        return view('frontend.companyauth.planpaymentsucess', $data);
+ 		//DB::enableQueryLog();
+		$res = DB::table('payment_tracking')->insert(
+                                                        ['companyId' =>$_SESSION['WHILLO']['COMPAnyID'], 
+                                                        'order_id' =>  $data['order_id'],  
+							 'tracking_id' =>  $data['tracking_id'], 
+							 'bank_ref_no' =>  $data['bank_ref_no'],  
+							'order_status' =>  $data['order_status'],  
+							'payment_mode' =>  $data['payment_mode'],
+							'amount' =>  $data['amount'],                  
+                                                        'createdDate'=> $createdDate
+                                                        ]);
+		  //dd(DB::getQueryLog($res));
+	           $plan_details = DB::table('_plandetails as p')
+                                       
+                                        ->select('p.*','t.planname')
+					 ->leftjoin('_plantypes as t','t.plan_id','=','p.plan_id')
+                                        ->leftjoin('companyplan as c','c.plan_id','=','p.plan_id')
+                                         ->where('c.companyId', '=',$companyid)
+                                        ->first();  
+		$planamount= $plan_details->price;
+		if($planamount ==$paymentamount)
+		{     
+		        $res = DB::table('commaster')
+		                ->where('companyId',$companyid)
+		                ->update(array('accountStatus'=>1,
+		                        'createdDate'=>$createdDate
+
+		                        ));
+
+			$res = DB::table('companyplan')
+		                ->where('companyId',$companyid )
+		                ->update(array(
+		                        'created_at'=>$createdDate,
+		                        'status'=>1,
+
+		                        ));
+		$data['info']['plan_name']= $plan_details->planname;
+		$data['info']['duration']= $plan_details->duration;
+		$data['info']['job_post_limit']= $plan_details->job_post_limit;
+		$data['info']['price']=$plan_details->price;
+		$data['info']['cv_access_per_day']= $plan_details->cv_access_per_day;
+		$data['info']['search_criterion']= $plan_details->search_criterion;
+		$planDuration=$plan_details->duration;
+                $getExpiryDate = CcavenueHelperController::getExpiryDate($planDuration,$createdDate); 
+		$plan_created_date= DB::table('companyplan')
+                                        ->select('created_at')
+                                         ->where('companyId', '=',$companyid)
+                                        ->first();  
+		$planstartdate=$plan_created_date->created_at;
+                $data['info']['createdDate']=$planstartdate;
+                $data['info']['planexpiry']= $getExpiryDate;
+
+
+     		
+       		 return view('frontend.companyauth.planpaymentsucess', $data);
+		}
+		else
+		{
+	
+		     return view('frontend.companyauth.planpaymentsucess', $data);
+		}
         }
        else if($data['order_status']=="Aborted" || $data['order_status']=="Failure")
 	{
