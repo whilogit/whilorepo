@@ -282,149 +282,31 @@ $jobid = explode(",", $datas->jobid);?>
                     
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner">
-                        <div class="item active">
-                            <div class="row">
-                                <div class="col-md-2">
+                        <?php $incr = 0; $class = "active"; ?>
+                  @foreach($profiles as $profile)
+              <?php   //echo '<pre>';print_r($profile); ?>
+                    <?php $incr++;  ?>
+                       <?php if($incr == 1){  echo '<div class="item ' . $class . '"><div class="row">';  }?>
+                            <div class="col-md-2">
                                     <div class="wp-block inverse bordergrey">
                            <a href="#"> <div class="figure">
                                 <img alt="" src="images/prv/team/team-corporate-3.jpg" class="img-responsive"  >
                                                     </div>
-                        <h2>Derek Shepard<small>Web Developer</small></h2>
+                        <h2>{{$profile->firstName}} {{$profile->lastName}}<small>{{$profile->functionalName}}</small></h2>
                             	   
-						   <p>6 Years <span>Bangalore</span></p>
+						   <p><span>{{$profile->locationName}}</span></p>
                            </a>
                         </div>
                                 </div>
-                                <div class="col-md-2">
-                                   <div class="wp-block inverse bordergrey">
-                            <a href="#"> <div class="figure">
-                                <img alt="" src="images/prv/team/team-corporate-1.jpg" class="img-responsive"  >
-                                
-                            </div>
-                            <h2>Derek Shepard<small>Web Developer</small></h2>
-                            	   
-						   <p>6 Years <span>Bangalore</span></p></a>
-                        </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="wp-block inverse bordergrey">
-                           <a href="#">  <div class="figure">
-                                <img alt="" src="images/prv/team/team-corporate-3.jpg" class="img-responsive"  >
-                                
-                            </div>
-                            <h2>Derek Shepard<small>Web Developer</small></h2>
-                            	   
-						   <p>6 Years <span>Bangalore</span></p></a>
-                        </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="wp-block inverse bordergrey">
-                           <a href="#">  <div class="figure">
-                                <img alt="" src="images/prv/team/team-corporate-5.jpg" class="img-responsive"  >
-                                
-                            </div>
-                           <h2>Derek Shepard<small>Web Developer</small></h2>
-                            	   
-						   <p>6 Years <span>Bangalore</span></p></a>
-                        </div>
-                                </div>
-								 <div class="col-md-2">
-                                    <div class="wp-block inverse bordergrey">
-                           <a href="#">  <div class="figure">
-                                <img alt="" src="images/prv/team/team-corporate-1.jpg" class="img-responsive"  >
-                                
-                            </div>
-                          <h2>Derek Shepard<small>Web Developer</small></h2>
-                            	   
-						   <p>6 Years <span>Bangalore</span></p></a>
-                        </div>
-                                </div>
-								<div class="col-md-2">
-                                    <div class="wp-block inverse bordergrey">
-                           <a href="#">  <div class="figure">
-                                <img alt="" src="images/prv/team/team-corporate-2.jpg" class="img-responsive"  >
-                                
-                            </div>
-                         <h2>Derek Shepard<small>Web Developer</small></h2>
-                            	   
-						   <p>6 Years <span>Bangalore</span></p></a>
-                        </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="row">
-                               <div class="col-md-2">
-                                    <div class="wp-block inverse bordergrey">
-                           <a href="#">  <div class="figure">
-                                <img alt="" src="images/prv/team/team-corporate-3.jpg" class="img-responsive"  >
-                                
-                            </div>
-                         <h2>Derek Shepard<small>Web Developer</small></h2>
-                            	   
-						   <p>6 Years <span>Bangalore</span></p></a>
-                        </div>
-                                </div>
-                              <div class="col-md-2">
-                                    <div class="wp-block inverse bordergrey">
-                           <a href="#">  <div class="figure">
-                             
-							 <img alt="" src="images/prv/team/team-corporate-5.jpg" class="img-responsive"  >
-                           </div>     
-                          <h2>Derek Shepard<small>Web Developer</small></h2>
-                            	   
-						   <p>6 Years <span>Bangalore</span></p></a>
-                        </div>
-						</div>
                                
-                              <div class="col-md-2">
-                                    <div class="wp-block inverse bordergrey">
-                           <a href="#">  <div class="figure">
-                                <img alt="" src="images/prv/team/team-corporate-1.jpg" class="img-responsive"  >
-                                
-                            </div>
-                            <h2>Derek Shepard<small>Web Developer</small></h2>
-                            	   
-						   <p>6 Years <span>Bangalore</span></p></a>
-                        </div>
-                                </div>
-								<div class="col-md-2">
-                                    <div class="wp-block inverse bordergrey">
-                           <a href="#">  <div class="figure">
-                                <img alt="" src="images/prv/team/team-corporate-2.jpg" class="img-responsive"  >
-                                
-                            </div>
-                            <h2>Derek Shepard<small>Web Developer</small></h2>
-                            	   
-						   <p>6 Years <span>Bangalore</span></p></a>
-                        </div>
-                                </div>
-								<div class="col-md-2">
-                                    <div class="wp-block inverse bordergrey">
-                           <a href="#">  <div class="figure">
-                                <img alt="" src="images/prv/team/team-corporate-3.jpg" class="img-responsive"  >
-                                
-                            </div>
-                           <h2>Derek Shepard<small>Web Developer</small></h2>
-                            	   
-						   <p>6 Years <span>Bangalore</span></p></a>
-                        </div>
-                                </div>
-								<div class="col-md-2">
-                                    <div class="wp-block inverse bordergrey">
-                           <a href="#">  <div class="figure">
-                                <img alt="" src="images/prv/team/team-corporate-5.jpg" class="img-responsive"  >
-                                
-                            </div>
-                          <h2>Derek Shepard<small>Web Developer</small></h2>
-                            	   
-						   <p>6 Years <span>Bangalore</span></p></a>
-                        </div>
-                                </div>
-								
-                            </div>
-                        </div>
+                           <?php if($incr == 6){ echo '</div></div>'; } if($incr == 6) $incr = 0; ?>
+                       <?php $class = "";?>
+                       @endforeach
                     </div>
+                          
+
+  
+                          
                 </div>  
             </div>
         </div>

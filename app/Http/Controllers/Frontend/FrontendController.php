@@ -34,9 +34,23 @@ class FrontendController extends Controller
                         ->where('j.status',1)
                         ->groupBy('j.companyId')
                         ->get();
+        //$jobs=DB::table('companyjobs as j')
+                $profiles=DB::table('jfeedbacks as jb')
+                        ->select('p.firstName','p.lastName','l.locationName','f.functionalName')
+					->leftjoin('jfeedbacklink as jf', 'jf.feedbackId', '=', 'jb.feedbackId')
+					->join('jprofile as p', 'p.seekerId', '=', 'jf.seekerId')
+					
+					->join('jmaster as m', 'm.seekerId', '=', 'jf.seekerId')
+                                        ->join('jproffessional as jp', 'jp.seekerId', '=', 'm.seekerId')
+                        ->join('_functionalarea as f', 'f.functionalId', '=', 'jp.functionalarea')
+                        ->leftjoin('_locations as l', 'l.locationId', '=', 'p.locationId')
+					 ->where('m.accountStatus',1)->where('jf.Status',1)
+                                                  ->groupBy('jf.seekerId')->get();
+                                        // echo '<pre>'; print_r($profiles);
+                                          //exit;
 
 
-        return view('frontend.index')->with("locations",DB::table('_locations')->get() )->with("data",$jobs);
+        return view('frontend.index')->with("locations",DB::table('_locations')->get() )->with("data",$jobs)->with("profiles",$profiles);
     }
      public function verifytalent(){ return view('frontend.verifytalent');   }
     
