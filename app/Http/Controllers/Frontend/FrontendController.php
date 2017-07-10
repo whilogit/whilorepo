@@ -48,9 +48,14 @@ class FrontendController extends Controller
                                                   ->groupBy('jf.seekerId')->get();
                                         // echo '<pre>'; print_r($profiles);
                                           //exit;
-
-
-        return view('frontend.index')->with("locations",DB::table('_locations')->get() )->with("data",$jobs)->with("profiles",$profiles);
+ $company=DB::table('companyjobs as j')
+               ->select('li.logoCategory','li.logoName','li.dirYear','li.dirMonth','li.crTime','li.logExt')
+					->leftjoin('companylogo as li', 'li.companyId', '=', 'j.companyId')
+				->where('j.status',1)
+                        ->groupBy('j.companyId')
+                        ->get();
+						
+        return view('frontend.index')->with("locations",DB::table('_locations')->get() )->with("data",$jobs)->with("profiles",$profiles)->with("company",$company);
     }
      public function verifytalent(){ return view('frontend.verifytalent');   }
     

@@ -327,8 +327,85 @@ $jobid = explode(",", $datas->jobid);?>
                     
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner">
-                        <div class="item active">
-						  <div class="row">
+                       <?php $incrs = 0; $class = "active"; ?>
+						@foreach($company as $companys)
+              <?php   //echo '<pre>';print_r($profile); ?>
+                    <?php $incrs++;  ?>
+                       <?php if($incrs == 1){  echo '<div class="item ' . $class . '"><div class="row">';  }?>
+						 
+                               <div class="col-md-2">
+                                    <div class="wp-block inverse">
+                           <a href="#"> 
+						   <div class="client">
+                            <a href="#">
+                                <img src="images/clients/client-2.png" alt="" >
+								@if(($companys->logoCategory != "")&&($companys->logoName))
+                                                        <img src="<?php echo url('/'); ?>/companylogo.get/{{ $companys->logoCategory }}/{{ $companys->dirYear }}/{{ $companys->dirMonth }}/{{ $companys->logoName }}/{{ $companys->crTime }}/s.{{ $companys->logExt }}" class="img-responsive" style="width:1000%"  alt="">
+														@endif
+                            </a>
+                        </div>
+                           </a>
+                        </div>
+                                </div>
+                              <div class="col-md-2">
+                                    <div class="wp-block inverse"><a href="#"> 
+						   <div class="client">
+                            <a href="#">
+                                <img src="images/clients/client-1.png" alt="" >
+                            </a>
+                        </div>
+                           </a>
+                        </div>
+						</div>
+                               
+                              <div class="col-md-2">
+                                    <div class="wp-block inverse">
+                          <a href="#"> 
+						   <div class="client">
+                            <a href="#">
+                                <img src="images/clients/client-3.png" alt="" >
+                            </a>
+                        </div>
+                           </a>
+                        </div>
+                                </div>
+								<div class="col-md-2">
+                                    <div class="wp-block inverse">
+                         <a href="#"> 
+						   <div class="client">
+                            <a href="#">
+                                <img src="images/clients/client-2.png" alt="" >
+                            </a>
+                        </div>
+                           </a>
+                        </div>
+                                </div>
+								<div class="col-md-2">
+                                    <div class="wp-block inverse">
+                           <a href="#"> 
+						   <div class="client">
+                            <a href="#">
+                                <img src="images/clients/client-1.png" alt="" >
+                            </a>
+                        </div>
+                           </a>
+                        </div>
+                                </div>
+								<div class="col-md-2">
+                                    <div class="wp-block inverse">
+                       <a href="#"> 
+						   <div class="client">
+                            <a href="#">
+                                <img src="images/clients/client-3.png" alt="" >
+                            </a>
+                        </div>
+                           </a>
+                        </div>
+                                </div>
+								
+                           <?php if($incrs == 6){ echo '</div><div class="row">'; }  ?>
+							
+							
                                <div class="col-md-2">
                                     <div class="wp-block inverse">
                            <a href="#"> 
@@ -396,77 +473,8 @@ $jobid = explode(",", $datas->jobid);?>
                         </div>
                                 </div>
 								
-                            </div>
-							  <div class="row">
-                               <div class="col-md-2">
-                                    <div class="wp-block inverse">
-                           <a href="#"> 
-						   <div class="client">
-                            <a href="#">
-                                <img src="images/clients/client-2.png" alt="" >
-                            </a>
-                        </div>
-                           </a>
-                        </div>
-                                </div>
-                              <div class="col-md-2">
-                                    <div class="wp-block inverse"><a href="#"> 
-						   <div class="client">
-                            <a href="#">
-                                <img src="images/clients/client-1.png" alt="" >
-                            </a>
-                        </div>
-                           </a>
-                        </div>
-						</div>
-                               
-                              <div class="col-md-2">
-                                    <div class="wp-block inverse">
-                          <a href="#"> 
-						   <div class="client">
-                            <a href="#">
-                                <img src="images/clients/client-3.png" alt="" >
-                            </a>
-                        </div>
-                           </a>
-                        </div>
-                                </div>
-								<div class="col-md-2">
-                                    <div class="wp-block inverse">
-                         <a href="#"> 
-						   <div class="client">
-                            <a href="#">
-                                <img src="images/clients/client-2.png" alt="" >
-                            </a>
-                        </div>
-                           </a>
-                        </div>
-                                </div>
-								<div class="col-md-2">
-                                    <div class="wp-block inverse">
-                           <a href="#"> 
-						   <div class="client">
-                            <a href="#">
-                                <img src="images/clients/client-1.png" alt="" >
-                            </a>
-                        </div>
-                           </a>
-                        </div>
-                                </div>
-								<div class="col-md-2">
-                                    <div class="wp-block inverse">
-                       <a href="#"> 
-						   <div class="client">
-                            <a href="#">
-                                <img src="images/clients/client-3.png" alt="" >
-                            </a>
-                        </div>
-                           </a>
-                        </div>
-                                </div>
-								
-                            </div>
-                            <div class="row">
+                            <?php if($incrs == 12){ echo '</div><div class="row">'; }  ?>
+                           
                                 <div class="col-md-2">
                                     <div class="wp-block inverse">
                            <a href="#"> 
@@ -533,218 +541,9 @@ $jobid = explode(",", $datas->jobid);?>
                            </a>
                         </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="row">
-							  <div class="row">
-                               <div class="col-md-2">
-                                    <div class="wp-block inverse">
-                           <a href="#"> 
-						   <div class="client">
-                            <a href="#">
-                                <img src="images/clients/client-2.png" alt="" >
-                            </a>
-                        </div>
-                           </a>
-                        </div>
-                                </div>
-                              <div class="col-md-2">
-                                    <div class="wp-block inverse"><a href="#"> 
-						   <div class="client">
-                            <a href="#">
-                                <img src="images/clients/client-1.png" alt="" >
-                            </a>
-                        </div>
-                           </a>
-                        </div>
-						</div>
-                               
-                              <div class="col-md-2">
-                                    <div class="wp-block inverse">
-                          <a href="#"> 
-						   <div class="client">
-                            <a href="#">
-                                <img src="images/clients/client-3.png" alt="" >
-                            </a>
-                        </div>
-                           </a>
-                        </div>
-                                </div>
-								<div class="col-md-2">
-                                    <div class="wp-block inverse">
-                         <a href="#"> 
-						   <div class="client">
-                            <a href="#">
-                                <img src="images/clients/client-2.png" alt="" >
-                            </a>
-                        </div>
-                           </a>
-                        </div>
-                                </div>
-								<div class="col-md-2">
-                                    <div class="wp-block inverse">
-                           <a href="#"> 
-						   <div class="client">
-                            <a href="#">
-                                <img src="images/clients/client-1.png" alt="" >
-                            </a>
-                        </div>
-                           </a>
-                        </div>
-                                </div>
-								<div class="col-md-2">
-                                    <div class="wp-block inverse">
-                       <a href="#"> 
-						   <div class="client">
-                            <a href="#">
-                                <img src="images/clients/client-3.png" alt="" >
-                            </a>
-                        </div>
-                           </a>
-                        </div>
-                                </div>
-								
-                            </div>
-							  <div class="row">
-                               <div class="col-md-2">
-                                    <div class="wp-block inverse">
-                           <a href="#"> 
-						   <div class="client">
-                            <a href="#">
-                                <img src="images/clients/client-2.png" alt="" >
-                            </a>
-                        </div>
-                           </a>
-                        </div>
-                                </div>
-                              <div class="col-md-2">
-                                    <div class="wp-block inverse"><a href="#"> 
-						   <div class="client">
-                            <a href="#">
-                                <img src="images/clients/client-1.png" alt="" >
-                            </a>
-                        </div>
-                           </a>
-                        </div>
-						</div>
-                               
-                              <div class="col-md-2">
-                                    <div class="wp-block inverse">
-                          <a href="#"> 
-						   <div class="client">
-                            <a href="#">
-                                <img src="images/clients/client-3.png" alt="" >
-                            </a>
-                        </div>
-                           </a>
-                        </div>
-                                </div>
-								<div class="col-md-2">
-                                    <div class="wp-block inverse">
-                         <a href="#"> 
-						   <div class="client">
-                            <a href="#">
-                                <img src="images/clients/client-2.png" alt="" >
-                            </a>
-                        </div>
-                           </a>
-                        </div>
-                                </div>
-								<div class="col-md-2">
-                                    <div class="wp-block inverse">
-                           <a href="#"> 
-						   <div class="client">
-                            <a href="#">
-                                <img src="images/clients/client-1.png" alt="" >
-                            </a>
-                        </div>
-                           </a>
-                        </div>
-                                </div>
-								<div class="col-md-2">
-                                    <div class="wp-block inverse">
-                       <a href="#"> 
-						   <div class="client">
-                            <a href="#">
-                                <img src="images/clients/client-3.png" alt="" >
-                            </a>
-                        </div>
-                           </a>
-                        </div>
-                                </div>
-								
-                            </div>
-                               <div class="col-md-2">
-                                    <div class="wp-block inverse">
-                           <a href="#"> 
-						   <div class="client">
-                            <a href="#">
-                                <img src="images/clients/client-2.png" alt="" >
-                            </a>
-                        </div>
-                           </a>
-                        </div>
-                                </div>
-                              <div class="col-md-2">
-                                    <div class="wp-block inverse">
-                           <a href="#"> 
-						   <div class="client">
-                            <a href="#">
-                                <img src="images/clients/client-2.png" alt="" >
-                            </a>
-                        </div>
-                           </a>
-                        </div>
-						</div>
-                               
-                              <div class="col-md-2">
-                                    <div class="wp-block inverse">
-                          <a href="#"> 
-						   <div class="client">
-                            <a href="#">
-                                <img src="images/clients/client-2.png" alt="" >
-                            </a>
-                        </div>
-                           </a>
-                        </div>
-                                </div>
-								<div class="col-md-2">
-                                    <div class="wp-block inverse">
-                         <a href="#"> 
-						   <div class="client">
-                            <a href="#">
-                                <img src="images/clients/client-2.png" alt="" >
-                            </a>
-                        </div>
-                           </a>
-                        </div>
-                                </div>
-								<div class="col-md-2">
-                                    <div class="wp-block inverse">
-                           <a href="#"> 
-						   <div class="client">
-                            <a href="#">
-                                <img src="images/clients/client-2.png" alt="" >
-                            </a>
-                        </div>
-                           </a>
-                        </div>
-                                </div>
-								<div class="col-md-2">
-                                    <div class="wp-block inverse">
-                       <a href="#"> 
-						   <div class="client">
-                            <a href="#">
-                                <img src="images/clients/client-2.png" alt="" >
-                            </a>
-                        </div>
-                           </a>
-                        </div>
-                                </div>
-								
-                            </div>
-                        </div>
+                           <?php if($incrs == 18){ echo '</div></div>'; } if($incrs == 18) $incrs = 0; ?>
+                        <?php $class = "";?>
+                       @endforeach
                     </div>
                 </div>  
             </div>
