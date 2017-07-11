@@ -349,7 +349,7 @@ $jobid = explode(",", $datas->jobid);?>
                                 </div>
                              		
                            
-                             <?php if($incr == 6){ echo '</div></div>'; } if($incr == 6) $incr = 0; ?>
+                             <?php if($incr == 18){ echo '</div></div>'; } if($incr == 18) $incr = 0; ?>
                        <?php $class = "";?>
                        @endforeach
                     </div>
@@ -395,7 +395,7 @@ $jobid = explode(",", $datas->jobid);?>
                                 </div>
                              		
                            
-                             <?php if($incr == 6){ echo '</div></div>'; } if($incr == 6) $incr = 0; ?>
+                             <?php if($incr ==18){ echo '</div></div>'; } if($incr == 18) $incr = 0; ?>
                        <?php $class = "";?>
                        @endforeach
                     </div>
