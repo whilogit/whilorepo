@@ -10,7 +10,7 @@ use DB;
  */
 class Companylist extends Controller
 {
-	public static function getlist($limit = 10, $offset = 1)
+	public static function getlist()
 	{
 		$response = array();
 		
@@ -19,14 +19,21 @@ class Companylist extends Controller
 					->leftjoin("companylogo as logo",'logo.companyId','=','m.companyId')
 					->leftjoin('_locations as l','l.locationId','=','p.locationId')
 					->select("p.*","logo.*","l.locationName","m.accountStatus")
-					->skip($limit * ($offset -1))
-       				->take($limit)
 					->get();
 		
-		$response['count'] = ceil(DB::table('commaster as m')
-						  ->join('comprofile as p', 'p.companyId', '=', 'm.companyId')
-						  ->count()/10);
+	
 		
+		return $response;
+	}
+        public static function getlocation()
+	{
+		$response = array();
+		
+		$response['locationlist']  = DB::table('_locations')
+					
+					->get();
+		
+	
 		
 		return $response;
 	}
