@@ -209,7 +209,7 @@
                                     10
                                     <span id="sparklineB"></span>
                                 </div>
-                                <a href="add/workfeatures" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
+                                <a href="/dashboard/workfeatures" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
                             </div>
                         </div>
                     </div>
