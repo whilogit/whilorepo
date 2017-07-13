@@ -77,7 +77,7 @@
    
         </span>
          <span style="font-weight:normal;float:left;padding:10px ;width:40%;color:#888;text-align:right;">
-            {{ $duration }}	
+            {{ $duration }} Days
         </span>
       </div>
  <div style="width:100%;float:left;">
@@ -139,7 +139,7 @@
   <div style="width:100%;float:left; background:#fff;">
            
          <span style="font-weight:600;float:right;padding:10px 0px;width:40%;color:#666;text-align:center;">
-           Total Amount :  {{ $price }}
+           Total Amount :  Rs.{{ $price }}
         </span>
  	 </div>
 
