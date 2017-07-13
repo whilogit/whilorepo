@@ -16,8 +16,8 @@ class DashboardController extends Controller
     {
 
    
-        return view('frontend.myaccount.' . $GLOBALS['redirect'])->with("data" , access()->$GLOBALS['redirect']());
+        //return view('frontend.myaccount.' . $GLOBALS['redirect'])->with("data" , access()->$GLOBALS['redirect']());
 
-        //return view('frontend.myaccount.' . $GLOBALS['redirect']);
+        return view('frontend.myaccount.' . $GLOBALS['redirect']);
     }
 }
