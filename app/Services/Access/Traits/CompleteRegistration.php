@@ -73,7 +73,7 @@ trait completeRegistration
              }
              public function CompanyBasicDetails()
              {
-                 
+                   $companyid=$_SESSION['WHILLO']['COMPAnyID'];
                  $commaster = DB::table('commaster as c')
                                 ->join('comprofile as p', 'c.companyId', '=', 'p.companyId')
                                 ->join('_locations as l', 'l.locationId', '=', 'p.locationId')
@@ -81,9 +81,25 @@ trait completeRegistration
                                 ->select('c.*','p.*','l.locationName','log.userName','log.emailAddress')
                                 ->where('c.userId', '=', $_SESSION['WHILLO']['USERID'])
                                 ->first(); //die(json_encode($commaster));
-                                $commaimages = DB::table('companyimages')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->get(); 
-                                $companylogo = DB::table('companylogo')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->get();
-                                return view('frontend.myaccount.basicdeatils')->with(array("commaster"=>$commaster,"companyimages"=>$commaimages,"companylogo"=>$companylogo));
+                $plan_details = DB::table('_plandetails as p')
+                                       
+                                        ->select('p.*','t.planname')
+					 ->leftjoin('_plantypes as t','t.plan_id','=','p.plan_id')
+                                        ->leftjoin('companyplan as c','c.plan_id','=','p.plan_id')
+                                         ->where('c.companyId', '=',$companyid)
+                                        ->first();  
+               $plan_created_date= DB::table('companyplan')
+                                        ->select('created_at')
+                                         ->where('companyId', '=',$companyid)
+                                        ->first();  
+               $planstartdate=$plan_created_date->created_at;
+                $planDuration=$plan_details->duration;
+                $getExpiryDate = CcavenueHelperController::getExpiryDate($planDuration,$planstartdate); 
+	
+		
+                                $commaimages = DB::table('companyimages')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->first(); 
+                                $companylogo = DB::table('companylogo')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->first();
+                                return view('frontend.myaccount.basicdeatils')->with(array("commaster"=>$commaster,"images"=>$commaimages,"companylogo"=>$companylogo,"plandeatils"=>$plan_details,"startdate"=>$planstartdate,"expirydate"=>$getExpiryDate));
                  
              }
     public function CompanyProfileDetails()
@@ -95,7 +111,8 @@ trait completeRegistration
                                         ->leftjoin('userlogin as u','u.userId','=','m.userId')
                                          ->leftjoin('_locations as l','l.locationId','=','p.locationId')
                                          ->leftjoin('_industry as i','i.industryId','=','p.industry')
-                                        ->select('m.userId','u.emailAddress','p.companyName','p.mobileNumber','p.website','p.aboutbio','p.address','l.locationName','i.industryName','p.locationId','p.industry')
+                                         ->leftjoin('company_video_url as v','v.companyId','=','p.companyId')
+                                        ->select('m.userId','u.emailAddress','p.companyName','p.mobileNumber','p.website','p.aboutbio','p.address','l.locationName','i.industryName','p.locationId','p.industry','v.video_url')
                                          ->where('u.userId', '=', $_SESSION['WHILLO']['USERID'])
                                         ->first();
          $defaults['locations'] = DB::table('_locations')->get();
@@ -307,15 +324,24 @@ trait completeRegistration
     public function EditCompanyDeatils(Request $request)
             {
                 $data = $request->all();
+                $companyid=$_SESSION['WHILLO']['COMPAnyID'];
                 $res = DB::table('comprofile')
                     ->where('companyId',$_SESSION['WHILLO']['COMPAnyID'] )
                     ->update(array('website' =>"".$data['website']."",
                             'mobileNumber'=>$data['mobileNumber'],
                             'industry'=>$data['industry'],
                             'locationId'=>$data['locationId'],
-                            'address'=>"".$data['address'].""
+                            'address'=>"".$data['address']."",
+                             'aboutbio'=>"".$data['shortdescription'].""
 
                             ));
+                $status=0;
+                 $res = DB::table('company_video_url')->insert(
+                                                        ['companyId' =>$companyid, 
+                                                        'video_url' => $data['videourl'],    
+                                                         'status'=>$status
+                                                        ]
+                                                    );
 
                 if($res){
                         return response()->json(array(

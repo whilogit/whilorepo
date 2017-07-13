@@ -23,15 +23,14 @@
                     
                        
                         <ul class="categories">
+                         <li ><a href="#CompanyHome" data-toggle="tab">Home</a></li>
                          <li ><a href="#CompanyProfile" data-toggle="tab">Company Profile</a></li>
-<li ><a href="#Postnewjobs" data-toggle="tab">Post New Jobs</a></li>
-<li ><a href="#postedjobs" data-toggle="tab">Posted Jobs</a></li>
-<li ><a href="#ShortlistedCandidates" data-toggle="tab">Shortlisted Candidates</a></li>
-<li ><a href="#SearchedCandidates" data-toggle="tab">Searched Candidates</a></li>
-<li ><a href="#AppliedCandidates" data-toggle="tab">Applied Candidates</a></li>
-<li ><a href="#ChangePassword" data-toggle="tab">Change Password</a></li>
-
-                            
+                        <li ><a href="#Postnewjobs" data-toggle="tab">Post New Jobs</a></li>
+                        <li ><a href="#postedjobs" data-toggle="tab">Posted Jobs</a></li>
+                        <li ><a href="#ShortlistedCandidates" data-toggle="tab">Shortlisted Candidates</a></li>
+                        <li ><a href="#SearchedCandidates" data-toggle="tab">Searched Candidates</a></li>
+                        <li ><a href="#AppliedCandidates" data-toggle="tab">Applied Candidates</a></li>
+                        <li ><a href="#ChangePassword" data-toggle="tab">Change Password</a></li> 
                         </ul>
                     </div>
                     <div class="col-md-10">                     

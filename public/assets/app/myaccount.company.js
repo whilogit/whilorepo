@@ -86,11 +86,21 @@ $(function(){
                 
                 
 	}
+            $('a[href="#CompanyHome"]').click(function()
+        {
+              clearall();       
+            var postdata = {};
+            postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
+                $('body').removeClass('loaded');
+                $.post('/company/basicdetails',postdata,function(response){
+                $('body').addClass('loaded');
+                    $('#ProfileHome').append(response);
+                });
+   
+        }); 
         $('a[href="#CompanyProfile"]').click(function()
         {
-            $('#ProfileHome').html('');
-             $('#CompanyProfile').html('');
-             
+             clearall();    
             var postdata = {};
             postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
                 $('body').removeClass('loaded');
@@ -101,8 +111,7 @@ $(function(){
         }); 
         $('a[href="#Postnewjobs"]').click(function()
         {
-              $('#ProfileHome').html('');
-             $('#Postnewjobs').empty();
+          clearall();    
              var postdata = {};
             postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
                 $('body').removeClass('loaded');
@@ -115,8 +124,7 @@ $(function(){
         }); 
          $('a[href="#postedjobs"]').click(function()
         {
-             $('#ProfileHome').html('');
-             $('#postedjobs').empty();
+            clearall();    
              var postdata = {};
             postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
                 $('body').removeClass('loaded');
@@ -129,8 +137,7 @@ $(function(){
         }); 
           $('a[href="#ShortlistedCandidates"]').click(function()
         {
-             $('#ProfileHome').html('');
-             $('#ShortlistedCandidates').empty();
+            clearall();    
              var postdata = {};
             postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
                 $('body').removeClass('loaded');
@@ -144,8 +151,7 @@ $(function(){
         });   
            $('a[href="#SearchedCandidates"]').click(function()
         {
-             $('#ProfileHome').html('');
-             $('#SearchedCandidates').empty();
+          clearall();    
              var postdata = {};
             postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
                 $('body').removeClass('loaded');
@@ -158,9 +164,7 @@ $(function(){
         });
         $('a[href="#AppliedCandidates"]').click(function()
         {
-              $('#ProfileHome').html('');     
-             $('#AppliedCandidates').empty();
-          
+                clearall();    
              var postdata = {};
             postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
                 $('body').removeClass('loaded');
@@ -174,9 +178,8 @@ $(function(){
         });
         
           $('a[href="#ChangePassword"]').click(function()
-        {   
-             $('#ProfileHome').html('');
-                   $('#ChangePassword   ').empty();
+        {     
+                clearall();    
                 $('body').removeClass('loaded');
                 $.get('/company/passwordform',function(response){
                 $('body').addClass('loaded');
@@ -192,3 +195,15 @@ $(function(){
 	$.companyacount.globalinit();
 })(jQuery);
 
+function clearall()
+{
+     $('#ProfileHome').html('');
+     $('#CompanyProfile').html('');
+     $('#ChangePassword').empty();
+     $('#AppliedCandidates').empty();
+     $('#SearchedCandidates').empty();
+     $('#ShortlistedCandidates').empty();
+     $('#postedjobs').empty();
+     $('#Postnewjobs').empty();
+    
+}

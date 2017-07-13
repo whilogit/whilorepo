@@ -19,7 +19,7 @@
                                                     <td><input type="hidden" class="job_id" value="{{ $list->jobId }}">
                                                     <button class="btn btn-base btn-icon btn-icon-right  pull-right jobedit" id="edit_{{$key}}" value="" onclick="jobfunction({{ $list->jobId }})"> 
                                                     <span>Edit</span></button>
-                                                    <i class="fa fa-pencil"></i>
+                                                   
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -50,7 +50,7 @@
                                                         <div class="form-group">
                                                         <label class="label">Valid Till <span style="color:red">*</span></label>
                                                              <label class="input">
-                                                            <i class="icon-append fa fa-pencil"></i>
+                                                            
                                                             <input type="text" name="validtill" id="validtill" required="required" value="">
                                                        </label>
                                                         </div>  

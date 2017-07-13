@@ -8,14 +8,14 @@
        <div class="col-md-7 ">
 
 <div class="panel panel-default">
-  <div class="panel-heading">  <h4 >Company Basic Details</h4></div>
+  <div class="panel-heading">  <h4 >Company Plan  Details</h4></div>
    <div class="panel-body">
        
     <div class="box box-info">
         
             <div class="box-body">
                      <div class="col-sm-6">
-                     <div  align="center"> <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive"> 
+                     <div  align="center"><img width="100%" src='/display/image/{{ $companylogo->logoCategory }}/{{ $images->dirYear }}/{{ $images->dirMonth }}/{{ $images->logoName }}/{{ $images->crTime }}/l.{{ $images->logExt }}' alt="Featured Image" class="img-circle" kasperskylab_antibanner="on"> 
                 
                 <input id="profile-image-upload" class="hidden" type="file">
   </div>
@@ -25,46 +25,49 @@
               <!-- /input-group -->
             </div>
             <div class="col-sm-6">
-            <h4 style="color:#00b1b1;">Company Name </h4></span>
-              <span><p>Company /Counstuny </p></span>            
+            <h4 style="color:#00b1b1;">{{ $commaster->userName }}</h4></span>
+              <span><p>@if($commaster->ctypeId == '1')
+                   
+                       Company
+                  
+                      @else
+                      Consultancy
+                       </p></span>  
+            @endif
             </div>
             <div class="clearfix"></div>
             <hr style="margin:5px 0 5px 0;">
+
     
               
-<div class="col-sm-5 col-xs-6 tital " >Address</div><div class="col-sm-7 col-xs-6 ">Prasad</div>
+<div class="col-sm-5 col-xs-6 tital " >Plan Name</div><div class="col-sm-7 col-xs-6 ">{{ $plandeatils->planname }}</div>
      <div class="clearfix"></div>
 <div class="bot-border"></div>
 
-<div class="col-sm-5 col-xs-6 tital " >Plan Start Date</div><div class="col-sm-7"> Shankar</div>
+<div class="col-sm-5 col-xs-6 tital " >Plan Start Date</div><div class="col-sm-7"> {{ $startdate }} </div>
   <div class="clearfix"></div>
 <div class="bot-border"></div>
 
-<div class="col-sm-5 col-xs-6 tital " >Plan Expiry Date</div><div class="col-sm-7"> Huddedar</div>
+<div class="col-sm-5 col-xs-6 tital " >Plan Expiry Date</div><div class="col-sm-7"> {{ $expirydate}}</div>
   <div class="clearfix"></div>
 <div class="bot-border"></div>
 
-<div class="col-sm-5 col-xs-6 tital " >Plan Name</div><div class="col-sm-7">15 Jun 2016</div>
-
-  <div class="clearfix"></div>
-<div class="bot-border"></div>
-
-<div class="col-sm-5 col-xs-6 tital " >No of Jobs per day</div><div class="col-sm-7">11 Jun 1998</div>
+<div class="col-sm-5 col-xs-6 tital " >Amount</div><div class="col-sm-7">Rs.{{ $plandeatils->price }}</div>
 
   <div class="clearfix"></div>
 <div class="bot-border"></div>
 
-<div class="col-sm-5 col-xs-6 tital " >No of cv access</div><div class="col-sm-7">Shirdi</div>
-
+<div class="col-sm-5 col-xs-6 tital " >Duration</div><div class="col-sm-7">{{ $plandeatils->duration }} Days</div>
  <div class="clearfix"></div>
 <div class="bot-border"></div>
 
-<div class="col-sm-5 col-xs-6 tital " >Nationality:</div><div class="col-sm-7">Indian</div>
-
- <div class="clearfix"></div>
+<div class="col-sm-5 col-xs-6 tital " >No of Jobs Per Day</div><div class="col-sm-7">{{ $plandeatils->job_post_limit }}</div>
+  <div class="clearfix"></div>
 <div class="bot-border"></div>
 
-<div class="col-sm-5 col-xs-6 tital " >Relition:</div><div class="col-sm-7">Hindu</div>
+<div class="col-sm-5 col-xs-6 tital " >No of CV Access Per Day</div><div class="col-sm-7">{{ $plandeatils->cv_access_per_day }}</div>
+
+
 
 
             <!-- /.box-body -->

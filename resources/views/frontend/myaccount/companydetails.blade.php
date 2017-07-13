@@ -1,5 +1,5 @@
    <div class="panel panel-default">
-                          
+       <div id="message" style="display:none;">Updated</div>
                           <div class="panel-body">
                                  <h4 class="col-md-4 pull-left">Company Name</h4>
 
@@ -20,6 +20,11 @@
 <h4>Description</h4>
 <p class="text-justify" style="background:#ddd;padding:1%;color:black;font-weight:500;">{{$compdetails->aboutbio}}</p>
 </div>
+    <div class="col-md-12"><br/>
+<h4>You Tube URL</h4>
+<p class="text-justify" style="background:#ddd;padding:1%;color:black;font-weight:500;">{{$compdetails->video_url}}</p>
+</div>
+    
  </div>
 <div id="edit_form_company" style="display:none;">
     <div class="col-md-12">
@@ -97,6 +102,26 @@
                                                         </div>  
                                                     </div>               
                                                 </div>
+                                                          <div class="col-xs-6">
+                                                    <div class="form-group">
+                                                        <div class="form-group">
+                                                        <label class="label">Description<span style="color:red">*</span></label>
+                                                             <label class="input">
+                                                            <textarea rows="5" cols="50" name="description" id="description"required="required" value="{{$compdetails->aboutbio}}" >{{$compdetails->aboutbio}}</textarea>
+                                                       </label>
+                                                        </div>  
+                                                    </div>               
+                                                </div>
+                                                        <div class="col-xs-6">
+                                                    <div class="form-group">
+                                                        <div class="form-group">
+                                                        <label class="label">Youtube Video URL<span style="color:red">*</span></label>
+                                                             <label class="input">
+                                                            <textarea rows="5" cols="50" name="youtubeurl" id="youtubeurl" required="required" value="{{$compdetails->aboutbio}}" >{{$compdetails->aboutbio}}</textarea>
+                                                       </label>
+                                                        </div>  
+                                                    </div>               
+                                                </div>
                                             </div>   
                                         </section>
                                           <button id="company_detail_update" class="btn btn-base btn-icon btn-icon-right btn-sign-in pull-right" type="button">
@@ -157,8 +182,8 @@ $(function() {
               postdata['mobileNumber']=$('input[name="mobileno"]').val();
               postdata['emailAddress']=$('input[name="emailadd"]').val();
               postdata['address']=$('input[name="comaddress"]').val();
-             // postdata['shortdescription']=$('textarea#shortdescription').val();
-              //postdata['jobdescription']=$('textarea#jobdescription').val()
+              postdata['shortdescription']=$('#description').val();
+              postdata['videourl']=$('#youtubeurl').val()
               postdata['locationId']=$('select[name="comlocation"]').val();
               postdata['industry']=$('select[name="industry"]').val();
                 $('body').removeClass('loaded');
@@ -168,7 +193,9 @@ $(function() {
                                                  if(response.success)
                                                  {
 
-                                                   alert('scueess');
+                                                   $('#compnay_detail_table').show();
+                                                   $('#edit_form_company').hide();
+                                                     $('#message').show();
 
                                                  }
 

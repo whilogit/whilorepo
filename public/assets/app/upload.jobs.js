@@ -61,7 +61,7 @@ $(function(){
                                                  {
 
                                                   $('#message').append('<span align="center" style="color:red;font-weight:bold"">'+response.msg+'</b></span>');
-
+                                                  $('#uploadjob')[0].reset();
   
                                                  }
 

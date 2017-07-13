@@ -12,7 +12,7 @@
                             </div>
    
                             <div class="form-body">
-                                <form  name="uploadjob" class="sky-form">                                    
+                                <form  name="uploadjob" id="uploadjob" class="sky-form">                                    
                                     <fieldset class="no-padding">           
                                         <section class=""> 
                                             <div class="row">
@@ -87,7 +87,7 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label class="label">Salary (Anual) <span style="color:red">*</span></label>
+                                                        <label class="label">Salary (Annual) <span style="color:red">*</span></label>
                                                          <label class="select">
                                                         <i class="icon-append fa fa-currency"></i>
                                                         <select required="required" name="salary"><option value="" selected="selected" disabled="disabled">-Select-</option>@foreach ($response['salaryrange'] as $salaryrange)<option value="{{ $salaryrange->salaryId }}">{{ $salaryrange->salaryName }}</option>@endforeach</select>
