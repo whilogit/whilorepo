@@ -1,6 +1,6 @@
 <div id="navigation">
 		<div class="container-fluid">
-			<a href="#" id="brand">Whilo</a>
+			<a href="/dashboard" id="brand">TEST ADMIN</a>
 			
 			<ul class='main-nav'>
 				<li class='active'>

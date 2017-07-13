@@ -34,9 +34,39 @@ class FrontendController extends Controller
                         ->where('j.status',1)
                         ->groupBy('j.companyId')
                         ->get();
-
-
-        return view('frontend.index')->with("locations",DB::table('_locations')->get() )->with("data",$jobs);
+        //$jobs=DB::table('companyjobs as j')
+                $profiles=DB::table('jfeedbacks as jb')
+                        ->select('p.firstName','p.lastName','l.locationName','f.functionalName')
+					->leftjoin('jfeedbacklink as jf', 'jf.feedbackId', '=', 'jb.feedbackId')
+					->join('jprofile as p', 'p.seekerId', '=', 'jf.seekerId')
+					
+					->join('jmaster as m', 'm.seekerId', '=', 'jf.seekerId')
+                                        ->join('jproffessional as jp', 'jp.seekerId', '=', 'm.seekerId')
+                        ->join('_functionalarea as f', 'f.functionalId', '=', 'jp.functionalarea')
+                        ->leftjoin('_locations as l', 'l.locationId', '=', 'p.locationId')
+					 ->where('m.accountStatus',1)->where('jf.Status',1)
+                                                  ->groupBy('jf.seekerId')->get();
+                                        // echo '<pre>'; print_r($profiles);
+                                          //exit;
+  $company=DB::table('companyjobs as j')
+          ->leftjoin('commaster as cm', 'cm.companyId', '=', 'j.companyId')
+               ->select('li.logoCategory','li.logoName','li.dirYear','li.dirMonth','li.crTime','li.logExt')
+					->join('companylogo as li', 'li.companyId', '=', 'j.companyId')
+				->where('j.status',1)
+           ->where('cm.ctypeId',1)
+                        ->groupBy('j.companyId')
+                        ->get();
+  
+  $consultancy=DB::table('companyjobs as j')
+          ->leftjoin('commaster as cm', 'cm.companyId', '=', 'j.companyId')
+               ->select('li.logoCategory','li.logoName','li.dirYear','li.dirMonth','li.crTime','li.logExt')
+					->join('companylogo as li', 'li.companyId', '=', 'j.companyId')
+				->where('j.status',1)
+           ->where('cm.ctypeId',2)
+                        ->groupBy('j.companyId')
+                        ->get();
+		
+        return view('frontend.index')->with("locations",DB::table('_locations')->get() )->with("data",$jobs)->with("profiles",$profiles)->with("company",$company)->with("consultancy",$consultancy);
     }
      public function verifytalent(){ return view('frontend.verifytalent');   }
     

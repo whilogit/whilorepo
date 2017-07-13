@@ -6,5 +6,3 @@
        //Basic Features Routes
         Route::get('/workfeatures', 'BaseTablesController@home');
         Route::get('/locations', 'BaseTablesController@locationindex');
-        
- 
