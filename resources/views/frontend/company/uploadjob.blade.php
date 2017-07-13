@@ -1,12 +1,11 @@
 @extends('frontend.layouts.master')
 <div class="wp-block default user-form no-margin">
                             <div class="form-header">
-                                
                                  @if($response['limit_status'] == 0)
-                                 <span align="center" style="color:green;font-weight:bold"> <h2>{{ $response['message'] }}</h2> </span>
+                                 	<span align="center"> <h2 style="color:green;font-weight:bold">{{ $response['message'] }}</h2> </span>
                                  @elseif($response['limit_status'] ==1)
-                                   <span align="center" style="color:red;font-weight:bold"> <h2>{{ $response['message'] }}</h2> </span>
-                                   @endif
+                                   	<span align="center"> <h2 style="color:red;font-weight:bold">{{ $response['message'] }}</h2> </span>
+                           	 @endif
                                 <div id="message">
         
                                      </div>

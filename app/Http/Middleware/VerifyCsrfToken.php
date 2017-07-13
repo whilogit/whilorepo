@@ -18,6 +18,5 @@ class VerifyCsrfToken extends BaseVerifier
     protected $except = [
         '/ccavenue/cancelurl',
         '/ccavenue/responseurl'
-        
     ];
 }

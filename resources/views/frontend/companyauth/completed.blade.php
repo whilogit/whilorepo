@@ -131,12 +131,11 @@
 			</div>
                            
                     </div>
-                </div>          
+                </div>
             </div>
         </section>
 @endsection
 @section('after-scripts-end')
     <script src="/assets/app/register.ccomplete.js"></script>
-    <link rel="stylesheet" href="{{ url('/assets/extra/jquery-confirm.min.css') }}">
-<script src="{{ url('/assets/extra/jquery-confirm.min.js')}}"></script> 
 @stop
+

@@ -29,7 +29,7 @@
 <li ><a href="#ShortlistedCandidates" data-toggle="tab">Shortlisted Candidates</a></li>
 <li ><a href="#SearchedCandidates" data-toggle="tab">Searched Candidates</a></li>
 <li ><a href="#AppliedCandidates" data-toggle="tab">Applied Candidates</a></li>
-<li  class="active"><a href="#ChangePassword" data-toggle="tab">Change Password</a></li>
+<li ><a href="#ChangePassword" data-toggle="tab">Change Password</a></li>
 
                             
                         </ul>

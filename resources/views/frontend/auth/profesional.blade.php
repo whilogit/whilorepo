@@ -69,9 +69,9 @@
                                                            <label class="select">
                                                     <select name="functionalarea">
                                                         <option value="0" selected="" disabled="">Functional Area</option>
-                                                        <option {{ isset($proffessional->functionalarea) ?  $proffessional->functionalarea == 1 ? "selected" : '' : '' }} value="1">Account</option>
-                                                        <option {{ isset($proffessional->functionalarea) ?  $proffessional->functionalarea == 2 ? "selected" : '' : '' }} value="2">Finance</option>
-                                                        <option {{ isset($proffessional->functionalarea) ?  $proffessional->functionalarea == 3 ? "selected" : '' : '' }} value="3">Engineering</option>
+                                                          @foreach($functionalarea as $list)
+                                                    <option {{ isset($list->functionalId) ? $list->functionalId == $list->functionalId ? "selected" : "" : ""  }} value="{{ $list->functionalId }}">{{ $list->functionalName }}</option>
+                                                    @endforeach
                                                                                                 
                                                     </select>
                                                     <i></i>
