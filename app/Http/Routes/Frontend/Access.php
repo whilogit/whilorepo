@@ -54,6 +54,7 @@ Route::group(['namespace' => 'Auth'], function () {
         Route::get('upload/jobs', 'AuthController@showCompanyJobuploadForm');
         Route::post('upload/jobs', 'AuthController@uploadjobs');
 
+        Route::post('/company/basicdetails', 'AuthController@CompanyBasicDetails');
 
 
         Route::post('send/email', 'AuthController@sendmail');

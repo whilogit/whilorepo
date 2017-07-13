@@ -58,40 +58,23 @@ $(function(){
 		},
 		
 		btnsubmit:function(ths,callback){
-<<<<<<< HEAD
 			if($("[name=companyimages] input[name=logo]").val() == '' ||$("[name=companyimages] input[name=companyimage]").val() == ''){
                     	  $('body').addClass('loaded');
-=======
-                    
-                   if($("[name=companyimages] input[name=logo]").val() == '' ||$("[name=companyimages] input[name=companyimage]").val() == ''){
-                      $('body').addClass('loaded');
->>>>>>> d705622bf42cb36a88f31bf15223a2c5abae8c60
 				$.alert({
 								title: 'Error!',
 								content: 'Please add company log and images',
 								animation: 'rotate',
 								closeAnimation: 'right',
 							 });
-<<<<<<< HEAD
 			}
 			else
 			{
-=======
-                   }
-                   else
-                   {
->>>>>>> d705622bf42cb36a88f31bf15223a2c5abae8c60
 			var postdata =  { "_token" : $('meta[name="csrf-token"]').attr('content')};
 			$('body').removeClass('loaded');
 			$.post('/company/complete',postdata,function(response){ 
 			if(response.success){
-<<<<<<< HEAD
                           
 				
-=======
-                            
-				//location.href="/company/signup";
->>>>>>> d705622bf42cb36a88f31bf15223a2c5abae8c60
                                  location.href = "/company/reg_complete";
 			}
 			else 
@@ -104,17 +87,12 @@ $(function(){
 								closeAnimation: 'right',
 							 });
 			}
-<<<<<<< HEAD
 			},'json');
 		}
 		},
-=======
-                     
-                    },'json');
-		}
-            },
->>>>>>> d705622bf42cb36a88f31bf15223a2c5abae8c60
 		logo:function(thiss,ths,callback){
+                        $('#loadingmessage').show();
+
 			var proceed = true;
 		        var fname = thiss.value;
 		     //var re = /(\.jpg|\.jpeg|\.png)$/i;

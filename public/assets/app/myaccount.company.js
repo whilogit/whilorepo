@@ -1,5 +1,13 @@
 var fetch = false;
 $(function(){
+     var postdata = {};
+            postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
+                $('body').removeClass('loaded');
+                $.post('/company/basicdetails',postdata,function(response){
+                $('body').addClass('loaded');
+                    $('#ProfileHome').append(response);
+                });
+   
 	$.companyacount = {
 		init: function(callback) {
 			
@@ -80,7 +88,9 @@ $(function(){
 	}
         $('a[href="#CompanyProfile"]').click(function()
         {
+            $('#ProfileHome').html('');
              $('#CompanyProfile').html('');
+             
             var postdata = {};
             postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
                 $('body').removeClass('loaded');
@@ -91,6 +101,7 @@ $(function(){
         }); 
         $('a[href="#Postnewjobs"]').click(function()
         {
+              $('#ProfileHome').html('');
              $('#Postnewjobs').empty();
              var postdata = {};
             postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
@@ -104,6 +115,7 @@ $(function(){
         }); 
          $('a[href="#postedjobs"]').click(function()
         {
+             $('#ProfileHome').html('');
              $('#postedjobs').empty();
              var postdata = {};
             postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
@@ -117,6 +129,7 @@ $(function(){
         }); 
           $('a[href="#ShortlistedCandidates"]').click(function()
         {
+             $('#ProfileHome').html('');
              $('#ShortlistedCandidates').empty();
              var postdata = {};
             postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
@@ -131,6 +144,7 @@ $(function(){
         });   
            $('a[href="#SearchedCandidates"]').click(function()
         {
+             $('#ProfileHome').html('');
              $('#SearchedCandidates').empty();
              var postdata = {};
             postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
@@ -144,7 +158,7 @@ $(function(){
         });
         $('a[href="#AppliedCandidates"]').click(function()
         {
-                  
+              $('#ProfileHome').html('');     
              $('#AppliedCandidates').empty();
           
              var postdata = {};
@@ -161,7 +175,7 @@ $(function(){
         
           $('a[href="#ChangePassword"]').click(function()
         {   
-    
+             $('#ProfileHome').html('');
                    $('#ChangePassword   ').empty();
                 $('body').removeClass('loaded');
                 $.get('/company/passwordform',function(response){

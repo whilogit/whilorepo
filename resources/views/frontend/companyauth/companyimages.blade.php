@@ -37,7 +37,8 @@
 											 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <div class="form-group">
-                                                            <label class="input">Upload your logo here   </label>
+                                                        
+                                                            <label class="input">Upload Company logo here   </label>
 															 <label class="btn btn-block btn-primary">
                 Browse… <input name="logo" type="file" style="display: none;">
             </label>
@@ -53,7 +54,7 @@
 											 <div class="col-md-12" style="border:1px solid #ccc">
                                                     <div class="form-group">
                                                         <div class="form-group">
-                                                            <label class="input">Upload your photos here   </label>
+                                                            <label class="input">Upload Company photos here   </label>
 															 <label class="btn btn-block btn-primary">
                 Browse… <input name="companyimage" type="file" multiple="multiple" style="display: none;">
             </label>

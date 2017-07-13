@@ -37,6 +37,9 @@
                     <div class="col-md-10">                     
                         <div class="tabs-framed">
                             <div class="tab-content">
+                                  <div id="ProfileHome" >
+              
+                                    </div>
   <div class="tab-pane " id="CompanyProfile" >
                      
 </div>
