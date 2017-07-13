@@ -295,6 +295,5 @@
     </section>
 @endsection
 @section('after-scripts-end')
-
-    <script src="{{ url('assets/app/register.company.js') }}"></script>
+    <script src="/assets/app/register.company.js"></script>
 @stop

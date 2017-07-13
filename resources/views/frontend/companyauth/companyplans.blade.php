@@ -46,12 +46,12 @@
            <input type="hidden" name="planid" id="express_plan_id" value="1"/>
     </form>
     <form name="enterprisePlan" id="enterprisePlan" method="post" action="" >
-     <input type="hidden" name="companyid" id="enterprise_company_id" value="{{ $_SESSION['WHILLO']['COMPAnyID'] }}"/>
-           <input type="hidden" name="planid" id="enterprise_plan_id" value="2"/>
+     <input type="hidden" name="enterprise_company_id" id="enterprise_company_id" value="{{ $_SESSION['WHILLO']['COMPAnyID'] }}"/>
+           <input type="hidden" name="enterprise_plan_id" id="enterprise_plan_id" value="2"/>
     </form>
     <form name="exclusivePlan" id="exclusivePlan" method="post" action="" >
-      <input type="hidden" name="companyid" id="exclusive_company_id" value="{{ $_SESSION['WHILLO']['COMPAnyID'] }}"/>
-           <input type="hidden" name="planid" id="exclusive_plan_id" value="3"/>
+      <input type="hidden" name="exclusive_company_id" id="exclusive_company_id" value="{{ $_SESSION['WHILLO']['COMPAnyID'] }}"/>
+           <input type="hidden" name="exclusive_plan_id"" id="exclusive_plan_id" value="3"/>
     </form>
         </div>
                     </div>
@@ -64,7 +64,7 @@
 
 
 </div>
-
+<span id="append_ccavenu"></span>
 
 <style>
 body{font-family:Tw Cen MT !important;}
@@ -79,4 +79,6 @@ th, td {
 
 @section('after-scripts-end')
 <script src="/assets/app/register.companyplan.js"></script>
+<script src="{{ url('/assets/extra/json.js')}}"></script>
+<script src="{{ url('/assets/extra/jquery-1.7.2.min.js')}}"></script>
 @endsection

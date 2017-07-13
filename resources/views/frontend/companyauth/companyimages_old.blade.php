@@ -44,8 +44,8 @@
                                                         </div>  
                                                     </div>               
                                                 </div>
-                                                <div class="col-md-2" name="logoimage">
-                                                           
+												 <div class="col-md-2" name="logoimage">
+                                                 @foreach ($companylogo as $logo) <img src="/display/image/{{ $logo->logoCategory }}/{{ $logo->dirYear }}/{{ $logo->dirMonth }}/{{ $logo->logoName }}/{{ $logo->crTime }}/s.{{ $logo->logExt }}" style="border:1px solid #ccc"> @endforeach             
                                                   <span id="close" class="close">x</span>       
                                                 </div>
 										<br></div>
@@ -60,10 +60,12 @@
                                                         </div>  
                                                     </div>               
                                                 </div><div name="companyimages">
-						
+																	 @foreach ($companyimages as $images)
+                                                                                 <div class="col-md-2"><img  src="/display/image/{{ $images->imageCategory }}/{{ $images->dirYear }}/{{ $images->dirMonth }}/{{ $images->logoName }}/{{ $images->crTime }}/s.{{ $images->logExt }}" style="border:1px solid #ccc;width:100%">  
+<span id="close" class="close">x</span></div> @endforeach  
 </div>
 												 
-                                               
+                                                
                                             </div>   
 
                                         </section>
@@ -99,7 +101,4 @@
 @endsection
 @section('after-scripts-end')
     <script src="/assets/app/register.companyimages.js"></script>
-    <script src="{{ url('/assets/extra/jquery_new.min.js')}}"></script>
-<link rel="stylesheet" href="{{ url('/assets/extra/jquery-confirm.min.css') }}">
-<script src="{{ url('/assets/extra/jquery-confirm.min.js')}}"></script> 
 @stop

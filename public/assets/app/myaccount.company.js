@@ -144,13 +144,14 @@ $(function(){
         });
         $('a[href="#AppliedCandidates"]').click(function()
         {
-           
+                  
              $('#AppliedCandidates').empty();
-             $('#candidateDatatable').DataTable();
+          
              var postdata = {};
             postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
                 $('body').removeClass('loaded');
                 $.post('/company/appliedcandy',postdata,function(response){
+              
                 $('body').addClass('loaded');
                  $('#AppliedCandidates').append(response);
                   
@@ -159,7 +160,8 @@ $(function(){
         });
         
           $('a[href="#ChangePassword"]').click(function()
-        {          
+        {   
+    
                    $('#ChangePassword   ').empty();
                 $('body').removeClass('loaded');
                 $.get('/company/passwordform',function(response){
@@ -175,3 +177,4 @@ $(function(){
 	$.companyacount.init();
 	$.companyacount.globalinit();
 })(jQuery);
+

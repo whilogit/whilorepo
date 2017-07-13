@@ -45,10 +45,11 @@ trait RegisterRedirectsForms
 					case 3: { 
 						 $locations = DB::table('_locations')->get();
 						 $industry = DB::table('_industry')->get(); 
+                                                 $functionalarea= DB::table('_functionalarea')->get();
 						 $proffessional = DB::table('jproffessional')->where('seekerId', $_SESSION['WHILLO']['SEEKERID'])->first();
 						 $jexperience = DB::table('jexperience')->where('seekerId', $_SESSION['WHILLO']['SEEKERID'])->get();
 						 $jfeedbackemails = DB::table('jfeedbackemails')->where('seekerId', $_SESSION['WHILLO']['SEEKERID'])->get();
-						 return view('frontend.auth.profesional',array('industry'=>$industry))->with(array("proffessional"=>$proffessional,"experiences"=>$jexperience,"feedbackemails"=>$jfeedbackemails,"locations"=>$locations)); break;}
+						 return view('frontend.auth.profesional',array('industry'=>$industry))->with(array("proffessional"=>$proffessional,"experiences"=>$jexperience,"feedbackemails"=>$jfeedbackemails,"locations"=>$locations,"functionalarea"=>$functionalarea)); break;}
 					case 4: {
 						$jprofileimage = DB::table('jprofileimage')->where('seekerId', $_SESSION['WHILLO']['SEEKERID'])->get(); 
 						$jsocialmedia = DB::table('jsocialmedia')->where('seekerId', $_SESSION['WHILLO']['SEEKERID'])->first();

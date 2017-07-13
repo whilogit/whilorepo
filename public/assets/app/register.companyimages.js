@@ -58,15 +58,26 @@ $(function(){
 		},
 		
 		btnsubmit:function(ths,callback){
-                   
+			if($("[name=companyimages] input[name=logo]").val() == '' ||$("[name=companyimages] input[name=companyimage]").val() == ''){
+                    	  $('body').addClass('loaded');
+				$.alert({
+								title: 'Error!',
+								content: 'Please add company log and images',
+								animation: 'rotate',
+								closeAnimation: 'right',
+							 });
+			}
+			else
+			{
 			var postdata =  { "_token" : $('meta[name="csrf-token"]').attr('content')};
 			$('body').removeClass('loaded');
 			$.post('/company/complete',postdata,function(response){ 
 			if(response.success){
-                            alert('heloooo');
-				//location.href="/company/signup";
+                          
+				
                                  location.href = "/company/reg_complete";
-			}else 
+			}
+			else 
 			{
 				$('body').addClass('loaded');
 				$.alert({
@@ -77,6 +88,7 @@ $(function(){
 							 });
 			}
 			},'json');
+		}
 		},
 		logo:function(thiss,ths,callback){
 			var proceed = true;
@@ -132,7 +144,7 @@ $(function(){
                   
 			var proceed = true;
 		        var fname = thiss.value;
-		        //var re = /(\.jpg|\.jpeg|\.png)$/i;
+		        var re = /(\.jpg|\.jpeg|\.png)$/i;
                       
                       
 			if(!re.exec(fname)){	

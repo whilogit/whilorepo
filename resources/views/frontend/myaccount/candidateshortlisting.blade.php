@@ -1,4 +1,4 @@
-<div id="post-ajax"><h4>Shortlisted Candidates</h4>
+<h4>Shortlisted Candidates</h4>
 <table class="table table-orders table-bordered table-striped table-responsive no-margin">
 <tbody>
 <tr><th>Name</th><th>Qualification</th><th>Experience</th><th>Status</th></tr>
@@ -21,14 +21,11 @@
          @endif
     </td>
     
-    
 </tr>
  @endforeach
-
 </tbody>
-</table>   
- {{ $shortlist->links() }}  
-</div>
+</table>  
+ {{ $shortlist->links() }}       
 <script src="{{ url('/assets/extra/jquery_new.min.js')}}"></script>
 <link rel="stylesheet" href="{{ url('/assets/extra/jquery-confirm.min.css') }}">
 <script src="{{ url('/assets/extra/jquery-confirm.min.js')}}"></script> 
@@ -74,7 +71,7 @@
                
    
      }
-     $(function() {
+      $(function() {
             $('#post-ajax').on('click', '.pagination a', function (e) {
                var pageno=$(this).attr('href').split('page=')[1];
                e.preventDefault();
@@ -91,6 +88,6 @@
                 });
             });
         });
-
+     
 
 </script>

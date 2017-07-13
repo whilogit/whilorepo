@@ -140,7 +140,7 @@ trait completeRegistration
                                          ->leftjoin('_experience as ep','ep.experienceId','=','jp.exprstatus')
                                          ->leftjoin('userlogin as u','u.userId','=','j.userId')
                                          ->where('sc.companyId', '=', $_SESSION['WHILLO']['COMPAnyID'])
-                                        ->get();
+                                       ->paginate(2);
 
          $data['searchcand'] = $searchcand;
          
@@ -175,13 +175,14 @@ trait completeRegistration
             $data = $request->all();
             $buttonid=$data['button_id'];
             $id=$data['seekerId'];
+	    $jobId=$data['jobId'];
             $to=$data['email_id'];
             $sub='Test Interview Call Subject';
             $message='Interview Test body';
             $sendmail= MailController::sendmail($to,$sub,$message);
             $res = DB::table('userappliedjobs')
                         ->where('seekerId',$id )
-                         ->where('companyId', $_SESSION['WHILLO']['COMPAnyID'] )
+                         ->where('jobId', $jobId )
                         ->update(array('status' =>1));
             return response()->json(array(
                                                         'success' => true,
@@ -253,7 +254,7 @@ trait completeRegistration
            
            $appliedcandidates = DB::table('userappliedjobs as sc')
                                        
-                                        ->select('q.qualificationName','u.userName','j.seekerId','ep.experienceName','cb.jobTitle','u.emailAddress','sc.status')
+                                        ->select('q.qualificationName','u.userName','j.seekerId','ep.experienceName','cb.jobTitle','u.emailAddress','sc.status','sc.jobId')
                                         ->leftjoin('jmaster as j','j.seekerId','=','sc.seekerId')
                                          ->leftjoin('jqualification as jq','jq.seekerId','=','sc.seekerId')
                                           ->leftjoin('_qualification as q','q.qualificationId','=','jq.qualificationId')
@@ -263,7 +264,7 @@ trait completeRegistration
                                           ->leftjoin('companyjobs as cb','cb.jobId','=','sc.jobId')
                                          
                                          ->where('cb.companyId', '=', $_SESSION['WHILLO']['COMPAnyID'])
-                                        ->get();
+                                        ->paginate(2);
            
          $data['appliedcandidates'] = $appliedcandidates;
         return response(view('frontend.myaccount.appliedcandidates', $data),'200')->header('Content-Type', 'text/plain');  
@@ -382,8 +383,8 @@ public function PaymentPlanDetails(Request $request)
                                         ->where('plan_id', '=',$data['planId'])
                                         ->first();
                 $merchant_id = \Config::get('constant.MERCHANT_ID');
-               // $amount= $plan_price->price;
-                $amount= 0.01;
+               	$amount= $plan_price->price;
+               // $amount= 0.01;
                 $working_key= \Config::get('constant.WORKING_KEY');
                 $access_code = \Config::get('constant.ACCESS_CODE');
                 $order_id = CcavenueHelperController::random_num(6); 
@@ -392,7 +393,8 @@ public function PaymentPlanDetails(Request $request)
                 $marchant_data = "tid=$t_id&merchant_id=$merchant_id&order_id=$order_id&amount=$amount&currency=INR&redirect_url=$redirect_url&cancel_url=$cancel_url&language=EN";
                 $encRequest = CcavenueHelperController::encrypt($marchant_data,$working_key);
               
-                $form_style= '<form method="post" id="ccavenu_form" name="ccavenu_form" action="https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction"> 
+               // $form_style= '<form method="post" id="ccavenu_form" name="ccavenu_form" action="https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction"> 
+                $form_style= '<form method="post" id="ccavenu_form" name="ccavenu_form" action="https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction "> 
                     <input type="hidden" name="encRequest" value="'.$encRequest.'">
                     <input type="hidden" name="access_code" value="'.$access_code.'">				
                     </form>';                                                                       
