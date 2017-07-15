@@ -21,7 +21,7 @@ $(function(){
 		removeimages:function(ths,callback){
 			 $('body').removeClass('loaded');
 			 var postdata =  { 
-			 "imageId" : ths.closest('.col-md-2').find('img').attr('id'),
+			 "imageId" : ths.closest('#imageappend').find('img').attr('id'),
 			 "_token" : $('meta[name="csrf-token"]').attr('content')};
 			$.post('/company/removeimages',postdata,function(response){ 
 				$('body').addClass('loaded');  
@@ -178,7 +178,7 @@ $(function(){
 						$('body').addClass('loaded'); 
 						if(response.success){
 							for(var i=0; i<response.imagepath.length; i++){  
-						 	 ths.closest('.row').find('[name=companyimages]').append(' <div class="col-md-2"><img id="'+ response.imagepath[i].imageid+'" src="'+ response.imagepath[i].image +'" style="border:1px solid #ccc"><span id="close" class="close">x</span></div>');
+						 	 ths.closest('.row').find('[name=companyimages]').append(' <div class="col-md-2" id="imageappend"><input type="hidden" id="imageid" value="'+ response.imagepath[i].imageid+'"><img id="'+ response.imagepath[i].imageid+'" src="'+ response.imagepath[i].image +'" style="border:1px solid #ccc"><span id="close" class="close">x</span></div>');
 							}
 						  }else {
 							$.alert({
