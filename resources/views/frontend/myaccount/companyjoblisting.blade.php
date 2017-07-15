@@ -1,4 +1,3 @@
-
 <div class="panel panel-default">
 
   <div class="panel-body">
@@ -6,15 +5,14 @@
          <div id="post-ajax">
          <div id="job_detail_table" >
 
-         <table class="table table-orders table-bordered table-striped table-responsive no-margin" id="myTable">
+         <table class="table table-orders table-bordered table-striped table-responsive no-margin">
 
 
-                                              <thead>
-                                            <tr><th>Job Title</th><th>Valid Till</th><th>Location</th><th>Edit</th></tr>
-                                              </thead>
-                                              
                                         <tbody>
+                                            <tr><th>Job Title</th><th>Valid Till</th><th>Location</th><th>Edit</th></tr>
+                                            
                                             @foreach($jobdetails as $key=> $list)
+                                          {{  dd($list) }}
                                                 <tr>
                                                     <td><a href="#"></a> {{ $list->jobTitle }}</td>
                                                     <td>{{ $list->lastdate }}</td>
@@ -146,22 +144,3 @@
             });
         });
 </script>
-
-<script src="{{ url('/js/jquery.js') }}"></script>
-<script src="{{ url('/js/jquery-ui.min.js')}}"></script>
-<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css"></script>
- <script>
-  $( function() {
-        $('#myTable').dataTable();
-	  var today = new Date(); 
-		var dd = today.getDate() + 1;
-		var mm = today.getMonth()+1; //January is 0!
-		var yyyy = today.getFullYear();
-    $( "[name=validtill]" ).datepicker({
-		dateFormat: "dd-mm-yy",
-		defaultDate: +1,
-		minDate: new Date(yyyy, mm , dd)
-	});
-  } );
-  </script>
