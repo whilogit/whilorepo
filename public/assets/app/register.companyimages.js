@@ -1,7 +1,8 @@
 $(function(){ 
 	$.companyimages = {
 		init: function(callback) {
-			$("[name=companyimages] input[name=logo]").change(function() { $.companyimages.logo(this,$(this),callback); });
+
+			$("[name=companyimages] input[name=logo]").change(function() { $.companyimages.logo(this,$(this),callback);  });
 			$("[name=companyimages] input[name=companyimage]").change(function() { $.companyimages.companyimages(this,$(this),callback); });
 			$("[name=companyimages] input").keyup(function() { $.companyimages.validate($(this),callback); });
 			$("[name=companyimages] select").change(function() { $.companyimages.validate($(this),callback); });
@@ -19,11 +20,13 @@ $(function(){
 		
 		
 		removeimages:function(ths,callback){
+			
 			 $('body').removeClass('loaded');
 			 var postdata =  { 
 			 "imageId" : ths.closest('.col-md-2').find('img').attr('id'),
 			 "_token" : $('meta[name="csrf-token"]').attr('content')};
 			$.post('/company/removeimages',postdata,function(response){ 
+				$('.loader').show();
 				$('body').addClass('loaded');  
 				if(response.success){
 					ths.closest('.col-md-2').remove();
@@ -39,9 +42,11 @@ $(function(){
 			 
 		},
 		removelogo:function(ths,callback){
+			
 			 $('body').removeClass('loaded');
 			 var postdata =  { "_token" : $('meta[name="csrf-token"]').attr('content')};
-			$.post('/company/removelogo',postdata,function(response){ 
+			$.post('/company/removelogo',postdata,function(response){
+					$('.loader').show(); 
 				$('body').addClass('loaded');  
 				if(response.success){
 					ths.closest('[name=logoimage]').html('');
@@ -91,8 +96,7 @@ $(function(){
 		}
 		},
 		logo:function(thiss,ths,callback){
-                        $('#loadingmessage').show();
-
+			$('.loader').show();
 			var proceed = true;
 		        var fname = thiss.value;
 		     //var re = /(\.jpg|\.jpeg|\.png)$/i;
@@ -111,10 +115,12 @@ $(function(){
 			}
 			if(proceed){  
 		     $('body').removeClass('loaded'); 
+			
 			 setTimeout(function(){
 				var formData = new FormData(); 
 				formData.append("image_file[]",thiss.files[0]);
 				formData.append("_token",$('meta[name="csrf-token"]').attr('content'));
+				
 				$.ajax({
 					url:"/company/logo",
 					cache: false,
@@ -128,7 +134,8 @@ $(function(){
                                             
 						$('body').addClass('loaded'); 
 						if(response.success){  
-						  ths.closest('.row').find('[name=logoimage]').html('<img src="'+ response.imagepath +'" style="border:1px solid #ccc"><span id="close" class="close">x</span>				');
+						$('.loader').hide();
+						  ths.closest('.row').find('[name=logoimage]').html('<span id="close" class="close" style="float:right;">x</span><img src="'+ response.imagepath +'" style="border:1px solid #ccc; float:left;">');
 						  }else {
 							$.alert({
 									title: 'Error!',
@@ -143,7 +150,7 @@ $(function(){
 			}
 		},
 		companyimages:function(thiss,ths,callback){ 
-                  
+                	 $('.imageloader').show();
 			var proceed = true;
 		        var fname = thiss.value;
 		        var re = /(\.jpg|\.jpeg|\.png)$/i;
@@ -166,6 +173,7 @@ $(function(){
 				for(var i=0; i<thiss.files.length;i++)
 				formData.append("image_file[]",thiss.files[i]);
 				formData.append("_token",$('meta[name="csrf-token"]').attr('content'));
+				 
 				$.ajax({
 					url:"/company/companyimages",
 					cache: false,
@@ -175,10 +183,11 @@ $(function(){
 					data: formData,
 					type: 'post',
 					success: function(response) { 
+							$('.imageloader').hide();
 						$('body').addClass('loaded'); 
 						if(response.success){
 							for(var i=0; i<response.imagepath.length; i++){  
-						 	 ths.closest('.row').find('[name=companyimages]').append(' <div class="col-md-2"><img id="'+ response.imagepath[i].imageid+'" src="'+ response.imagepath[i].image +'" style="border:1px solid #ccc"><span id="close" class="close">x</span></div>');
+						 	 ths.closest('.row').find('[name=companyimages]').append(' <div class="col-md-2"><span id="close" class="close" style="float:right;">x</span></div><img id="'+ response.imagepath[i].imageid+'" src="'+ response.imagepath[i].image +'" style="border:1px solid #ccc; float:left;">');
 							}
 						  }else {
 							$.alert({
