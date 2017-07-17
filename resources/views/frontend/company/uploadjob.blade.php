@@ -1,4 +1,4 @@
-@extends('frontend.layouts.master')
+@extends('frontend.layouts.master_side')
 <div class="wp-block default user-form no-margin">
                             <div class="form-header">
                                  @if($response['limit_status'] == 0)

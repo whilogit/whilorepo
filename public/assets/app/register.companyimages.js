@@ -10,7 +10,22 @@ $(function(){
 			
 			
 			$(document).on('click', '[name=companyimages] [name=logoimage] .close', function() {  $.companyimages.removelogo($(this),callback);    });
-			$(document).on('click', '[name=companyimages] [name=companyimages] .close', function() {  $.companyimages.removeimages($(this),callback);    });
+			$(document).on('click', '[name=companyimages] [name=companyimages] .close', function() {
+			var getimagid=$(this).attr('closeid');
+			
+ $('body').removeClass('loaded');
+			 var postdata =  { 
+			 "imageId" : getimagid,
+			 "_token" : $('meta[name="csrf-token"]').attr('content')};
+			$.post('/company/removeimages',postdata,function(response){ 
+				
+				$('body').addClass('loaded');  
+				if(response.success){
+					$('#imageappend_'+getimagid).remove();
+				}
+			});
+			
+		});
 			
 		},
 		validate:function(ths,callback){
@@ -19,28 +34,7 @@ $(function(){
 		},
 		
 		
-		removeimages:function(ths,callback){
-			
-			 $('body').removeClass('loaded');
-			 var postdata =  { 
-			 "imageId" : ths.closest('.col-md-2').find('img').attr('id'),
-			 "_token" : $('meta[name="csrf-token"]').attr('content')};
-			$.post('/company/removeimages',postdata,function(response){ 
-				$('.loader').show();
-				$('body').addClass('loaded');  
-				if(response.success){
-					ths.closest('.col-md-2').remove();
-				}else{
-					alert({
-							title: 'Error!',
-							content: response.errors,
-							animation: 'rotate',
-							closeAnimation: 'right',
-						 });
-				}
-			},'json');
-			 
-		},
+		
 		removelogo:function(ths,callback){
 			
 			 $('body').removeClass('loaded');
@@ -80,7 +74,7 @@ $(function(){
 			if(response.success){
                           
 				
-                                 location.href = "/company/reg_complete";
+                                 location.href = "/myaccount";
 			}
 			else 
 			{
@@ -102,7 +96,8 @@ $(function(){
 		     //var re = /(\.jpg|\.jpeg|\.png)$/i;
                       // var ext = fname.split('.').pop();
                   var ext=  (/\.(gif|jpg|jpeg|tiff|png)$/i).test(fname);
-			if(!ext){	
+			if(!ext){
+				$('.loader').hide();	
 				proceed= false; 
 				$.alert({
 						title: 'Error!',
@@ -156,7 +151,8 @@ $(function(){
 		        var re = /(\.jpg|\.jpeg|\.png)$/i;
                       
                       
-			if(!re.exec(fname)){	
+			if(!re.exec(fname)){
+			$('.imageloader').hide();	
 				proceed= false; 
 				$.alert({
 						title: 'Error!',
@@ -187,7 +183,7 @@ $(function(){
 						$('body').addClass('loaded'); 
 						if(response.success){
 							for(var i=0; i<response.imagepath.length; i++){  
-						 	 ths.closest('.row').find('[name=companyimages]').append(' <div class="col-md-2"><span id="close" class="close" style="float:right;">x</span></div><img id="'+ response.imagepath[i].imageid+'" src="'+ response.imagepath[i].image +'" style="border:1px solid #ccc; float:left;">');
+						 	 ths.closest('.row').find('[name=companyimages]').append(' <div class="col-md-2" id="imageappend_'+response.imagepath[i].imageid+'"><span id="img_'+response.imagepath[i].imageid+'" class="close" style="float:right;" closeid="'+response.imagepath[i].imageid+'">x</span><input type="hidden" id="imageid_'+i+'" value="'+ response.imagepath[i].imageid+'"  ><img id="image_'+response.imagepath[i].imageid+'" src="'+ response.imagepath[i].image +'" style="border:1px solid #ccc; float:left;"></div>');
 							}
 						  }else {
 							$.alert({

@@ -98,6 +98,18 @@ $(function(){
                 });
    
         }); 
+           $('a[href="#CompanyImages"]').click(function()
+        {
+             clearall();    
+            var postdata = {};
+            postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
+                $('body').removeClass('loaded');
+                $.post('/company/getcompanyImages',postdata,function(response){
+                $('body').addClass('loaded');
+                 $('#CompanyImage').append(response); 
+                });
+   
+        }); 
         $('a[href="#CompanyProfile"]').click(function()
         {
              clearall();    

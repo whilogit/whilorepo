@@ -97,10 +97,25 @@ trait completeRegistration
                 $getExpiryDate = CcavenueHelperController::getExpiryDate($planDuration,$planstartdate); 
 	
 		
-                                $commaimages = DB::table('companyimages')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->first(); 
+                                //$commaimages = DB::table('companyimages')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->first(); 
+                           
                                 $companylogo = DB::table('companylogo')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->first();
-                                return view('frontend.myaccount.basicdeatils')->with(array("commaster"=>$commaster,"images"=>$commaimages,"companylogo"=>$companylogo,"plandeatils"=>$plan_details,"startdate"=>$planstartdate,"expirydate"=>$getExpiryDate));
+                                   
+                                return view('frontend.myaccount.basicdeatils')->with(array("commaster"=>$commaster,"company_logo"=>$companylogo,"plandeatils"=>$plan_details,"startdate"=>$planstartdate,"expirydate"=>$getExpiryDate));
                  
+             }
+             public function CompanyGetImages()
+             {
+                 $commaster = DB::table('commaster as c')
+										 ->join('comprofile as p', 'c.companyId', '=', 'p.companyId')
+										 ->join('_locations as l', 'l.locationId', '=', 'p.locationId')
+										 ->join('userlogin as log', 'log.userId', '=', 'c.userId')
+										 ->select('c.*','p.*','l.locationName','log.userName','log.emailAddress')
+										 ->where('c.userId', '=', $_SESSION['WHILLO']['USERID'])
+										 ->first();
+                $commaimages = DB::table('companyimages')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->get(); 
+		$companylogo = DB::table('companylogo')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->get();
+	        return view('frontend.myaccount.companyshowimage')->with(array("commaster"=>$commaster,"companyimages"=>$commaimages,"companylogo"=>$companylogo));
              }
     public function CompanyProfileDetails()
      {

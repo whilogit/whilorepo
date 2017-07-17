@@ -15,7 +15,7 @@
         
             <div class="box-body">
                      <div class="col-sm-6">
-                     <div  align="center"><img width="100%" src='/display/image/{{ $companylogo->logoCategory }}/{{ $images->dirYear }}/{{ $images->dirMonth }}/{{ $images->logoName }}/{{ $images->crTime }}/l.{{ $images->logExt }}' alt="Featured Image" class="img-circle" kasperskylab_antibanner="on"> 
+                     <div  align="center"><img width="100%" src="{{ URL::to('/') }}/app/Storage/Images/{{ $company_logo->logoCategory }}/{{ $company_logo->dirYear }}/{{ $company_logo->dirMonth }}/{{ $company_logo->dirYear }}_{{ $company_logo->dirMonth }}_{{ $company_logo->crTime }}_{{ $company_logo->logoName }}_l.{{ $company_logo->logExt }}" alt="Featured Image" class="img-circle" kasperskylab_antibanner="on"> 
                 
                 <input id="profile-image-upload" class="hidden" type="file">
   </div>

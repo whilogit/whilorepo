@@ -32,68 +32,57 @@
                                 <form name="companyimages" id="frmRegister" class="sky-form">                                    
                                     <fieldset class="no-padding">           
                                         <section class=""> 
-                                           
-										 <div class="row" style="border:1px solid #ccc;background:#eee;padding-bottom:2%; margin-bottom: 30px;">
-											 <div class="col-md-4">
+                                           <div class="row" style="border:1px solid #ccc;background:#eee;padding-bottom:2%; margin-bottom: 30px;">
+					        <div class="col-md-4">
                                                     <div class="form-group">
                                                         <div class="form-group">
                                                             <label class="input">Upload Company logo here   </label>
-															 <label class="btn btn-block btn-primary">
-                                                            Browse… <input name="logo" type="file" style="display: none;">
-                                                        </label>
-
-
+								 <label class="btn btn-block btn-primary">
+                                                                    Browse… <input name="logo" type="file" style="display: none;">
+                                                                </label>
                                                         </div>  
                                                     </div>               
                                                 </div>
-    
-                                                <div class="col-md-2" name="logoimage" >
- 
-                                                          <div >
-															<img class="loader" style="display:none;margin-top:10px;" width="50%" src="{{ URL::to('/') }}/images/771.gif">
-														</div> 
+                                                <div class="col-md-2" name="logoimage">
+                                                        
                                                 </div>
-											<br></div>
-										<div class="row" style="border:1px solid #ccc;margin-bottom: 50px;">
-											 <div class="col-md-4">
+                                                <img class="loader" style="display:none;margin-top:10px;" width="10%" src="{{ URL::to('/') }}/images/771.gif">
+                                                <br></div>
+                                                <div class="row" style="border:1px solid #ccc;background:#eee;padding-bottom:2%; margin-bottom: 30px;">
+                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <div class="form-group">
-                                                            <label class="input">Upload Company photos here   </label>
-															 <label class="btn btn-block btn-primary">
-																Browse… <input name="companyimage" type="file" multiple="multiple" style="display: none;">
-															</label>
+                                                            <label class="input">Upload Company photos here</label>
+							<label class="btn btn-block btn-primary">
+                                                            Browse… <input name="companyimage" type="file" multiple="multiple" style="display: none;">
+                                                        </label>
                                                         </div>  
                                                     </div>               
                                                 </div>
-                                                                                </div><div name="companyimages">
-											<div>
-                                                  <img class="imageloader" style="display:none;margin-top:10px;" width="50%" src="{{ URL::to('/') }}/images/771.gif">
-											</div> 
-                                                       
-                                            </div> 
-                                                       <div class="row">
-                                                <div class="col-md-8">
-                                                   &nbsp;
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <button class="btn btn-alt btn-icon btn-icon-right btn-icon-go pull-right btnsubmit" type="button">
-                                                        <span>Complete Registration</span>
-                                                    </button>
-                                                </div>
-                                                
-                                                 <div class="col-md-6"><br>
-                                                    <ul class="list-check responsereport" style="color:#F00;">
-                                                        <li> </li>
-                                                    </ul>
-                                                 </div>
-                                        </div>                          
-                                        </section>
+                                                <div name="companyimages">
+                                                   
+						</div>
+						 <img class="imageloader" style="display:none;margin-top:10px;" width="10%" src="{{ URL::to('/') }}/images/771.gif">
+                                            </div>   
+                                        </section>            
                                     </fieldset>  
-									
-                                   
+				<div class="row">
+                                    <div class="col-md-8">
+                                          &nbsp;
+                                     </div>
+                                      <div class="col-md-4">
+                                        <button class="btn btn-alt btn-icon btn-icon-right btn-icon-go pull-right btnsubmit" type="button">
+                                            <span>Complete Registration</span>
+                                        </button>
+                                     </div>
+                                       <div class="col-md-6"><br>
+                                            <ul class="list-check responsereport" style="color:#F00;">
+                                             <li> </li>
+                                            </ul>
+                                        </div>
+                                   </div>   
                                 </form>  
                             </div>
-                           
                         </div>
                     </div>
                 </div>

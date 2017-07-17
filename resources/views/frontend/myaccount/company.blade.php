@@ -25,6 +25,7 @@
                         <ul class="categories">
                          <li ><a href="#CompanyHome" data-toggle="tab">Home</a></li>
                          <li ><a href="#CompanyProfile" data-toggle="tab">Company Profile</a></li>
+                          <li ><a href="#CompanyImages" data-toggle="tab">Images</a></li>
                         <li ><a href="#Postnewjobs" data-toggle="tab">Post New Jobs</a></li>
                         <li ><a href="#postedjobs" data-toggle="tab">Posted Jobs</a></li>
                         <li ><a href="#ShortlistedCandidates" data-toggle="tab">Shortlisted Candidates</a></li>
@@ -37,6 +38,9 @@
                         <div class="tabs-framed">
                             <div class="tab-content">
                                   <div id="ProfileHome" >
+              
+                                    </div>
+                                 <div id="CompanyImage" >
               
                                     </div>
   <div class="tab-pane " id="CompanyProfile" >

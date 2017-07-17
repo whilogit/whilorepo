@@ -3,6 +3,7 @@
 <table class="table table-orders table-bordered table-striped table-responsive no-margin">
 <tbody>
 <tr><th>Name</th><th>Job Title</th><th>Qualification</th><th>Experience</th><th>View Profile</th><th>Status</th></tr>
+@if(count($appliedcandidates) > 0)
  @foreach($appliedcandidates as $key=> $list)
  <tr>
      <td><a href="#">{{ $list->userName }}</a></td>
@@ -22,6 +23,11 @@
          
      </td></tr>
  @endforeach
+ @else
+ <tr>
+    <td colspan=5 align="center" ><b> No Data</b></td>
+ </tr>
+ @endif
 </tbody>
 </table>  
  {{ $appliedcandidates ->links() }}                                  
