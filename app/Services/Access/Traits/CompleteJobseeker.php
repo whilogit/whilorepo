@@ -148,7 +148,7 @@ This email will take you to whilo.in, where you have to verify Mr.Something.Plea
 											</tr>
 				<tr>
 												<td width="20" height="20" style="color: #545454; font-family: Raleway, arial; font-weight:600; font-size: 16px;text:center;">
-													<a href="http://whilo.in/feedback/'. $randomString .'" target="_blank">Click here to Verify Mr.'. $users[0]->firstName . '</a>
+													<a href="http://whilo.in/feedback/'. $randomString .'" target="_blank">Click here to Verify Mr.'. $fullname . '</a>
 												</td>
 											</tr>							
 			

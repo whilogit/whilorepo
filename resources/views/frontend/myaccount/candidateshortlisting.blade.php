@@ -4,7 +4,6 @@
 <tr><th>Name</th><th>Qualification</th><th>Experience</th><th>Status</th></tr>
  @if(count($shortlist) > 0)
  @foreach($shortlist as $key=> $list)
-
 <tr>
     <td><a href="#">{{ $list->userName }}</a></td>
     <td>{{ $list->qualificationName }}</td>
@@ -98,3 +97,4 @@
      
 
 </script>
+

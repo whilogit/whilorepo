@@ -67,12 +67,11 @@
                                                              <div class="form-group">
                                                         <label class="label">Functional Area</label>
                                                            <label class="select">
-                                                    <select name="functionalarea">
+                                                 <select name="functionalarea">
                                                         <option value="0" selected="" disabled="">Functional Area</option>
                                                           @foreach($functionalarea as $list)
                                                     <option {{ isset($list->functionalId) ? $list->functionalId == $list->functionalId ? "selected" : "" : ""  }} value="{{ $list->functionalId }}">{{ $list->functionalName }}</option>
-                                                    @endforeach
-                                                                                                
+                                                    @endforeach                                             
                                                     </select>
                                                     <i></i>
                                                 </label>

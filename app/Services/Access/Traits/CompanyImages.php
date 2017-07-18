@@ -24,11 +24,11 @@ trait CompanyImages
     
 	public function removeimages(Request $request,Response $response)
     {
-     	
+     	 
 		 $companyimages = DB::table('companyimages as i')->select('i.*')
 	   								->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])
 									->where('imageId', $request->input('imageId'))
-									->get();
+								->get();	
 	   if($companyimages){
 		   foreach ($companyimages as $get){			   
 			   if(file_exists(app_path() . "/Storage/Images/". $get->imageCategory."/" . $get->dirYear . "/" . $get->dirMonth . "/".$get->dirYear . "_" . $get->dirMonth . "_" .$get->crTime . "_" . $get->logoName . "_l." . $get->logExt)){
@@ -62,6 +62,7 @@ trait CompanyImages
 	   $proceed = true;
 	   $imagearr = array();
 	   $imagecount = DB::table('companyimages')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->count(); //die(json_encode($imagecount));
+DB::table('csteps')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->increment('steps');
 		if($imagecount >= 10)$proceed = false;
 		if($proceed){
 			$images = array();

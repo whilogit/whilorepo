@@ -1,114 +1,93 @@
-<section class="slice slice-lg bg-image" name="ccomplete" style="background-image:url(../images/mainbg.png)">
-        <div class="wp-section">
-            <div class="container">
-			<div class="row">
-		
-			</div>
-                <div class="row">
-                 <div class="section slider">					
-				<div class="row">
-					<!-- carousel -->
-					<div class="col-md-4">
-						<div id="product-carousel" class="carousel slide" data-ride="carousel">
-										<!-- Wrapper for slides -->
-							<div class="carousel-inner" role="listbox">
-								<!-- item -->
-                                <?php $active = "active"; ?>
-                                 @foreach ($companyimages as $images)
-                                
-								<div class="item <?php echo $active; ?>">
-									<div class="carousel-image">
-										<!-- image-wrapper -->
-										<img width="100%" src="/display/image/{{ $images->imageCategory }}/{{ $images->dirYear }}/{{ $images->dirMonth }}/{{ $images->logoName }}/{{ $images->crTime }}/l.{{ $images->logExt }}" alt="Featured Image" class="img-responsive" kasperskylab_antibanner="on">
-									</div>
-								</div><!-- item -->
-                                <?php echo $active=""; ?>
-								@endforeach 
-								
-							</div><!-- carousel-inner -->
+@section('content')
+<div class="heading">
+<h4>Company Images </h4>
+</div>
+<div class="gallery cf">
 
-						</div>
-					</div><!-- Controls -->	
+   @foreach ($companyimages as $images)
+  <div>
+    <img src="/display/image/{{ $images->imageCategory }}/{{ $images->dirYear }}/{{ $images->dirMonth }}/{{ $images->logoName }}/{{ $images->crTime }}/l.{{ $images->logExt }}" />
+  </div>
+  @endforeach 
+</div>
+<div class="video">
+@if(count($videourl) > 0)
+<?php 
+$url = "$videourl->video_url";
+parse_str( parse_url( $url, PHP_URL_QUERY ), $my_array_of_vars );
+$videoid=$my_array_of_vars['v'];   
 
-					<!-- slider-text -->
-					<div class="col-md-8">
-                                        <div class="panel panel-default panel-sidebar-1">
-                                            <div class="panel-heading">
-                                                <h2><!--@foreach ($companylogo as $logo) <img src="/display/image/{{ $logo->logoCategory }}/{{ $logo->dirYear }}/{{ $logo->dirMonth }}/{{ $logo->logoName }}/{{ $logo->crTime }}/s.{{ $logo->logExt }}" style="border:1px solid #ccc"> @endforeach <b>{{ $commaster->companyName }}</b></h2>
-                                            </div>
-                                            <div class="panel-body">
-                                                <div class="row">
-                                                    <div class="col-md-6 br">
-                                                        <strong>Address</strong>
-                                                        <p class="p1">{{ $commaster->address }}, <br>{{ $commaster->locationName }}<br>Pin: {{ $commaster->pincode }}</p>
-                                                          <p class="p1"><span>Website</span>:{{ $commaster->website }}</p>
-                                                    <div class="col-md-6">
-                                                         <strong>Contact Details</strong>
-                                                        <p class="p1"><span>Mobile</span>:{{ $commaster->mobileNumber }}</p>--> 
-														 <p class="p1"><span>Phone</span>:{{ $commaster->phone }}</p>
-														  <p class="p1"><span>Email</span>:{{ $commaster->emailAddress }}</p>
-														     
-    <input type="hidden" id="companyid" name="companyid" value="{{ $_SESSION['WHILLO']['COMPAnyID']}}">
-     <input type="hidden" id="emailAdd" name="emailAdd" value="{{ $commaster->emailAddress }}">
-                                                      
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-										<div class="panel panel-default panel-sidebar-1">
-										 <div class="panel-heading"><div class="social-links">
-								<h2><b>Share this</b></h2></div>
-						 <div class="panel-body">		<ul class="list-inline">
-									<li><a href="#"><i class="fa fa-facebook-square fa-2x"></i></a></li>
-									<li><a href="#"><i class="fa fa-twitter-square  fa-2x"></i></a></li>
-									<li><a href="#"><i class="fa fa-google-plus-square  fa-2x"></i></a></li>
-									<li><a href="#"><i class="fa fa-linkedin-square  fa-2x"></i></a></li>
-									<li><a href="#"><i class="fa fa-pinterest-square  fa-2x"></i></a></li>
-									<li><a href="#"><i class="fa fa-tumblr-square  fa-2x"></i></a></li>
-								</ul>
-							</div></div>
-										</div>
-                                    </div><!-- slider-text -->				
-				</div>				
-			</div>
-			<br>
-			<div class="description-info">
-				<div class="row">
-				
-<div class="col-md-12">
-                                <div class="panel panel-default panel-sidebar-1">
-                                    <div class="panel-heading">
-                                        <h2>Short Description</h2>
-                                    </div>
-                                    
-                                    
-                                    <div class="panel-body">
-                                        
-                                        <p>{{ $commaster->aboutbio }} </p>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                            
-                            <div class="col-md-12">
-                    <div class="col-md-10">
-                        <div class="form-group">
-                           &nbsp;
-                        </div> </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                           <button class="btn btn-lg btn-block btn-alt btn-icon btn-icon-right btn-icon-go pull-right btnsubmit" id="complete_btn">
-                               <span>Complete</span></button>
-    </a>
-                        </div> </div>              
-                    </div>
-                            
-				</div><!-- row -->
-			</div>
-                           
-                    </div>
-                </div>
-            </div>
-        </section>
+?>
+ <iframe width="420" height="315"
+src="https://www.youtube.com/embed/{{$videoid}}">
+</iframe> 
+@endif
+</div>
+<style>
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300');
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font: 14px/1 'Open Sans', sans-serif;
+  color: #555;
+  background: #e5e5e5;
+}
+
+.gallery {
+  width: 640px;
+  margin: 0 auto;
+  padding: 5px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0,0,0,.3);
+}
+
+.gallery > div {
+  position: relative;
+  float: left;
+  padding: 5px;
+}
+
+.gallery > div > img {
+  display: block;
+  width: 200px;
+  transition: .1s transform;
+  transform: translateZ(0); /* hack */
+}
+
+.gallery > div:hover {
+  z-index: 1;
+}
+
+.gallery > div:hover > img {
+  transform: scale(1.7,1.7);
+  transition: .3s transform;
+}
+
+.cf:before, .cf:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+
+.cf:after {
+  clear: both;
+}
+
+h4 {
+  margin: 40px 0;
+  font-size: 30px;
+  font-weight: 300;
+  text-align: center;
+}
+.video
+{
+	margin: 40px ;
+	margin-left:60px;
+}
+</style>
 

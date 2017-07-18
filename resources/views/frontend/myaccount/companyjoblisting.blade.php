@@ -118,8 +118,12 @@
                 postdata['_token'] = $('meta[name="csrf-token"]').attr('content');
                 postdata['jobid']=$('input[name="hide_jid"]').val();
                 postdata['jobtitle']=$('input[name="jobtitle"]').val();
-                    postdata['validtill']=$('input[name="validtill"]').val();
-
+                postdata['validtill']=$('input[name="validtill"]').val();
+		var expireDateStr = $("#validtill").val();
+                var expireDateArr = expireDateStr.split("-");
+                var expireDate = new Date(expireDateArr[2], expireDateArr[0], expireDateArr[1]);
+                var todayDate = new Date();
+                   if (todayDate < expireDate) {
                     $('body').removeClass('loaded');
                                             $.post('/company/updatejob',postdata,function(response){ 
 
@@ -127,11 +131,16 @@
                                                     if(response.success)
                                                     {
 
-                                                    $('#message').html('<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert">&times;</a><strong>Updated!</strong> Job details updated sucessfully </div>')
+                                                    $('#message').html('<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert">&times;</a><strong>Updated!</strong> Job details updated sucessfully </div>');
 
                                                     }
 
             });
+            }
+            else
+            {
+            	  $('#message').html('<div class="alert alert-warning"><a href="#" class="close" data-dismiss="alert">&times;</a><strong>Invalid!</strong> Date Entered is invalid</div>');
+            }
 
     });
     });

@@ -1,5 +1,7 @@
    <div class="panel panel-default">
-       <div id="message" style="display:none;">Updated</div>
+       <div id="message">
+        
+                                     </div>
                           <div class="panel-body">
                                  <h4 class="col-md-4 pull-left">Company Name</h4>
 
@@ -117,7 +119,7 @@
                                                         <div class="form-group">
                                                         <label class="label">Youtube Video URL<span style="color:red">*</span></label>
                                                              <label class="input">
-                                                            <textarea rows="5" cols="50" name="youtubeurl" id="youtubeurl" required="required" value="{{$compdetails->aboutbio}}" >{{$compdetails->aboutbio}}</textarea>
+                                                            <textarea rows="5" cols="50" name="youtubeurl" id="youtubeurl" required="required" value="{{$compdetails->video_url}}" >{{$compdetails->video_url}}</textarea>
                                                        </label>
                                                         </div>  
                                                     </div>               
@@ -193,13 +195,13 @@ $(function() {
                                                  if(response.success)
                                                  {
 
-                                                   $('#compnay_detail_table').show();
-                                                   $('#edit_form_company').hide();
-                                                     $('#message').show();
+                                                   
+                                                     $('#message').html('<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert">&times;</a><strong>Updated!</strong> Company details updated sucessfully </div>');
 
                                                  }
 
         });
+       
                                  
 });
 });

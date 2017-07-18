@@ -24,7 +24,8 @@ trait RegisterRedirectsForms
      */
     public function showRegistrationForm()
     {
-      	if(isset($_SESSION['WHILLO']['STATUS'])){ if($_SESSION['WHILLO']['TYPE']=="C")return Redirect::to('company/signup'); 
+      	if(isset($_SESSION['WHILLO']['STATUS'])){ if($_SESSION['WHILLO']['TYPE']=="C")
+      	//return Redirect::to('company/signup'); 
 		$steps = DB::table('userlogin as l')
 	  		         ->join('jmaster as m', 'm.userId', '=', 'l.userId')
 					 ->join('jsteps as s', 'm.seekerId', '=', 's.seekerId')
@@ -45,11 +46,10 @@ trait RegisterRedirectsForms
 					case 3: { 
 						 $locations = DB::table('_locations')->get();
 						 $industry = DB::table('_industry')->get(); 
-						 $functionalarea= DB::table('_functionalarea')->get();
 						 $proffessional = DB::table('jproffessional')->where('seekerId', $_SESSION['WHILLO']['SEEKERID'])->first();
 						 $jexperience = DB::table('jexperience')->where('seekerId', $_SESSION['WHILLO']['SEEKERID'])->get();
 						 $jfeedbackemails = DB::table('jfeedbackemails')->where('seekerId', $_SESSION['WHILLO']['SEEKERID'])->get();
-						 return view('frontend.auth.profesional',array('industry'=>$industry))->with(array("proffessional"=>$proffessional,"experiences"=>$jexperience,"feedbackemails"=>$jfeedbackemails,"locations"=>$locations,"functionalarea"=>$functionalarea)); break;}
+						 return view('frontend.auth.profesional',array('industry'=>$industry))->with(array("proffessional"=>$proffessional,"experiences"=>$jexperience,"feedbackemails"=>$jfeedbackemails,"locations"=>$locations)); break;}
 					case 4: {
 						$jprofileimage = DB::table('jprofileimage')->where('seekerId', $_SESSION['WHILLO']['SEEKERID'])->get(); 
 						$jsocialmedia = DB::table('jsocialmedia')->where('seekerId', $_SESSION['WHILLO']['SEEKERID'])->first();
@@ -95,20 +95,12 @@ trait RegisterRedirectsForms
 					 ->get();
 					 
 		foreach ($steps as $step){
-                 
 			    if($step->accountStatus == 0){ 
 				switch($step->steps){
 					case 1: { 
 					        //$companylogo = DB::table('companylogo')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->get();
-                                               /* $complans = DB::table('_plantypes as c')
-                                        ->leftjoin('_plandetails as p', 'c.id', '=', 'p.plan_id')
-                                        ->select('c.*','p.*')
-                                        ->get();*/
-                                               
 							//$companyimages = DB::table('companyimages')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->get();// die(json_encode($companyimages));
 							//return view('frontend.companyauth.companyimages')->with(array("companylogo"=>$companylogo,"companyimages"=>$companyimages));
-                                            
-                                              // return view('frontend.companyauth.companyplans')->with(array("complans"=>$complans));
                                                return view('frontend.companyauth.companyplans');
                                             break;
                                             }
@@ -156,48 +148,19 @@ trait RegisterRedirectsForms
 	    public function showCompanyPlans()
         {  
                if(isset($_SESSION['WHILLO']['STATUS'])){ if($_SESSION['WHILLO']['TYPE']=="C")
-                    /* $plantypes = DB::table('_plantypes as c')
-                                        ->select('c.*')
-                                        ->get();
-                          $complans1 = DB::table('_plantypes as c')
-                          
-                                        ->leftjoin('_plandetails as p', 'c.id', '=', 'p.plan_id')
-                                        ->select('c.planname','p.detail_name','p.detail_value')
-                                        ->where('p.plan_id', 1)
-                                        ->get();
-                          $complans2 = DB::table('_plantypes as c')
-                          
-                                        ->leftjoin('_plandetails as p', 'c.id', '=', 'p.plan_id')
-                                        ->select('c.planname','p.detail_name','p.detail_value')
-                                        ->where('p.plan_id', 2)
-                                        ->get();
-                           $complans3 = DB::table('_plantypes as c')
-                          
-                                        ->leftjoin('_plandetails as p', 'c.id', '=', 'p.plan_id')
-                                        ->select('c.planname','p.detail_name','p.detail_value')
-                                        ->where('p.plan_id', 3)
-                                        ->get();
-                          
-                         dd($complans1,$complans2,$complans3);
-                           
-                         $planDetailName['plan1']= $complans1[0]->planname;
-                         $planDetailName['plan2']= $complans2[0]->planname;
-                         $planDetailName['plan3']= $complans3[0]->planname;
-                         dd($planDetailName);
-                         for($i=0; $i<6; $i++)
-                         {
-                             //$planDetailName[$i] = 
-                         }
-                         
-                            dd($complans1,$complans2,$complans3);
-                       
-                    return view('frontend.companyauth.companyplans')->with(array("complans"=>$plans));*/
-                   return view('frontend.companyauth.companyplans');
+             return view('frontend.companyauth.companyplans');
                }
 
 
         }
-   
+     public function showPaymentpage()
+        {  
+               if(isset($_SESSION['WHILLO']['STATUS'])){ if($_SESSION['WHILLO']['TYPE']=="C")
+              return view('frontend.companyauth.companyplanpayment');
+               }
+
+
+        }
 public function CompanyImagesPage()
         {  
                 

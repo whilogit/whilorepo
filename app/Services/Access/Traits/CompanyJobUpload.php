@@ -33,15 +33,19 @@ trait CompanyJobUpload
 		$defaults['jobrole'] = DB::table('_jobrole')->get();
 		$defaults['jobrolecategory'] = DB::table('_jobrolecategory')->get();
 		$defaults['joiningtime'] = DB::table('_joiningtime')->get();
+
 		 $jobpostedcount = DB::table('companyjobs')
 
                                                ->select(DB::raw('count(jobId) as jobcount'))
 
                                                 ->where(function($query){
 
-                                                        $query->where(DB::raw('DATE( NOW( ))' ),  DB::raw('DATE(createdDate)'));
+                                                        $query->where(DB::raw('DATE(createdDate)'),  DB::raw('DATE( NOW( ))' ));
+                                                
+                                                        
 
                                                 })
+                                                 ->where('companyId', '=', $_SESSION['WHILLO']['COMPAnyID'])
                                                ->first();
                     $jobpostlimit = DB::table('_plandetails as p')
 
@@ -51,10 +55,10 @@ trait CompanyJobUpload
                                                 ->where('c.companyId', '=', $_SESSION['WHILLO']['COMPAnyID'])
                                                ->first();
 
+
                   $postlimt=$jobpostlimit->job_post_limit;
                   $posted_count=$jobpostedcount->jobcount;
-
-                  if($posted_count == $postlimt)
+                  if($posted_count >= $postlimt)
                   { 
                      $defaults['message']='Job Post Limit Over';
                      $defaults['limit_status']='1';
@@ -97,8 +101,10 @@ trait CompanyJobUpload
                                          ->where(function($query){
                                                  
                                                  $query->where(DB::raw('DATE( NOW( ))' ),  DB::raw('DATE(createdDate)'));
+   
                                                          
                                          })
+                                         ->where('companyId', '=', $_SESSION['WHILLO']['COMPAnyID'])
                                         ->first();
              $jobpostlimit = DB::table('_plandetails as p')
                                        

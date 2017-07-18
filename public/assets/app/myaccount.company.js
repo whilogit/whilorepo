@@ -98,18 +98,6 @@ $(function(){
                 });
    
         }); 
-           $('a[href="#CompanyImages"]').click(function()
-        {
-             clearall();    
-            var postdata = {};
-            postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
-                $('body').removeClass('loaded');
-                $.post('/company/getcompanyImages',postdata,function(response){
-                $('body').addClass('loaded');
-                 $('#CompanyImage').append(response); 
-                });
-   
-        }); 
         $('a[href="#CompanyProfile"]').click(function()
         {
              clearall();    
@@ -120,6 +108,18 @@ $(function(){
                 $('body').addClass('loaded');
                     $('#CompanyProfile').append(response);
                 });
+        }); 
+	   $('a[href="#CompanyImages"]').click(function()
+        {
+             clearall();  
+            var postdata = {};
+            postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
+                $('body').removeClass('loaded');
+                $.post('/company/getcompanyImages',postdata,function(response){
+                $('body').addClass('loaded');
+                 $('#CompanyImage').append(response); 
+                });
+   
         }); 
         $('a[href="#Postnewjobs"]').click(function()
         {
@@ -211,6 +211,7 @@ function clearall()
 {
      $('#ProfileHome').html('');
      $('#CompanyProfile').html('');
+     $('#CompanyImage').html('');
      $('#ChangePassword').empty();
      $('#AppliedCandidates').empty();
      $('#SearchedCandidates').empty();

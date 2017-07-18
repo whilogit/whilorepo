@@ -139,7 +139,7 @@
   <div style="width:100%;float:left; background:#fff;">
            
          <span style="font-weight:600;float:right;padding:10px 0px;width:40%;color:#666;text-align:center;">
-           Total Amount :  Rs.{{ $price }}
+           Total Amount :Rs.  {{ $price }}
         </span>
  	 </div>
 

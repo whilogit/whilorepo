@@ -245,13 +245,22 @@
                                                <div class="form-group">
                                                    <label class="checkbox">
                                                         <input type="checkbox" required="required" data-parsley-required-message="Please read and accept the terms and conditions" name="termsandcondition" id="subscription">
-                                                        <i></i> I accept the <a href="#">terms and conditions</a> of this website.
+                                                        <i></i> I accept the <a href="#openModal">terms and conditions</a> of this website.
                                                     </label>
                                                 </div>  
                                             </div>               
                                         </div>
                                         
-                                           
+                                               <div id="openModal" class="modalDialog">
+    <div>	<a href="#close" title="Close" class="close">X</a>
+
+        	<h2>Terms & Conditions</h2>
+
+        <p>YOUR MEMBERSHIP ACCOUNT</p>
+        <p>If you use this site, you are responsible for maintaining the confidentiality of your account and password and for restricting access to your computer, and you agree to accept responsibility for all activities that occur under your account or password. MYCOMPANY and its associates reserve the right to refuse service, terminate accounts, remove or edit content, or cancel orders in their sole discretion.</p>
+    </div>
+                                           </div>
+                                             
                                             
                                         <div class="col-xs-4">
                                           <div class="form-group">
@@ -297,3 +306,57 @@
 @section('after-scripts-end')
     <script src="/assets/app/register.company.js"></script>
 @stop
+<style>
+    .modalDialog {
+    position: fixed;
+    font-family: Arial, Helvetica, sans-serif;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 99999;
+    opacity:0;
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+    pointer-events: none;
+}
+.modalDialog:target {
+    opacity:1;
+    pointer-events: auto;
+}
+.modalDialog > div {
+    width: 400px;
+    position: relative;
+    margin: 10% auto;
+    padding: 5px 20px 13px 20px;
+    border-radius: 10px;
+    background: #fff;
+    background: -moz-linear-gradient(#fff, #999);
+    background: -webkit-linear-gradient(#fff, #999);
+    background: -o-linear-gradient(#fff, #999);
+}
+.close {
+    background: #606061;
+    color: #FFFFFF;
+    line-height: 25px;
+    position: absolute;
+    right: -12px;
+    text-align: center;
+    top: -10px;
+    width: 24px;
+    text-decoration: none;
+    font-weight: bold;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    -moz-box-shadow: 1px 1px 3px #000;
+    -webkit-box-shadow: 1px 1px 3px #000;
+    box-shadow: 1px 1px 3px #000;
+}
+.close:hover {
+    background: #00d9ff;
+}
+    </style>
+

@@ -60,7 +60,7 @@
                                                         $('body').addClass('loaded');
                                                                 if(response.success)
                                                                 {
-                                                                    $.alert('EmailSend!');
+                                                                    $.alert('EmailSent!');
                                                                    $('#search_email_button_'+response.buttonid).remove();
                                                                    $('#statustd_'+response.buttonid).append('<span><b>Email Sent</b></span>');
                                                                    
@@ -97,3 +97,4 @@
         });
 
 </script>
+

@@ -78,11 +78,13 @@ trait CompanyRegister
 	   $res = DB::insert('insert into csteps(companyId,steps) 
 	   				values (?,?)',array($companyId,1));
 	  
+	  
 		
 		$_SESSION['WHILLO']['STATUS']=true;
 		$_SESSION['WHILLO']['USERID']=$userId;
 		$_SESSION['WHILLO']['COMPAnyID']=$companyId;
 		$_SESSION['WHILLO']['TYPE']="C";
+		
 		
 		return response()->json(array(
 					'success' => true,

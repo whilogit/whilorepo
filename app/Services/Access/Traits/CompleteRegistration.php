@@ -71,7 +71,8 @@ trait completeRegistration
                          
 
              }
-             public function CompanyBasicDetails()
+
+ public function CompanyBasicDetails()
              {
                    $companyid=$_SESSION['WHILLO']['COMPAnyID'];
                  $commaster = DB::table('commaster as c')
@@ -97,27 +98,12 @@ trait completeRegistration
                 $getExpiryDate = CcavenueHelperController::getExpiryDate($planDuration,$planstartdate); 
 	
 		
-                                //$commaimages = DB::table('companyimages')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->first(); 
-                           
+                                
                                 $companylogo = DB::table('companylogo')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->first();
-                                   
                                 return view('frontend.myaccount.basicdeatils')->with(array("commaster"=>$commaster,"company_logo"=>$companylogo,"plandeatils"=>$plan_details,"startdate"=>$planstartdate,"expirydate"=>$getExpiryDate));
                  
              }
-             public function CompanyGetImages()
-             {
-                 $commaster = DB::table('commaster as c')
-										 ->join('comprofile as p', 'c.companyId', '=', 'p.companyId')
-										 ->join('_locations as l', 'l.locationId', '=', 'p.locationId')
-										 ->join('userlogin as log', 'log.userId', '=', 'c.userId')
-										 ->select('c.*','p.*','l.locationName','log.userName','log.emailAddress')
-										 ->where('c.userId', '=', $_SESSION['WHILLO']['USERID'])
-										 ->first();
-                $commaimages = DB::table('companyimages')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->get(); 
-		$companylogo = DB::table('companylogo')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->get();
-	        return view('frontend.myaccount.companyshowimage')->with(array("commaster"=>$commaster,"companyimages"=>$commaimages,"companylogo"=>$companylogo));
-             }
-    public function CompanyProfileDetails()
+ public function CompanyProfileDetails()
      {
         	
 		
@@ -130,6 +116,7 @@ trait completeRegistration
                                         ->select('m.userId','u.emailAddress','p.companyName','p.mobileNumber','p.website','p.aboutbio','p.address','l.locationName','i.industryName','p.locationId','p.industry','v.video_url')
                                          ->where('u.userId', '=', $_SESSION['WHILLO']['USERID'])
                                         ->first();
+
          $defaults['locations'] = DB::table('_locations')->get();
         $defaults['industry'] = DB::table('_industry')->get();	
           //$data['compdetails'] = $compdetails;
@@ -137,6 +124,20 @@ trait completeRegistration
 
         return response(view('frontend.myaccount.companydetails', $data),'200')->header('Content-Type', 'text/plain');  
      }
+	public function CompanyGetImages()
+             {
+                 $commaster = DB::table('commaster as c')
+										 ->join('comprofile as p', 'c.companyId', '=', 'p.companyId')
+										 ->join('_locations as l', 'l.locationId', '=', 'p.locationId')
+										 ->join('userlogin as log', 'log.userId', '=', 'c.userId')
+										 ->select					('c.*','p.*','l.locationName','log.userName','log.emailAddress')
+										 ->where('c.userId', '=', $_SESSION['WHILLO']['USERID'])
+										 ->first();
+                $commaimages = DB::table('companyimages')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->get(); 
+		$companylogo = DB::table('companylogo')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->get();
+		$company_video=DB::table('company_video_url')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->first();
+	        return view('frontend.myaccount.companyshowimage')->with(array("commaster"=>$commaster,"companyimages"=>$commaimages,"companylogo"=>$companylogo,'videourl'=>$company_video));
+             }
      public function GetCompanyPostedJobs()
      {
          
@@ -351,6 +352,7 @@ trait completeRegistration
 
                             ));
                 $status=0;
+		DB::table('company_video_url')->where('companyId',$_SESSION['WHILLO']['COMPAnyID'])->delete();
                  $res = DB::table('company_video_url')->insert(
                                                         ['companyId' =>$companyid, 
                                                         'video_url' => $data['videourl'],    

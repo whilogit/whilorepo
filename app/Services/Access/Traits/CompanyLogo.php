@@ -55,14 +55,16 @@ trait CompanyLogo
 	}
 	
     public function logoupload(Request $request,Response $response)
-    {       
-	    $files = $_FILES['image_file'];
+    {
+       
+	    $files = $_FILES['image_file']; 
 		$images['image'] = array();
 		$cnt = count($files['name']);
-		for($i = 0 ; $i < $cnt ; $i++) { 
+		for($i = 0 ; $i < $cnt ; $i++) {  
 			$imagefile_name    = $files['name'][$i];
 			$imagefile_temp    = $files['tmp_name'][$i];
-			$imagefile_temp1 = $imagefile_temp;                       		
+			$imagefile_temp1 = $imagefile_temp;
+			
 			$im = strrpos($files['name'][$i],"."); 
 			if (!$im) {			
 				return false;
@@ -75,12 +77,13 @@ trait CompanyLogo
 			
 			$result= false;	
 			
-                    $dir_year = date("Y");
+			$dir_year = date("Y");
 		    $dir_month = date("m");
 		    $time=time();
 		    $uniqid = uniqid();
 		    $image_category = "companylogo";
-			$init = true;			
+			$init = true;
+			
 			$size=filesize($imagefile_temp);  
 			if ($size < (9000*1024)) {
 				 
@@ -115,7 +118,8 @@ trait CompanyLogo
 			else {
 				$width = 200*$ratio;
 				$height = 200;
-			}			
+			}
+			
 			$src = imagecreatefromstring(file_get_contents($imagefile_temp));
 			$dst = imagecreatetruecolor($width,$height);
 			imagecopyresampled($dst,$src,0,0,0,0,$width,$height,$size[0],$size[1]);
@@ -133,7 +137,8 @@ trait CompanyLogo
 			else {
 				$width = 100*$ratio;
 				$height = 100;
-			}			
+			}
+			
 			$src = imagecreatefromstring(file_get_contents($imagefile_temp));
 			$dst = imagecreatetruecolor($width,$height);
 			imagecopyresampled($dst,$src,0,0,0,0,$width,$height,$size[0],$size[1]);
