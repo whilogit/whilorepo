@@ -14,8 +14,12 @@
 @if(count($videourl) > 0)
 <?php 
 $url = "$videourl->video_url";
+$videoid='';
+if($url)
+{
 parse_str( parse_url( $url, PHP_URL_QUERY ), $my_array_of_vars );
 $videoid=$my_array_of_vars['v'];   
+}
 
 ?>
  <iframe width="420" height="315"
