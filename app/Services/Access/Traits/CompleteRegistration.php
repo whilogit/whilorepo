@@ -135,7 +135,9 @@ trait completeRegistration
 										 ->first();
                 $commaimages = DB::table('companyimages')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->get(); 
 		$companylogo = DB::table('companylogo')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->get();
-		$company_video=DB::table('company_video_url')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])->first();
+		$company_video=DB::table('company_video_url')->where('companyId', $_SESSION['WHILLO']['COMPAnyID'])
+								->where('status',1)
+								->first();
 	        return view('frontend.myaccount.companyshowimage')->with(array("commaster"=>$commaster,"companyimages"=>$commaimages,"companylogo"=>$companylogo,'videourl'=>$company_video));
              }
      public function GetCompanyPostedJobs()
