@@ -38,7 +38,7 @@
                     </div>
                     <div class="col-lg-2 col-sm-6">
                         <div class="circle-tile">
-                            <a href="#">
+                            <a href="/dashboard/companylist">
                                 <div class="circle-tile-heading orange">
                                     <i class="fa fa-building-o fa-fw fa-3x"></i>
                                 </div>
@@ -50,13 +50,13 @@
                                 <div class="circle-tile-number text-faded">
                                     9 New
                                 </div>
-                                <a href="#" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
+                                <a href="/dashboard/companylist" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-2 col-sm-6">
                         <div class="circle-tile">
-                            <a href="#">
+                            <a href="/dashboard/postedjobs">
                                 <div class="circle-tile-heading blue">
                                     <i class="fa fa-briefcase fa-fw fa-3x"></i>
                                 </div>
@@ -69,7 +69,7 @@
                                     10
                                     <span id="sparklineB"></span>
                                 </div>
-                                <a href="#" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
+                                <a href="/dashboard/postedjobs" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
                             </div>
                         </div>
                     </div>

@@ -35,5 +35,6 @@ class DashboardController extends Controller
                 {  
                     return Approve::accept($id); 
                 }
+      
 	
 }

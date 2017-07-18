@@ -42,5 +42,13 @@ class Companylist extends Controller
             $response['totalAmount'] = DB::select( DB::raw("SELECT ROUND(SUM(amount)) as revenue from payment_tracking where `order_status`='success'") );
             return $response;
         }
+        public static function getjoblist()
+        {
+            $response['company_jobs']  = DB::table('companyjobs as m')
+					->join('comprofile as p', 'p.companyId', '=', 'm.companyId')
+                                        ->select('p.companyName','m.*')
+					->get();
+            return $response;
+        }
     
 }
