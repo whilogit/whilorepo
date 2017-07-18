@@ -30,7 +30,7 @@
                                     Revenue
                                 </div>
                                 <div class="circle-tile-number text-faded">
-                                    Rs.32,384
+                                 Rs. {{ $data['totalAmount'][0] ->revenue }}
                                 </div>
                                 <a href="#" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
                             </div>

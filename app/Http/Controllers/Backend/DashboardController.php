@@ -19,7 +19,8 @@ class DashboardController extends Controller
                 }
 	public function home()
                 { 
-                    return view('backend.index'); 
+                    
+                    return view('backend.index')->with(array("data"=>Companylist::totalAmount()));
                 }
 	public function companylist()
                 {  

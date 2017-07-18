@@ -37,5 +37,10 @@ class Companylist extends Controller
 		
 		return $response;
 	}
+        public static function totalAmount()
+        {
+            $response['totalAmount'] = DB::select( DB::raw("SELECT ROUND(SUM(amount)) as revenue from payment_tracking where `order_status`='success'") );
+            return $response;
+        }
     
 }

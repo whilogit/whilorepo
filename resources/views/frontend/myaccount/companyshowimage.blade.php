@@ -18,13 +18,30 @@ $videoid='';
 if($url)
 {
 parse_str( parse_url( $url, PHP_URL_QUERY ), $my_array_of_vars );
-$videoid=$my_array_of_vars['v'];   
+  
+    if (!empty($my_array_of_vars)) 
+    {
+        $videoid=$my_array_of_vars['v'];  
+    }
+    else
+    {
+        $videoid ='';
+    }
+
 }
 
 ?>
+ <div class="col-md-12"><br/>
+<h4>Company Video</h4>
  <iframe width="420" height="315"
 src="https://www.youtube.com/embed/{{$videoid}}">
 </iframe> 
+</div>
+@else
+ <div class="col-md-12"><br/>
+<h4>Company Video</h4>
+<p class="text-justify" style="background:#ddd;padding:1%;color:black;font-weight:500;">No Youtube URL Or Pending admin approval</p>
+</div>
 @endif
 </div>
 <style>

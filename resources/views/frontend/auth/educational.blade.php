@@ -161,7 +161,7 @@
                                                 <div class="col-md-4 col-sm-6 col-xs-12">
                                                     
                                                     <div class="form-group">
-                                                        <label class="label">Cources <span style="color:red">*</span></label>
+                                                        <label class="label">courses<span style="color:red">*</span></label>
                                                            <label class="input">
                                                                 <i class="icon-append fa fa-pencil"></i>
                                                                 <input type="text" name="cources" required="required" placeholder="Cources">
@@ -188,27 +188,28 @@
                                                 </div>
                                            
                                                
-												
-												 <div class="col-md-4 col-sm-6 col-xs-12">
+                                                
+                                                <div class="row">
+                                                <div class="col-md-4 col-sm-6 col-xs-12">
                                                     <div class="form-group">
-                                                        <label class="label">Cource Type <span style="color:red">*</span></label>
-                                                           <label class="select">
-                                                    <select name="courcetype" required="required">
+                                                        <label class="label">Course Type <span style="color:red">*</span></label>
+                                                         <label class="select">
+                                                        <select name="courcetype" required="required">
                                                         <option value="" selected="" disabled="">Cource Type</option>
                                                         <option value="1">Full Time</option>
                                                         <option value="2">Part Time</option>
                                                         <option value="3">Correspondance</option>
                                                                                                 
                                                     </select>
-                                                    
+                                                    <i></i>
                                                 </label>
                                                     </div>               
                                                 </div>
 												
 											
-												
+												 <div class="row">
 												<div class="col-md-4 col-sm-6 col-xs-12">
-                                                    <div class="form-group">
+                                                    
                                                         <label class="label">Passing Year <span style="color:red">*</span></label>
                                                            <label class="input">
                                                                 <i class="icon-append fa fa-pencil"></i>
@@ -218,7 +219,10 @@
                                                 </div>
 												
                                             </div>  
-											
+						</div>	
+						
+						
+										
                                             										
                                         </section>
                                                                               
