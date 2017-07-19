@@ -16,5 +16,9 @@ class CompanyController extends Controller
                 {  
                       return view('backend.companyjoblist')->with(array("data"=>Companylist::getjoblist()));
                 }
+        public function paymentDetails()
+                {  
+                      return view('backend.companypaymentdetails')->with(array("data"=>Companylist::getpaymentlist()));
+                }
 	
 }

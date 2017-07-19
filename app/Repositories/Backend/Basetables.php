@@ -18,10 +18,6 @@ class Basetables extends Controller
 		$response['locationlist']  = DB::table('_locations')
 					
 					->get();
-		
-	
-		
 		return $response;
 	}
-    
 }

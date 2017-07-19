@@ -136,7 +136,7 @@
                 
                                <div class="col-lg-2 col-sm-6">
                         <div class="circle-tile">
-                            <a href="#">
+                            <a href="/dashboard/paymentdetails">
                                 <div class="circle-tile-heading sandlebrown">
                                     <i class="fa fa-credit-card fa-fw fa-3x"></i>
                                 </div>
@@ -149,7 +149,7 @@
                                     24
                                     <span id="sparklineC"></span>
                                 </div>
-                                <a href="#" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
+                                <a href="/dashboard/paymentdetails" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
                             </div>
                         </div>
                     </div>

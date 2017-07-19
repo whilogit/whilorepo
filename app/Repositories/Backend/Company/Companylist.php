@@ -50,5 +50,13 @@ class Companylist extends Controller
 					->get();
             return $response;
         }
+         public static function getpaymentlist()
+        {
+            $response['company_payments']  = DB::table('payment_tracking as m')
+					->join('comprofile as p', 'p.companyId', '=', 'm.companyId')
+                                        ->select('p.companyName','m.*')
+					->get();
+            return $response;
+        }
     
 }

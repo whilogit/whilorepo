@@ -35,7 +35,7 @@
                             <i class="fa fa-angle-right"></i>
                     </li>
                     <li>
-                            <a href="index.html">Company Jobs</a>
+                            <a href="index.html">Payment Details</a>
                     </li>
             </ul>
             <div class="close-bread">
@@ -49,7 +49,7 @@
                         <div class="box-title">
                             <h3>
                                     <i class="fa fa-table"></i>
-                                    Company Job list
+                                   Company Payment Details
                             </h3>
                         </div>
                     <div class="box-content nopadding">
@@ -58,24 +58,28 @@
                                 <thead>
                                 <th width="5%">Sl-No</th>
                                 <th>Company Name</th>
-                                <th width="7%">jobTitle</th>
-                                <th width="7%">lastdate</th>
-                                <th width="15%">createdDate</th>
-                                <th width="15%">Delete</th>
+                                <th width="7%">Order Id</th>
+                                <th width="15%">Tracking Id</th>
+                                <th width="15%">Bank Reference No</th>
+                                <th width="15%">Order Status</th>
+                                <th width="15%">Payment Mode</th>
+                                <th width="15%">Amount</th>
+                                <th width="15%">Payment Date</th>
                                 </thead>
                                
                                     <tbody><?php $i=0; ?>
                                         @if(count($data)>0)
-                                         @foreach($data['company_jobs'] as $list) <?php $i = $i + 1; ?>
+                                         @foreach($data['company_payments'] as $list) <?php $i = $i + 1; ?>
                                                 <tr role="row" class="odd">
                                                         <td><?php  echo $i; ?></td>
                                                          <td>{{ $list->companyName }}</td>
-                                                        <td>{{ $list->jobTitle }}</td>
-                                                        <td>{{ $list->lastdate }}</td>
+                                                        <td>{{ $list->order_id }}</td>
+                                                        <td>{{ $list->tracking_id }}</td>
+                                                        <td>{{ $list->bank_ref_no }}</td>
+                                                        <td>{{ $list->order_status }}</td>
+                                                        <td>{{ $list->payment_mode }}</td>
+                                                         <td>{{ $list->amount }}</td>
                                                         <td>{{ $list->createdDate }}</td>
-                                                        <td><button  class="btn btn-danger fa fa-trash" name="delete" value="Delete"></button></td>
-
-                                                
                                                 </tr>
                                          @endforeach
                                          @endif
