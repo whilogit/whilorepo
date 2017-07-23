@@ -9,6 +9,8 @@
         Route::post('company/approve/{id}', 'DashboardController@approve');
         Route::get('/postedjobs', 'CompanyController@postedJobs');
         Route::get('/paymentdetails', 'CompanyController@paymentDetails');
+        Route::get('/addnewcompany', 'CompanyController@addNewCompany');
+        
          
        //Basic Features Routes
         Route::get('/workfeatures', 'BaseTablesController@home');
