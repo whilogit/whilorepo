@@ -33,5 +33,29 @@ class Talentlist extends Controller
 		
 		return $response;
 	}
+                    public static function shortlistcandidate()
+        {
+                   $response = array();
+            $response['company_jobs']  = DB::table('shortlistjobs as sj')
+                    ->select('userName','emailAddress','companyName','ShortlistedDate')
+					->join('jmaster as j', 'j.seekerId', '=', 'sj.seekerId')
+                                          ->join('userlogin as ul', 'ul.userId', '=', 'j.userId')
+                                        ->join('comprofile as cp', 'cp.companyId', '=', 'sj.companyId')
+                     ->where('sj.Status',0)
+					->get();
+            return $response;
+        }
     
+                    public static function hiredcandidate()
+        {
+                   $response = array();
+            $response['company_jobs']  = DB::table('shortlistjobs as sj')
+                    ->select('userName','emailAddress','companyName','ShortlistedDate')
+					->join('jmaster as j', 'j.seekerId', '=', 'sj.seekerId')
+                                          ->join('userlogin as ul', 'ul.userId', '=', 'j.userId')
+                                        ->join('comprofile as cp', 'cp.companyId', '=', 'sj.companyId')
+                    ->where('sj.Status',1)
+					->get();
+            return $response;
+        }
 }
