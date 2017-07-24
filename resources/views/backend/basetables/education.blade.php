@@ -13,7 +13,7 @@
                         <div class="box-title">
                             <h3>
                                     <i class="fa fa-table"></i>
-                                   Locations
+                                   Eductaion
                             </h3>
                             <button id="data_add" style="float:right"class="primary">Add New</button>
                              
@@ -29,17 +29,17 @@
                              <table class="table table-hover table-nomargin table-bordered dataTable no-footer myTable"  role="grid" aria-describedby="DataTables_Table_0_info">
                                 <thead>
                                 <th width="1%">Sl-No</th>
-                                <th width="3%">Locations</th>
+                                <th width="3%">Eductaion Name</th>
                                 <th width="1%">Edit</th>
                                  <th width="1%">Delete</th>
                                 </thead>
                                    <tbody><?php $i=0; ?>
-                                         @foreach($data['locationlist'] as $list) <?php $i = $i + 1; ?>
+                                         @foreach($data['education'] as $list) <?php $i = $i + 1; ?>
                                                 <tr role="row" class="odd">
                                                         <td><?php  echo $i; ?></td>
-                                                        <td>{{ $list->locationName }}</td>
-                                                         <td><button  class="btn btn-danger fa fa-pencil-square" name="edit" value="edit" onclick="edit_data({{ $list->locationId }},'{{ $list->locationName }}')"></button></td>
-                                                          <td><button  class="btn btn-danger fa fa-trash" name="delete" value="Delete" onclick="delete_data({{ $list->locationId }})"></button></td>
+                                                        <td>{{ $list->educationName }}</td>
+                                                         <td><button  class="btn btn-danger fa fa-pencil-square" name="edit" value="edit" onclick="edit_data({{ $list->educationId }},'{{ $list->educationName }}')"></button></td>
+                                                          <td><button  class="btn btn-danger fa fa-trash" name="delete" value="Delete" onclick="delete_data({{ $list->educationId }})"></button></td>
                                                 </tr>
                                          @endforeach
 
@@ -50,13 +50,13 @@
              
                        <div style="margin-top:50px; display:none" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 addcontent_form">                    
                          
-                            <a href="/dashboard/locations" class="circle-tile-footer">Go Back <i class="fa fa-arrow-left"></i></a>
+                            <a href="/dashboard/education" class="circle-tile-footer">Go Back <i class="fa fa-arrow-left"></i></a>
                            <div class="alert alert-success message" style="display: none">
                                
                            </div>
                            <div class="panel panel-info" >
                                 <div class="panel-heading">
-                                    <div class="panel-title">Add New Location</div>
+                                    <div class="panel-title">Add New Education</div>
 
                                 </div>     
 
@@ -68,8 +68,8 @@
 
                                         <div style="margin-bottom: 25px" class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-plus"></i></span>
-                                                    <input type='hidden' id='loc_id_hidden' value="">
-                                                    <input id="location" type="text" class="form-control" name="location" value="" placeholder="Add Location">                                        
+                                                    <input type='hidden' id='edu_id_hidden' value="">
+                                                    <input id="education" type="text" class="form-control" name="education" value="" placeholder="Add Eductaion">                                        
                                                 </div>
 
                                         </form>     
@@ -78,7 +78,7 @@
 
                                     <div class="col-sm-12 controls">
         
-                                     <button id="data_insert" style="float:right"class="primary">Add Location</button>
+                                     <button id="data_insert" style="float:right"class="primary">Add Education</button>
                                      <button id="data_update" style="display:none;float:right"class="primary">Update</button>
 
                                     </div>
@@ -102,42 +102,42 @@
 <style type="text/css" src="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css"/></style>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <script>
-    function edit_data(locid,locname)
+    function edit_data(eduid,eduname)
     {
             var postdata = {};
             alert(locname);
             postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
             $('#table_div').hide();
             $('.addcontent_form').show();
-            $('.panel-title').replaceWith('Edit Location');
+            $('.panel-title').replaceWith('Edit Education');
             $('#data_insert').hide();
             $('#data_update').show();
-            $('#location').val(locname);
-            $('#loc_id_hidden').val(locid);
+            $('#education').val(locname);
+            $('#edu_id_hidden').val(locid);
      
     }
-    function delete_data(locid)
+    function delete_data(eduid)
     { 
             var txt;
             var postdata = {};
             postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
-            postdata['locat_id']=locid;
+            postdata['edu_id']=eduid;
             var r = confirm("Do you waht to delete!");
             if (r == true) {
-                  $.post('/dashboard/deletelocation',postdata,function(response)
+                  $.post('/dashboard/deleteeducation',postdata,function(response)
                                   {
                                       if(response.success)
                                       {
                                          
                                           $('#loader').hide();
                                           $('.message').show();
-                                          $('.message').html('<strong>Added!</strong>Location Deleted successfully.');
-                                          location.href = "/dashboard/locations";
+                                          $('.message').html('<strong>Added!</strong>Eductaion Deleted successfully.');
+                                          location.href = "/dashboard/education";
                                             
                                       }
                                      else
                                       {
-                                         alert('Cannot delete. This location is used in other places');
+                                         alert('Cannot delete. This eductaion is used in other places');
                                       }
                                       
                                       
@@ -154,18 +154,18 @@
       
 });
    $('#data_insert').click(function() {
-                        var location = $('#location').val();
+                        var education = $('#education').val();
                                var postdata = {};
                               postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
-                              postdata['location']=location;
+                              postdata['education']=education;
                               $('body').removeClass('loaded');
-                              $.post('/dashboard/addlocation',postdata,function(response)
+                              $.post('/dashboard/addeducation',postdata,function(response)
                                   {
                                       if(response.success)
                                       {
                                           $('#loader').hide();
                                           $('.message').show();
-                                         $('.message').html('<strong>Added!</strong>Location Deleted successfully.')
+                                         $('.message').html('<strong>Deleted!</strong>Education Deleted successfully.')
                                             
                                       }
                                      
@@ -174,16 +174,16 @@
  $('#data_update').click(function() {
                                var postdata = {};
                               postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
-                              postdata['locationid']=$('#loc_id_hidden').val();
-                              postdata['locname']= $('#location').val();
+                              postdata['educationid']=$('#edu_id_hidden').val();
+                              postdata['eduname']= $('#education').val();
                               $('body').removeClass('loaded');
-                              $.post('/dashboard/editlocation',postdata,function(response)
+                              $.post('/dashboard/editeducation',postdata,function(response)
                                   {
                                       if(response.success)
                                       {
                                           $('#loader').hide();
                                           $('.message').show();
-                                         $('.message').html('<strong>Added!</strong>Location Updated successfully.')
+                                         $('.message').html('<strong>Added!</strong>Eductaion Updated successfully.')
                                             
                                       }
                                       

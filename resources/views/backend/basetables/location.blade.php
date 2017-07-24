@@ -131,7 +131,7 @@
                                          
                                           $('#loader').hide();
                                           $('.message').show();
-                                          $('.message').html('<strong>Added!</strong>Location Deleted successfully.');
+                                          $('.message').html('<strong>Deleted!</strong>Location Deleted successfully.');
                                           location.href = "/dashboard/locations";
                                             
                                       }

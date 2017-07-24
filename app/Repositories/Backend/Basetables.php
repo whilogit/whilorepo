@@ -20,4 +20,14 @@ class Basetables extends Controller
 					->get();
 		return $response;
 	}
+        public static function geteducation()
+        {
+            
+                $response = array();
+		
+		$response['education']  = DB::table('_educations')
+					
+					->get();
+		return $response;
+        }
 }

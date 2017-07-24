@@ -40,6 +40,42 @@
                                             <td>1</td>
                                             <td><a href="/dashboard/locations">Add Locations</a></td>
                                         </tr>
+                                          <tr>
+                                            <td>2</td>
+                                            <td><a href="/dashboard/education">Add Educational Area</a></td>
+                                        </tr>
+                                          <tr>
+                                            <td>3</td>
+                                            <td><a href="/dashboard/functional">Add Functional Area</a></td>
+                                        </tr>
+                                          <tr>
+                                            <td>4</td>
+                                            <td><a href="/dashboard/industries">Add Industries</a></td>
+                                        </tr>
+                                          <tr>
+                                            <td>5</td>
+                                            <td><a href="/dashboard/jobrole">Add Job Role</a></td>
+                                        </tr>
+                                          <tr>
+                                            <td>6</td>
+                                            <td><a href="/dashboard/rolecat">Add Job Role Category</a></td>
+                                        </tr>
+                                          <tr>
+                                            <td>7</td>
+                                            <td><a href="/dashboard/joiningtime">Add Joining Time</a></td>
+                                        </tr>
+                                          <tr>
+                                            <td>8</td>
+                                            <td><a href="/dashboard/keyskill">Add Key Skills</a></td>
+                                        </tr>
+                                          <tr>
+                                            <td>9</td>
+                                            <td><a href="/dashboard/qualification">Add Qualification</a></td>
+                                        </tr>
+                                         <tr>
+                                            <td>10</td>
+                                            <td><a href="/dashboard/salaryrange">Add Salary Range</a></td>
+                                        </tr>
                                      </tbody>
                               </table>
                             </div>

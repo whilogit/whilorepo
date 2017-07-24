@@ -11,9 +11,15 @@
          
        //Basic Features Routes
         Route::get('/workfeatures', 'BaseTablesController@home');
+        
+        //Location
         Route::get('/locations', 'BaseTablesController@locationindex');
         Route::post('/addlocation', 'BaseTablesController@addLocation');
         Route::post('/editlocation', 'BaseTablesController@editLocation');
         Route::post('/deletelocation', 'BaseTablesController@deleteLocation');
         
-        
+        //Eductaional Area
+        Route::get('/education', 'BaseTablesController@eductaionindex');
+        Route::post('/addeducation', 'BaseTablesController@addEducation');
+        Route::post('/editeducation', 'BaseTablesController@editEducation');
+        Route::post('/deleteeducation', 'BaseTablesController@deleteEducation');
