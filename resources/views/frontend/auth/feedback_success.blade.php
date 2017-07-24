@@ -26,9 +26,8 @@
                 <div class="row">
                     <div class="col-md-12">
                         <h2 class="col-md-12">Feedback successfully submited</h2>
-<h3>Congratulations!! You have successfully completed Talent Registration With Whilo.in</h3>
-<h4>Now you can use your email ID and password to sign in to whilo.in. All the credentials have been sent to your registered email ID.</h4>
-<h2 class="col-md-12">Happy Job Search!!</h2>
+
+
                     </div>
                   
 

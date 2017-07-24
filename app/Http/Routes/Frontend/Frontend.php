@@ -31,7 +31,7 @@ Route::group(['middleware' => 'AuthJoblist'], function () {
 	Route::get('search/joblist/{offset}', 'JobController@joblistpagination')->name('frontend.joblistpagination');
 	Route::get('jobs/keyword={keyword}/location={locations}', 'JobController@searchjobjoblist')->name('frontend.jobjoblist');
          Route::get('applyjob', 'JobController@applyjob');
-        Route::get('shortlist', 'JobController@shortlist');   
+         
         Route::post('job/changestatus/{id}', 'JobController@changestatus');
         Route::get('companies', 'CompanyController@index')->name('frontend.company');
         Route::get('search/companylist/{offset}', 'CompanyController@joblistpagination')->name('frontend.joblistpagination');	
@@ -75,6 +75,7 @@ Route::get('companylogo.get/{category}/{year}/{month}/{name}/{time}/{size}.{ext}
                Route::group(['middleware' => 'talent'], function () {
                Route::get('bonafiedtalentdetails/{id}/{name}', 'TalentController@talentdetails')->name('frontend.talentdetails');
                Route::get('talentdetails/{id}/{name}', 'ResumeController@talentdetails')->name('frontend.talentdetails');
+                Route::get('shortlist', 'JobController@shortlist'); 
                Route::get('jobdetails/{id}/{title}', 'JobController@jobdetails')->name('frontend.jobdetails');
                Route::get('companydetails/{id}/{title}', 'CompanyController@jobdetails');
                Route::get('consultancydetails/{id}/{title}', 'ConsultantController@jobdetails');

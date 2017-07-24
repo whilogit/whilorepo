@@ -10,9 +10,9 @@
                 </div>
                 <div class="col-md-6">
                     <ol class="breadcrumb">
-                        <li><a href="#">Home</a></li>
+                        <!--<li><a href="#">Home</a></li>
                         <li><a href="#">Pages</a></li>
-                        <li class="active">Already Submitted</li>
+                        <li class="active">Already Submitted</li>-->
                     </ol>
                 </div>
             </div>
@@ -27,9 +27,8 @@
                 <div class="row">
                     <div class="col-md-12">
                        
-<h3>your profile has been already submitted.</h3>
-<h4>Now you can use your email ID and password to sign in to whilo.in. All the credentials have been sent to your registered email ID.</h4>
-<h2 class="col-md-12">Happy Job Search!!</h2>
+<h3>You have already verified the talent.</h3>
+
                     </div>
                   
 

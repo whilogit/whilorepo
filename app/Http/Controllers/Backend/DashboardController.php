@@ -7,7 +7,7 @@ use App\Repositories\Backend\Company\Companylist;
 use App\Repositories\Backend\Talents\Talentlist;
 
 use App\Repositories\Backend\Company\Approve;
-
+use DB;
 
 class DashboardController extends Controller
 {
@@ -31,6 +31,15 @@ class DashboardController extends Controller
                 {  
                     return view('backend.talentlist')->with(array("data"=>Talentlist::getlist()));
                 }
+                 public static function shortlistcandidate()
+        {
+             return view('backend.shortlist')->with(array("data"=>Talentlist::shortlistcandidate()));
+        }
+                 public static function hiredcandidate()
+        {
+             return view('backend.hired')->with(array("data"=>Talentlist::hiredcandidate()));
+        }
+        
 	public function approve($id)
                 {  
                     return Approve::accept($id); 
