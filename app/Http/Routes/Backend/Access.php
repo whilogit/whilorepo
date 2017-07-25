@@ -10,6 +10,8 @@
         Route::get('/postedjobs', 'CompanyController@postedJobs');
         Route::get('/paymentdetails', 'CompanyController@paymentDetails');
         Route::get('/addnewcompany', 'CompanyController@addNewCompany');
+        Route::post('/register/newcompany','CompanyController@insertNewCompany');
+        
         
          
        //Basic Features Routes
