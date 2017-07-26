@@ -11,6 +11,9 @@
         Route::get('/paymentdetails', 'CompanyController@paymentDetails');
         Route::get('/addnewcompany', 'CompanyController@addNewCompany');
         Route::post('/register/newcompany','CompanyController@insertNewCompany');
+        Route::get('/approvevideolist','CompanyController@youtubeVideoList');
+        Route::post('/approvevideo','CompanyController@approveYoutubeVideo');
+        
         
         
          

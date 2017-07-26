@@ -266,7 +266,7 @@
                 
                     <div class="col-lg-2 col-sm-12">
                         <div class="circle-tile">
-                            <a href="#">
+                            <a href="/dashboard/approvevideolist">
                                     <div class="circle-tile-heading olive">
                                     <i class="fa fa-youtube fa-fw fa-3x"></i>
                                 </div>
@@ -279,7 +279,7 @@
                                     10
                                     <span id="sparklineB"></span>
                                 </div>
-                                <a href="#" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
+                                <a href="/dashboard/approvevideolist" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
                             </div>
                         </div>
                     </div>

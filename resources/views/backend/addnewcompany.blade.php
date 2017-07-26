@@ -72,11 +72,17 @@
 
   </head>
   <body>
+      
 <div class="panel panel-primary" style="margin:20px;">
 	<div class="panel-heading">
         	<h3 class="panel-title">Registration Form</h3>
 	</div>
 <div class="panel-body">
+        <div class="col-md-6"><br>
+                                                    <ul class="list-check responsereport" style="display:none;color:#F00;">
+                                                        <li> </li>
+                                                    </ul>
+                                                 </div>
     <form name="company" id="company">
 
 	<div class="form-group col-md-12 col-sm-12">
@@ -111,6 +117,7 @@
             <label for="mobile">Username<span style="color:red">*</span></label>
             <input type="text" class="form-control input-sm" required="required" name="username" data-parsley-type="alphanum" data-parsley-minlength="6" data-parsley-maxlength="25" data-parsley-maxlength-message="Max length 25 characters" data-parsley-minlength-message="Min length 6 characters" data-parsley-type-message="Only characters" data-parsley-trigger="keyup" data-parsley-whitespace="trim" placeholder="username">
         </div>
+                                    
 
 	<div class="form-group col-md-6 col-sm-6">
 	      <label for="address">Email Address<span style="color:red">*</span></label>
@@ -173,7 +180,7 @@
     <div class="col-md-12 col-sm-12" id="deceased">
                <div class="form-group col-md-6 col-sm-6">
             <label for="name">Company Address <span style="color:red">*</span</label>
-            <textarea class="form-control input-lg" name="aboutbio" id="aboutbio" data-parsley-minlength="30" data-parsley-maxlength="200" data-parsley-maxlength-message="Max length 200 characters" data-parsley-minlength-message="Min length 30 characters" style="width:400px;"></textarea>
+            <textarea class="form-control input-lg" name="address" id="address" data-parsley-minlength="30" data-parsley-maxlength="200" data-parsley-maxlength-message="Max length 200 characters" data-parsley-minlength-message="Min length 30 characters" style="width:400px;"></textarea>
         </div>
 	<div class="form-group col-md-6 col-sm-6">
             <label for="name">About Company/Consultancy <span style="color:red">*</span</label>
@@ -183,8 +190,8 @@
 	
 	
 </div>
-   
-
+    </div>
+            
 <div class="col-md-6 col-sm-6">
     <div class="form-group col-md-3 col-sm-3 pull-right" style="float:right;" >
 
@@ -214,10 +221,11 @@
         var proceed = $('form[name=company]').parsley().validate();
         postdata['registertype']=$('select[name="registertype"]').val();
         postdata['companyname']=$('input[name="companyname"]').val();
-        postdata['usrname']=$('input[name="usrname"]').val();
+        postdata['username']=$('input[name="username"]').val();
         postdata['experience']=$('select[name="experience"]').val();
-        postdata['email']=$('select[name="email"]').val();
+        postdata['email']=$('input[name="email"]').val();
         postdata['password']=$('input[name="password"]').val();
+        postdata['repassword']=$('input[name="repassword"]').val();
         postdata['phone']=$('input[name="phone"]').val();
         postdata['mobile']=$('input[name="mobile"]').val();
         postdata['website']=$('input[name="website"]').val();
@@ -226,21 +234,27 @@
         postdata['location']=$('select[name="location"]').val();
         postdata['city']=$('input[name="city"]').val();
         postdata['pincode']=$('input[name="pincode"]').val();
-        postdata['shortdescription']=$('textarea#shortdescription').val();
+        postdata['address']=$('textarea#address').val();
         postdata['aboutbio']=$('textarea#aboutbio').val()
         postdata['plan']=$('select[name="plan"]').val();
           $.post('/dashboard/register/newcompany',postdata,function(response){
               if(response.success)
+                $("#company")[0].reset();
 								
 			if ((typeof  response.errors) == 'object') { 
 								var errorsHtml = ""; 
-								$.each( response.errors, function( key, value ) {
-									errorsHtml += '<li><i class="fa fa-times" style="color:#F00;"></i>' + value[0] + '</li>';
-								});
-								$('[name=company]  .responsereport li').html('' + errorsHtml);
-							}else{
-								$('[name=company]  .responsereport li').html('' + response.errors);
-							}				
+                                                                    $.each( response.errors, function( key, value ) {
+                                                                            errorsHtml += '<li><i class="fa fa-times" style="color:#F00;"></i>' + value[0] + '</li>';
+                                                                    });
+                                                                    $('[name=company]  .responsereport li').html('' + errorsHtml);
+                                                                    $('.responsereport').show();
+                                                                     $('.responsereport').html(response.errors);
+                                                                }else
+                                                                {
+                                                                    $('[name=company]  .responsereport li').html('' + response.errors);
+                                                                     $('.responsereport').show();
+                                                                    $('.responsereport').html(response.errors);
+                                                                }				
           });
         
         });

@@ -58,5 +58,13 @@ class Companylist extends Controller
 					->get();
             return $response;
         }
+        public static function getvideolist()
+        {
+             $response['video_list']  = DB::table('company_video_url as ul')
+					->join('comprofile as p', 'p.companyId', '=', 'ul.companyId')
+                                        ->select('p.companyName','ul.*')
+					->get();
+            return $response;
+        }
     
 }
