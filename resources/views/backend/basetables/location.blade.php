@@ -15,7 +15,7 @@
                                     <i class="fa fa-table"></i>
                                    Locations
                             </h3>
-                            <button id="data_add" style="float:right"class="primary">Add New</button>
+                            <button id="data_add" style="float:right" class="primary">Add New</button>
                              
                         </div>
                     
@@ -114,7 +114,7 @@
 
                                         
                                                     
-                                                    <input type="text" class="locid"  name="locid" value="">
+                                                    <input type="hidden" class="locid"  name="locid" value="">
                                                     <input class="locname" type="text"  name="locname" value="">                                        
                                                
 
@@ -151,7 +151,7 @@
                                 <div class="col-md-12">
                                     <form id="deleteposting">                                      
                                       {!! csrf_field() !!}
-                                        <input type="text" class="locid"  name="locid" value="">
+                                        <input type="hidden" class="locid"  name="locid" value="">
                                     <p class="text-center">Are you sure want to delete this item?</p>
                                     </form>
                                 </div>
@@ -170,7 +170,41 @@
             </div>
 
             <!-- /.Delete Modal-->
+ <!-- Add Modal-->
 
+            <div class="modal fade modal-middle" id="addlocations" role="dialog" style="display: none;">
+                <div class="modal-dialog modal-sm">
+
+                    <!-- Popup contents-->
+                    <div class="modal-content">
+                        <div class="modal-header delete-modal-header">
+                            
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <form id="addposting">                                      
+                                      {!! csrf_field() !!}
+                                        <input type="hidden" class="locid"  name="locid" value="">
+                                   <input type="text" class="addlocation"  name="addlocation" value="">
+                                    </form>
+                                   
+                                </div>
+
+                            </div>											
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" id="add_posting" class="btn btn-success"><i class="fa fa-floppy-o" aria-hidden="true"></i> Add</button>
+                            <button type="reset" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- /.Add Modal-->
 
 @endsection
 
@@ -224,7 +258,7 @@
     $(document).ready(function(){
     $('.myTable').DataTable();
     
-    $('#data_add').click(function() {
+  /*  $('#data_add').click(function() {
        $('#table_div').hide();
         $('.addcontent_form').show();
       
@@ -246,7 +280,7 @@
                                       }
                                      
                                   });
-           });
+           });*/
  /*$('#data_update').click(function() {
                                var postdata = {};
                               postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
@@ -306,6 +340,17 @@
          
         $('#editlocation').modal('show');
     });
+               $("#data_add").click(function () {
+        
+         /*var locid = $(this).data('locid');
+      
+          var locname = $(this).data('locname');
+           $(".modal-body .locid").val(locid);
+            $(".modal-body .locname").val(locname);
+         
+        $('#editlocation').modal('show');*/
+        
+    });
     
             $('#locations').on('click', '.locationsdelete', function(){
         
@@ -353,6 +398,33 @@
                     alert("Deleted successfully");
                     
                    $('#deletelocations').modal('hide');
+                  location.reload();
+                }
+            });
+            
+        });
+        
+         $("#data_add").click(function () {
+             
+        $('#addlocations').modal('show');
+             
+         });
+         
+           $("#add_posting").click(function () {
+            var formDataValues = document.forms.namedItem("addposting");
+                  var formValues = new FormData(formDataValues); 
+           
+          $.ajax({
+                url: '/dashboard/addlocation',
+                type: 'POST',
+           processData: false,
+                      contentType: false,
+                      data: formValues,
+                success: function (data) {
+                   
+                    alert("Added successfully");
+                    
+                   $('#addlocations').modal('hide');
                   location.reload();
                 }
             });

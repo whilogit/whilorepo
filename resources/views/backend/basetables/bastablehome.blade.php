@@ -58,7 +58,7 @@
                                         </tr>
                                           <tr>
                                             <td>6</td>
-                                            <td><a href="/dashboard/rolecat">Add Job Role Category</a></td>
+                                            <td><a href="/dashboard/jobrolecategory">Add Job Role Category</a></td>
                                         </tr>
                                           <tr>
                                             <td>7</td>
@@ -66,7 +66,7 @@
                                         </tr>
                                           <tr>
                                             <td>8</td>
-                                            <td><a href="/dashboard/keyskill">Add Key Skills</a></td>
+                                            <td><a href="/dashboard/keyskills">Add Key Skills</a></td>
                                         </tr>
                                           <tr>
                                             <td>9</td>

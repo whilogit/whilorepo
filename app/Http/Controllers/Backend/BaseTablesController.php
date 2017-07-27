@@ -26,7 +26,7 @@ class BaseTablesController extends Controller
                   }
           public function addLocation(Request $request,Response $response) 
                  {
-                    $location_name=$request->location;
+                    $location_name=$request->addlocation;
                     DB::table('_locations')->insert(
                                                 ['locationName' =>$location_name, 'status' => 1]
                                             );
