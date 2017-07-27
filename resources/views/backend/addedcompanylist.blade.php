@@ -55,33 +55,23 @@
                              <table class="table table-hover table-nomargin table-bordered dataTable no-footer" id="myTable" role="grid" aria-describedby="DataTables_Table_0_info">
                                 <thead>
                                 <th width="5%">Sl-No</th>
+                                <th width="1%">Logo</th>
                                 <th>Company Name</th>
-                                <th width="45%">YouTube Video URL</th>
-                                 <th width="15%">Action</th>
-
+                                <th width="7%">Location</th>
+                                <th width="7%">Mobile</th>
+                                <th width="15%">Website</th>
+                                <th width="8%">Options</th>
                                 </thead>
                                     <tbody><?php $i=0; ?>
-                                         @foreach($data['video_list'] as $list) <?php $i = $i + 1; ?>
+                                         @foreach($data['admincompanylist'] as $list) <?php $i = $i + 1; ?>
                                                 <tr role="row" class="odd">
                                                         <td><?php  echo $i; ?></td>
-                                                       
+                                                        <td> <img style="width:100%" src="/companylogo.get/{{ $list->logoCategory }}/{{ $list->dirYear }}/{{ $list->dirMonth }}/{{ $list->logoName }}/{{ $list->crTime }}/s.{{ $list->logExt }}" alt=""></td>
                                                          <td>{{ $list->companyName }}</td>
-                                                           <td>{{ $list->video_url }}</td>  
-                                                           <?php 
-                                                           if( $list->status == 0)
-                                                           {
-                                                              $btn_name='Approve';
-                                                              $btn_action='approve';
-                                                              $color = 'color:green';
-                                                           }
-                                                           else
-                                                           {
-                                                               $btn_name='Disapprove';
-                                                               $btn_action='disapprove';
-                                                               $color = 'color:blue';
-                                                           }
-                                                           ?>
-                                                           <td><button style="width: 111px;{{$color}}" id="statusbtn_{{ $list->id}}" class="actionclass" primaryid="{{ $list->id}}" fnaction="{{$btn_action}}" >{{ $btn_name }}</button></td>     
+                                                        <td>{{ $list->locationName }}</td>
+                                                        <td>{{ $list->mobileNumber }}</td>
+                                                        <td>{{ $list->website }}</td>
+                                                <td>{!! $list->accountStatus == 0 ? "<a style='cursor:pointer'><span class='active'>Activate</span></a>" : "<a style='cursor:pointer'><span class='deactive'>Deactivate</span></a>" !!}</td>
                                                 </tr>
                                          @endforeach
 
@@ -104,30 +94,6 @@
 <script>
     $(document).ready(function(){
     $('#myTable').DataTable();
-   
-    
 });
- $('.actionclass').unbind().bind('click', function(){
-     
-         var postdata = {}
-         var status_id=$(this).attr('primaryid')
-             postdata['primaryid']=$(this).attr('primaryid');
-            postdata['fnaction']=$(this).attr('fnaction');
-          $.post('/dashboard/approvevideo',postdata,function(response){
-              if(response.action =='approve')
-              {
-                  $('#statusbtn_'+response.primaryid).attr('style', 'color:blue; width: 111px;');
-                  $('#statusbtn_'+response.primaryid).attr('fnaction', 'disapprove');
-                  $('#statusbtn_'+response.primaryid).html('Disapprove')
-              }
-              else
-              {
-                  $('#statusbtn_'+response.primaryid).attr('style', 'color:green; width: 111px;');
-                   $('#statusbtn_'+response.primaryid).attr('fnaction', 'approve');
-                   $('#statusbtn_'+response.primaryid).html('Approve')
-              }
-          });
-        
-    });
     </script>
 @stop

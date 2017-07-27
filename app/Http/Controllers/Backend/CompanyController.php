@@ -15,6 +15,11 @@ use App\Repositories\Backend\Company\Approve;
 class CompanyController extends Controller
 {
    
+        public function adminAddedCompany()
+                {  
+                    return view('backend.addedcompanylist')->with(array("data"=>Companylist::getcompanyaddedlist()));  
+                    
+                }
 	
         public function postedJobs()
                 {  
@@ -105,8 +110,8 @@ class CompanyController extends Controller
 	   $regId = "WH" . date("Ymdhsi") . "J";
 	   $transId = round(microtime(true) * 1000);
 	   
-	   $res = DB::insert('insert into commaster(userId,RegId,ctypeId,TransactionId,accountStatus,createdDate) 
-	   				values (?,?,?,?,?,?)',array($userId,$regId,$data['registertype'],$transId,1,$createdDate));
+	   $res = DB::insert('insert into commaster(userId,RegId,ctypeId,TransactionId,accountStatus,addedby,createdDate) 
+	   				values (?,?,?,?,?,?)',array($userId,$regId,$data['registertype'],$transId,1,1,$createdDate));
 	   $companyId =  DB::getPdo()->lastInsertId();
 	   
 	   $res = DB::insert('insert into comprofile(companyId,companyName,mobileNumber,phone,website,industry,aboutbio,locationId,city,pincode,address) 

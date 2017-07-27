@@ -13,6 +13,7 @@
         Route::post('/register/newcompany','CompanyController@insertNewCompany');
         Route::get('/approvevideolist','CompanyController@youtubeVideoList');
         Route::post('/approvevideo','CompanyController@approveYoutubeVideo');
+        Route::get('/adminaddedcompanies', 'CompanyController@adminAddedCompany');
         
         
         

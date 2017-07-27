@@ -40,15 +40,15 @@
                         <div class="circle-tile">
                             <a href="/dashboard/companylist">
                                 <div class="circle-tile-heading orange">
-                                    <i class="fa fa-building-o fa-fw fa-3x"></i>
+                                    <i class="fa fa-diamond fa-fw fa-3x"></i>
                                 </div>
                             </a>
                             <div class="circle-tile-content orange">
                                 <div class="circle-tile-description text-faded">
-                                    Company & Consultancy List 
+                                   Paid Company & Consultancy List 
                                 </div>
                                 <div class="circle-tile-number text-faded">
-                                    9 New
+                           
                                 </div>
                                 <a href="/dashboard/companylist" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
                             </div>
@@ -176,19 +176,19 @@
            
                     <div class="col-lg-2 col-sm-6">
                         <div class="circle-tile">
-                            <a href="#">
+                            <a href="/dashboard/adminaddedcompanies">
                                 <div class="circle-tile-heading seagreen">
-                                    <i class="fa fa-diamond fa-fw fa-3x"></i>
+                                    <i class="fa fa-building-o fa-fw fa-3x"></i>
                                 </div>
                             </a>
                             <div class="circle-tile-content seagreen">
                                 <div class="circle-tile-description text-faded">
-                                   Paid Company & Consultancy 
+                                   Admin Added Company & Consultancy 
                                 </div>
                                 <div class="circle-tile-number text-faded">
-                                   new
+                                   
                                 </div>
-                                <a href="#" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
+                                <a href="/dashboard/adminaddedcompanies" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
                             </div>
                         </div>
                     </div>
