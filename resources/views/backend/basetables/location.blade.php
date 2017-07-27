@@ -15,7 +15,7 @@
                                     <i class="fa fa-table"></i>
                                    Locations
                             </h3>
-                            <button id="data_add" style="float:right"class="primary">Add New</button>
+                            <button id="data_add" style="float:right" class="primary">Add New</button>
                              
                         </div>
                     
@@ -26,7 +26,7 @@
                                
                            </div>
                         <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper no-footer" >
-                             <table class="table table-hover table-nomargin table-bordered dataTable no-footer myTable"  role="grid" aria-describedby="DataTables_Table_0_info">
+                             <table class="table table-hover table-nomargin table-bordered dataTable no-footer myTable"  role="grid" aria-describedby="DataTables_Table_0_info" id="locations">
                                 <thead>
                                 <th width="1%">Sl-No</th>
                                 <th width="3%">Locations</th>
@@ -38,8 +38,8 @@
                                                 <tr role="row" class="odd">
                                                         <td><?php  echo $i; ?></td>
                                                         <td>{{ $list->locationName }}</td>
-                                                         <td><button  class="btn btn-danger fa fa-pencil-square" name="edit" value="edit" onclick="edit_data({{ $list->locationId }},'{{ $list->locationName }}')"></button></td>
-                                                          <td><button  class="btn btn-danger fa fa-trash" name="delete" value="Delete" onclick="delete_data({{ $list->locationId }})"></button></td>
+                                                         <td><button  class="btn btn-danger fa fa-pencil-square locationsedit" name="edit" value="edit" data-locid="<?php echo $list->locationId ?>" data-locname="<?php echo $list->locationName ?>"></button></td>
+                                                          <td><button  class="btn btn-danger fa fa-trash locationsdelete" name="delete" value="Delete" data-locid="<?php echo $list->locationId ?>"></button></td>
                                                 </tr>
                                          @endforeach
 
@@ -96,13 +96,123 @@
         </div>
     </div>
 </div> 
+<!-- Modify Modal-->
+
+            <div class="modal fade modal-middle" id="editlocation" role="dialog" style="display: none;">
+                <div class="modal-dialog modal-md">
+
+                    <!-- Popup contents-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">×</button>
+                            <h4 class="modal-title">Modify</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                     <form id="jobposting" class="form-horizontal" role="form">
+
+                                        
+                                                    
+                                                    <input type="hidden" class="locid"  name="locid" value="">
+                                                    <input class="locname" type="text"  name="locname" value="">                                        
+                                               
+
+                                        </form>    
+                                </div>
+
+                            </div>											
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="reset" id="edit_posting" class="btn btn-success"><i class="fa fa-floppy-o" aria-hidden="true"></i> Update</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- /.Modify Modal -->
+            <!-- Delete Modal-->
+
+            <div class="modal fade modal-middle" id="deletelocations" role="dialog" style="display: none;">
+                <div class="modal-dialog modal-sm">
+
+                    <!-- Popup contents-->
+                    <div class="modal-content">
+                        <div class="modal-header delete-modal-header">
+                            <button type="button" class="close" data-dismiss="modal">×</button>
+                            <h4 class="modal-title">Delete</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <form id="deleteposting">                                      
+                                      {!! csrf_field() !!}
+                                        <input type="hidden" class="locid"  name="locid" value="">
+                                    <p class="text-center">Are you sure want to delete this item?</p>
+                                    </form>
+                                </div>
+
+                            </div>											
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" id="delete_posting" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
+                            <button type="reset" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- /.Delete Modal-->
+ <!-- Add Modal-->
+
+            <div class="modal fade modal-middle" id="addlocations" role="dialog" style="display: none;">
+                <div class="modal-dialog modal-sm">
+
+                    <!-- Popup contents-->
+                    <div class="modal-content">
+                        <div class="modal-header delete-modal-header">
+                            
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <form id="addposting">                                      
+                                      {!! csrf_field() !!}
+                                        <input type="hidden" class="locid"  name="locid" value="">
+                                   <input type="text" class="addlocation"  name="addlocation" value="">
+                                    </form>
+                                   
+                                </div>
+
+                            </div>											
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" id="add_posting" class="btn btn-success"><i class="fa fa-floppy-o" aria-hidden="true"></i> Add</button>
+                            <button type="reset" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- /.Add Modal-->
+
 @endsection
 
 @section('after-scripts-end')
 <style type="text/css" src="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css"/></style>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <script>
-    function edit_data(locid,locname)
+   /* function edit_data(locid,locname)
     {
             var postdata = {};
             alert(locname);
@@ -144,11 +254,11 @@
                                   });
             } 
         
-    }
+    }*/
     $(document).ready(function(){
     $('.myTable').DataTable();
     
-    $('#data_add').click(function() {
+  /*  $('#data_add').click(function() {
        $('#table_div').hide();
         $('.addcontent_form').show();
       
@@ -170,8 +280,8 @@
                                       }
                                      
                                   });
-           });
- $('#data_update').click(function() {
+           });*/
+ /*$('#data_update').click(function() {
                                var postdata = {};
                               postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
                               postdata['locationid']=$('#loc_id_hidden').val();
@@ -188,7 +298,143 @@
                                       }
                                       
                                   });
-           });
+           });*/
+          // $(".locationsedit").click(function () {
+         /* function delete_data(locid)
+    { 
+        alert(locid);
+            var txt;
+            var postdata = {};
+            postdata['_token'] = $('meta[name="csrf-token"]').attr('content'); 
+            postdata['locat_id']=locid;
+            var r = confirm("Do you waht to delete!");
+            if (r == true) {
+                  $.post('/dashboard/deletelocation',postdata,function(response)
+                                  {
+                                      if(response.success)
+                                      {
+                                         
+                                          $('#loader').hide();
+                                          $('.message').show();
+                                          $('.message').html('<strong>Deleted!</strong>Location Deleted successfully.');
+                                          location.href = "/dashboard/locations";
+                                            
+                                      }
+                                     else
+                                      {
+                                         alert('Cannot delete. This location is used in other places');
+                                      }
+                                      
+                                      
+                                  });
+            } 
+        
+    }*/
+                  $('#locations').on('click', '.locationsedit', function(){
+        
+         var locid = $(this).data('locid');
+      
+          var locname = $(this).data('locname');
+           $(".modal-body .locid").val(locid);
+            $(".modal-body .locname").val(locname);
+         
+        $('#editlocation').modal('show');
+    });
+               $("#data_add").click(function () {
+        
+         /*var locid = $(this).data('locid');
+      
+          var locname = $(this).data('locname');
+           $(".modal-body .locid").val(locid);
+            $(".modal-body .locname").val(locname);
+         
+        $('#editlocation').modal('show');*/
+        
+    });
+    
+            $('#locations').on('click', '.locationsdelete', function(){
+        
+         var locid = $(this).data('locid');
+      
+         
+           $(".modal-body .locid").val(locid);
+          
+        $('#deletelocations').modal('show');
+    });
+        $("#edit_posting").click(function () {
+            var formDataValues = document.forms.namedItem("jobposting");
+                  var formValues = new FormData(formDataValues); 
+           
+           
+          $.ajax({
+                url: '/dashboard/editlocation',
+                type: 'POST',
+           processData: false,
+                      contentType: false,
+                      data: formValues,
+                success: function (data) {
+                   
+                    alert("updated successfully");
+                    
+                   $('#editlocation').modal('hide');
+                  location.reload();
+                }
+            });
+            
+        });
+        $("#delete_posting").click(function () {
+            var formDataValues = document.forms.namedItem("deleteposting");
+                  var formValues = new FormData(formDataValues); 
+           
+           
+          $.ajax({
+                url: '/dashboard/deletelocation',
+                type: 'POST',
+           processData: false,
+                      contentType: false,
+                      data: formValues,
+                success: function (data) {
+                   
+                    alert("Deleted successfully");
+                    
+                   $('#deletelocations').modal('hide');
+                  location.reload();
+                }
+            });
+            
+        });
+        
+         $("#data_add").click(function () {
+             
+        $('#addlocations').modal('show');
+             
+         });
+         
+           $("#add_posting").click(function () {
+            var formDataValues = document.forms.namedItem("addposting");
+                  var formValues = new FormData(formDataValues); 
+           
+          $.ajax({
+                url: '/dashboard/addlocation',
+                type: 'POST',
+           processData: false,
+                      contentType: false,
+                      data: formValues,
+                success: function (data) {
+                   
+                    alert("Added successfully");
+                    
+                   $('#addlocations').modal('hide');
+                  location.reload();
+                }
+            });
+            
+        });
+        
+    
+    
 });
+
     </script>
+    
 @stop
