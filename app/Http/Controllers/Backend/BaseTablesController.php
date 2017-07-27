@@ -38,21 +38,21 @@ class BaseTablesController extends Controller
            public function editLocation(Request $request,Response $response) 
                  {
             
-                    $locationid=$request->locationid;
+                    $locationid=$request->locid;
                     $locationname=$request->locname;
                    $res = DB::table('_locations')
                                 ->where('locationId',$locationid )
                                 ->update(array('locationName' =>$locationname));
-                     return response()->json(array(
-                                                        'success' => true,
+                     return response()->json(array('success' => true,
                                                         'msg' => "Updated"
                                                         ));
                   }
              public function deleteLocation(Request $request,Response $response) 
                  {
             
-                    $locationid=$request->locat_id;
-                    $res=DB::table('_locations')->where('locationId',$locationid )->delete();
+                    $locationid=$request->locid;
+                    
+                    $res=DB::table('_locations')->where('locationId',$locationid)->delete();
                     if($res)
                     {
                         return response()->json(array(
