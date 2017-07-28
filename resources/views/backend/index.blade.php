@@ -17,25 +17,27 @@
      </div> 
                                                  
         <div class="row" >
-                   
-                    <div class="col-lg-2 col-sm-6">
+                       
+                    <div class="col-lg-2 col-sm-12">
                         <div class="circle-tile">
-                            <a href="#">
-                                <div class="circle-tile-heading green">
-                                    <i class="fa fa-money fa-fw fa-3x"></i>
+                            <a href="/dashboard/approvevideolist">
+                                    <div class="circle-tile-heading olive">
+                                    <i class="fa fa-youtube fa-fw fa-3x"></i>
                                 </div>
                             </a>
-                            <div class="circle-tile-content green">
+                            <div class="circle-tile-content olive">
                                 <div class="circle-tile-description text-faded">
-                                    Revenue
+                                   Approve Company Video
                                 </div>
                                 <div class="circle-tile-number text-faded">
-                                 Rs. {{ $data['totalAmount'][0] ->revenue }}
+                              
+                                    <span id="sparklineB"></span>
                                 </div>
-                                <a href="#" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
+                                <a href="/dashboard/approvevideolist" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
                             </div>
                         </div>
                     </div>
+          
                     <div class="col-lg-2 col-sm-6">
                         <div class="circle-tile">
                             <a href="/dashboard/companylist">
@@ -63,10 +65,10 @@
                             </a>
                             <div class="circle-tile-content blue">
                                 <div class="circle-tile-description text-faded">
-                                   Posted Jobs
+                                 Company  Posted Jobs
                                 </div>
                                 <div class="circle-tile-number text-faded">
-                                    10
+                          
                                     <span id="sparklineB"></span>
                                 </div>
                                 <a href="/dashboard/postedjobs" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
@@ -75,7 +77,7 @@
                     </div>
                      <div class="col-lg-2 col-sm-6">
                         <div class="circle-tile">
-                            <a href="#">
+                            <a href="/dashboard/planexpiry">
                                 <div class="circle-tile-heading skyblue">
                                     <i class="fa fa-level-down fa-fw fa-3x"></i>
                                 </div>
@@ -85,10 +87,10 @@
                                    Plan Expiry
                                 </div>
                                 <div class="circle-tile-number text-faded">
-                                19 
+                            
                                     <span id="sparklineD"></span>
                                 </div>
-                                <a href="#" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
+                                <a href="/dashboard/planexpiry" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -105,7 +107,7 @@
                                     Shortlisted Candidates
                                 </div>
                                 <div class="circle-tile-number text-faded">
-                                    18
+                                  
                                 </div>
                                 <a href="/dashboard/shortlistcandidate" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
                             </div>
@@ -123,7 +125,7 @@
                                     Talents List
                                 </div>
                                 <div class="circle-tile-number text-faded">
-                                    265
+                                
                                     <span id="sparklineA"></span>
                                 </div>
                                 <a href="#" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
@@ -146,7 +148,7 @@
                                     Payment Details
                                 </div>
                                 <div class="circle-tile-number text-faded">
-                                    24
+                               
                                     <span id="sparklineC"></span>
                                 </div>
                                 <a href="/dashboard/paymentdetails" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
@@ -165,7 +167,7 @@
                                     Add  Company /Consultancy
                                 </div>
                                 <div class="circle-tile-number text-faded">
-                                    new
+                                    
                                     <span id="sparklineD"></span>
                                 </div>
                                 <a href="/dashboard/addnewcompany" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
@@ -206,7 +208,7 @@
                                     Manage Basic Features
                                 </div>
                                 <div class="circle-tile-number text-faded">
-                                    10
+                                   
                                     <span id="sparklineB"></span>
                                 </div>
                                 <a href="/dashboard/workfeatures" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
@@ -225,7 +227,7 @@
                                    Hired Candidates
                                 </div>
                                 <div class="circle-tile-number text-faded">
-                                    24
+                                  
                                     <span id="sparklineC"></span>
                                 </div>
                                 <a href="/dashboard/hiredcandidate" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
@@ -245,7 +247,7 @@
                                     <b> Add New Talents</b>
                                 </div>
                                 <div class="circle-tile-number text-faded">
-                                    265
+                                    
                                     <span id="sparklineA"></span>
                                 </div>
                                 <a href="#" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
@@ -262,27 +264,25 @@
                       
                     </div>
                    
-           
-                
-                    <div class="col-lg-2 col-sm-12">
+                     <div class="col-lg-2 col-sm-6">
                         <div class="circle-tile">
-                            <a href="/dashboard/approvevideolist">
-                                    <div class="circle-tile-heading olive">
-                                    <i class="fa fa-youtube fa-fw fa-3x"></i>
+                            <a href="#">
+                                <div class="circle-tile-heading green">
+                                    <i class="fa fa-money fa-fw fa-3x"></i>
                                 </div>
                             </a>
-                            <div class="circle-tile-content olive">
+                            <div class="circle-tile-content green">
                                 <div class="circle-tile-description text-faded">
-                                   Approve Company Video
+                                    Revenue
                                 </div>
                                 <div class="circle-tile-number text-faded">
-                                    10
-                                    <span id="sparklineB"></span>
+                                 Rs. {{ $data['totalAmount'][0] ->revenue }}
                                 </div>
-                                <a href="/dashboard/approvevideolist" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
+                                <a href="#" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
                             </div>
                         </div>
                     </div>
+            
                       <div class="col-lg-2 col-sm-6">
                        
                     </div>

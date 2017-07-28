@@ -1,15 +1,31 @@
 @extends('backend.layouts.master')
 @section('content')
-<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"> 
 <div class="container-fluid" id="content">
     <div id="main" style="margin-left: 0px;">
         <div class="container-fluid">
-              <div class="page-header">
+                    <div class="page-header">
                         <div class="pull-left">
                             <h1>Dashboard</h1>
                         </div>
-          
+                        <div class="pull-right">
+                            <ul class="stats">
+                                <li class='satgreen'>
+                                    <i class="fa fa-money"></i>
+                                        <div class="details">
+                                                <span class="big">Total Company</span>
+                                                <span>13</span>
+                                        </div>
+                                </li>
+                                    <li class='satgreen'>
+                                        <i class="fa fa-money"></i>
+                                        <div class="details">
+                                                <span class="big">Total users</span>
+                                                <span>5</span>
+                                        </div>
+                                    </li>
+                            </ul>
+                        </div>
                     </div>
         <div class="breadcrumbs">
             <ul>
@@ -18,7 +34,7 @@
                             <i class="fa fa-angle-right"></i>
                     </li>
                     <li>
-                            <a href="index.html">Company Jobs</a>
+                            <a href="index.html">Plan Expiry</a>
                     </li>
             </ul>
             <div class="close-bread">
@@ -32,7 +48,7 @@
                         <div class="box-title">
                             <h3>
                                     <i class="fa fa-table"></i>
-                                    Company Job list
+                                    Company Plan Expires Today
                             </h3>
                         </div>
                     <div class="box-content nopadding">
@@ -41,24 +57,17 @@
                                 <thead>
                                 <th width="5%">Sl-No</th>
                                 <th>Company Name</th>
-                                <th width="7%">jobTitle</th>
-                                <th width="7%">lastdate</th>
-                                <th width="15%">createdDate</th>
-                                <th width="15%">Delete</th>
+                                <th width="7%">Plan Name</th>
+                               
                                 </thead>
                                
                                     <tbody><?php $i=0; ?>
                                         @if(count($data)>0)
-                                         @foreach($data['company_jobs'] as $list) <?php $i = $i + 1; ?>
+                                         @foreach($data as $key => $list) <?php $i = $i + 1; ?>
                                                 <tr role="row" class="odd">
                                                         <td><?php  echo $i; ?></td>
                                                          <td>{{ $list->companyName }}</td>
-                                                        <td>{{ $list->jobTitle }}</td>
-                                                        <td>{{ $list->lastdate }}</td>
-                                                        <td>{{ $list->createdDate }}</td>
-                                                        <td><button  class="btn btn-danger fa fa-trash" name="delete" value="Delete"></button></td>
-
-                                                
+                                                        <td>{{ $list->planname }}</td>
                                                 </tr>
                                          @endforeach
                                          @endif

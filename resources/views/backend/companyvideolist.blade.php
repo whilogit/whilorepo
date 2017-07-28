@@ -7,24 +7,7 @@
                         <div class="pull-left">
                             <h1>Dashboard</h1>
                         </div>
-                        <div class="pull-right">
-                            <ul class="stats">
-                                <li class='satgreen'>
-                                    <i class="fa fa-money"></i>
-                                        <div class="details">
-                                                <span class="big">Total Company</span>
-                                                <span>13</span>
-                                        </div>
-                                </li>
-                                    <li class='satgreen'>
-                                        <i class="fa fa-money"></i>
-                                        <div class="details">
-                                                <span class="big">Total users</span>
-                                                <span>5</span>
-                                        </div>
-                                    </li>
-                            </ul>
-                        </div>
+              
                     </div>
         <div class="breadcrumbs">
             <ul>
@@ -33,7 +16,7 @@
                             <i class="fa fa-angle-right"></i>
                     </li>
                     <li>
-                            <a href="index.html">Dashboard</a>
+                            <a href="index.html">Video Approve</a>
                     </li>
             </ul>
             <div class="close-bread">
