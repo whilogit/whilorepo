@@ -33,49 +33,49 @@
         Route::post('/deleteeducation', 'BaseTablesController@deleteEducation');
         
         //Functional Area
-        Route::get('/functional', 'BaseTablesController@eductaionindex');
-        Route::post('/addfunctional', 'BaseTablesController@addEducation');
-        Route::post('/editfunctional', 'BaseTablesController@editEducation');
-        Route::post('/deletfunctional', 'BaseTablesController@deleteEducation');
+        Route::get('/functional', 'BaseTablesController@functionalindex');
+        Route::post('/addfunctional', 'BaseTablesController@addFunctional');
+        Route::post('/editfunctional', 'BaseTablesController@editFunctional');
+        Route::post('/deletfunctional', 'BaseTablesController@deleteFunctional');
         
         //Industrial Area
-        Route::get('/industries', 'BaseTablesController@eductaionindex');
-        Route::post('/addindustries', 'BaseTablesController@addEducation');
-        Route::post('/editindustries', 'BaseTablesController@editEducation');
-        Route::post('/deleteindustries', 'BaseTablesController@deleteEducation');
+        Route::get('/industries', 'BaseTablesController@industriesindex');
+        Route::post('/addindustries', 'BaseTablesController@addIndustries');
+        Route::post('/editindustries', 'BaseTablesController@editIndustries');
+        Route::post('/deleteindustries', 'BaseTablesController@deleteIndustries');
         
          //Job role
-        Route::get('/jobrole', 'BaseTablesController@eductaionindex');
-        Route::post('/addjobrole', 'BaseTablesController@addEducation');
-        Route::post('/editjobrole', 'BaseTablesController@editEducation');
-        Route::post('/deletejobrole', 'BaseTablesController@deleteEducation');
+        Route::get('/jobrole', 'BaseTablesController@jobroleindex');
+        Route::post('/addjobrole', 'BaseTablesController@addJobrole');
+        Route::post('/editjobrole', 'BaseTablesController@editJobrole');
+        Route::post('/deletejobrole', 'BaseTablesController@deleteJobrole');
         
          //Job role Category
-        Route::get('/jobrolecategory', 'BaseTablesController@eductaionindex');
-        Route::post('/addjobrolecategory', 'BaseTablesController@addEducation');
-        Route::post('/editjobrolecategory', 'BaseTablesController@editEducation');
-        Route::post('/deletejobrolecategory', 'BaseTablesController@deleteEducation');
+        Route::get('/jobrolecategory', 'BaseTablesController@jobrolecategoryindex');
+        Route::post('/addjobrolecategory', 'BaseTablesController@addJobrolecategory');
+        Route::post('/editjobrolecategory', 'BaseTablesController@editJobrolecategory');
+        Route::post('/deletejobrolecategory', 'BaseTablesController@deleteJobrolecategory');
         
          //Joining time
-        Route::get('/joiningtime', 'BaseTablesController@eductaionindex');
-        Route::post('/addjoiningtime', 'BaseTablesController@addEducation');
-        Route::post('/editjoiningtime', 'BaseTablesController@editEducation');
-        Route::post('/deletejoiningtime', 'BaseTablesController@deleteEducation');
+        Route::get('/joiningtime', 'BaseTablesController@joiningtimeindex');
+        Route::post('/addjoiningtime', 'BaseTablesController@addJoiningtime');
+        Route::post('/editjoiningtime', 'BaseTablesController@editJoiningtime');
+        Route::post('/deletejoiningtime', 'BaseTablesController@deleteJoiningtime');
         
          //key skills
-        Route::get('/keyskills', 'BaseTablesController@eductaionindex');
-        Route::post('/addkeyskills', 'BaseTablesController@addEducation');
-        Route::post('/editkeyskills', 'BaseTablesController@editEducation');
-        Route::post('/deletekeyskills', 'BaseTablesController@deleteEducation');
+        Route::get('/keyskills', 'BaseTablesController@keyskills');
+        Route::post('/addkeyskills', 'BaseTablesController@addKeyskills');
+        Route::post('/editkeyskills', 'BaseTablesController@editKeyskills');
+        Route::post('/deletekeyskills', 'BaseTablesController@deleteKeyskills');
         
          //Qualification
-        Route::get('/qualification', 'BaseTablesController@eductaionindex');
-        Route::post('/addqualification', 'BaseTablesController@addEducation');
-        Route::post('/editqualification', 'BaseTablesController@editEducation');
-        Route::post('/deletequalification', 'BaseTablesController@deleteEducation');
+        Route::get('/qualification', 'BaseTablesController@qualificationindex');
+        Route::post('/addqualification', 'BaseTablesController@addQualification');
+        Route::post('/editqualification', 'BaseTablesController@editQualification');
+        Route::post('/deletequalification', 'BaseTablesController@deleteQualification');
         
           //Salary Range
-        Route::get('/salaryrange', 'BaseTablesController@eductaionindex');
-        Route::post('/addsalaryrange', 'BaseTablesController@addEducation');
-        Route::post('/editsalaryrange', 'BaseTablesController@editEducation');
-        Route::post('/deletesalaryrange', 'BaseTablesController@deleteEducation');
+        Route::get('/salaryrange', 'BaseTablesController@salaryrangeindex');
+        Route::post('/addsalaryrange', 'BaseTablesController@addSalaryrange');
+        Route::post('/editsalaryrange', 'BaseTablesController@editSalaryrange');
+        Route::post('/deletesalaryrange', 'BaseTablesController@deleteSalaryrange');

@@ -10,7 +10,7 @@
                         <div class="box-title">
                             <h3>
                                 <i class="fa fa-table"></i>
-                                Locations
+                                Functional Area
                             </h3>
                             <button id="data_add" style="float:right" class="primary">Add New</button>
 
@@ -24,24 +24,24 @@
                                 </div>
                                 <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper no-footer" >
                                     <table class="table table-hover table-nomargin table-bordered dataTable no-footer myTable"  role="grid" aria-describedby="DataTables_Table_0_info" id="locations">
-                                        <thead>
-                                        <th width="1%">Sl-No</th>
-                                        <th width="3%">Locations</th>
-                                        <th width="1%">Edit</th>
-                                        <th width="1%">Delete</th>
-                                        </thead>
-                                        <tbody><?php $i = 0; ?>
-                                            @foreach($data['locationlist'] as $list) <?php $i = $i + 1; ?>
-                                            <tr role="row" class="odd">
-                                                <td><?php echo $i; ?></td>
-                                                <td>{{ $list->locationName }}</td>
-                                                <td><button  class="btn btn-danger fa fa-pencil-square locationsedit" name="edit" value="edit" data-locid="<?php echo $list->locationId ?>" data-locname="<?php echo $list->locationName ?>"></button></td>
-                                                <td><button  class="btn btn-danger fa fa-trash locationsdelete" name="delete" value="Delete" data-locid="<?php echo $list->locationId ?>"></button></td>
-                                            </tr>
-                                            @endforeach
+                                <thead>
+                                <th width="1%">Sl-No</th>
+                                <th width="3%">Functional Area</th>
+                                <th width="1%">Edit</th>
+                                 <th width="1%">Delete</th>
+                                </thead>
+                                   <tbody><?php $i=0; ?>
+                                         @foreach($data['functional'] as $list) <?php $i = $i + 1; ?>
+                                                <tr role="row" class="odd">
+                                                        <td><?php  echo $i; ?></td>
+                                                        <td>{{ $list->functionalName }}</td>
+                                                         <td><button  class="btn btn-danger fa fa-pencil-square locationsedit" name="edit" value="edit" data-locid="<?php echo $list->functionalId ?>" data-locname="<?php echo $list->functionalName ?>"></button></td>
+                                                <td><button  class="btn btn-danger fa fa-trash locationsdelete" name="delete" value="Delete" data-locid="<?php echo $list->functionalId ?>"></button></td>
+                                                </tr>
+                                         @endforeach
 
-                                        </tbody>
-                                    </table>
+                                     </tbody>
+                              </table>
                                 </div>
                             </div>
 
@@ -201,7 +201,7 @@ $(document).ready(function () {
 
 
         $.ajax({
-            url: '/dashboard/editlocation',
+            url: '/dashboard/editfunctional',
             type: 'POST',
             processData: false,
             contentType: false,
@@ -228,7 +228,7 @@ $(document).ready(function () {
 
 
         $.ajax({
-            url: '/dashboard/deletelocation',
+            url: '/dashboard/deletfunctional',
             type: 'POST',
             processData: false,
             contentType: false,
@@ -255,7 +255,7 @@ $(document).ready(function () {
         var formValues = new FormData(formDataValues);
 
         $.ajax({
-            url: '/dashboard/addlocation',
+            url: '/dashboard/addfunctional',
             type: 'POST',
             processData: false,
             contentType: false,
