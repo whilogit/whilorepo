@@ -53,7 +53,21 @@
                                                         <td>{{ $list->locationName }}</td>
                                                         <td>{{ $list->mobileNumber }}</td>
                                                         <td>{{ $list->website }}</td>
-                                                <td>{!! $list->accountStatus == 0 ? "<a style='cursor:pointer'><span class='active'>Activate</span></a>" : "<a style='cursor:pointer'><span class='deactive'>Deactivate</span></a>" !!}</td>
+                                                  <?php 
+                                                           if( $list->accountStatus == 0)
+                                                           {
+                                                              $btn_name='Approve';
+                                                              $btn_action='approve';
+                                                              $color = 'color:green';
+                                                           }
+                                                           else
+                                                           {
+                                                               $btn_name='Disapprove';
+                                                               $btn_action='disapprove';
+                                                               $color = 'color:blue';
+                                                           }
+                                                           ?>
+                                                           <td><button style="width: 111px;{{$color}}" id="statusbtn_{{ $list->companyId}}" class="actionclass" primaryid="{{ $list->companyId}}" fnaction="{{$btn_action}}" >{{ $btn_name }}</button></td>     
                                                 </tr>
                                          @endforeach
 
@@ -77,5 +91,27 @@
     $(document).ready(function(){
     $('#myTable').DataTable();
 });
+ $('.actionclass').unbind().bind('click', function(){
+     
+         var postdata = {}
+         var status_id=$(this).attr('primaryid')
+             postdata['companyId']=$(this).attr('primaryid');
+            postdata['fnaction']=$(this).attr('fnaction');
+          $.post('/dashboard/company/approve',postdata,function(response){
+              if(response.action =='approve')
+              {
+                  $('#statusbtn_'+response.primaryid).attr('style', 'color:blue; width: 111px;');
+                  $('#statusbtn_'+response.primaryid).attr('fnaction', 'disapprove');
+                  $('#statusbtn_'+response.primaryid).html('Disapprove')
+              }
+              else
+              {
+                  $('#statusbtn_'+response.primaryid).attr('style', 'color:green; width: 111px;');
+                   $('#statusbtn_'+response.primaryid).attr('fnaction', 'approve');
+                   $('#statusbtn_'+response.primaryid).html('Approve')
+              }
+          });
+        
+    });
     </script>
 @stop
