@@ -275,7 +275,7 @@ class BaseTablesController extends Controller {
 
     public function jobroleindex() {
 
-        return view('backend.basetables.jobrole')->with(array("data" => Basetables::getjobrole()));
+        return view('backend.basetables.jobrole')->with(array("data" => Basetables::getjobrole(),"getrole"=> Basetables::getrolecategory()));
     }
 
     public function addJobrole(Request $request) {
@@ -337,7 +337,7 @@ class BaseTablesController extends Controller {
 
     public function jobrolecategoryindex() {
 
-        return view('backend.basetables.jobrolecategory')->with(array("data" => Basetables::getrolecategory(),"getrole"=>  Basetables::getjobrole()));
+        return view('backend.basetables.jobrolecategory')->with(array("data" => Basetables::getrolecategory()));
     }
 
     public function addJobrolecategory(Request $request, Response $response) {

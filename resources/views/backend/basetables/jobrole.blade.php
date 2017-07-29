@@ -37,7 +37,7 @@
                                                         <td><?php  echo $i; ?></td>
                                                         <td>{{ $list->jobroleName }}</td>
          <td>{{ $list->rolecategoryName }}</td>
-                                                         <td><button  class="btn btn-danger fa fa-pencil-square locationsedit" name="edit" value="edit" data-locid="<?php echo $list->jobroleId ?>" data-locname="<?php echo $list->jobroleName ?>"></button></td>
+                                                         <td><button  class="btn btn-danger fa fa-pencil-square locationsedit" name="edit" value="edit" data-locid="<?php echo $list->jobroleName ?>" data-rolcatname="<?php echo $list->rolecategoryName ?>" data-locname="<?php echo $list->jobroleName ?>"></button></td>
                                                 <td><button  class="btn btn-danger fa fa-trash locationsdelete" name="delete" value="Delete" data-locid="<?php echo $list->jobroleId ?>"></button></td>
                                                 </tr>
                                          @endforeach
@@ -75,7 +75,13 @@
 
                             <input type="hidden" class="locid"  name="locid" value="">
                             <input class="locname" type="text"  name="locname" value="">                                        
-
+                             <select id="rolcatname"  name="rolcatname" class="form-control">    
+                               <?php foreach($getrole as $roles) 
+                    { 
+                                print_r($roles); ?>
+                                <option value="<?php  ?>" name="role" id="role"><?php  ?></option>  
+                   <?php } ?>
+                </select>
 
                         </form>    
                     </div>
@@ -146,6 +152,7 @@
                             {!! csrf_field() !!}
                             <input type="hidden" class="locid"  name="locid" value="">
                             <input type="text" class="addlocation"  name="addlocation" value="">
+                           
                         </form>
 
                     </div>
@@ -181,9 +188,11 @@ $(document).ready(function () {
         var locid = $(this).data('locid');
 
         var locname = $(this).data('locname');
+         var rolcatname = $(this).data('rolcatname');
+         alert(rolcatname);
         $(".modal-body .locid").val(locid);
         $(".modal-body .locname").val(locname);
-
+         $(".modal-body .role").val(rolcatname);
         $('#editlocation').modal('show');
     });
 
