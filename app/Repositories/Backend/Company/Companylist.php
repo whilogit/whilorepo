@@ -19,12 +19,30 @@ class Companylist extends Controller
 					->leftjoin("companylogo as logo",'logo.companyId','=','m.companyId')
 					->leftjoin('_locations as l','l.locationId','=','p.locationId')
 					->select("p.*","logo.*","l.locationName","m.accountStatus")
+                                        ->where('addedby',0)
 					->get();
 		
 	
 		
 		return $response;
 	}
+        public static function getcompanyaddedlist()
+        {
+          $response = array();
+		
+		$response['admincompanylist']  = DB::table('commaster as m')
+					->join('comprofile as p', 'p.companyId', '=', 'm.companyId')
+					->leftjoin("companylogo as logo",'logo.companyId','=','m.companyId')
+					->leftjoin('_locations as l','l.locationId','=','p.locationId')
+					->select("p.*","logo.*","l.locationName","m.accountStatus")
+                                        ->where('addedby',1)
+					->get();
+		
+	
+		
+		return $response;  
+        }
+
         public static function getlocation()
 	{
 		$response = array();

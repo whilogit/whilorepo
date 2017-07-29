@@ -32,7 +32,7 @@ $(function(){
 					$.post('/admin/auth/signin',postdata,function(response){    
 					    $('body').addClass('loaded');
 						if(response.success)
-							location.href = "/dashboard/companylist";
+							location.href = "/dashboard/adminhome";
 						else 
 							{
 							if ((typeof  response.errors) == 'object') { 

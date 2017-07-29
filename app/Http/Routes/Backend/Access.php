@@ -1,5 +1,5 @@
 <?php
-	Route::get('/', 'DashboardController@home')->name('dashboard.home');
+	Route::get('/adminhome', 'DashboardController@home')->name('dashboard.home');
         //Talent Module
         Route::get('/talentlist', 'DashboardController@talentlist')->name('dashboard.talentlist');
         Route::get('/shortlistcandidate', 'DashboardController@shortlistcandidate')->name('dashboard.talentlist');
@@ -13,6 +13,8 @@
         Route::post('/register/newcompany','CompanyController@insertNewCompany');
         Route::get('/approvevideolist','CompanyController@youtubeVideoList');
         Route::post('/approvevideo','CompanyController@approveYoutubeVideo');
+        Route::get('/adminaddedcompanies', 'CompanyController@adminAddedCompany');
+        Route::get('/planexpiry', 'CompanyController@CompanyPlanExpiry');
         
         
         

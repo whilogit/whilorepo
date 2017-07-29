@@ -7,24 +7,7 @@
                         <div class="pull-left">
                             <h1>Dashboard</h1>
                         </div>
-                        <div class="pull-right">
-                            <ul class="stats">
-                                <li class='satgreen'>
-                                    <i class="fa fa-money"></i>
-                                        <div class="details">
-                                                <span class="big">Total Company</span>
-                                                <span>13</span>
-                                        </div>
-                                </li>
-                                    <li class='satgreen'>
-                                        <i class="fa fa-money"></i>
-                                        <div class="details">
-                                                <span class="big">Total users</span>
-                                                <span>5</span>
-                                        </div>
-                                    </li>
-                            </ul>
-                        </div>
+              
                     </div>
         <div class="breadcrumbs">
             <ul>
@@ -33,7 +16,7 @@
                             <i class="fa fa-angle-right"></i>
                     </li>
                     <li>
-                            <a href="index.html">Dashboard</a>
+                            <a href="index.html">Video Approve</a>
                     </li>
             </ul>
             <div class="close-bread">
@@ -72,14 +55,16 @@
                                                            {
                                                               $btn_name='Approve';
                                                               $btn_action='approve';
+                                                              $color = 'color:green';
                                                            }
                                                            else
                                                            {
                                                                $btn_name='Disapprove';
                                                                $btn_action='disapprove';
+                                                               $color = 'color:blue';
                                                            }
                                                            ?>
-                                                           <td><button id="statusbtn_{{ $list->id}}" class="actionclass" primaryid="{{ $list->id}}" fnaction="{{$btn_action}}">{{ $btn_name }}</button></td>     
+                                                           <td><button style="width: 111px;{{$color}}" id="statusbtn_{{ $list->id}}" class="actionclass" primaryid="{{ $list->id}}" fnaction="{{$btn_action}}" >{{ $btn_name }}</button></td>     
                                                 </tr>
                                          @endforeach
 
@@ -106,6 +91,7 @@
     
 });
  $('.actionclass').unbind().bind('click', function(){
+     
          var postdata = {}
          var status_id=$(this).attr('primaryid')
              postdata['primaryid']=$(this).attr('primaryid');
@@ -113,11 +99,15 @@
           $.post('/dashboard/approvevideo',postdata,function(response){
               if(response.action =='approve')
               {
-                  $('#statusbtn_'+response.primaryid).text('Disapprove')
+                  $('#statusbtn_'+response.primaryid).attr('style', 'color:blue; width: 111px;');
+                  $('#statusbtn_'+response.primaryid).attr('fnaction', 'disapprove');
+                  $('#statusbtn_'+response.primaryid).html('Disapprove')
               }
               else
               {
-                   $('#statusbtn_'+response.primaryid).text('Approve')
+                  $('#statusbtn_'+response.primaryid).attr('style', 'color:green; width: 111px;');
+                   $('#statusbtn_'+response.primaryid).attr('fnaction', 'approve');
+                   $('#statusbtn_'+response.primaryid).html('Approve')
               }
           });
         

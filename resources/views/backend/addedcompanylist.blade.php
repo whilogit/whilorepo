@@ -1,16 +1,9 @@
 @extends('backend.layouts.master')
 @section('content')
-<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-
 <div class="container-fluid" id="content">
     <div id="main" style="margin-left: 0px;">
         <div class="container-fluid">
-              <div class="page-header">
-                        <div class="pull-left">
-                            <h1>Dashboard</h1>
-                        </div>
-          
-                    </div>
+         
         <div class="breadcrumbs">
             <ul>
                     <li>
@@ -18,7 +11,7 @@
                             <i class="fa fa-angle-right"></i>
                     </li>
                     <li>
-                            <a href="index.html">Company Jobs</a>
+                            <a href="index.html">Dashboard</a>
                     </li>
             </ul>
             <div class="close-bread">
@@ -32,36 +25,33 @@
                         <div class="box-title">
                             <h3>
                                     <i class="fa fa-table"></i>
-                                    Company Job list
+                                    Company list
                             </h3>
                         </div>
                     <div class="box-content nopadding">
                         <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper no-footer">
-                             <table class="table table-hover table-nomargin table-bordered dataTable no-footer myTable"  role="grid" aria-describedby="DataTables_Table_0_info">
+                             <table class="table table-hover table-nomargin table-bordered dataTable no-footer" id="myTable" role="grid" aria-describedby="DataTables_Table_0_info">
                                 <thead>
                                 <th width="5%">Sl-No</th>
+                                <th width="1%">Logo</th>
                                 <th>Company Name</th>
-                                <th width="7%">jobTitle</th>
-                                <th width="7%">lastdate</th>
-                                <th width="15%">createdDate</th>
-                                <th width="15%">Delete</th>
+                                <th width="7%">Location</th>
+                                <th width="7%">Mobile</th>
+                                <th width="15%">Website</th>
+                                <th width="8%">Options</th>
                                 </thead>
-                               
                                     <tbody><?php $i=0; ?>
-                                        @if(count($data)>0)
-                                         @foreach($data['company_jobs'] as $list) <?php $i = $i + 1; ?>
+                                         @foreach($data['admincompanylist'] as $list) <?php $i = $i + 1; ?>
                                                 <tr role="row" class="odd">
                                                         <td><?php  echo $i; ?></td>
+                                                        <td> <img style="width:100%" src="/companylogo.get/{{ $list->logoCategory }}/{{ $list->dirYear }}/{{ $list->dirMonth }}/{{ $list->logoName }}/{{ $list->crTime }}/s.{{ $list->logExt }}" alt=""></td>
                                                          <td>{{ $list->companyName }}</td>
-                                                        <td>{{ $list->jobTitle }}</td>
-                                                        <td>{{ $list->lastdate }}</td>
-                                                        <td>{{ $list->createdDate }}</td>
-                                                        <td><button  class="btn btn-danger fa fa-trash" name="delete" value="Delete"></button></td>
-
-                                                
+                                                        <td>{{ $list->locationName }}</td>
+                                                        <td>{{ $list->mobileNumber }}</td>
+                                                        <td>{{ $list->website }}</td>
+                                                <td>{!! $list->accountStatus == 0 ? "<a style='cursor:pointer'><span class='active'>Activate</span></a>" : "<a style='cursor:pointer'><span class='deactive'>Deactivate</span></a>" !!}</td>
                                                 </tr>
                                          @endforeach
-                                         @endif
 
                                      </tbody>
                               </table>
@@ -81,7 +71,7 @@
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <script>
     $(document).ready(function(){
-    $('.myTable').DataTable();
+    $('#myTable').DataTable();
 });
     </script>
 @stop
