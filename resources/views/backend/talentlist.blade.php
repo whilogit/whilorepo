@@ -34,7 +34,7 @@
                         </div>
                     <div class="box-content nopadding">
                         <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper no-footer">
-                             <table class="table table-hover table-nomargin table-bordered dataTable no-footer" id="myTable" role="grid" aria-describedby="DataTables_Table_0_info">
+                             <table class="table table-hover table-nomargin table-bordered dataTable no-footer myTable"role="grid" aria-describedby="DataTables_Table_0_info">
                                   <thead>
                                     
 					<th width="5%">Sl-No</th>
