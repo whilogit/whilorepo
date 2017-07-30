@@ -2,6 +2,7 @@
 	Route::get('/adminhome', 'DashboardController@home')->name('dashboard.home');
         //Talent Module
         Route::get('/talentlist', 'DashboardController@talentlist')->name('dashboard.talentlist');
+        Route::post('talent/approve', 'DashboardController@talentapprove');
         Route::get('/shortlistcandidate', 'DashboardController@shortlistcandidate')->name('dashboard.talentlist');
         Route::get('/hiredcandidate', 'DashboardController@hiredcandidate')->name('dashboard.talentlist');
         Route::get('/addtalent', 'DashboardController@talentAddView');

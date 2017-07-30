@@ -16,9 +16,9 @@ class Talentlist extends Controller
 		
 		$response['talents']  = DB::table('jmaster as m')
 					->join('jprofile as p', 'p.seekerId', '=', 'm.seekerId')
-					->leftjoin("jprofileimage as img",'img.seekerId','=','m.seekerId')
-					->leftjoin('_locations as l','l.locationId','=','p.locationId')
-					->select("p.*","img.imageCategory","img.imageName","img.dirYear","img.dirMonth","img.crTime","img.imgExt","l.locationName")
+					->join("jprofileimage as img",'img.seekerId','=','m.seekerId')
+					->join('_locations as l','l.locationId','=','p.locationId')
+					->select("p.*","img.imageCategory","img.imageName","img.dirYear","img.dirMonth","img.crTime","img.imgExt","l.locationName","m.accountStatus")
 					->skip($limit * ($offset -1))
        				->take($limit)
 					->get();

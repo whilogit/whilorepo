@@ -35,6 +35,30 @@ class DashboardController extends Controller
                 {  
                     return view('backend.talentlist')->with(array("data"=>Talentlist::getlist()));
                 }
+                public function talentapprove(Request $request,Response $response)
+                {
+                    
+             if($request->fnaction=='approve')
+             {
+                  $status=1;
+             }
+             else
+             {
+                 $status=0;
+             }
+             $company_status=DB::table('jmaster')->where('seekerId',$request->seekerId);
+             $primaryid=$request->seekerId;
+             $company_status->accountStatus=$status;
+              $res = DB::table('jmaster')
+                             ->where('seekerId',$primaryid )
+                             ->update(array('accountStatus' =>$status));
+                  return response()->json(array(
+                                                     'success' => true,
+                                                     'action' => $request->fnaction, 
+                                                    'primaryid' => $request->seekerId
+                                                     ));
+                }
+                
          public  function shortlistcandidate()
                     {
                          return view('backend.shortlist')->with(array("data"=>Talentlist::shortlistcandidate()));
