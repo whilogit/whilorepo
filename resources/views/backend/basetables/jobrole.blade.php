@@ -75,13 +75,9 @@
 
                             <input type="hidden" class="locid"  name="locid" value="">
                             <input class="locname" type="text"  name="locname" value="">                                        
-                             <select id="rolcatname"  name="rolcatname" class="form-control">    
-                               <?php foreach($getrole as $roles) 
-                    { 
-                                print_r($roles); ?>
-                                <option value="<?php  ?>" name="role" id="role"><?php  ?></option>  
-                   <?php } ?>
-                </select>
+                             <select id="rolecatname"  name="rolecatname" class="form-control">    
+                               
+                             </select>
 
                         </form>    
                     </div>
@@ -192,7 +188,14 @@ $(document).ready(function () {
          alert(rolcatname);
         $(".modal-body .locid").val(locid);
         $(".modal-body .locname").val(locname);
-         $(".modal-body .role").val(rolcatname);
+        var numbers = [1, 2, 3, 4, 5];
+var option = '';
+for (var i=0;i<numbers.length;i++){
+   option += '<option value="'+ numbers[i] + '">' + numbers[i] + '</option>';
+}
+alert(option);
+$('.modal-body #rolecatname').append(option);
+        
         $('#editlocation').modal('show');
     });
 
