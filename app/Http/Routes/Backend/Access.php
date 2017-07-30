@@ -3,10 +3,13 @@
         //Talent Module
         Route::get('/talentlist', 'DashboardController@talentlist')->name('dashboard.talentlist');
         Route::get('/shortlistcandidate', 'DashboardController@shortlistcandidate')->name('dashboard.talentlist');
-         Route::get('/hiredcandidate', 'DashboardController@hiredcandidate')->name('dashboard.talentlist');
+        Route::get('/hiredcandidate', 'DashboardController@hiredcandidate')->name('dashboard.talentlist');
+        Route::get('/addtalent', 'DashboardController@talentAddView');
+        Route::post('/register/newtalent','DashboardController@insertNewTalent');
+       
         //Company Modules
         Route::get('/companylist', 'DashboardController@companylist')->name('dashboard.companylist');
-        Route::post('company/approve/{id}', 'DashboardController@approve');
+        Route::post('company/approve', 'CompanyController@companyapprove');
         Route::get('/postedjobs', 'CompanyController@postedJobs');
         Route::get('/paymentdetails', 'CompanyController@paymentDetails');
         Route::get('/addnewcompany', 'CompanyController@addNewCompany');
@@ -15,6 +18,7 @@
         Route::post('/approvevideo','CompanyController@approveYoutubeVideo');
         Route::get('/adminaddedcompanies', 'CompanyController@adminAddedCompany');
         Route::get('/planexpiry', 'CompanyController@CompanyPlanExpiry');
+       
         
         
         

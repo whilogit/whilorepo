@@ -118,7 +118,7 @@
                     </div>
              <div class="col-lg-2 col-sm-6">
                         <div class="circle-tile">
-                            <a href="#">
+                            <a href="/dashboard/talentlist">
                                 <div class="circle-tile-heading dark-blue">
                                     <i class="fa fa-users fa-fw fa-3x"></i>
                                 </div>
@@ -131,7 +131,7 @@
                                 
                                     <span id="sparklineA"></span>
                                 </div>
-                                <a href="#" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
+                                <a href="/dashboard/talentlist" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -240,7 +240,7 @@
            
                        <div class="col-lg-2 col-sm-6">
                         <div class="circle-tile">
-                            <a href="#">
+                            <a href="/dashboard/addtalent">
                                 <div class="circle-tile-heading coral">
                                     <i class="fa fa-plus fa-fw fa-3x"></i>
                                 </div>
@@ -253,7 +253,7 @@
                                     
                                     <span id="sparklineA"></span>
                                 </div>
-                                <a href="#" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
+                                <a href="/dashboard/addtalent" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
                             </div>
                         </div>
 

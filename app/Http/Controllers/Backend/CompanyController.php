@@ -63,6 +63,30 @@ class CompanyController extends Controller
                                                     'primaryid' => $request->primaryid
                                                      ));
          }
+       
+            public function companyapprove(Request $request,Response $response)
+         {
+             
+             if($request->fnaction=='approve')
+             {
+                  $status=1;
+             }
+             else
+             {
+                 $status=0;
+             }
+             $company_status=DB::table('commaster')->where('companyId',$request->companyId);
+             $primaryid=$request->companyId;
+             $company_status->accountStatus=$status;
+              $res = DB::table('commaster')
+                             ->where('companyId',$primaryid )
+                             ->update(array('accountStatus' =>$status));
+                  return response()->json(array(
+                                                     'success' => true,
+                                                     'action' => $request->fnaction, 
+                                                    'primaryid' => $request->companyId
+                                                     ));
+         }
          public function CompanyPlanExpiry()
          {
              $companyDetails = array();
