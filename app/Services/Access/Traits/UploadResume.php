@@ -6,10 +6,12 @@ use App\Events\Frontend\Auth\UserRegistered;
 use App\Http\Requests\Frontend\Auth\RegisterRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Response as FacadeResponse;
 use Validator;
 
 use DB;
 use Hash;
+
 /**
  * Class RegistersUsers
  * @package App\Services\Access\Traits
@@ -177,5 +179,50 @@ trait UploadResume
 	  
 	}
 		}
+		
+		      public function getDownload($seekerid)
+		      
+{  
+
+		
+		
+                 $get = DB::table('jdocumenttitles as j')
+							->leftjoin('jdocument as t', 't.docId', '=', 'j.docId')
+							->select('t.*','j.doctitleId')
+							->where('seekerId', $seekerid)
+							->where('j.docTitle', 'resume')
+							->first();
+		if($get){
+		
+		
+		  $file= app_path() . "/Storage/Documents/". $get->docCategory."/" . $get->dirYear . "/" . $get->dirMonth . "/".$get->dirYear . "_" . $get->dirMonth . "_" .$get->crTime . "_" . $get->docName . "." . $get->docExt;
+		  if($get->docExt=='doc')
+		  {
+
+    $headers = array(
+              'Content-Type: application/doc',
+            );
+
+    return FacadeResponse::download($file, 'Resume.doc', $headers);
+    }
+   else if($get->docExt=='docx')
+   {
+   $headers = array(
+              'Content-Type: application/docx',
+            );
+
+    return FacadeResponse::download($file, 'Resume.docx', $headers);
+   }
+   else
+   {
+   $headers = array(
+              'Content-Type: application/pdf',
+            );
+
+    return FacadeResponse::download($file, 'Resume.pdf', $headers);
+   }
+		
+                        }
+                        }
 	
 }

@@ -69,7 +69,7 @@
                 </div>  
 				                  <div class="col-md-6">
                 <table>
-                   
+                    <a  href="/auth/downloadresume/{{  $profile->seekerId }}" class="btn btn-large pull-right"><i class="icon-download-alt"> </i> Download Resume </a>
                     <input type="hidden" id="seekerId" value="<?php echo $profile->seekerId ?>">
                                             <tbody>
                                                 <tr>
@@ -542,7 +542,7 @@ span.onclick = function() {
 
        
         var seekerId = $('#seekerId').val();
-      //alert(seekerId);
+     
         $.ajax({
             url: url+'/shortlist',
             dataType : 'json',
@@ -550,8 +550,8 @@ span.onclick = function() {
             success: function (data) {
            location.reload();
          
-          
-        }
+         
+     }
         });
     });
     

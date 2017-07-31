@@ -129,6 +129,7 @@ Route::group(['namespace' => 'Auth'], function () {
 
         Route::post('auth/profileimage', 'AuthController@profileimage');
         Route::post('auth/userresume', 'AuthController@resumeupdloads');
+           Route::get('auth/downloadresume/{seekerid}', 'AuthController@getDownload');
 
 
 
